@@ -1,10 +1,13 @@
-all: video object background player coguns rabbit
+all: video object background player gui enemy caterpie coguns rabbit
 	g++						\
 	./src/main.cpp				\
 	./obj/video.o				\
 	./obj/background.o			\
 	./obj/object.o				\
 	./obj/player.o				\
+	./obj/gui.o				\
+	./obj/enemy.o				\
+	./obj/caterpie.o			\
 	./obj/mush.o				\
 	./obj/rabbit.o				\
 	-o main.e				\
@@ -25,6 +28,19 @@ object: ./include/object.hpp ./src/object.cpp
 player: ./include/player.hpp ./src/player.cpp
 	g++ -c ./src/player.cpp
 	mv player.o ./obj/player.o
+
+gui: ./include/gui.hpp ./src/gui.cpp
+	g++ -c ./src/gui.cpp
+	mv gui.o ./obj/gui.o
+
+enemy: ./include/enemy.hpp ./src/enemy.cpp
+	g++ -c ./src/enemy.cpp
+	mv enemy.o ./obj/enemy.o
+
+caterpie: ./include/caterpie.hpp ./src/caterpie.cpp
+	g++ -c ./src/caterpie.cpp
+	mv caterpie.o ./obj/caterpie.o
+
 
 coguns:	./include/mush.hpp ./src/mush.cpp
 	g++ -c ./src/mush.cpp
