@@ -62,9 +62,10 @@ rabbit: ./include/rabbit.hpp ./src/rabbit.cpp
 	mv rabbit.o ./obj/rabbit.o
 
 clean:
-	@rm -rdf ./include/*~
-	@rm -rdf ./src/*~
-	@rm -rdf ./*~
+	@rm -rf main.e
+	@rm -rf ./include/*~
+	@rm -rf ./src/*~
+	@rm -rf ./*~
 
 createbg:
 	g++ ./bg_make/main.c -o a.out	../gorgon_core/static/libgorgon.a `allegro-config --libs`
