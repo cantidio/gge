@@ -1,37 +1,39 @@
-#include "objects/include/object.hpp"
+#include "../src/objects/include/object.hpp"
 
-int main()
+int main(int argc, char* argv[])
 {
 	try
 	{
 		allegro_init();
 		install_keyboard();
 		Gorgon::Video::init("Teste inimigo com script");
-		Object caterpie("resources/enemy/caterpie.lua",0,50);
-		Object klona("resources/enemy/klona.lua",300,100);
-		Object klona2("resources/enemy/klona.lua",300,200);
-		Object klona3("resources/enemy/klona2.lua",300,210);
-		Object klona4("resources/enemy/klona2.lua",0,220);
-		Object klona5("resources/enemy/klona2.lua",300,230);
+		vector<Object*> objects;
+		if(argc>1)
+		{
+			for(int i=1; i<argc; ++i)
+			{
+				string a;
+				a=argv[i];
+				objects.push_back(new Object(a,0,30*i));
+			}
+		}
+		else
+		{
+			objects.push_back(new Object("resources/character/enemy/caterpie.lua",0,30));
+			objects.push_back(new Object("resources/character/enemy/klona.lua",300,60));
+			objects.push_back(new Object("resources/character/enemy/klona2.lua",300,90));
+		}
 
 		while(!key[KEY_ESC])
 		{
-			Gorgon::Video::get()->clear();
-			caterpie.logic();
-			klona.logic();
-			klona2.logic();
-			klona3.logic();
-			klona4.logic();
-			klona5.logic();
-			caterpie.draw();
-			klona.draw();
-			klona2.draw();
-			klona3.draw();
-			klona4.draw();
-			klona5.draw();
+			Gorgon::Video::get()->clear(0xAA0BDD);
+			for(int i=0; i<objects.size(); objects[i]->logic(),++i);
+			for(int i=0; i<objects.size(); objects[i]->draw(),++i);
 			Gorgon::Video::get()->show();
-			rest(40);
+			rest(16);
 		}
+		for(int i=0; i<objects.size(); ++i)
+			delete objects[i];
 	}
 	catch(Gorgon::Exception e)
 	{

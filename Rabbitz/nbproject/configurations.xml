@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="51">
+  <logicalFolder name="root" displayName="root" projectFiles="true">
+    <logicalFolder name="src" displayName="src" projectFiles="true">
+      <logicalFolder name="objects" displayName="objects" projectFiles="true">
+        <logicalFolder name="include" displayName="include" projectFiles="true">
+          <itemPath>/home/cantidio/Development/rabbitz/src/objects/include/enemy.hpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/objects/include/object.hpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>/home/cantidio/Development/rabbitz/src/objects/src/object.cpp</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="resource_manager"
+                     displayName="resource_manager"
+                     projectFiles="true">
+        <logicalFolder name="include" displayName="include" projectFiles="true">
+          <itemPath>/home/cantidio/Development/rabbitz/src/resource_manager/include/animation_manager.hpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/resource_manager/include/colision_manager.hpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/resource_manager/include/sprite_manager.hpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>/home/cantidio/Development/rabbitz/src/resource_manager/src/animation_manager.cpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/resource_manager/src/sprite_manager.cpp</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="tests" displayName="tests" projectFiles="true">
+      <itemPath>/home/cantidio/Development/rabbitz/tests/enemy_teste.cpp</itemPath>
+      <itemPath>/home/cantidio/Development/rabbitz/tests/resource_manager.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Arquivos importantes"
+                   projectFiles="false">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>/home/cantidio/Development/rabbitz/src</Elem>
+    <Elem>/home/cantidio/Development/rabbitz/tests</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <compilerSet>GNU|GNU</compilerSet>
+        <platform>2</platform>
+      </toolsSet>
+      <compileType>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibProjectItem>
+              <makeArtifact PL="/home/cantidio/Development/gorgon++/Gorgon++"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="/home/cantidio/Development/gorgon++/Gorgon++"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="dist/Debug/GNU-Linux-x86/libgorgon.so">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerOptionItem>`allegro-config --libs`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/include/enemy.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/include/object.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/src/object.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/resource_manager/include/animation_manager.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/resource_manager/include/colision_manager.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/resource_manager/include/sprite_manager.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/resource_manager/src/animation_manager.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/resource_manager/src/sprite_manager.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/tests/enemy_teste.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/tests/resource_manager.cpp">
+        <itemExcluded>true</itemExcluded>
+        <itemTool>1</itemTool>
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <compilerSet>GNU|GNU</compilerSet>
+        <platform>2</platform>
+      </toolsSet>
+      <compileType>
+        <cCompilerTool>
+          <developmentMode>5</developmentMode>
+        </cCompilerTool>
+        <ccCompilerTool>
+          <developmentMode>5</developmentMode>
+        </ccCompilerTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <linkerTool>
+          <linkerLibItems>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/include/enemy.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/include/object.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/src/object.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/resource_manager/include/animation_manager.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/resource_manager/include/colision_manager.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/resource_manager/include/sprite_manager.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/resource_manager/src/animation_manager.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/resource_manager/src/sprite_manager.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/tests/enemy_teste.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/tests/resource_manager.cpp">
+        <itemTool>1</itemTool>
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
