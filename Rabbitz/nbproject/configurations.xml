@@ -4,10 +4,12 @@
     <logicalFolder name="src" displayName="src" projectFiles="true">
       <logicalFolder name="objects" displayName="objects" projectFiles="true">
         <logicalFolder name="include" displayName="include" projectFiles="true">
+          <itemPath>/home/cantidio/Development/rabbitz/src/objects/include/character.hpp</itemPath>
           <itemPath>/home/cantidio/Development/rabbitz/src/objects/include/enemy.hpp</itemPath>
           <itemPath>/home/cantidio/Development/rabbitz/src/objects/include/object.hpp</itemPath>
         </logicalFolder>
         <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>/home/cantidio/Development/rabbitz/src/objects/src/character.cpp</itemPath>
           <itemPath>/home/cantidio/Development/rabbitz/src/objects/src/object.cpp</itemPath>
         </logicalFolder>
       </logicalFolder>
@@ -26,6 +28,7 @@
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="tests" displayName="tests" projectFiles="true">
+      <itemPath>/home/cantidio/Development/rabbitz/tests/character.cpp</itemPath>
       <itemPath>/home/cantidio/Development/rabbitz/tests/enemy_teste.cpp</itemPath>
       <itemPath>/home/cantidio/Development/rabbitz/tests/resource_manager.cpp</itemPath>
     </logicalFolder>
@@ -66,11 +69,17 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/include/character.hpp">
+        <itemTool>3</itemTool>
+      </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/include/enemy.hpp">
         <itemTool>3</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/include/object.hpp">
         <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/src/character.cpp">
+        <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/src/object.cpp">
         <itemTool>1</itemTool>
@@ -90,7 +99,11 @@
       <item path="/home/cantidio/Development/rabbitz/src/resource_manager/src/sprite_manager.cpp">
         <itemTool>1</itemTool>
       </item>
+      <item path="/home/cantidio/Development/rabbitz/tests/character.cpp">
+        <itemTool>1</itemTool>
+      </item>
       <item path="/home/cantidio/Development/rabbitz/tests/enemy_teste.cpp">
+        <itemExcluded>true</itemExcluded>
         <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/tests/resource_manager.cpp">
@@ -119,11 +132,17 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/include/character.hpp">
+        <itemTool>3</itemTool>
+      </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/include/enemy.hpp">
         <itemTool>3</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/include/object.hpp">
         <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/src/character.cpp">
+        <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/src/object.cpp">
         <itemTool>1</itemTool>
@@ -141,6 +160,9 @@
         <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/resource_manager/src/sprite_manager.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/tests/character.cpp">
         <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/tests/enemy_teste.cpp">

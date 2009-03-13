@@ -29,6 +29,8 @@ OBJECTDIR=build/Release/${PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/resource_manager.o \
+	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character.o \
+	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/character.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/enemy_teste.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/resource_manager/src/animation_manager.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/resource_manager/src/sprite_manager.o \
@@ -59,6 +61,16 @@ ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/resource_manager.o: /h
 	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/resource_manager.o /home/cantidio/Development/rabbitz/tests/resource_manager.cpp
+
+${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character.o: /home/cantidio/Development/rabbitz/src/objects/src/character.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character.o /home/cantidio/Development/rabbitz/src/objects/src/character.cpp
+
+${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/character.o: /home/cantidio/Development/rabbitz/tests/character.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/character.o /home/cantidio/Development/rabbitz/tests/character.cpp
 
 ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/enemy_teste.o: /home/cantidio/Development/rabbitz/tests/enemy_teste.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests

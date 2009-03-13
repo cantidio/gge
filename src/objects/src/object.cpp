@@ -1,4 +1,47 @@
 #include "../include/object.hpp"
+Object::Object()
+{
+	script	= new Gorgon::Lua("resources/object/object.lua");
+}
+
+void Object::loadGlobalVars()
+{
+	name				= script->getStringVar("name");
+	spritePackName		= script->getStringVar("sprite");
+	animationPackName	= script->getStringVar("animation");
+	colisionPackName	= script->getStringVar("colision");
+	paletteName			= script->getStringVar("palette");
+	xPulse				= script->getNumericVar("xPulse");
+	yPulse				= script->getNumericVar("yPulse");
+	xPulseMax			= script->getNumericVar("xPulseMax");
+}
+
+void Object::registerFunctions()
+{
+	vector<Gorgon::LuaParam> obj=Gorgon::mountParam("i",this);
+	script->function("getObject",obj,0);
+	script->registerFunction("lua_changeAnimation",lua_changeAnimation);
+	script->registerFunction("lua_animationIsPlaying",lua_animationIsPlaying);
+	script->registerFunction("lua_getXPosition",lua_getXPosition);
+	script->registerFunction("lua_getYPosition",lua_getYPosition);
+	script->registerFunction("lua_setXPosition",lua_setXPosition);
+	script->registerFunction("lua_setYPosition",lua_setYPosition);
+	script->registerFunction("lua_setPosition",lua_setPosition);
+	script->registerFunction("lua_addXPosition",lua_addXPosition);
+	script->registerFunction("lua_addYPosition",lua_addYPosition);
+	script->registerFunction("lua_addPosition",lua_addPosition);
+	script->registerFunction("lua_setMirroring",lua_setMirroring);
+	script->registerFunction("lua_getMirroring",lua_getMirroring);
+}
+
+void Object::setUp()
+{
+	loadGlobalVars();
+	registerFunctions();
+	spritePack			= ResourceManager::SpriteManager::load(spritePackName);
+	animationPack		= ResourceManager::AnimationManager::load(animationPackName);
+	animationHandler	= new Gorgon::AnimationHandler(*spritePack,*animationPack);
+}
 
 Object::Object
 (
@@ -7,27 +50,11 @@ Object::Object
 	const int& y
 )
 {
-	script				= new Gorgon::Lua("resources/object/object.lua");
+	posX	= x;
+	posY	= y;
+	script	= new Gorgon::Lua("resources/object/object.lua");
 	script->loadScript(scriptName);
-	name				= script->getStringVar("name");
-	spritePackName		= script->getStringVar("sprite");
-	animationPackName	= script->getStringVar("animation");
-	colisionPackName	= script->getStringVar("colision");
-	paletteName			= script->getStringVar("palette");
-
-	posX				= x;
-	posY				= y;
-	xPulse				= script->getNumericVar("xPulse");
-	yPulse				= script->getNumericVar("yPulse");
-	xPulseMax			= script->getNumericVar("xPulseMax");
-	stateOn;
-
-	spritePack			= ResourceManager::SpriteManager::load(spritePackName);
-	animationPack		= ResourceManager::AnimationManager::load(animationPackName);
-
-	animationHandler	= new Gorgon::AnimationHandler(*spritePack,*animationPack);
-	
-	registerFunctions();
+	setUp();	
 }
 
 Object::~Object()
@@ -114,24 +141,6 @@ void Object::logic()
 {
 	script->function("logic",Gorgon::mountParam(""),0);
 	animationHandler->playByStep();
-}
-
-void Object::registerFunctions()
-{
-	vector<Gorgon::LuaParam> obj=Gorgon::mountParam("i",this);
-	script->function("getObject",obj,0);
-	script->registerFunction("lua_changeAnimation",lua_changeAnimation);
-	script->registerFunction("lua_animationIsPlaying",lua_animationIsPlaying);
-	script->registerFunction("lua_getXPosition",lua_getXPosition);
-	script->registerFunction("lua_getYPosition",lua_getYPosition);
-	script->registerFunction("lua_setXPosition",lua_setXPosition);
-	script->registerFunction("lua_setYPosition",lua_setYPosition);
-	script->registerFunction("lua_setPosition",lua_setPosition);
-	script->registerFunction("lua_addXPosition",lua_addXPosition);
-	script->registerFunction("lua_addYPosition",lua_addYPosition);
-	script->registerFunction("lua_addPosition",lua_addPosition);
-	script->registerFunction("lua_setMirroring",lua_setMirroring);
-	script->registerFunction("lua_getMirroring",lua_getMirroring);
 }
 
 int lua_changeAnimation(lua_State* state)

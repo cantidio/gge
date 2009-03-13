@@ -1,5 +1,11 @@
 /**
- *
+ *  ____              __       __          __
+ * /\  _`\           /\ \     /\ \      __/\ \__
+ * \ \ \L\ \     __  \ \ \____\ \ \____/\_\ \ ,_\  ____
+ *  \ \ ,  /   /'__`\ \ \ '__`\\ \ '__`\/\ \ \ \/ /\_ ,`\
+ *   \ \ \\ \ /\ \L\.\_\ \ \L\ \\ \ \L\ \ \ \ \ \_\/_/  /_
+ *    \ \_\ \_\ \__/.\_\\ \_,__/ \ \_,__/\ \_\ \__\ /\____\
+ *     \/_/\/ /\/__/\/_/ \/___/   \/___/  \/_/\/__/ \/____/
  *
  *  Copyright (C) 2008-2009  Gorgon Team
  *
@@ -34,7 +40,7 @@
  */
 class Object
 {
-	private:
+	protected:
 		/**
 		 * Nome do arquivo de sprites do objeto
 		 */
@@ -107,7 +113,24 @@ class Object
 		 * Estado atual do objeto
 		 */
 		int stateOn;
-
+		/**
+		 * Método Construtor vazio
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 */
+		Object();
+		void loadGlobalVars();
+		/**
+		 * Método para registrar as funções a serem usadas nos scripts em lua
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 */
+		void registerFunctions();
+		void setUp();
 	public:
 		/**
 		 * Método Construtor
@@ -259,14 +282,7 @@ class Object
 		 * @return	bool
 		 */
 		bool animationIsPlaying() const;
-		/**
-		 * Método para registrar as funções a serem usadas nos scripts em lua
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @final	12/03/2009
-		 */
-		void registerFunctions();
+		
 };
 /**
  * Bindings para os métodos de classe serem usados nos scritps em lua

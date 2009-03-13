@@ -1,5 +1,11 @@
 /**
- *
+ *  ____              __       __          __
+ * /\  _`\           /\ \     /\ \      __/\ \__
+ * \ \ \L\ \     __  \ \ \____\ \ \____/\_\ \ ,_\  ____
+ *  \ \ ,  /   /'__`\ \ \ '__`\\ \ '__`\/\ \ \ \/ /\_ ,`\
+ *   \ \ \\ \ /\ \L\.\_\ \ \L\ \\ \ \L\ \ \ \ \ \_\/_/  /_
+ *    \ \_\ \_\ \__/.\_\\ \_,__/ \ \_,__/\ \_\ \__\ /\____\
+ *     \/_/\/ /\/__/\/_/ \/___/   \/___/  \/_/\/__/ \/____/
  *
  *  Copyright (C) 2008-2009  Gorgon Team
  *
@@ -19,20 +25,11 @@
  */
 #ifndef _ENEMY_
 #define	_ENEMY_
-
-class Enemy
+ #include "character.hpp"
+class Enemy : public Character
 {
-	private:
-		string spritePackName;
-		string animationPackName;
-		string colisionPackName;
-		int posx;
-		int posy;
-		int weight;
-		int xPulse;
-		int yPulse;
-		int stateOn;
-		Lua* script;
+	protected:
+		
 	public:
 		/**
 		 * Método Construtor
@@ -41,10 +38,7 @@ class Enemy
 		 * @since	11/03/2009
 		 * @final	11/03/2009
 		 */
-		Enemy(const string& script)
-		{
-			script= new Lua(script);
-		}
+		Enemy(const string& script);
 		/**
 		 * Método Destrutor
 		 *
@@ -53,7 +47,7 @@ class Enemy
 		 * @final	11/03/2009
 		 */
 		virtual ~Enemy();
-	private:
+		
 };
 
 #endif
