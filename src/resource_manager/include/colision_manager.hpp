@@ -23,8 +23,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
  */
-a#ifndef _ANIMATION_MANAGER_
-#define _ANIMATION_MANAGER_
+#ifndef _GSBGE_COLISION_MANAGER_
+#define _GSBGE_COLISION_MANAGER_
 //#include "../../../../gorgon++/src/graphic/include/gorgon_animationpack.hpp"
 
 namespace ResourceManager

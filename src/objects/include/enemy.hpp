@@ -23,8 +23,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
  */
-#ifndef _ENEMY_
-#define	_ENEMY_
+#ifndef _GSBGE_ENEMY_
+#define	_GSBGE_ENEMY_
  #include "character.hpp"
 class Enemy : public Character
 {
@@ -47,7 +47,6 @@ class Enemy : public Character
 		 * @final	11/03/2009
 		 */
 		virtual ~Enemy();
-		
 };
 
 #endif

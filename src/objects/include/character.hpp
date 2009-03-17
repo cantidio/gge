@@ -1,4 +1,5 @@
 /**
+ *
  *  ____              __       __          __
  * /\  _`\           /\ \     /\ \      __/\ \__
  * \ \ \L\ \     __  \ \ \____\ \ \____/\_\ \ ,_\  ____
@@ -23,8 +24,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
  */
-#ifndef _CHARACTER_
-#define	_CHARACTER_
+#ifndef _GSBGE_CHARACTER_
+#define	_GSBGE_CHARACTER_
 #include "object.hpp"
 
 /**
@@ -60,159 +61,197 @@ class Character : public Object
 		/**
 		 * Vetor com os helpers do personagem
 		 */
-		vector<Character*> helpers;
+		vector< vector<Character*> > helpers;
+
+		/**
+		 * Método Construtor
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	14/03/2009
+		 * @final	14/03/2009
+		 */
+		Character();
+		/**
+		 * Método para carregar as variáveis globais de um personagem declaradas no script
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	14/03/2009
+		 * @final	14/03/2009
+		 */
+		void loadGlobalVars();
+		/**
+		 * Método para registrar as funções a serem usadas nos scripts em lua
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	14/03/2009
+		 * @final	14/03/2009
+		 */
+		void registerFunctions();
+		/**
+		 * Método para preparar o personagem com as informações já recolhidas
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	14/03/2009
+		 * @final	14/03/2009
+		 */
+		void setUp();
 	public:
-	/**
-	 * Método Construtor
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 */
-	Character
-	(
-		const string& fileName,
-		const int& x=0,
-		const int& y=0
-	);
-	/**
-	 * Método Destrutor
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 */
-	virtual ~Character();
-	/**
-	 * Método para retornar o life do personagem
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @return	int
-	 */
-	int getLife() const;
-	/**
-	 * Método para setar o life do personagem
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	const int& life, vida do personagem
-	 */
-	void setLife(const int& life);
-	/**
-	 * Método que dimuniu a vida do personagem
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	const int& life, valor a ser diminuído do life do personagem
-	 */
-	void subLife(const int& life);
-	/**
-	 * Método para aumentar a vida do personagem
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	const int& life, valor a ser somado ao life do personagem
-	 */
-	void addLife(const int& life);
-	/**
-	 * Método que retorna verdadeiro se o personagem estiver vivo
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @return	bool
-	 */
-	bool isAlive() const;
-	/**
-	 * Método para ativar o personagem
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 */
-	void ativate();
-	/**
-	 * Método para desativar o personagem
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 */
-	void inativate();
-	/**
-	 * Método que retorna verdadeiro se o personagem estiver ativo
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @return	bool
-	 */
-	bool isAtive() const;
-	/**
-	 * Método que retorna verdadeiro se o personagem estiver imortal
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @return	bool
-	 */
-	bool isImortal() const;
-	/**
-	 * Método que machuca o personagem
-	 *
-	 * @author		Cantidio Oliveira Fontes
-	 * @since		12/03/2009
-	 * @final		12/03/2009
-	 * @param		const int& damage, dano
-	 * @abstract	diminui o dano especificado e o deixa o personagem imortal o número de tempo espeficidado
-	 * na variável imortalTime
-	 */
-	void hurt(const int& damage);
-	/**
-	 * Método para preparar os helpers do personagem
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 */
-	void prepareHelpers();
-	/**
-	 * Método para chamar um helper
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @final	13/03/2009
-	 * @param	const int& x, posição x que o helper será chamado
-	 * @param	const int& y, posição y que o helper será chamado
-	 * @param	const Gorgon::Mirroring& mirroring, espelhamento que o helper será chamado
-	 */
-	void callHelper
-	(
-		const int& x,
-		const int& y,
-		const Gorgon::Mirroring& mirroring
-	);
-	/**
-	 * Método responsável por desenhar o personagem
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 */
-	void draw() const;
-	/**
-	 * Método responsável pela lógica do personagem
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 */
-	void logic();
+		/**
+		 * Método Construtor
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	14/03/2009
+		 * @param	const string& fileName, localização do arquivo de script do personagem
+		 * @param	const int& x, posição x do personagem
+		 * @param	const int& y, posição y do personagem
+		 */
+		Character
+		(
+			const string& fileName,
+			const int& x=0,
+			const int& y=0
+		);
+		/**
+		 * Método Destrutor
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 */
+		virtual ~Character();
+		/**
+		 * Método para retornar o life do personagem
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 * @return	int
+		 */
+		int getLife() const;
+		/**
+		 * Método para setar o life do personagem
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 * @param	const int& life, vida do personagem
+		 */
+		void setLife(const int& life);
+		/**
+		 * Método que dimuniu a vida do personagem
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 * @param	const int& life, valor a ser diminuído do life do personagem
+		 */
+		void subLife(const int& life);
+		/**
+		 * Método para aumentar a vida do personagem
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 * @param	const int& life, valor a ser somado ao life do personagem
+		 */
+		void addLife(const int& life);
+		/**
+		 * Método que retorna verdadeiro se o personagem estiver vivo
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 * @return	bool
+		 */
+		bool isAlive() const;
+		/**
+		 * Método para ativar o personagem
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 */
+		void ativate();
+		/**
+		 * Método para desativar o personagem
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 */
+		void inativate();
+		/**
+		 * Método que retorna verdadeiro se o personagem estiver ativo
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 * @return	bool
+		 */
+		bool isAtive() const;
+		/**
+		 * Método que retorna verdadeiro se o personagem estiver imortal
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 * @return	bool
+		 */
+		bool isImortal() const;
+		/**
+		 * Método que machuca o personagem
+		 *
+		 * @author		Cantidio Oliveira Fontes
+		 * @since		12/03/2009
+		 * @final		12/03/2009
+		 * @param		const int& damage, dano
+		 * @abstract	diminui o dano especificado e o deixa o personagem imortal o número de tempo espeficidado
+		 * na variável imortalTime
+		 */
+		void hurt(const int& damage);
+		/**
+		 * Método para preparar os helpers do personagem
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 */
+		void prepareHelpers();
+		/**
+		 * Método para chamar um helper
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	13/03/2009
+		 * @param	const int& helper, qual helper a chamar
+		 * @param	const int& x, posição x que o helper será chamado
+		 * @param	const int& y, posição y que o helper será chamado
+		 * @param	const Gorgon::Mirroring& mirroring, espelhamento que o helper será chamado
+		 */
+		void callHelper
+		(
+			const int& x,
+			const int& y,
+			const Gorgon::Mirroring& mirroring,
+			const int& helper=0
+		);
+		/**
+		 * Método responsável por desenhar o personagem
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 */
+		void draw() const;
+		/**
+		 * Método responsável pela lógica do personagem
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 */
+		void logic();
 };
 /**
  * Bindings para os métodos de classe serem usados nos scritps em lua
@@ -322,7 +361,7 @@ int lua_hurt(lua_State* state);
  *
  * @author	Cantidio Oliveira Fontes
  * @since	12/03/2009
- * @final	12/03/2009
+ * @final	14/03/2009
  * @param	lua_State* state, estado do interpretador lua atual
  * @return	int
  */

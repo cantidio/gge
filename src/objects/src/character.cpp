@@ -1,22 +1,18 @@
 #include "../include/character.hpp"
 
-Character::Character
-(
-	const string& fileName,
-	const int& x,
-	const int& y
-)
+Character::Character()
 {
-	script->loadScript("resources/character/character.lua");
-	script->loadScript(fileName);
-	Object::setUp();
+	script->loadScript("data/character/character.lua");
+}
+
+void Character::loadGlobalVars()
+{
 	life		= (int)script->getNumericVar("life");
-	currentLife	= life;
 	imortalTime	= (int)script->getNumericVar("imortalTime");
-	imortal		= 0;
-	ative		= false;
-	posX		= x;
-	posY		= y;
+}
+
+void Character::registerFunctions()
+{
 	script->registerFunction("lua_getLife",lua_getLife);
 	script->registerFunction("lua_setLife",lua_setLife);
 	script->registerFunction("lua_subLife",lua_subLife);
@@ -25,14 +21,40 @@ Character::Character
 	script->registerFunction("lua_inativate",lua_inativate);
 	script->registerFunction("lua_isAlive",lua_isAlive);
 	script->registerFunction("lua_isAtive",lua_isAtive);
+	script->registerFunction("lua_hurt",lua_hurt);
 	script->registerFunction("lua_callHelper",lua_callHelper);
+}
+
+void Character::setUp()
+{
+	Object::setUp();
+	loadGlobalVars();
+	registerFunctions();
+	currentLife	= life;
+	imortal		= 0;
+	ative		= false;
 	prepareHelpers();
+}
+
+Character::Character
+(
+	const string& fileName,
+	const int& x,
+	const int& y
+)
+{
+	script->loadScript("data/character/character.lua");
+	script->loadScript(fileName);
+	posX		= x;
+	posY		= y;
+	setUp();
 }
 
 Character::~Character()
 {
 	for(int i=0; i<helpers.size(); ++i)
-		delete helpers[i];
+		for(int j=0; j<helpers[i].size(); ++j)
+			delete helpers[i][j];
 }
 
 int Character::getLife() const
@@ -87,11 +109,19 @@ void Character::hurt(const int& damage)
 
 void Character::prepareHelpers()
 {
-	const int numHelpers= (int)script->getNumericVar("helperMaxInstances");
-	const string helperScriptFile= script->getStringVar("helperScriptFile");
-	for(int i=0; i<numHelpers; ++i)
+	const int &num=(int)script->function("getHelpersNumber",Gorgon::LuaParam(),1)->getNumericValue();
+	printf("helperNum: %d\n",num);
+	for(int i=0; i<num; ++i)
 	{
-		helpers.push_back(new Character(helperScriptFile));
+		const int numInstances	=script->function("getHelperMaxInstances",Gorgon::LuaParam("i",i+1),1)->getNumericValue();
+		string helperScriptFile	=script->function("getHelperScriptFile",Gorgon::LuaParam("i",i+1),1)->getStringValue();
+		vector<Character*> helper;
+		
+		for(int j=0; j<numInstances; ++j)
+		{
+			helper.push_back(new Character(helperScriptFile));
+		}
+		helpers.push_back(helper);
 	}
 }
 
@@ -99,18 +129,19 @@ void Character::callHelper
 (
 	const int& x,
 	const int& y,
-	const Gorgon::Mirroring& mirroring
+	const Gorgon::Mirroring& mirroring,
+	const int& helper
 )
 {
-	for(int i=0; i<helpers.size(); ++i)
+	for(int i=0; i<helpers[helper].size(); ++i)
 	{
-		if(!helpers[i]->isAtive())
+		if(!helpers[helper][i]->isAtive())
 		{
-			helpers[i]->setPosition(x,y);
-			helpers[i]->ativate();
-			helpers[i]->setMirroring(mirroring);
+			helpers[helper][i]->setPosition(x,y);
+			helpers[helper][i]->ativate();
+			helpers[helper][i]->setMirroring(mirroring);
 			break;
-		}
+		}	
 	}
 }
 
@@ -118,15 +149,18 @@ void Character::draw() const
 {
 	if(ative)
 	{
-		if((imortal!=0 && imortal%2) || imortal==0)
+		if((imortal>0 && (imortal%2==0)) || imortal==0)
 		{
 			Object::draw();
 		}
 		for(int i=0; i<helpers.size(); ++i)
 		{
-			if(helpers[i]->isAtive())
+			for(int j=0; j<helpers[i].size(); ++j)
 			{
-				helpers[i]->draw();
+				if(helpers[i][j]->isAtive())
+				{
+					helpers[i][j]->draw();
+				}
 			}
 		}
 	}
@@ -135,11 +169,16 @@ void Character::draw() const
 void Character::logic()
 {
 	Object::logic();
+	if(imortal>0)
+		--imortal;
 	for(int i=0; i<helpers.size(); ++i)
 	{
-		if(helpers[i]->isAtive())
+		for(int j=0; j<helpers[i].size(); ++j)
 		{
-			helpers[i]->logic();
+			if(helpers[i][j]->isAtive())
+			{
+				helpers[i][j]->logic();
+			}
 		}
 	}
 }
@@ -235,7 +274,8 @@ int lua_callHelper(lua_State* state)
 			(
 				lua_tointeger(state,2),
 				lua_tointeger(state,3),
-				Gorgon::Mirroring::Normal
+				Gorgon::Mirroring::Normal,
+				lua_tointeger(state,5)
 			);
 			break;
 		case 1:
@@ -243,7 +283,8 @@ int lua_callHelper(lua_State* state)
 			(
 				lua_tointeger(state,2),
 				lua_tointeger(state,3),
-				Gorgon::Mirroring::HFlip
+				Gorgon::Mirroring::HFlip,
+				lua_tointeger(state,5)
 			);
 			break;
 		case 2:
@@ -251,7 +292,8 @@ int lua_callHelper(lua_State* state)
 			(
 				lua_tointeger(state,2),
 				lua_tointeger(state,3),
-				Gorgon::Mirroring::VFlip
+				Gorgon::Mirroring::VFlip,
+				lua_tointeger(state,5)
 			);
 			break;
 		default:
@@ -259,7 +301,8 @@ int lua_callHelper(lua_State* state)
 			(
 				lua_tointeger(state,2),
 				lua_tointeger(state,3),
-				Gorgon::Mirroring::VHFlip
+				Gorgon::Mirroring::VHFlip,
+				lua_tointeger(state,5)
 			);
 			break;
 	}

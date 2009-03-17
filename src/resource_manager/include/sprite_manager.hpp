@@ -23,8 +23,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
  */
-#ifndef _SPRITE_MANAGER_
-#define _SPRITE_MANAGER_
+#ifndef _GSBGE_SPRITE_MANAGER_
+#define _GSBGE_SPRITE_MANAGER_
 #include "../../../../gorgon++/src/graphic/include/gorgon_spritepack.hpp"
 
 namespace ResourceManager

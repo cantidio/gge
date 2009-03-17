@@ -1,7 +1,7 @@
 #include "../include/object.hpp"
 Object::Object()
 {
-	script	= new Gorgon::Lua("resources/object/object.lua");
+	script	= new Gorgon::Lua("data/object/object.lua");
 }
 
 void Object::loadGlobalVars()
@@ -18,10 +18,11 @@ void Object::loadGlobalVars()
 
 void Object::registerFunctions()
 {
-	vector<Gorgon::LuaParam> obj=Gorgon::mountParam("i",this);
-	script->function("getObject",obj,0);
+	script->function("getObject",Gorgon::LuaParam("N",this));
 	script->registerFunction("lua_changeAnimation",lua_changeAnimation);
 	script->registerFunction("lua_animationIsPlaying",lua_animationIsPlaying);
+	script->registerFunction("lua_getAnimationOn",lua_getAnimationOn);
+	script->registerFunction("lua_getFrameOn",lua_getFrameOn);
 	script->registerFunction("lua_getXPosition",lua_getXPosition);
 	script->registerFunction("lua_getYPosition",lua_getYPosition);
 	script->registerFunction("lua_setXPosition",lua_setXPosition);
@@ -46,13 +47,13 @@ void Object::setUp()
 Object::Object
 (
 	const string& scriptName,
-	const int& x,
-	const int& y
+	const double& x,
+	const double& y
 )
 {
 	posX	= x;
 	posY	= y;
-	script	= new Gorgon::Lua("resources/object/object.lua");
+	script	= new Gorgon::Lua("data/object/object.lua");
 	script->loadScript(scriptName);
 	setUp();	
 }
@@ -74,44 +75,44 @@ Gorgon::Mirroring Object::getMirroring() const
 	return direction;
 }
 
-void Object::setXPosition(const int& x)
+void Object::setXPosition(const double& x)
 {
 	posX=x;
 }
 
-void Object::setYPosition(const int& y)
+void Object::setYPosition(const double& y)
 {
 	posY=y;
 }
 
-void Object::setPosition(const int& x,const int& y)
+void Object::setPosition(const double& x,const double& y)
 {
 	posX=x;
 	posY=y;
 }
 
-void Object::addXPosition(const int& x)
+void Object::addXPosition(const double& x)
 {
 	posX+=x;
 }
 
-void Object::addYPosition(const int& y)
+void Object::addYPosition(const double& y)
 {
 	posY+=y;
 }
 
-void Object::addPosition(const int& x,const int& y)
+void Object::addPosition(const double& x,const double& y)
 {
 	posX+=x;
 	posY+=y;
 }
 
-int Object::getXPosition() const
+double Object::getXPosition() const
 {
 	return posX;
 }
 
-int Object::getYPosition() const
+double Object::getYPosition() const
 {
 	return posY;
 }
@@ -121,8 +122,8 @@ void Object::draw() const
 	animationHandler->draw
 	(
 		*Gorgon::Video::get(),
-		posX,
-		posY,
+		(int)posX,
+		(int)posY,
 		direction
 	);
 }
@@ -137,9 +138,19 @@ bool Object::animationIsPlaying() const
 	return animationHandler->isPlaying();
 }
 
+int Object::getAnimationOn() const
+{
+	return animationHandler->getAnimationOn();
+}
+
+int Object::getFrameOn() const
+{
+	return animationHandler->getFrameOn();
+}
+
 void Object::logic()
 {
-	script->function("logic",Gorgon::mountParam(""),0);
+	script->function("logic");
 	animationHandler->playByStep();
 }
 
@@ -150,6 +161,7 @@ int lua_changeAnimation(lua_State* state)
 	a->changeAnimation((int)lua_tointeger(state,2));
 	return 0;
 }
+
 int lua_animationIsPlaying(lua_State* state)
 {
 	int pointer=lua_tointeger(state,1);
@@ -157,6 +169,23 @@ int lua_animationIsPlaying(lua_State* state)
 	lua_pushboolean(state,a->animationIsPlaying());;
 	return 1;
 }
+
+int lua_getAnimationOn(lua_State* state)
+{
+	int pointer=lua_tointeger(state,1);
+	Object* a=(Object*)pointer;
+	lua_pushnumber(state,a->getAnimationOn());;
+	return 1;
+}
+
+int lua_getFrameOn(lua_State* state)
+{
+	int pointer=lua_tointeger(state,1);
+	Object* a=(Object*)pointer;
+	lua_pushnumber(state,a->getFrameOn());;
+	return 1;
+}
+
 int lua_getXPosition(lua_State* state)
 {
 	int pointer=lua_tointeger(state,1);
@@ -177,49 +206,54 @@ int lua_setXPosition(lua_State* state)
 {
 	int pointer=lua_tointeger(state,1);
 	Object* a=(Object*)pointer;
-	a->setXPosition((int)lua_tointeger(state,2));
+	a->setXPosition(lua_tonumber(state,2));
 	return 0;
 }
+
 int lua_setYPosition(lua_State* state)
 {
 	int pointer=lua_tointeger(state,1);
 	Object* a=(Object*)pointer;
-	a->setYPosition((int)lua_tointeger(state,2));
+	a->setYPosition(lua_tonumber(state,2));
 	return 0;
 }
+
 int lua_setPosition(lua_State* state)
 {
 	int pointer=lua_tointeger(state,1);
 	Object* a=(Object*)pointer;
 	a->setPosition
 	(
-		(int)lua_tointeger(state,2),
-		(int)lua_tointeger(state,3)
+		lua_tonumber(state,2),
+		lua_tonumber(state,3)
 	);
 	return 0;
 }
+
 int lua_addXPosition(lua_State* state)
 {
 	int pointer=lua_tointeger(state,1);
 	Object* a=(Object*)pointer;
-	a->addXPosition((int)lua_tointeger(state,2));
+	a->addXPosition(lua_tonumber(state,2));
 	return 0;
 }
+
 int lua_addYPosition(lua_State* state)
 {
 	int pointer=lua_tointeger(state,1);
 	Object* a=(Object*)pointer;
-	a->addYPosition((int)lua_tointeger(state,2));
+	a->addYPosition(lua_tonumber(state,2));
 	return 0;
 }
+
 int lua_addPosition(lua_State* state)
 {
 	int pointer=lua_tointeger(state,1);
 	Object* a=(Object*)pointer;
 	a->addPosition
 	(
-		(int)lua_tointeger(state,2),
-		(int)lua_tointeger(state,3)
+		lua_tonumber(state,2),
+		lua_tonumber(state,3)
 	);
 	return 0;
 }

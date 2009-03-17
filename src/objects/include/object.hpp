@@ -1,4 +1,5 @@
 /**
+ *
  *  ____              __       __          __
  * /\  _`\           /\ \     /\ \      __/\ \__
  * \ \ \L\ \     __  \ \ \____\ \ \____/\_\ \ ,_\  ____
@@ -23,8 +24,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
  */
-#ifndef _OBJECT_
-#define	_OBJECT_
+#ifndef _GSBGE_OBJECT_
+#define	_GSBGE_OBJECT_
 #include "../../../../gorgon++/src/graphic/include/gorgon_video.hpp"
 #include "../../../../gorgon++/src/graphic/include/gorgon_animation_handler.hpp"
 #include "../../../../gorgon++/src/script/include/gorgon_lua.hpp"
@@ -36,7 +37,7 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	11/03/2009
- * @final	12/03/2009
+ * @final	14/03/2009
  */
 class Object
 {
@@ -88,27 +89,27 @@ class Object
 		/**
 		 * Posição do objeto no eixo x
 		 */
-		int posX;
+		double posX;
 		/**
 		 * Posição do objeto no eixo y
 		 */
-		int posY;
+		double posY;
 		/**
 		 * Peso do objeto
 		 */
-		int weight;
+		double weight;
 		/**
 		 * Impulso horizontal que o objeto dispõem
 		 */
-		int xPulse;
+		double xPulse;
 		/**
 		 * Impulso vertical que o objeto dispõem
 		 */
-		int yPulse;
+		double yPulse;
 		/**
 		 * Impulso máximo no eixo x
 		 */
-		int xPulseMax;
+		double xPulseMax;
 		/**
 		 * Estado atual do objeto
 		 */
@@ -121,6 +122,13 @@ class Object
 		 * @final	12/03/2009
 		 */
 		Object();
+		/**
+		 * Método para carregar as variáveis globais de um objeto declaradas no script
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 */
 		void loadGlobalVars();
 		/**
 		 * Método para registrar as funções a serem usadas nos scripts em lua
@@ -130,6 +138,13 @@ class Object
 		 * @final	12/03/2009
 		 */
 		void registerFunctions();
+		/**
+		 * Método para preparar o objeto com as informações já recolhidas
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @final	12/03/2009
+		 */
 		void setUp();
 	public:
 		/**
@@ -137,16 +152,16 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	11/03/2009
-		 * @final	11/03/2009
+		 * @final	14/03/2009
 		 * @param	const string& scriptName, nome do script do objeto
-		 * @param	const int& x, posição x do objeto
-		 * @param	const int& y, posição y do objeto
+		 * @param	const double& x, posição x do objeto
+		 * @param	const double& y, posição y do objeto
 		 */
 		Object
 		(
 			const string& scriptName,
-			const int& x = 0,
-			const int& y = 0
+			const double& x = 0,
+			const double& y = 0
 		);
 		/**
 		 * Método Destrutor
@@ -195,75 +210,75 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
-		 * @param	const int& x, nova posição no eixo x
+		 * @final	14/03/2009
+		 * @param	const double& x, nova posição no eixo x
 		 */
-		void setXPosition(const int& x);
+		void setXPosition(const double& x);
 		/**
 		 * Método para setar a posição y do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
-		 * @param	const int& y, nova posição no eixo y
+		 * @final	14/03/2009
+		 * @param	const double& y, nova posição no eixo y
 		 */
-		void setYPosition(const int& y);
+		void setYPosition(const double& y);
 		/**
 		 * Método para setar a posição xy do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
-		 * @param	const int& x, nova posição no eixo x
-		 * @param	const int& y, nova posição no eixo y
+		 * @final	14/03/2009
+		 * @param	const double& x, nova posição no eixo x
+		 * @param	const double& y, nova posição no eixo y
 		 */
-		void setPosition(const int& x,const int& y);
+		void setPosition(const double& x,const double& y);
 		/**
 		 * Método para adicionar um valor a posição x do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
-		 * @param	const int& x, valor a ser adicionado a posição no eixo x
+		 * @final	14/03/2009
+		 * @param	const double& x, valor a ser adicionado a posição no eixo x
 		 */
-		void addXPosition(const int& x);
+		void addXPosition(const double& x);
 		/**
 		 * Método para adicionar um valor a posição y do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
-		 * @param	const int& y, valor a ser adicionado a posição no eixo y
+		 * @final	14/03/2009
+		 * @param	const double& y, valor a ser adicionado a posição no eixo y
 		 */
-		void addYPosition(const int& y);
+		void addYPosition(const double& y);
 		/**
 		 * Método para adicionar um valor a posição x do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
-		 * @param	const int& x, valor a ser adicionado a posição no eixo x
-		 * @param	conat int& y, valor a ser adicionado a posição no eixo y
+		 * @final	14/03/2009
+		 * @param	const double& x, valor a ser adicionado a posição no eixo x
+		 * @param	conat double& y, valor a ser adicionado a posição no eixo y
 		 */
-		void addPosition(const int& x,const int& y);
+		void addPosition(const double& x,const double& y);
 		/**
 		 * Método para retornar a posição x do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
-		 * @return	int
+		 * @final	14/03/2009
+		 * @return	double
 		 */
-		int getXPosition() const;
+		double getXPosition() const;
 		/**
 		 * Método para retornar a posição y do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
-		 * @return	int
+		 * @final	14/03/2009
+		 * @return	double
 		 */
-		int getYPosition() const;
+		double getYPosition() const;
 		/**
 		 * Método para mudar a animação atuante do objeto
 		 *
@@ -282,7 +297,24 @@ class Object
 		 * @return	bool
 		 */
 		bool animationIsPlaying() const;
-		
+		/**
+		 * Método que retorna a animação que está tocando
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	14/03/2009
+		 * @final	14/03/2009
+		 * @return	int
+		 */
+		int getAnimationOn() const;
+		/**
+		 * Método que retorna o frame atual da animação que está tocando
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	14/03/2009
+		 * @final	14/03/2009
+		 * @return	int
+		 */
+		int getFrameOn() const;
 };
 /**
  * Bindings para os métodos de classe serem usados nos scritps em lua
@@ -307,6 +339,26 @@ int lua_changeAnimation(lua_State* state);
  * @return	int
  */
 int lua_animationIsPlaying(lua_State* state);
+/**
+ * Função que retorna o número da animação que está tocando
+ *
+ * @author	Cantidio Oliveira Fontes
+ * @since	14/03/2009
+ * @final	14/03/2009
+ * @param	lua_State* state, estado do interpretador lua atual
+ * @return	int
+ */
+int lua_getAnimationOn(lua_State* state);
+/**
+ * Função que retorna o número do frame atual da animação que está tocando
+ *
+ * @author	Cantidio Oliveira Fontes
+ * @since	14/03/2009
+ * @final	14/03/2009
+ * @param	lua_State* state, estado do interpretador lua atual
+ * @return	int
+ */
+int lua_getFrameOn(lua_State* state);
 /**
  * Função que retorna a posição x do objeto
  *

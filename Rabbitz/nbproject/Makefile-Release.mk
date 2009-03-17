@@ -31,6 +31,10 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/resource_manager.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/character.o \
+	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src/input_lua.o \
+	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src/input.o \
+	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/player.o \
+	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/player.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/enemy_teste.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/resource_manager/src/animation_manager.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/resource_manager/src/sprite_manager.o \
@@ -71,6 +75,26 @@ ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/character.o: /home/can
 	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/character.o /home/cantidio/Development/rabbitz/tests/character.cpp
+
+${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src/input_lua.o: /home/cantidio/Development/rabbitz/src/input/src/input_lua.c 
+	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src/input_lua.o /home/cantidio/Development/rabbitz/src/input/src/input_lua.c
+
+${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src/input.o: /home/cantidio/Development/rabbitz/src/input/src/input.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src/input.o /home/cantidio/Development/rabbitz/src/input/src/input.cpp
+
+${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/player.o: /home/cantidio/Development/rabbitz/tests/player.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/player.o /home/cantidio/Development/rabbitz/tests/player.cpp
+
+${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/player.o: /home/cantidio/Development/rabbitz/src/objects/src/player.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/player.o /home/cantidio/Development/rabbitz/src/objects/src/player.cpp
 
 ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/enemy_teste.o: /home/cantidio/Development/rabbitz/tests/enemy_teste.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests
