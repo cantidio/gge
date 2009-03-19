@@ -2,6 +2,18 @@
 <configurationDescriptor version="51">
   <logicalFolder name="root" displayName="root" projectFiles="true">
     <logicalFolder name="src" displayName="src" projectFiles="true">
+      <logicalFolder name="background" displayName="background" projectFiles="true">
+        <logicalFolder name="include" displayName="include" projectFiles="true">
+          <itemPath>/home/cantidio/Development/rabbitz/src/background/include/background.hpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/background/include/layer.hpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/background/include/tile.hpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>/home/cantidio/Development/rabbitz/src/background/src/background.cpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/background/src/layer.cpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/background/src/tile.cpp</itemPath>
+        </logicalFolder>
+      </logicalFolder>
       <logicalFolder name="input" displayName="input" projectFiles="true">
         <logicalFolder name="include" displayName="include" projectFiles="true">
           <itemPath>/home/cantidio/Development/rabbitz/src/input/include/input.hpp</itemPath>
@@ -40,6 +52,8 @@
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="tests" displayName="tests" projectFiles="true">
+      <itemPath>/home/cantidio/Development/rabbitz/tests/background.cpp</itemPath>
+      <itemPath>/home/cantidio/Development/rabbitz/tests/background.hpp</itemPath>
       <itemPath>/home/cantidio/Development/rabbitz/tests/character.cpp</itemPath>
       <itemPath>/home/cantidio/Development/rabbitz/tests/enemy_teste.cpp</itemPath>
       <itemPath>/home/cantidio/Development/rabbitz/tests/player.cpp</itemPath>
@@ -82,6 +96,24 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="/home/cantidio/Development/rabbitz/src/background/include/background.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/background/include/layer.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/background/include/tile.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/background/src/background.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/background/src/layer.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/background/src/tile.cpp">
+        <itemTool>1</itemTool>
+      </item>
       <item path="/home/cantidio/Development/rabbitz/src/input/include/input.hpp">
         <itemTool>3</itemTool>
       </item>
@@ -130,6 +162,12 @@
       <item path="/home/cantidio/Development/rabbitz/src/resource_manager/src/sprite_manager.cpp">
         <itemTool>1</itemTool>
       </item>
+      <item path="/home/cantidio/Development/rabbitz/tests/background.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/tests/background.hpp">
+        <itemTool>3</itemTool>
+      </item>
       <item path="/home/cantidio/Development/rabbitz/tests/character.cpp">
         <itemExcluded>true</itemExcluded>
         <itemTool>1</itemTool>
@@ -139,6 +177,7 @@
         <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/tests/player.cpp">
+        <itemExcluded>true</itemExcluded>
         <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/tests/resource_manager.cpp">
@@ -167,6 +206,24 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="/home/cantidio/Development/rabbitz/src/background/include/background.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/background/include/layer.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/background/include/tile.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/background/src/background.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/background/src/layer.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/background/src/tile.cpp">
+        <itemTool>1</itemTool>
+      </item>
       <item path="/home/cantidio/Development/rabbitz/src/input/include/input.hpp">
         <itemTool>3</itemTool>
       </item>
@@ -214,6 +271,12 @@
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/resource_manager/src/sprite_manager.cpp">
         <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/tests/background.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/tests/background.hpp">
+        <itemTool>3</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/tests/character.cpp">
         <itemTool>1</itemTool>
