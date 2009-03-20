@@ -16,8 +16,8 @@ int main(int argc, char* argv[])
 		objects[objects.size()-1]->ativate();
 
 		
-		Background* bg=createYamattoBackground();
-		bg->save("teste.lua");
+		Background* bg=new Background("teste.lua");//createYamattoBackground();
+
 		while(!key[KEY_ESC])
 		{
 			Gorgon::Video::get()->clear(0xAA0BDD);

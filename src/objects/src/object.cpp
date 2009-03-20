@@ -55,7 +55,7 @@ Object::Object
 	posY	= y;
 	script	= new Gorgon::Lua("data/object/object.lua");
 	script->loadScript(scriptName);
-	setUp();	
+	setUp();
 }
 
 Object::~Object()

@@ -5,11 +5,13 @@
       <logicalFolder name="background" displayName="background" projectFiles="true">
         <logicalFolder name="include" displayName="include" projectFiles="true">
           <itemPath>/home/cantidio/Development/rabbitz/src/background/include/background.hpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/background/include/background_lua.hpp</itemPath>
           <itemPath>/home/cantidio/Development/rabbitz/src/background/include/layer.hpp</itemPath>
           <itemPath>/home/cantidio/Development/rabbitz/src/background/include/tile.hpp</itemPath>
         </logicalFolder>
         <logicalFolder name="src" displayName="src" projectFiles="true">
           <itemPath>/home/cantidio/Development/rabbitz/src/background/src/background.cpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/background/src/background_lua.cpp</itemPath>
           <itemPath>/home/cantidio/Development/rabbitz/src/background/src/layer.cpp</itemPath>
           <itemPath>/home/cantidio/Development/rabbitz/src/background/src/tile.cpp</itemPath>
         </logicalFolder>
@@ -99,6 +101,9 @@
       <item path="/home/cantidio/Development/rabbitz/src/background/include/background.hpp">
         <itemTool>3</itemTool>
       </item>
+      <item path="/home/cantidio/Development/rabbitz/src/background/include/background_lua.hpp">
+        <itemTool>3</itemTool>
+      </item>
       <item path="/home/cantidio/Development/rabbitz/src/background/include/layer.hpp">
         <itemTool>3</itemTool>
       </item>
@@ -106,6 +111,9 @@
         <itemTool>3</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/background/src/background.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/background/src/background_lua.cpp">
         <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/background/src/layer.cpp">
@@ -209,6 +217,9 @@
       <item path="/home/cantidio/Development/rabbitz/src/background/include/background.hpp">
         <itemTool>3</itemTool>
       </item>
+      <item path="/home/cantidio/Development/rabbitz/src/background/include/background_lua.hpp">
+        <itemTool>3</itemTool>
+      </item>
       <item path="/home/cantidio/Development/rabbitz/src/background/include/layer.hpp">
         <itemTool>3</itemTool>
       </item>
@@ -216,6 +227,9 @@
         <itemTool>3</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/background/src/background.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/background/src/background_lua.cpp">
         <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/background/src/layer.cpp">
