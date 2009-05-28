@@ -12,7 +12,7 @@ tiles				= {
 	{
 		animation	= 108,
 		position	= {
-			{ x = 30, y = 30 },
+			{ x = 0, y = 0 },
 		}
 	},
 }

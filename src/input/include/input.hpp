@@ -1,4 +1,4 @@
-/**
+/*
  *
  *  ____              __       __          __
  * /\  _`\           /\ \     /\ \      __/\ \__
@@ -35,7 +35,10 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	16/03/2009
- * @final	16/03/2009
+ * @version	28/05/2009
+ * @ingroup	Input
+ * @todo	Aceitar joystick
+ * @todo	Aceitar mais de um player
  */
 class Input
 {
@@ -43,66 +46,66 @@ class Input
 		/**
 		 * Ponteiro para a instância da classe
 		 */
-		static Input* singleton;
+		static Input* mSingleton;
 		/**
 		 * Código da tecla de start no teclado
 		 */
-		int key_start;
+		int mKey_start;
 		/**
 		 * Código da tecla direcional para cima no teclado
 		 */
-		int key_up;
+		int mKey_up;
 		/**
 		 * Código da tecla direcional para baixo no teclado
 		 */
-		int key_down;
+		int mKey_down;
 		/**
 		 * Código da tecla direcional para esquerda no teclado
 		 */
-		int key_left;
+		int mKey_left;
 		/**
 		 * Código da tecla direcional para direita no teclado
 		 */
-		int key_right;
+		int mKey_right;
 		/**
 		 * Código da tecla de botão1 no teclado
 		 */
-		int key_button1;
+		int mKey_button1;
 		/**
 		 * Código da tecla de botão2 no teclado
 		 */
-		int key_button2;
+		int mKey_button2;
 		/**
 		 * Código da tecla de botão3 no teclado
 		 */
-		int key_button3;
+		int mKey_button3;
 		/**
 		 * Código da tecla de botão4 no teclado
 		 */
-		int key_button4;
+		int mKey_button4;
 		/**
 		 * Código da tecla de botão5 no teclado
 		 */
-		int key_button5;
+		int mKey_button5;
 		/**
 		 * Código da tecla de botão6 no teclado
 		 */
-		int key_button6;
+		int mKey_button6;
 		/**
 		 * Código da tecla de botão7 no teclado
 		 */
-		int key_button7;
+		int mKey_button7;
 		/**
 		 * Código da tecla de botão8 no teclado
 		 */
-		int key_button8;
+		int mKey_button8;
 	protected:
 		/**
 		 * Método Construtor
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 */
 		Input();
 		/**
@@ -110,7 +113,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 */
 		virtual ~Input();
 		/**
@@ -118,7 +121,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 */
 		void loadConfiguration();
 		/**
@@ -126,7 +129,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 */
 		void saveConfiguration() const;
 		/**
@@ -134,7 +137,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 */
 		void createDefaultConfiguration();
 	public:
@@ -143,7 +146,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 */
 		static void init();
 		/**
@@ -151,7 +154,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 */
 		static void halt();
 		/**
@@ -159,7 +162,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 */
 		static Input& get();
 
@@ -168,7 +171,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 * @return	bool
 		 */
 		bool buttonStart();
@@ -177,7 +180,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 * @return	bool
 		 */
 		bool buttonUp();
@@ -186,7 +189,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 * @return	bool
 		 */
 		bool buttonRight();
@@ -195,7 +198,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 * @return	bool
 		 */
 		bool buttonDown();
@@ -204,7 +207,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 * @return	bool
 		 */
 		bool buttonLeft();
@@ -213,7 +216,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 * @return	bool
 		 */
 		bool button1();
@@ -222,7 +225,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 * @return	bool
 		 */
 		bool button2();
@@ -231,7 +234,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 * @return	bool
 		 */
 		bool button3();
@@ -240,7 +243,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 * @return	bool
 		 */
 		bool button4();
@@ -249,7 +252,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 * @return	bool
 		 */
 		bool button5();
@@ -258,7 +261,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 * @return	bool
 		 */
 		bool button6();
@@ -267,7 +270,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 * @return	bool
 		 */
 		bool button7();
@@ -276,7 +279,7 @@ class Input
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
-		 * @final	16/03/2009
+		 * @version	28/05/2009
 		 * @return	bool
 		 */
 		bool button8();

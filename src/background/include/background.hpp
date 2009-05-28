@@ -1,4 +1,4 @@
-/**
+/*
  *
  *  ____              __       __          __
  * /\  _`\           /\ \     /\ \      __/\ \__
@@ -29,11 +29,23 @@
 #include "layer.hpp"
 
 /**
+ * @defgroup	Background
+ *
+ * @author		Cantidio Oliveira Fontes
+ * @since		18/03/2009
+ * @version		28/05/2009
+ * @details
+ *				O módulo Background engloba todas as funcionalidades relacionadas
+ *				à parte de cenários, camadas de cenários, tiles e a interação dos mesmos
+ */
+
+/**
  * Classe que representa um cenário
  *
  * @author	Cantidio Oliveira Fontes
  * @since	18/03/2009
- * @final	20/03/2009
+ * @version	28/05/2009
+ * @ingroup	Background
  */
 class Background
 {
@@ -41,46 +53,46 @@ class Background
 		/**
 		 * Script que comanda as ações do layer
 		 */
-		Gorgon::Lua* script;
+		Gorgon::Lua* mScript;
 		/**
 		 * Vetor com os layers do background
 		 */
-		std::vector<Layer*> layers;
+		std::vector<Layer*> mLayers;
 		/**
 		 * Gravidade aplicado ao cenário
 		 */
-		double gravity;
+		double mGravity;
 		/**
 		 * Atrito exercido sobre os objetos quando não estão colidindo em nada
 		 */
-		double voidFriction;
+		double mVoidFriction;
 		/**
 		 * Posição x do background
 		 */
-		double posX;
+		double mPosX;
 		/**
 		 * Posição y do background
 		 */
-		double posY;
+		double mPosY;
 		/**
 		 * Largura do background
 		 */
-		int width;
+		int mWidth;
 		/**
 		 * Altura do cenário
 		 */
-		int height;
+		int mHeight;
 		/**
 		 * Variável que trava o scrooling do cenário
 		 */
-		bool lockScrool;
+		bool mLockScrool;
 	protected:
 		/**
 		 * Método para carregar as variáveis globais do cenário
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
+		 * @version	28/05/2009
 		 */
 		void loadGlobalVars();
 		/**
@@ -88,7 +100,7 @@ class Background
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
+		 * @version	28/05/2009
 		 */
 		void loadLayers();
 		/**
@@ -96,7 +108,7 @@ class Background
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
+		 * @version	28/05/2009
 		 */
 		void setUp();
 	public:
@@ -105,34 +117,34 @@ class Background
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	18/03/2009
-		 * @param	const int& width	, largura do cenário
-		 * @param	const int& height	, altura do cenário
-		 * @param	const int& posX		, posição x que o cenário se encontra
-		 * @param	const int& posY		, posição y que o cenário se encontra
+		 * @version	28/05/2009
+		 * @param	const int& pWidth	, largura do cenário
+		 * @param	const int& pHeight	, altura do cenário
+		 * @param	const int& pPosX	, posição x que o cenário se encontra
+		 * @param	const int& pPosY	, posição y que o cenário se encontra
 		 */
 		Background
 		(
-			const int& width,
-			const int& height,
-			const double& posX=0,
-			const double& posY=0
+			const int&		pWidth,
+			const int&		pHeight,
+			const double&	pPosX=0,
+			const double&	pPosY=0
 		);
 		/**
 		 * Método Construtor
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
-		 * @param	const std::string& fileName, nome do arquivo de script do cenário
+		 * @version	28/03/2009
+		 * @param	const std::string& pFileName, nome do arquivo de script do cenário
 		 */
-		Background(const std::string& fileName);
+		Background(const std::string& pFileName);
 		/**
 		 * Método Destrutor
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	19/03/2009
+		 * @version	28/05/2009
 		 */
 		~Background();
 		/**
@@ -140,16 +152,16 @@ class Background
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	19/03/2009
-		 * @param	Layer* layer, layer a ser adicionado
+		 * @version	28/05/2009
+		 * @param	Layer* pLayer, layer a ser adicionado
 		 */
-		void addLayer(Layer* layer);
+		void addLayer(Layer* pLayer);
 		/**
 		 * Método que executa a lógica envolvida no background
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	18/03/2009
+		 * @version	28/05/2009
 		 */
 		void logic();
 		/**
@@ -157,34 +169,34 @@ class Background
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	18/03/2009
+		 * @version	28/05/2009
 		 * @param	Gorgon::Sprite& sprite, sprite que o cenário será desenhado
 		 */
-		void draw(Gorgon::Sprite& sprite);
+		void draw(Gorgon::Sprite& pSprite);
 		/**
 		 * Método para salvar o background e seus componentes
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	18/03/2009
-		 * @final	19/03/2009
+		 * @version	28/05/2009
 		 * @param	const std::string& fileName, nome do arquivo a salvar
 		 */
-		void save(const std::string& fileName) const;
+		void save(const std::string& pFileName) const;
 		/**
 		 * Método para carregar o cenário de um arquivo de script
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
+		 * @version	28/05/2009
 		 * @param	const std::string& fileName, nome do arquivo de script
 		 */
-		void load(const std::string& fileName);
+		void load(const std::string& pFileName);
 		/**
 		 * Método para trancar o scroll do cenário
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
+		 * @version	28/05/2009
 		 */
 		void scroolLock();
 		/**
@@ -192,7 +204,7 @@ class Background
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
+		 * @version	28/05/2009
 		 */
 		void scroolUnlock();
 		/**
@@ -200,25 +212,25 @@ class Background
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
-		 * @param	const double& x, posição no eixo x
+		 * @version	28/05/2009
+		 * @param	const double& pPosX, posição no eixo x
 		 */
-		void setXPos(const double& x);
+		void setXPos(const double& pPosX);
 		/**
 		 * Método para setar a posição y do cenário
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
-		 * @param	const double& y, posição no eixo y
+		 * @version	28/05/2009
+		 * @param	const double& pPosY, posição no eixo y
 		 */
-		void setYPos(const double& y);
+		void setYPos(const double& pPosY);
 		/**
 		 * Método para retornar a posição x do cenário
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
+		 * @version	28/05/2009
 		 * @return	double
 		 */
 		double getXPos() const;
@@ -227,7 +239,7 @@ class Background
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
+		 * @version	28/05/2009
 		 * @return	double
 		 */
 		double getYPos() const;

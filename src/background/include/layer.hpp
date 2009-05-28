@@ -1,4 +1,4 @@
-/**
+/*
  *
  *  ____              __       __          __
  * /\  _`\           /\ \     /\ \      __/\ \__
@@ -24,8 +24,6 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
  */
-
-
 #ifndef _GSBGE_LAYER_
 #define _GSBGE_LAYER_
 #include "../../resource_manager/include/sprite_manager.hpp"
@@ -39,7 +37,8 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	17/03/2009
- * @final	19/03/2009
+ * @version	28/05/2009
+ * @ingroup	Background
  */
 class Layer
 {
@@ -47,66 +46,66 @@ class Layer
 		/**
 		 * Nome do arquivo de script do layer
 		 */
-		std::string scriptName;
+		std::string mScriptName;
 		/**
 		 * Nome do arquivo de sprites do layer
 		 */
-		std::string spritePackName;
+		std::string mSpritePackName;
 		/**
 		 * Nome do arquivo de animações do layer
 		 */
-		std::string animationPackName;
+		std::string mAnimationPackName;
 		/**
 		 * Ponteiro para o spritePack do layer
 		 */
-		Gorgon::SpritePack* spritePack;
+		Gorgon::SpritePack* mSpritePack;
 		/**
 		 * Ponteiro para o animationPack do layer
 		 */
-		Gorgon::AnimationPack* animationPack;
+		Gorgon::AnimationPack* mAnimationPack;
 		/**
 		 * Script que comanda as ações do layer
 		 */
-		Gorgon::Lua* script;
+		Gorgon::Lua* mScript;
 		/**
 		 * Vetor com os tiles do layer
 		 */
-		std::vector<Tile*>	tiles;
+		std::vector<Tile*>	mTiles;
 		/**
 		 * Vetor com os objetos do cenário
 		 */
-		std::vector<Object*> objects;
+		std::vector<Object*> mObjects;
 		/**
 		 * Velocidade de deslocamento horizontal do layer
 		 */
-		double xScrollSpeed;
+		double mXScrollSpeed;
 		/**
 		 * Velocidade de deslocamento vertical do layer
 		 */
-		double yScrollSpeed;
+		double mYScrollSpeed;
 	protected:
 		/**
 		 * Carrega as variáveis globais da classe
 		 *
-		 * @author		Cantidio Oliveira Fontes
-		 * @since		19/03/2009
-		 * @final		19/03/2009
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	19/03/2009
+		 * @version	28/05/2009
 		 */
 		void loadGlobalVars();
 		/**
 		 * Carrega os tiles do layer
 		 *
-		 * @author		Cantidio Oliveira Fontes
-		 * @since		19/03/2009
-		 * @final		19/03/2009
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	19/03/2009
+		 * @version	28/05/2009
 		 */
 		void loadTiles();
 		/**
 		 * Método que carrega os objetos do layer
 		 *
-		 * @author		Cantidio Oliveira Fontes
-		 * @since		19/03/2009
-		 * @final		19/03/2009
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	19/03/2009
+		 * @version	28/05/2009
 		 */
 		void loadObjects();
 		/**
@@ -114,37 +113,37 @@ class Layer
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
+		 * @version	28/05/2009
 		 */
 		void setUp();
 	public:
 		
-		Layer(const Layer& orig);
+		Layer(const Layer& pOrig);
 		/**
 		 * Método Construtor
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	19/03/2009
-		 * @param	const double& xScrollSpeed,	velocidade de deslocamento horizontal do layer
-		 * @param	const double& yScrollSpeed,	velocidade de deslocamento vertical do layer
+		 * @version	28/05/2009
+		 * @param	const double& pXScrollSpeed,	velocidade de deslocamento horizontal do layer
+		 * @param	const double& pYScrollSpeed,	velocidade de deslocamento vertical do layer
 		 */
-		Layer(const double& xScrollSpeed=1,const double& yScrollSpeed=1);
+		Layer(const double& pXScrollSpeed=1,const double& pYScrollSpeed=1);
 		/**
 		 * Método Construtor
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
-		 * @param	const std::string& scriptName, nome do script do layer
+		 * @version	28/05/2009
+		 * @param	const std::string& pScriptName, nome do script do layer
 		 */
-		Layer(const std::string& scriptName);
+		Layer(const std::string& pScriptName);
 		/**
 		 * Método Destrutor
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	19/03/2009
+		 * @version	28/05/2009
 		 */
 		~Layer();
 		/**
@@ -152,7 +151,7 @@ class Layer
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	18/03/2009
-		 * @final	18/03/2009
+		 * @version	28/05/2009
 		 */
 		void describe() const;
 		/**
@@ -160,45 +159,45 @@ class Layer
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	19/03/2009
-		 * @param	Object* object, Object a ser adicionado
+		 * @version	28/05/2009
+		 * @param	Object* pObject, Object a ser adicionado
 		 */
-		void addObject(Object* object);
+		void addObject(Object* pObject);
 		/**
 		 * Método para se adicionar um Tile ao Layer
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	18/03/2009
-		 * @param	Tile* tile, Tile a ser adicionado
+		 * @version	28/05/2009
+		 * @param	Tile* pTile, Tile a ser adicionado
 		 */
-		void addTile(Tile* tile);
+		void addTile(Tile* pTile);
 		/**
 		 * Método para retornar a posição x real do layer
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	18/03/2009
-		 * @param	const int& posX, posição x
+		 * @version	28/05/2009
+		 * @param	const int& pPosX, posição x
 		 * @return	int
 		 */
-		int getRealPosX(const int& posX) const;
+		int getRealPosX(const int& pPosX) const;
 		/**
 		 * Método para retornar a posição y real do layer
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	18/03/2009
-		 * @param	const int& posY, posição y
+		 * @version	28/05/2009
+		 * @param	const int& pPosY, posição y
 		 * @return	int
 		 */
-		int getRealPosY(const int& posY) const;
+		int getRealPosY(const int& pPosY) const;
 		/**
 		 * Método que executa a lógica envolvida no layer
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	19/03/2009
+		 * @version	28/05/2009
 		 */
 		void logic();
 		/**
@@ -206,34 +205,34 @@ class Layer
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	18/03/2009
+		 * @version	28/05/2009
 		 * @param	Gorgon::Sprite& sprite, sprite que o layer será desenhado
-		 * @param	const int& x, posição x que o layer será desenhado
-		 * @param	const int& y, posição y que o layer será desenhado
+		 * @param	const int& posX, posição x que o layer será desenhado
+		 * @param	const int& posY, posição y que o layer será desenhado
 		 */
 		void draw
 		(
 			Gorgon::Sprite& sprite,
-			const int& x,
-			const int& y
+			const int& posX,
+			const int& posY
 		);
 		/**
 		 * Método para salvar os dados da camada em um script lua
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	18/03/2009
-		 * @final	19/03/2009
-		 * @param	const std::string& fileName, nome do arquivo a salvar
+		 * @version	28/05/2009
+		 * @param	const std::string& pFileName, nome do arquivo a salvar
 		 */
-		void save(const std::string& fileName) const;
+		void save(const std::string& pFileName) const;
 		/**
 		 * Método para se carregar o layer de um arquivo de script
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
-		 * @param	const std::string& fileName, nome do arquivo a carregar
+		 * @version	28/05/2009
+		 * @param	const std::string& pFileName, nome do arquivo a carregar
 		 */
-		void load(const std::string& fileName);
+		void load(const std::string& pFileName);
 };
 #endif

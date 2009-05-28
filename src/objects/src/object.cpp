@@ -3,147 +3,147 @@
 
 Object::Object()
 {
-	script	= new Gorgon::Lua("data/object/object.lua");
+	mScript = new Gorgon::Lua("data/object/object.lua");
 }
 
 void Object::loadGlobalVars()
 {
-	name				= script->getStringVar("name");
-	spritePackName		= script->getStringVar("sprite");
-	animationPackName	= script->getStringVar("animation");
-	colisionPackName	= script->getStringVar("colision");
-	paletteName			= script->getStringVar("palette");
-	xPulse				= script->getNumericVar("xPulse");
-	yPulse				= script->getNumericVar("yPulse");
-	xPulseMax			= script->getNumericVar("xPulseMax");
-	gravityAffected		= script->getBooleanVar("gravityAffected");
+	mName				= mScript->getStringVar("name");
+	mSpritePackName		= mScript->getStringVar("sprite");
+	mAnimationPackName	= mScript->getStringVar("animation");
+	mColisionPackName	= mScript->getStringVar("colision");
+	mPaletteName		= mScript->getStringVar("palette");
+	mXPulse				= mScript->getNumericVar("xPulse");
+	mYPulse				= mScript->getNumericVar("yPulse");
+	mXPulseMax			= mScript->getNumericVar("xPulseMax");
+	mGravityAffected	= mScript->getBooleanVar("gravityAffected");
 }
 
 void Object::setUp()
 {
 	loadGlobalVars();
-	script->function("getObject",Gorgon::LuaParam("N",this));
-	ObjectLua::registerFunctions(script);
-	spritePack			= ResourceManager::SpriteManager::load(spritePackName);
-	animationPack		= ResourceManager::AnimationManager::load(animationPackName);
-	animationHandler	= new Gorgon::AnimationHandler(*spritePack,*animationPack);
+	mScript->function("getObject",Gorgon::LuaParam("n",this));
+	ObjectLua::registerFunctions(mScript);
+	mSpritePack			= ResourceManager::SpriteManager::load(mSpritePackName);
+	mAnimationPack		= ResourceManager::AnimationManager::load(mAnimationPackName);
+	mAnimationHandler	= new Gorgon::AnimationHandler(*mSpritePack,*mAnimationPack);
 }
 
-Object::Object(const std::string& scriptName,const Gorgon::Point& position)
+Object::Object(const std::string& pScriptName,const Gorgon::Point& pPosition)
 {
-	setPosition(position);
-	script	= new Gorgon::Lua("data/object/object.lua");
-	script->loadScript(scriptName);
+	setPosition(pPosition);
+	mScript	= new Gorgon::Lua("data/object/object.lua");
+	mScript->loadScript(pScriptName);
 	setUp();
 }
 
 Object::~Object()
 {
-	ResourceManager::SpriteManager::unload(spritePackName);
-	ResourceManager::AnimationManager::unload(animationPackName);
-	delete animationHandler;
+	ResourceManager::SpriteManager::unload(mSpritePackName);
+	ResourceManager::AnimationManager::unload(mAnimationPackName);
+	delete mAnimationHandler;
 }
 
-void Object::setMirroring(const Gorgon::Mirroring& mirroring)
+void Object::setMirroring(const Gorgon::Mirroring& pMirroring)
 {
-	direction=mirroring;
+	mDirection=pMirroring;
 }
 
 Gorgon::Mirroring Object::getMirroring() const
 {
-	return direction;
+	return mDirection;
 }
 
-void Object::setXPosition(const double& x)
+void Object::setXPosition(const double& pPosX)
 {
-	position.setX(x);
+	mPosition.setX(pPosX);
 }
 
-void Object::setYPosition(const double& y)
+void Object::setYPosition(const double& pPosY)
 {
-	position.setY(y);
+	mPosition.setY(pPosY);
 }
 
-void Object::setPosition(const Gorgon::Point& newPosition)
+void Object::setPosition(const Gorgon::Point& pPosition)
 {
-	position=newPosition;
+	mPosition=pPosition;
 }
 
-void Object::addXPosition(const double& x)
+void Object::addXPosition(const double& pPosX)
 {
-	position.addX(x);
+	mPosition.addX(pPosX);
 }
 
-void Object::addYPosition(const double& y)
+void Object::addYPosition(const double& pPosY)
 {
-	position.addY(y);
+	mPosition.addY(pPosY);
 }
 
-void Object::addPosition(const double& x,const double& y)
+	void Object::addPosition(const double& pPosX,const double& pPosY)
 {
-	position.addX(x);
-	position.addY(y);
+	mPosition.addX(pPosX);
+	mPosition.addY(pPosY);
 }
 
-void Object::subXPosition(const double& x)
+void Object::subXPosition(const double& pPosX)
 {
-	position.subX(x);
+	mPosition.subX(pPosX);
 }
 
-void Object::subYPosition(const double& y)
+void Object::subYPosition(const double& pPosY)
 {
-	position.subY(y);
+	mPosition.subY(pPosY);
 }
 
-void Object::subPosition(const double& x,const double& y)
+void Object::subPosition(const double& pPosX,const double& pPosY)
 {
-	position.subX(x);
-	position.subY(y);
+	mPosition.subX(pPosX);
+	mPosition.subY(pPosY);
 }
 
 double Object::getXPosition() const
 {
-	return position.getX();
+	return mPosition.getX();
 }
 
 double Object::getYPosition() const
 {
-	return position.getY();
+	return mPosition.getY();
 }
 
 void Object::draw() const
 {
-	animationHandler->draw
+	mAnimationHandler->draw
 	(
 		*Gorgon::Video::get(),
-		(int)position.getX(),
-		(int)position.getY(),
-		direction
+		(int)mPosition.getX(),
+		(int)mPosition.getY(),
+		mDirection
 	);
 }
 
-void Object::changeAnimation(const int& animation)
+void Object::changeAnimation(const int& pAnimation)
 {
-	animationHandler->changeAnimation(animation);
+	mAnimationHandler->changeAnimation(pAnimation);
 }
 
 bool Object::animationIsPlaying() const
 {
-	return animationHandler->isPlaying();
+	return mAnimationHandler->isPlaying();
 }
 
 int Object::getAnimationOn() const
 {
-	return animationHandler->getAnimationOn();
+	return mAnimationHandler->getAnimationOn();
 }
 
 int Object::getFrameOn() const
 {
-	return animationHandler->getFrameOn();
+	return mAnimationHandler->getFrameOn();
 }
 
 void Object::logic()
 {
-	script->function("logic");
-	animationHandler->playByStep();
+	mScript->function("logic");
+	mAnimationHandler->playByStep();
 }

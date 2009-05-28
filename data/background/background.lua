@@ -1,6 +1,6 @@
 --background
 --Memory Address for the background class that called the script
-BackgroundPointer	= nil
+backgroundPointer	= nil
 --Background gravity
 gravity				= 0
 --Friction when not coliding
@@ -21,7 +21,7 @@ player				= {
 	layer		= 1,
 	xPosition	= 0,
 	yPosition	= 0,
-	mirroring	= mirroring.Normal,
+	--mirroring	= mirroring.Normal, por causa disso tava dando pau
 	initialState= 290 
 }
 
@@ -29,25 +29,27 @@ player				= {
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	19/03/2009
--- @final	20/03/2009
+-- @version	20/03/2009
 -- @param	int pointer, endereço do cenário na memória
 function setBackgroundPointer(pointer)
-	BackgroundPointer=pointer
+	backgroundPointer=pointer
 end
+
 -- Função que retorna o número de layers que o cenário possui
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	19/03/2009
--- @final	19/03/2009
+-- @version	19/03/2009
 -- @return	int
 function getLayerNumber()
 	return #layers;
 end
+
 -- Função que retorna o arquivo de script do layer indicado
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	19/03/2009
--- @final	19/03/2009
+-- @version	19/03/2009
 -- @param	int index, índice do layer
 -- @return	string
 function getLayer(index)
@@ -58,97 +60,107 @@ end
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	19/03/2009
--- @final	20/03/2009
+-- @version	20/03/2009
 -- @return	int
 function getXPosition()
-	return lua_getXPosition(BackgroundPointer)
+	return lua_getXPosition(backgroundPointer)
 end
+
 -- Função que retorna a posição y atual do cenário
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	19/03/2009
--- @final	20/03/2009
+-- @version	20/03/2009
 -- @return	int
 function getYPosition()
-	return lua_getYPosition(BackgroundPointer)
+	return lua_getYPosition(backgroundPointer)
 end
+
 -- Função que seta a posição x atual do cenário
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	19/03/2009
--- @final	19/03/2009
--- @param	int x, nova posição x
-function setXPosition(x)
-	lua_setXPosition(BackgroundPointer,x)
+-- @version	19/03/2009
+-- @param	int pPosX, nova posição x
+function setXPosition(pPosX)
+	lua_setXPosition(backgroundPointer,pPosX)
 end
+
 -- Função que seta a posição y atual do cenário
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	19/03/2009
--- @final	19/03/2009
--- @param	int y, nova posição y
-function setYPosition(y)
-	lua_setYPosition(BackgroundPointer,y)
+-- @version	19/03/2009
+-- @param	int pPosY, nova posição y
+function setYPosition(pPosY)
+	lua_setYPosition(backgroundPointer,pPosY)
 end
+
 -- Função que adiciona um valor a posição x do cenário
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	19/03/2009
--- @final	19/03/2009
--- @param	int x, valor a ser adicionado a posição x
-function addXPosition(x)
-	lua_addXPosition(BackgroundPointer,x)
+-- @version	19/03/2009
+-- @param	int pPosX, valor a ser adicionado a posição x
+function addXPosition(pPosX)
+	lua_addXPosition(backgroundPointer,pPosX)
 end
+
 -- Função que adiciona um valor a posição y do cenário
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	19/03/2009
--- @final	19/03/2009
--- @param	int y, valor a ser adicionado a posição y
-function addYPosition(y)
-	lua_addYPosition(BackgroundPointer,y)
+-- @version	19/03/2009
+-- @param	int pPosY, valor a ser adicionado a posição y
+function addYPosition(pPosY)
+	lua_addYPosition(backgroundPointer,pPosY)
 end
+
 -- Função que subtrai um valor a posição x do cenário
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	19/03/2009
--- @final	19/03/2009
--- @param	int x, valor a ser subtraído da posição x
-function subXPosition(x)
-	lua_subXPosition(BackgroundPointer,x)
+-- @version	19/03/2009
+-- @param	int pPosX, valor a ser subtraído da posição x
+function subXPosition(pPosX)
+	lua_subXPosition(backgroundPointer,pPosX)
 end
+
 -- Função que subtrai um valor a posição y do cenário
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	19/03/2009
--- @final	19/03/2009
--- @param	int y, valor a ser subtraído da posição y
-function subYPosition(y)
-	lua_subYPosition(BackgroundPointer,y)
+-- @version	19/03/2009
+-- @param	int pPosY, valor a ser subtraído da posição y
+function subYPosition(pPosY)
+	lua_subYPosition(backgroundPointer,pPosY)
 end
+
 -- Função que trava o scrolling do cenário
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	19/03/2009
--- @final	19/03/2009
+-- @version	19/03/2009
 -- @param	int x, valor a ser adicionado a posição x
 function scrollLock()
-	lua_scrollLock(BackgroundPointer)
+	lua_scrollLock(backgroundPointer)
 end
+
 -- Função que destrava o scrolling do cenário
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	19/03/2009
--- @final	19/03/2009
+-- @version	19/03/2009
 -- @param	int x, valor a ser adicionado a posição x
 function scrollUnlock()
-	lua_scrollUnlock(BackgroundPointer)
+	lua_scrollUnlock(backgroundPointer)
 end
+
 -- Função que retorna se o cenário foi concluído
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	19/03/2009
--- @final	19/03/2009
+-- @version	19/03/2009
 function finished()
 	return false;
 end
@@ -157,7 +169,8 @@ end
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	18/03/2009
--- @final	18/03/2009
+-- @version	18/03/2009
 function logic()
+	--put your logic here
 end
 

@@ -1,4 +1,4 @@
-/**
+/*
  *
  *  ____              __       __          __
  * /\  _`\           /\ \     /\ \      __/\ \__
@@ -35,7 +35,9 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	17/03/2009
- * @final	19/03/2009
+ * @version	28/05/2009
+ * @ingroup	Background
+ * @todo	Substituir o vetor de posição x e y, por um vetor de Gorgon::Point(x,y)
  */
 class Tile
 {
@@ -43,33 +45,31 @@ class Tile
 		/**
 		 * Handler de animação do objeto
 		 */
-		Gorgon::AnimationHandler* animationHandler;
+		Gorgon::AnimationHandler* mAnimationHandler;
 		/**
 		 * Posição do objeto no eixo x
 		 */
-		std::vector<int> posX;
+		std::vector<int> mPosX;
 		/**
 		 * Posição do objeto no eixo y
 		 */
-		std::vector<int> posY;
+		std::vector<int> mPosY;
 	public:
 		/**
 		 * Método Construtor
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	17/03/2009
-		 * @param	Gorgon::SpritePack*			, ponteiro para o pacote de sprites
-		 * @param	Gorgon::AnimationPack*		, ponteiro para o pacote de animações
-		 * @param	const int& animationNumber	, número da animação do tile
-		 * @param	const int& x, posição x que o tile será exibido no cenário
-		 * @param	const int& y, posição y que o tile será exibido no cenário
+		 * @version	28/05/2009
+		 * @param	Gorgon::SpritePack*		pSpritePack			, ponteiro para o pacote de sprites
+		 * @param	Gorgon::AnimationPack*	pAnimationPack		, ponteiro para o pacote de animações
+		 * @param	const int&				pAnimationNumber	, número da animação do tile
 		 */
 		Tile
 		(
-			Gorgon::SpritePack& spritePack,
-			Gorgon::AnimationPack& animationPack,
-			const int& animationNumber
+			Gorgon::SpritePack&		pSpritePack,
+			Gorgon::AnimationPack&	pAnimationPack,
+			const int&				pAnimationNumber
 		);
 		Tile(const Tile& orig);
 		/**
@@ -77,7 +77,7 @@ class Tile
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	17/03/2009
+		 * @version	28/05/2009
 		 */
 		virtual ~Tile();
 		/**
@@ -85,7 +85,7 @@ class Tile
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	18/03/2009
-		 * @final	18/03/2009
+		 * @version	28/05/2009
 		 */
 		void describe() const;
 		/**
@@ -93,7 +93,7 @@ class Tile
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
+		 * @version	28/05/2009
 		 * @return	int
 		 */
 		int getAnimation() const;
@@ -102,27 +102,27 @@ class Tile
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
-		 * @param	const int& index, índice do tile
+		 * @version	28/05/2009
+		 * @param	const int& pIndex, índice do tile
 		 * @return	int
 		 */
-		int getXPostion(const int& index) const;
+		int getXPostion(const int& pIndex) const;
 		/**
 		 * Método para retornar a posição y do tile de índice indicado
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
-		 * @param	const int& index, índice do tile
+		 * @version	28/05/2009
+		 * @param	const int& pIndex, índice do tile
 		 * @return	int
 		 */
-		int getYPostion(const int& index) const;
+		int getYPostion(const int& pIndex) const;
 		/**
 		 * Método para retornar o número de tiles
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @final	19/03/2009
+		 * @version	28/05/2009
 		 * @return	int
 		 */
 		int getSize() const;
@@ -131,17 +131,17 @@ class Tile
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	17/03/2009
-		 * @param	const int& x, posição x do tile
-		 * @param	const int& y, posição y do tile
+		 * @version	28/05/2009
+		 * @param	const int& pPosX, posição x do tile
+		 * @param	const int& pPosY, posição y do tile
 		 */
-		void add(const int& x, const int& y);
+		void add(const int& pPosX, const int& pPosY);
 		/**
 		 * Método que executa a lógica envolvida no tile
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	17/03/2009
+		 * @version	28/05/2009
 		 */
 		void logic();
 		/**
@@ -149,16 +149,16 @@ class Tile
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
-		 * @final	17/03/2009
-		 * @param	const Gorgon::Sprite& sprite, sprite que o tile será desenhado
-		 * @param	const int& x, posição x base
-		 * @param	const int& y, posição y base
+		 * @version	28/05/2009
+		 * @param	const Gorgon::Sprite&	pSprite, sprite que o tile será desenhado
+		 * @param	const int&				pPosX, posição x base
+		 * @param	const int&				pPosY, posição y base
 		 */
 		void draw
 		(
-			Gorgon::Sprite& sprite,
-			const int& x=0,
-			const int& y=0
+			Gorgon::Sprite& pSprite,
+			const int& pPosX = 0,
+			const int& pPosY = 0
 		);
 };
 

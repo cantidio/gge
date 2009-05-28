@@ -1,4 +1,4 @@
-/**
+/*
  *
  *  ____              __       __          __
  * /\  _`\           /\ \     /\ \      __/\ \__
@@ -29,6 +29,14 @@
 #include "background.hpp"
 #include "../../../../gorgon++/src/script/include/gorgon_lua.hpp"
 
+/**
+ * NameSpace que engloba os wrappers de algumas funções em lua relacionadas ao Backgrouns
+ *
+ * @author	Cantidio Oliveira Fontes
+ * @since	19/03/2009
+ * @version	28/05/2009
+ * @ingroup	Background
+ */
 namespace BackgroundLua
 {
 	/**
@@ -36,109 +44,109 @@ namespace BackgroundLua
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	19/03/2009
-	 * @final	19/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int getXPosition(lua_State* state);
+	int getXPosition(lua_State* pState);
 	/**
 	 * Função que retorna a posição y do cenário
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	19/03/2009
-	 * @final	19/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int getYPosition(lua_State* state);
+	int getYPosition(lua_State* pState);
 	/**
 	 * Função que seta a posição x do cenário
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	19/03/2009
-	 * @final	19/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int setXPosition(lua_State* state);
+	int setXPosition(lua_State* pState);
 	/**
 	 * Função que seta a posição y do cenário
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	19/03/2009
-	 * @final	19/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int setYPosition(lua_State* state);
+	int setYPosition(lua_State* pState);
 	/**
 	 * Função que adiciona um valor a posição x do cenário
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	19/03/2009
-	 * @final	19/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int addXPosition(lua_State* state);
+	int addXPosition(lua_State* pState);
 	/**
 	 * Função que adiciona um valor a posição y do cenário
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	19/03/2009
-	 * @final	19/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int addYPosition(lua_State* state);
+	int addYPosition(lua_State* pState);
 	/**
 	 * Função que subtrai um valor a posição x do cenário
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	19/03/2009
-	 * @final	19/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int subXPosition(lua_State* state);
+	int subXPosition(lua_State* pState);
 	/**
 	 * Função que subtrai um valor a posição y do cenário
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	19/03/2009
-	 * @final	19/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int subYPosition(lua_State* state);
+	int subYPosition(lua_State* pState);
 	/**
 	 * Função que trava o scrolling do cenário
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	19/03/2009
-	 * @final	19/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int scrollLock(lua_State* state);
+	int scrollLock(lua_State* pState);
 	/**
 	 * Função que destrava o scrolling do cenário
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	19/03/2009
-	 * @final	19/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int scrollUnlock(lua_State* state);
+	int scrollUnlock(lua_State* pState);
 	/**
 	 * Método que registra as funçãode cenário para serem acessadas por um script
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	19/03/2009
-	 * @final	19/03/2009
-	 * @param	Gorgon::Lua* script, ponteiro para a classe lua que receberá as funções
+	 * @version	28/05/2009
+	 * @param	Gorgon::Lua* pScript, ponteiro para a classe lua que receberá as funções
 	 */
-	void registerFunctions(Gorgon::Lua* script);
+	void registerFunctions(Gorgon::Lua* pScript);
 }
 #endif

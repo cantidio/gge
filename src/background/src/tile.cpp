@@ -2,100 +2,104 @@
 
 Tile::Tile
 (
-	Gorgon::SpritePack& spritePack,
-	Gorgon::AnimationPack& animationPack,
-	const int& animationNumber
+	Gorgon::SpritePack&		pSpritePack,
+	Gorgon::AnimationPack&	pAnimationPack,
+	const int&				pAnimationNumber
 )
 {
-	animationHandler=new Gorgon::AnimationHandler(spritePack,animationPack);
-	animationHandler->optimize();
-	animationHandler->changeAnimation(animationNumber,true);
+	mAnimationHandler = new Gorgon::AnimationHandler(pSpritePack,pAnimationPack);
+	mAnimationHandler->optimize();
+	mAnimationHandler->changeAnimation(pAnimationNumber,true);
 }
 
-Tile::Tile(const Tile& orig)
+Tile::Tile(const Tile& pOrig)
 {
-	animationHandler= new Gorgon::AnimationHandler(*orig.animationHandler);
-	for(int i=0; i<orig.posX.size(); ++i)
+	mAnimationHandler= new Gorgon::AnimationHandler(*pOrig.mAnimationHandler);
+	for(int i=0; i < pOrig.mPosX.size(); ++i)
 	{
-		posX.push_back(orig.posX[i]);
-		posY.push_back(orig.posY[i]);
+		mPosX.push_back(pOrig.mPosX[i]);
+		mPosY.push_back(pOrig.mPosY[i]);
 	}
 }
 
 Tile::~Tile()
 {
-	posX.clear();
-	posY.clear();
-	if(animationHandler!=NULL)
-		delete animationHandler;
+	mPosX.clear();
+	mPosY.clear();
+
+	if(mAnimationHandler != NULL)
+	{
+		delete mAnimationHandler;
+	}
 }
 
 void Tile::describe() const
 {
 	std::cout << "Tile Describer" << std::endl;
-	std::cout << "Memory SprPack:" << &animationHandler->getSpritePack() << std::endl;
-	std::cout << "Memory AniPack:" << &animationHandler->getAnimationPack()<< std::endl;
-	std::cout << "Animation:" << animationHandler->getAnimationOn() << std::endl;
+	std::cout << "Memory SprPack:" << &mAnimationHandler->getSpritePack() << std::endl;
+	std::cout << "Memory AniPack:" << &mAnimationHandler->getAnimationPack()<< std::endl;
+	std::cout << "Animation:" << mAnimationHandler->getAnimationOn() << std::endl;
 	std::cout << "Positions:" << std::endl;
-	for(int i=0; i<posX.size(); ++i)
+
+	for(int i=0; i < mPosX.size(); ++i)
 	{
-		std::cout << "posX: " << posX[i] << " posY: " << posY[i] << std::endl;
+		std::cout << "posX: " << mPosX[i] << " posY: " << mPosY[i] << std::endl;
 	}
 }
 
 int Tile::getAnimation() const
 {
-	return animationHandler->getAnimationOn();
+	return mAnimationHandler->getAnimationOn();
 }
 
-int Tile::getXPostion(const int& index) const
+int Tile::getXPostion(const int& pIndex) const
 {
-	if(index<posX.size())
+	if(pIndex < mPosX.size())
 	{
-		return posX[index];
+		return mPosX[pIndex];
 	}
 	return 0;
 }
 
-int Tile::getYPostion(const int& index) const
+int Tile::getYPostion(const int& pIndex) const
 {
-	if(index<posY.size())
+	if(pIndex < mPosY.size())
 	{
-		return posY[index];
+		return mPosY[pIndex];
 	}
 	return 0;
 }
 
 int Tile::getSize() const
 {
-	return posX.size();
+	return mPosX.size();
 }
 
-void Tile::add(const int& x, const int& y)
+void Tile::add(const int& pPosX, const int& pPosY)
 {
-	posX.push_back(x);
-	posY.push_back(y);
+	mPosX.push_back(pPosX);
+	mPosY.push_back(pPosY);
 }
 
 void Tile::logic()
 {
-	this->animationHandler->playByStep();
+	mAnimationHandler->playByStep();
 }
 
 void Tile::draw
 (
-	Gorgon::Sprite& sprite,
-	const int& x,
-	const int& y
+	Gorgon::Sprite&	pSprite,
+	const int&		pPosX,
+	const int&		pPosY
 )
 {
-	for(int i=0; i<posX.size(); ++i)
+	for(int i=0; i < mPosX.size(); ++i)
 	{
-		animationHandler->draw
+		mAnimationHandler->draw
 		(
-			sprite,
-			x+posX[i],
-			y+posY[i]
+			pSprite,
+			pPosX + mPosX[i],
+			pPosY + mPosY[i]
 		);
 	}
 }

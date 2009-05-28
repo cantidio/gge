@@ -1,4 +1,5 @@
 /*
+ *
  *  ____              __       __          __
  * /\  _`\           /\ \     /\ \      __/\ \__
  * \ \ \L\ \     __  \ \ \____\ \ \____/\_\ \ ,_\  ____
@@ -23,38 +24,19 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
  */
-#ifndef _GSBGE_ENEMY_
-#define	_GSBGE_ENEMY_
-#include "character.hpp"
+#ifndef _RESOURCE_MANAGER_
+#define	_RESOURCE_MANAGER_
+
 /**
- * Classe que representa um inimigo
+ * @defgroup	ResourceManager
  *
- * @author	Cantidio Oliveira Fontes
- * @since	11/03/2009
- * @version	11/03/2009
- * @ingroup	Objects
+ * @author		Cantidio Oliveira Fontes
+ * @since		11/03/2009
+ * @version		28/05/2009
+ * @details
+ *				O módulo ResourceManager engloba todas as funcionalidades relacionadas
+ *				à parte de gestão de recursos na engine, como recursos visuais, sonoros,
+ *				recursos de animações entre outros
  */
-class Enemy : public Character
-{
-	protected:
-		
-	public:
-		/**
-		 * Método Construtor
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	11/03/2009
-		 * @final	11/03/2009
-		 */
-		Enemy(const string& script);
-		/**
-		 * Método Destrutor
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	11/03/2009
-		 * @final	11/03/2009
-		 */
-		virtual ~Enemy();
-};
 
 #endif

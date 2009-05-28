@@ -36,6 +36,7 @@ namespace ResourceManager
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	11/03/2009
 	 * @final	11/03/2009
+	 * @ingroup	ResourceManager
 	 */
 	typedef struct
 	{
@@ -49,7 +50,8 @@ namespace ResourceManager
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	11/03/2009
-	 * @final	11/03/2009
+	 * @final	28/05/2009
+	 * @ingroup	ResourceManager
 	 */
 	class AnimationManager
 	{
@@ -57,35 +59,37 @@ namespace ResourceManager
 			/**
 			 * Tabela com os recursos de animação
 			 */
-			static std::vector<AnimationId> table;
+			static std::vector<AnimationId> mTable;
 		public:
 			/**
 			 * Para para carregar um spritePack, se o mesmo já tiver sido carregado retorna o ponteiro para o mesmo
 			 *
 			 * @author	Cantidio Oliveira Fontes
 			 * @since	11/03/2009
-			 * @final	11/03/2009
-			 * @param	const std::string& name, nome do spritePack
-			 * SpritePack* ponteiro para o spritePack carregado
+			 * @final	28/05/2009
+			 * @param	const std::string& pAnimationPackName, nome do animationPack
+			 * @return	Gorgon::AnimationPack*
 			 */
-			static Gorgon::AnimationPack* load(const std::string& name);
+			static Gorgon::AnimationPack* load(const std::string& pAnimationPackName);
 			/**
 			 * Método para retirar da memória o spritePack carregado
 			 *
 			 * @author		Cantidio Oliveira Fontes
 			 * @since		11/03/2009
-			 * @final		11/03/2009
-			 * @param		const std::string& name, nome do spritePack a ser removido
-			 * @abstract	esse método antes de remover o sprite completamente, verifica se algum outro objeto está usando
-			 * o recurso do mesmo, ninguém mais estiver o usando então livra a memória do mesmo.
+			 * @final		28/05/2009
+			 * @param		const std::string& pAnimationPackName, nome do animationPack a ser removido
+			 * @details
+			 *				esse método antes de remover o animationPack completamente,
+			 * verifica se algum outro objeto está usando o recurso do mesmo, se ninguém
+			 * mais estiver o usando então livra a memória do mesmo.
 			 */
-			static void unload(const std::string& name);
+			static void unload(const std::string& pAnimationPackName);
 			/**
 			 * Método para forçar a limpeza de toda tabela
 			 *
 			 * @author	Cantidio Oliveira Fontes
 			 * @since	11/03/2009
-			 * @final	11/03/2009
+			 * @final	28/05/2009
 			 */
 			static void clear();
 	};

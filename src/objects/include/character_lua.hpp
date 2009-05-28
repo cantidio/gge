@@ -1,4 +1,4 @@
-/**
+/*
  *
  *  ____              __       __          __
  * /\  _`\           /\ \     /\ \      __/\ \__
@@ -28,8 +28,14 @@
 #define	_CHARACTER_LUA_
 #include "character.hpp"
 #include "../../../../gorgon++/src/script/include/gorgon_lua.hpp"
+
 /**
  * Bindings para os métodos de classe serem usados nos scritps em lua
+ *
+ * @author	Cantidio Oliveira Fontes
+ * @since	12/03/2009
+ * @version	28/05/2009
+ * @ingroup	Objects
  */
 namespace CharacterLua
 {
@@ -38,119 +44,119 @@ namespace CharacterLua
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_getLife(lua_State* state);
+	int lua_getLife(lua_State* pState);
 	/**
 	 * Função que seta o life do personagem
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_setLife(lua_State* state);
+	int lua_setLife(lua_State* pState);
 	/**
 	 * Função que subtrai um valor do life do personagem
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_subLife(lua_State* state);
+	int lua_subLife(lua_State* pState);
 	/**
 	 * Função que adiciona um valor ao life do personagem
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_addLife(lua_State* state);
+	int lua_addLife(lua_State* pState);
 	/**
 	 * Função que retorna verdadeiro se o personagem está vivo
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_isAlive(lua_State* state);
+	int lua_isAlive(lua_State* pState);
 	/**
 	 * Função que ativa o objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_ativate(lua_State* state);
+	int lua_ativate(lua_State* pState);
 	/**
 	 * Função que desativa o objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	13/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_inativate(lua_State* state);
+	int lua_inativate(lua_State* pState);
 	/**
 	 * Função que retorna verdadeiro se o personagem está ativo
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_isAtive(lua_State* state);
+	int lua_isAtive(lua_State* pState);
 	/**
 	 * Função que retorna verdadeiro se o personagem está imortal
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_isImortal(lua_State* state);
+	int lua_isImortal(lua_State* pState);
 	/**
 	 * Função que machuca o personagem
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_hurt(lua_State* state);
+	int lua_hurt(lua_State* pState);
 	/**
 	 * Função que chama um helper
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	14/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	28/05/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_callHelper(lua_State* state);
+	int lua_callHelper(lua_State* pState);
 	/**
 	 * Método que registra as funçãode cenário para serem acessadas por um script
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	31/03/2009
-	 * @final	31/03/2009
-	 * @param	Gorgon::Lua* script, ponteiro para a classe lua que receberá as funções
+	 * @version	28/05/2009
+	 * @param	Gorgon::Lua* pScript, ponteiro para a classe lua que receberá as funções
 	 */
-	void registerFunctions(Gorgon::Lua* script);
+	void registerFunctions(Gorgon::Lua* pScript);
 }
 #endif

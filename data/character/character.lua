@@ -57,10 +57,10 @@ end
 -- @author	Cantidio Oliveira Fontes
 -- @since	13/03/2009
 -- @final	13/03/2009
--- @param	int x, número do helper a verificar quantas instâncias
+-- @param	int pIndex, índice do helper a verificar quantas instâncias
 -- @return	int
-function getHelperMaxInstances(x)
-	return helperMaxInstances[x]
+function getHelperMaxInstances(pIndex)
+	return helperMaxInstances[pIndex]
 end
 
 -- Função que retorna o arquivo de script de um determinado helper
@@ -68,10 +68,10 @@ end
 -- @author	Cantidio Oliveira Fontes
 -- @since	13/03/2009
 -- @final	13/03/2009
--- @param	int x, número do helper a verificar o arquivo de script
+-- @param	int pIndex, índice do helper a verificar o arquivo de script
 -- @return	string
-function getHelperScriptFile(x)
-	return helperScriptFile[x]
+function getHelperScriptFile(pIndex)
+	return helperScriptFile[pIndex]
 end
 
 -- Função para retornar o life do personagem
@@ -89,9 +89,9 @@ end
 -- @author	Cantidio Oliveira Fontes
 -- @since	12/03/2009
 -- @final	12/03/2009
--- @param	int life, life do personagem
-function setLife(life)
-	return lua_setLife(objectPointer,life)
+-- @param	int pLife, life do personagem
+function setLife(pLife)
+	return lua_setLife(objectPointer,pLife)
 end
 
 -- Função para retirar um valor do life do personagem
@@ -99,9 +99,9 @@ end
 -- @author	Cantidio Oliveira Fontes
 -- @since	12/03/2009
 -- @final	12/03/2009
--- @param	int life, life a ser subtraído
-function subLife(life)
-	return lua_subLife(objectPointer,life)
+-- @param	int pLife, life a ser subtraído
+function subLife(pLife)
+	return lua_subLife(objectPointer,pLife)
 end
 
 -- Função para adicionar um valor ao life do personagem
@@ -109,9 +109,9 @@ end
 -- @author	Cantidio Oliveira Fontes
 -- @since	12/03/2009
 -- @final	12/03/2009
--- @param	int life, life a ser adicionado
-function addLife(life)
-	return lua_addLife(objectPointer,life)
+-- @param	int pLife, life a ser adicionado
+function addLife(pLife)
+	return lua_addLife(objectPointer,pLife)
 end
 
 -- Função que retorna verdadeiro se o personagem está vivo
@@ -167,9 +167,9 @@ end
 -- @author	Cantidio Oliveira Fontes
 -- @since	12/03/2009
 -- @final	12/03/2009
--- @param	int damage, valor de dano recebido
-function hurt(damage)
-	return lua_hurt(objectPointer,damage)
+-- @param	int pDamage, valor de dano recebido
+function hurt(pDamage)
+	return lua_hurt(objectPointer,pDamage)
 end
 
 -- Função que chama um helper do personagem
@@ -177,11 +177,11 @@ end
 -- @author	Cantidio Oliveira Fontes
 -- @since	12/03/2009
 -- @final	12/03/2009
--- @param	int x			, posição x que o helper aparecerá
--- @param	int y			, posição y que o helper aparecerá
--- @param	int mirroring	, espelhamento do helper
--- @param	int helper		, número deo helper chamado, se não for passado, assume-se o primeiro helper
-function callHelper(x,y,mirroring,helper)
-	lua_callHelper(objectPointer,x,y,mirroring,helper)
+-- @param	int pPosX			, posição x que o helper aparecerá
+-- @param	int pPosY			, posição y que o helper aparecerá
+-- @param	int pMirroring		, espelhamento do helper
+-- @param	int pHelperIndex	, número deo helper chamado, se não for passado, assume-se o primeiro helper
+function callHelper(pPosX,pPosY,pMirroring,pHelperIndex)
+	lua_callHelper(objectPointer,pPosX,pPosY,pMirroring,pHelperIndex)
 end
 

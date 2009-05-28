@@ -3,92 +3,90 @@
 
 Background::Background
 (
-	const int& width,
-	const int& height,
-	const double& posX,
-	const double& posY
+	const int&		pWidth,
+	const int&		pHeight,
+	const double&	pPosX,
+	const double&	pPosY
 )
 {
-	script			= new Gorgon::Lua("data/background/background.lua");
-	script->function("setBackgroundPointer",Gorgon::LuaParam("n",this));
-	BackgroundLua::registerFunctions(script);
-	this->width		= width;
-	this->height	= height;
-	this->posX		= posX;
-	this->posY		= posY;
+	mScript	= new Gorgon::Lua("data/background/background.lua");
+	mWidth	= pWidth;
+	mHeight	= pHeight;
+	mPosX	= pPosX;
+	mPosY	= pPosY;
+	mScript->function("setBackgroundPointer",Gorgon::LuaParam("n",this));
+	BackgroundLua::registerFunctions(mScript);
 }
 
-Background::Background(const std::string& fileName)
+Background::Background(const std::string& pFileName)
 {
-	script = new Gorgon::Lua("data/background/background.lua");
-	script->function("setBackgroundPointer",Gorgon::LuaParam("n",this));
-	BackgroundLua::registerFunctions(script);
-	load(fileName);
+	mScript = new Gorgon::Lua("data/background/background.lua");
+	load(pFileName);
 }
 
 Background::~Background()
 {
-	for(int i=0; i<layers.size(); ++i)
+	for(int i=0; i<mLayers.size(); ++i)
 	{
-		delete layers[i];
+		delete mLayers[i];
 	}
-	layers.clear();
+	mLayers.clear();
 }
 
-void Background::addLayer(Layer* layer)
+void Background::addLayer(Layer* pLayer)
 {
-	layers.push_back(layer);
+	mLayers.push_back(pLayer);
 }
 
 void Background::logic()
 {
-	script->function("logic");
-	for(int i=0; i<layers.size(); ++i)
+	mScript->function("logic");
+	for(int i=0; i<mLayers.size(); ++i)
 	{
-		layers[i]->logic();
+		mLayers[i]->logic();
 	}
 }
 
-void Background::draw(Gorgon::Sprite& sprite)
+void Background::draw(Gorgon::Sprite& pSprite)
 {
-	for(int i=0; i<layers.size(); ++i)
+	for(int i=0; i<mLayers.size(); ++i)
 	{
-		layers[i]->draw(sprite,posX,posY);
+		mLayers[i]->draw(pSprite,mPosX,mPosY);
 	}
 }
 
-void Background::save(const std::string& fileName) const
+void Background::save(const std::string& pFileName) const
 {
-	std::fstream file(fileName.c_str(),std::ios::out);
+	std::fstream file(pFileName.c_str(),std::ios::out);
 	
 	if(file.is_open())
 	{
 		file << "--Background Script File just modify if you know what you are doing" << std::endl;
-		file << "--Background gravity" << std::endl;
-		file << "gravity		= " << gravity << std::endl;
+		file << "--Background gravity"	<< std::endl;
+		file << "gravity		= "		<< mGravity << std::endl;
 		file << "--Friction when not coliding" << std::endl;
-		file << "voidFriction	= " << voidFriction << std::endl;
+		file << "voidFriction	= "		<< mVoidFriction << std::endl;
 		file << "--width of the background" << std::endl;
-		file << "width			= " << width << std::endl;
+		file << "width			= "		<< mWidth << std::endl;
 		file << "--height of the background" << std::endl;
-		file << "height			= " << height << std::endl;
-		file << "--init x position" << std::endl;
-		file << "posX			= " << posX << std::endl;
-		file << "--init y position" << std::endl;
-		file << "posY			= " << posY << std::endl;
+		file << "height			= "		<< mHeight << std::endl;
+		file << "--init x position"		<< std::endl;
+		file << "posX			= "		<< mPosX << std::endl;
+		file << "--init y position"		<< std::endl;
+		file << "posY			= "		<< mPosY << std::endl;
 		file << "--vector with the layers of the background" << std::endl;
 		file << "layers	= {";
 
-		if(layers.size()>0)
+		if(mLayers.size()>0)
 		{
 			file << std::endl;
-			for(int i=0; i<layers.size(); ++i)
+			for(int i=0; i<mLayers.size(); ++i)
 			{
 				std::stringstream layerName;
-				layerName << fileName.substr(0,fileName.find(".")) << "_layer" << i << fileName.substr(fileName.find("."),fileName.length()-1);
+				layerName << pFileName.substr(0,pFileName.find(".")) << "_layer" << i << pFileName.substr(pFileName.find("."),pFileName.length()-1);
 				
 				file << "\t\"" << layerName.str() << "\"," << std::endl;
-				layers[i]->save(layerName.str());
+				mLayers[i]->save(layerName.str());
 			}
 		}
 
@@ -106,71 +104,69 @@ void Background::save(const std::string& fileName) const
 
 void Background::loadGlobalVars()
 {
-	gravity			= script->getNumericVar("gravity");
-	voidFriction	= script->getNumericVar("voidFriction");
-	width			= script->getNumericVar("width");
-	height			= script->getNumericVar("height");
-	posX			= script->getNumericVar("posX");
-	posY			= script->getNumericVar("posY");
+	mGravity		= mScript->getNumericVar("gravity");
+	mVoidFriction	= mScript->getNumericVar("voidFriction");
+	mWidth			= mScript->getNumericVar("width");
+	mHeight			= mScript->getNumericVar("height");
+	mPosX			= mScript->getNumericVar("posX");
+	mPosY			= mScript->getNumericVar("posY");
 }
 
 void Background::loadLayers()
 {
-	const int layerNumber =(int)script->function("getLayerNumber",Gorgon::LuaParam(),1)->getNumericValue();
+	const int layerNumber =(int)mScript->function("getLayerNumber",Gorgon::LuaParam(),1)->getNumericValue();
 	for(int i=1; i<=layerNumber; ++i)
 	{
-		layers.push_back(new Layer(script->function("getLayer",Gorgon::LuaParam("n",i),1)->getStringValue()));
+		mLayers.push_back(new Layer(mScript->function("getLayer",Gorgon::LuaParam("n",i),1)->getStringValue()));
 	}
 }
 
 void Background::setUp()
 {
 	loadGlobalVars();
+	mScript->function("setBackgroundPointer",Gorgon::LuaParam("n",this));
+	BackgroundLua::registerFunctions(mScript);
 	loadLayers();
 }
 
-void Background::load(const std::string& fileName)
+void Background::load(const std::string& pFileName)
 {
-	script->loadScript(fileName);
+	mScript->loadScript(pFileName);
 	setUp();
 }
 
 void Background::scroolLock()
 {
-	lockScrool=true;
+	mLockScrool=true;
 }
 
 void Background::scroolUnlock()
 {
-	lockScrool=false;
+	mLockScrool=false;
 }
 
-void Background::setXPos(const double& x)
+void Background::setXPos(const double& pPosX)
 {
-	if(!lockScrool)
+	if(!mLockScrool)
 	{
-		posX=x;
+		mPosX=pPosX;
 	}
 }
 
-void Background::setYPos(const double& y)
+void Background::setYPos(const double& pPosY)
 {
-	if(!lockScrool)
+	if(!mLockScrool)
 	{
-		posY=y;
+		mPosY=pPosY;
 	}
 }
 
 double Background::getXPos() const
 {
-	return posX;
+	return mPosX;
 }
 
 double Background::getYPos() const
 {
-	return posY;
+	return mPosY;
 }
-
-
-
-

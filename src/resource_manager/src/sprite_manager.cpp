@@ -2,42 +2,42 @@
 
 namespace ResourceManager
 {
-	std::vector<SpriteId> SpriteManager::table;
+	std::vector<SpriteId> SpriteManager::mTable;
 
-	Gorgon::SpritePack* SpriteManager::load(const std::string& name)
+	Gorgon::SpritePack* SpriteManager::load(const std::string& pSpritePackName)
 	{
-		Gorgon::LogRegister("Cheking the existence of the SpritePack: \"%s\" ...",name.c_str());
-		for(int i=0; i<table.size(); ++i)
+		Gorgon::LogRegister("Cheking the existence of the SpritePack: \"%s\" ...",pSpritePackName.c_str());
+		for(int i=0; i<mTable.size(); ++i)
 		{
-			if(table[i].fileName==name)
+			if(mTable[i].fileName==pSpritePackName)
 			{
 				Gorgon::LogRegister("SpritePack found in position: %d",i);
-				++table[i].use;
-				return table[i].spritePack;
+				++mTable[i].use;
+				return mTable[i].spritePack;
 			}
 		}
-		Gorgon::LogRegister("SpritePack not found in SpriteManager Table...",name.c_str());
-		Gorgon::LogRegister("Putting new SpritePack in SpriteManager Table...",name.c_str());
-		SpriteId a;
-		a.use		= 1;
-		a.fileName	= name;
-		a.spritePack= new Gorgon::SpritePack(name);
-		table.push_back(a);
-		return a.spritePack;
+		Gorgon::LogRegister("SpritePack not found in SpriteManager Table...",pSpritePackName.c_str());
+		Gorgon::LogRegister("Putting new SpritePack in SpriteManager Table...",pSpritePackName.c_str());
+		SpriteId spriteId;
+		spriteId.use		= 1;
+		spriteId.fileName	= pSpritePackName;
+		spriteId.spritePack	= new Gorgon::SpritePack(pSpritePackName);
+		mTable.push_back(spriteId);
+		return spriteId.spritePack;
 	}
 
-	void SpriteManager::unload(const std::string& name)
+	void SpriteManager::unload(const std::string& pSpritePackName)
 	{
-		for(int i=0; i<table.size(); ++i)
+		for(int i=0; i<mTable.size(); ++i)
 		{
-			if(table[i].fileName==name)
+			if(mTable[i].fileName==pSpritePackName)
 			{
-				--table[i].use;
-				if(table[i].use<=0)
+				--mTable[i].use;
+				if(mTable[i].use<=0)
 				{
-					Gorgon::LogRegister("Taking \"%s\" out of SpriteManager Table...",name.c_str());
-					delete table[i].spritePack;
-					table.erase(table.begin()+i);
+					Gorgon::LogRegister("Taking \"%s\" out of SpriteManager Table...",pSpritePackName.c_str());
+					delete mTable[i].spritePack;
+					mTable.erase(mTable.begin()+i);
 				}
 				break;
 			}
@@ -46,11 +46,11 @@ namespace ResourceManager
 
 	void SpriteManager::clear()
 	{
-		for(int i=0; i<table.size(); ++i)
+		for(int i=0; i<mTable.size(); ++i)
 		{
-			Gorgon::LogRegister("Deleting sprite in table position: %d...",i);
-			delete table[i].spritePack;
+			Gorgon::LogRegister("Deleting sprite in table position: %d: %s...",i,mTable[i].fileName.c_str());
+			delete mTable[i].spritePack;
 		}
-		table.clear();
+		mTable.clear();
 	}
 }

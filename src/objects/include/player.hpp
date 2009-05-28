@@ -1,4 +1,4 @@
-/**
+/*
  *
  *  ____              __       __          __
  * /\  _`\           /\ \     /\ \      __/\ \__
@@ -34,7 +34,8 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	14/03/2009
- * @final	16/03/2009
+ * @version	16/03/2009
+ * @ingroup	Objects
  */
 class Player : public Character
 {
@@ -44,7 +45,7 @@ class Player : public Character
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
-		 * @final	14/03/2009
+		 * @version	14/03/2009
 		 */
 		Player();
 		/**
@@ -52,7 +53,7 @@ class Player : public Character
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
-		 * @final	14/03/2009
+		 * @version	14/03/2009
 		 */
 		void loadGlobalVars();
 		/**
@@ -60,7 +61,7 @@ class Player : public Character
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
-		 * @final	16/03/2009
+		 * @version	16/03/2009
 		 */
 		void registerFunctions();
 		/**
@@ -68,7 +69,7 @@ class Player : public Character
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
-		 * @final	14/03/2009
+		 * @version	14/03/2009
 		 */
 		void setUp();
 	public:
@@ -77,17 +78,17 @@ class Player : public Character
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
-		 * @final	31/03/2009
-		 * @param	const std::string& fileName, localização do arquivo de script do jogador
-		 * @param	const Gorgon::Point& position, posição xy a criar o personagem
+		 * @version	31/03/2009
+		 * @param	const std::string& pFileName, localização do arquivo de script do jogador
+		 * @param	const Gorgon::Point& pPosition, posição xy a criar o personagem
 		 */
-		Player(const std::string& fileName,const Gorgon::Point& position=Gorgon::Point(0,0));
+		Player(const std::string& pFileName,const Gorgon::Point& pPosition=Gorgon::Point(0,0));
 		/**
 		 * Método Destrutor
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
-		 * @final	14/03/2009
+		 * @version	14/03/2009
 		 */
 		virtual ~Player();
 };

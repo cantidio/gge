@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-	script->loadScript("data/character/player/player.lua");
+	mScript->loadScript("data/character/player/player.lua");
 }
 
 void Player::loadGlobalVars()
@@ -11,7 +11,7 @@ void Player::loadGlobalVars()
 
 void Player::registerFunctions()
 {
-	lua_registerInputFunctions(script);
+	InputLua::registerFunctions(mScript);
 }
 
 void Player::setUp()
@@ -19,18 +19,17 @@ void Player::setUp()
 	Character::setUp();
 	loadGlobalVars();
 	registerFunctions();
-	
 }
 
 Player::Player
 (
-	const std::string& fileName,
-	const Gorgon::Point& position
+	const std::string& pFileName,
+	const Gorgon::Point& pPosition
 )
 {
-	script->loadScript("data/character/player/player.lua");
-	script->loadScript(fileName);
-	setPosition(position);
+	mScript->loadScript("data/character/player/player.lua");
+	mScript->loadScript(pFileName);
+	setPosition(pPosition);
 	setUp();
 }
 

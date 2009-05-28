@@ -36,6 +36,7 @@ namespace ResourceManager
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	11/03/2009
 	 * @final	11/03/2009
+	 * @ingroup	ResourceManager
 	 */
 	typedef struct
 	{
@@ -49,40 +50,46 @@ namespace ResourceManager
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	11/03/2009
-	 * @final	11/03/2009
+	 * @final	28/05/2009
+	 * @ingroup	ResourceManager
 	 */
 	class SpriteManager
 	{
 		private:
-			static std::vector<SpriteId> table;
+			/**
+			 * Tabela com os recursos de sprites
+			 */
+			static std::vector<SpriteId> mTable;
 		public:
 			/**
 			 * Para para carregar um spritePack, se o mesmo já tiver sido carregado retorna o ponteiro para o mesmo
 			 *
 			 * @author	Cantidio Oliveira Fontes
 			 * @since	11/03/2009
-			 * @final	26/03/2009
-			 * @param	const std::string& name, nome do spritePack
-			 * SpritePack* ponteiro para o spritePack carregado
+			 * @final	28/05/2009
+			 * @param	const std::string& pSpritePackName, nome do spritePack
+			 * @return	Gorgon::SpritePack*
 			 */
-			static Gorgon::SpritePack* load(const std::string& name);
+			static Gorgon::SpritePack* load(const std::string& pSpritePackName);
 			/**
 			 * Método para retirar da memória o spritePack carregado
 			 *
-			 * @author		Cantidio Oliveira Fontes
-			 * @since		11/03/2009
-			 * @final		26/03/2009
-			 * @param		const std::string& name, nome do spritePack a ser removido
-			 * @abstract	esse método antes de remover o sprite completamente, verifica se algum outro objeto está usando
-			 * o recurso do mesmo, ninguém mais estiver o usando então livra a memória do mesmo.
+			 * @author	Cantidio Oliveira Fontes
+			 * @since	11/03/2009
+			 * @final	28/05/2009
+			 * @param	const std::string& pSpritePackName, nome do spritePack a ser removido
+			 * @details
+			 *			Esse método antes de remover o SpritePack completamente,
+			 * verifica se algum outro objeto está usando o recurso do mesmo, ninguém
+			 * mais estiver o usando então livra a memória do mesmo.
 			 */
-			static void unload(const std::string& name);
+			static void unload(const std::string& pSpritePackName);
 			/**
 			 * Método para forçar a limpeza de toda tabela
 			 *
 			 * @author	Cantidio Oliveira Fontes
 			 * @since	11/03/2009
-			 * @final	11/03/2009
+			 * @final	28/05/2009
 			 */
 			static void clear();
 	};

@@ -1,90 +1,94 @@
-#include "../include/background_lua.hpp"
-#define BackgroundObj() int pointer=lua_tointeger(state,1); Background* background =(Background*)pointer;
+	#include "../include/background_lua.hpp"
 
 namespace BackgroundLua
 {
-	int getXPosition(lua_State* state)
+	inline Background* getBackgroundPointer(lua_State* pState)
 	{
-		BackgroundObj();
-		lua_pushnumber(state,background->getXPos());
+		return (Background*)lua_tointeger(pState,1);
+	}
+
+	int getXPosition(lua_State* pState)
+	{
+		Background* background = getBackgroundPointer(pState);
+		lua_pushnumber(pState,background->getXPos());
 		return 1;
 	}
 
-	int getYPosition(lua_State* state)
+	int getYPosition(lua_State* pState)
 	{
-		BackgroundObj();
-		lua_pushnumber(state,background->getYPos());
+		Background* background = getBackgroundPointer(pState);
+		lua_pushnumber(pState,background->getYPos());
 		return 1;
 	}
 
-	int setXPosition(lua_State* state)
+	int setXPosition(lua_State* pState)
 	{
-		BackgroundObj();
-		background->setXPos((int)lua_tonumber(state,2));
+		Background* background = getBackgroundPointer(pState);
+		background->setXPos((int)lua_tonumber(pState,2));
 		return 0;
 	}
 
-	int setYPosition(lua_State* state)
+	int setYPosition(lua_State* pState)
 	{
-		BackgroundObj();
-		background->setYPos((int)lua_tonumber(state,2));
+		Background* background = getBackgroundPointer(pState);
+		background->setYPos((int)lua_tonumber(pState,2));
 		return 0;
 	}
 
-	int addXPosition(lua_State* state)
+	int addXPosition(lua_State* pState)
 	{
-		BackgroundObj();
-		background->setXPos(background->getXPos()+lua_tonumber(state,2));
+		Background* background = getBackgroundPointer(pState);
+		background->setXPos(background->getXPos()+lua_tonumber(pState,2));
 		return 0;
 	}
 
-	int addYPosition(lua_State* state)
+	int addYPosition(lua_State* pState)
 	{
-		BackgroundObj();
-		background->setYPos(background->getYPos()+lua_tonumber(state,2));
+		Background* background = getBackgroundPointer(pState);
+		background->setYPos(background->getYPos()+lua_tonumber(pState,2));
 		return 0;
 	}
 
-	int subXPosition(lua_State* state)
+	int subXPosition(lua_State* pState)
 	{
-		BackgroundObj();
-		background->setXPos(background->getXPos()-lua_tonumber(state,2));
+		Background* background = getBackgroundPointer(pState);
+		background->setXPos(background->getXPos()-lua_tonumber(pState,2));
 		return 0;
 	}
 
-	int subYPosition(lua_State* state)
+	int subYPosition(lua_State* pState)
 	{
-		BackgroundObj();
-		background->setYPos(background->getYPos()-lua_tonumber(state,2));
+		Background* background = getBackgroundPointer(pState);
+		background->setYPos(background->getYPos()-lua_tonumber(pState,2));
 		return 0;
 	}
 
-	int scrollLock(lua_State* state)
+	int scrollLock(lua_State* pState)
 	{
-		BackgroundObj();
+		Background* background = getBackgroundPointer(pState);
 		background->scroolLock();
 		return 0;
 	}
 
-	int scrollUnlock(lua_State* state)
+	int scrollUnlock(lua_State* pState)
 	{
-		BackgroundObj();
+		Background* background = getBackgroundPointer(pState);
 		background->scroolUnlock();
 		return 0;
 	}
 
-	void registerFunctions(Gorgon::Lua* script)
+	void registerFunctions(Gorgon::Lua* pScript)
 	{
-		script->registerFunction("lua_getXPosition",getXPosition);
-		script->registerFunction("lua_getYPosition",getYPosition);
-		script->registerFunction("lua_setXPosition",setXPosition);
-		script->registerFunction("lua_setYPosition",setYPosition);
-		script->registerFunction("lua_addXPosition",addXPosition);
-		script->registerFunction("lua_addYPosition",addYPosition);
-		script->registerFunction("lua_subXPosition",subXPosition);
-		script->registerFunction("lua_subYPosition",subYPosition);
-		script->registerFunction("lua_scrollLock",scrollLock);
-		script->registerFunction("lua_scrollUnlock",scrollUnlock);
+		pScript->registerFunction("lua_getXPosition",getXPosition);
+		pScript->registerFunction("lua_getYPosition",getYPosition);
+		pScript->registerFunction("lua_setXPosition",setXPosition);
+		pScript->registerFunction("lua_setYPosition",setYPosition);
+		pScript->registerFunction("lua_addXPosition",addXPosition);
+		pScript->registerFunction("lua_addYPosition",addYPosition);
+		pScript->registerFunction("lua_subXPosition",subXPosition);
+		pScript->registerFunction("lua_subYPosition",subYPosition);
+		pScript->registerFunction("lua_scrollLock",scrollLock);
+		pScript->registerFunction("lua_scrollUnlock",scrollUnlock);
 	}
 }
 

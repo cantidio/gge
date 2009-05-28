@@ -1,100 +1,104 @@
 #include "../include/layer.hpp"
 
-Layer::Layer(const double& xScrollSpeed,const double& yScrollSpeed)
+Layer::Layer(const double& pXScrollSpeed,const double& pYScrollSpeed)
 {
-	script				= new Gorgon::Lua("data/background/background_layer.lua");
-	this->xScrollSpeed	= xScrollSpeed;
-	this->yScrollSpeed	= yScrollSpeed;
+	mScript			= new Gorgon::Lua("data/background/background_layer.lua");
+	mXScrollSpeed	= pXScrollSpeed;
+	mYScrollSpeed	= pYScrollSpeed;
 }
 
-Layer::Layer(const Layer& orig)
+Layer::Layer(const Layer& pOrig)
 {
-	xScrollSpeed	= orig.xScrollSpeed;
-	yScrollSpeed	= orig.yScrollSpeed;
-
+	mXScrollSpeed	= pOrig.mXScrollSpeed;
+	mYScrollSpeed	= pOrig.mYScrollSpeed;
+	/**
+	 * @todo colocar o resto aki, ta faltando mto coisa, como copiar o script, clonar um estado lua...
+	 */
 }
-Layer::Layer(const std::string& scriptName)
+
+Layer::Layer(const std::string& pScriptName)
 {
-	load(scriptName);
+	load(pScriptName);
 }
 
 Layer::~Layer()
 {
-	tiles.clear();
-	objects.clear();
-	ResourceManager::SpriteManager::unload(spritePackName);
-	ResourceManager::AnimationManager::unload(animationPackName);
+	mTiles.clear();
+	mObjects.clear();
+	ResourceManager::SpriteManager::unload(mSpritePackName);
+	ResourceManager::AnimationManager::unload(mAnimationPackName);
 }
 
 void Layer::describe() const
 {
 	std::cout << "Layer describer" << std::endl;
-	std::cout << "ScrollingXSpeed:" << xScrollSpeed << std::endl;
-	std::cout << "ScrollingYSpeed:" << yScrollSpeed << std::endl;
+	std::cout << "ScrollingXSpeed:" << mXScrollSpeed << std::endl;
+	std::cout << "ScrollingYSpeed:" << mYScrollSpeed << std::endl;
 	std::cout << "Tiles:" << std::endl;
-	for(int i=0; i<tiles.size(); ++i)
+
+	for(int i=0; i<mTiles.size(); ++i)
 	{
 		std::cout << "Tile: " << i << std::endl;
-		tiles[i]->describe();
+		mTiles[i]->describe();
 	}
 }
 
-int Layer::getRealPosX(const int& posX) const
+int Layer::getRealPosX(const int& pPosX) const
 {
-	return posX*xScrollSpeed;
+	return pPosX*mXScrollSpeed;
 }
 
-int Layer::getRealPosY(const int& posY) const
+int Layer::getRealPosY(const int& pPosY) const
 {
-	return posY*yScrollSpeed;
+	return pPosY*mYScrollSpeed;
 }
 
-void Layer::addTile(Tile* tile)
+void Layer::addTile(Tile* pTile)
 {
-	tiles.push_back(tile);
+	mTiles.push_back(pTile);
 }
 
-void Layer::addObject(Object* object)
+void Layer::addObject(Object* pObject)
 {
-	objects.push_back(object);
+	mObjects.push_back(pObject);
 }
 
 void Layer::logic()
 {
-	script->function("logic");
+	mScript->function("logic");
 	int i;
-	for(i=0; i<tiles.size(); ++i)
+	for(i=0; i<mTiles.size(); ++i)
 	{
-		tiles[i]->logic();
+		mTiles[i]->logic();
 	}
-	for(i=0; i<objects.size(); ++i)
+	for(i=0; i<mObjects.size(); ++i)
 	{
-		objects[i]->logic();
+		mObjects[i]->logic();
 	}
 }
 
 void Layer::draw
 (
-	Gorgon::Sprite& sprite,
-	const int& x,
-	const int& y
+	Gorgon::Sprite& pSprite,
+	const int& pPosX,
+	const int& pPosY
 )
 {
 	int i;
-	for(i=0; i<tiles.size(); ++i)
+	for(i=0; i<mTiles.size(); ++i)
 	{
-		tiles[i]->draw
+		mTiles[i]->draw
 		(
-			sprite,
-			getRealPosX(x),
-			getRealPosY(y)
+			pSprite,
+			getRealPosX(pPosX),
+			getRealPosY(pPosY)
 		);
 	}
 }
 
-void Layer::save(const std::string& fileName) const
+void Layer::save(const std::string& pFileName) const
 {
-	std::fstream file(fileName.c_str(),std::ios::out);
+	std::fstream file(pFileName.c_str(),std::ios::out);
 
 	if(file.is_open())
 	{
@@ -104,27 +108,27 @@ void Layer::save(const std::string& fileName) const
 		file << "--location of the layer animationPack" << std::endl;
 		file << "animation\t\t\t= " << "\"" << "Blobs" << "\"" << std::endl;
 		file << "--x scrolling velocity" << std::endl;
-		file << "xScrollingSpeed\t\t= " << xScrollSpeed << std::endl;
+		file << "xScrollingSpeed\t\t= " << mXScrollSpeed << std::endl;
 		file << "--y scrolling velocity" << std::endl;
-		file << "yScrollingSpeed\t\t= " << yScrollSpeed << std::endl;
+		file << "yScrollingSpeed\t\t= " << mYScrollSpeed << std::endl;
 		file << "--vector with the tiles of the layer" << std::endl;
 		file << "tiles\t\t\t\t= {";
 
-		if(tiles.size()>0)
+		if(mTiles.size()>0)
 		{
 			file << std::endl;
-			for(int i=0; i<tiles.size(); ++i)
+			for(int i=0; i<mTiles.size(); ++i)
 			{
 				file << "\t{" << std::endl;
-				file << "\t\tanimation	= " << tiles[i]->getAnimation() << "," << std::endl;
-				file << "\t\tposition	= {" << std::endl;
-				for(int j=0; j<tiles[i]->getSize(); ++j)
+				file << "\t\tanimation	= "		<< mTiles[i]->getAnimation() << "," << std::endl;
+				file << "\t\tposition	= {"	<< std::endl;
+				for(int j=0; j<mTiles[i]->getSize(); ++j)
 				{
-					file << "\t\t\t{ x = " << tiles[i]->getXPostion(j);
-					file << ", y = " << tiles[i]->getYPostion(j) << " }," << std::endl;
+					file << "\t\t\t{ x = " << mTiles[i]->getXPostion(j);
+					file << ", y = " << mTiles[i]->getYPostion(j) << " }," << std::endl;
 				}
-				file << "\t\t}" << std::endl;
-				file << "\t}," << std::endl;
+				file << "\t\t}"	<< std::endl;
+				file << "\t},"	<< std::endl;
 			}
 		}
 		file << "}" << std::endl << std::endl;
@@ -151,43 +155,43 @@ void Layer::save(const std::string& fileName) const
 	file.close();
 }
 
-void Layer::load(const std::string& fileName)
+void Layer::load(const std::string& pFileName)
 {
-	script	= new Gorgon::Lua("data/background/background_layer.lua");
-	script->loadScript(fileName);
+	mScript	= new Gorgon::Lua("data/background/background_layer.lua");
+	mScript->loadScript(pFileName);
 	loadGlobalVars();
 	setUp();
 }
 
 void Layer::loadGlobalVars()
 {
-	spritePackName			= script->getStringVar("sprite");
-	animationPackName		= script->getStringVar("animation");
-	xScrollSpeed			= script->getNumericVar("xScrollingSpeed");
-	yScrollSpeed			= script->getNumericVar("yScrollingSpeed");
+	mSpritePackName		= mScript->getStringVar("sprite");
+	mAnimationPackName	= mScript->getStringVar("animation");
+	mXScrollSpeed		= mScript->getNumericVar("xScrollingSpeed");
+	mYScrollSpeed		= mScript->getNumericVar("yScrollingSpeed");
 }
 
 void Layer::loadTiles()
 {
-	const int tileNumber	=(int)script->function("getTileNumber",Gorgon::LuaParam(),1)->getNumericValue();
+	const int tileNumber	=(int)mScript->function("getTileNumber",Gorgon::LuaParam(),1)->getNumericValue();
 	for(int i=1; i<=tileNumber; ++i)
 	{
-		tiles.push_back
+		mTiles.push_back
 		(
 			new Tile
 			(
-				*spritePack,
-				*animationPack,
-				(int)script->function("getTileAnimation",Gorgon::LuaParam("n",i),1)->getNumericValue()
+				*mSpritePack,
+				*mAnimationPack,
+				(int)mScript->function("getTileAnimation",Gorgon::LuaParam("n",i),1)->getNumericValue()
 			)
 		);
-		const int tileInstances =(int)script->function("getTileInstances",Gorgon::LuaParam("n",i),1)->getNumericValue();
+		const int tileInstances =(int)mScript->function("getTileInstances",Gorgon::LuaParam("n",i),1)->getNumericValue();
 		for(int j=1; j<=tileInstances; ++j)
 		{
-			tiles[i-1]->add
+			mTiles[i-1]->add
 			(
-				(int)script->function("getTileXPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue(),
-				(int)script->function("getTileYPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue()
+				(int)mScript->function("getTileXPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue(),
+				(int)mScript->function("getTileYPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue()
 			);
 		}
 	}
@@ -195,21 +199,21 @@ void Layer::loadTiles()
 
 void Layer::loadObjects()
 {
-	const int objectNumber	=(int)script->function("getObjectNumber",Gorgon::LuaParam(),1)->getNumericValue();
+	const int objectNumber	=(int)mScript->function("getObjectNumber",Gorgon::LuaParam(),1)->getNumericValue();
 	for(int i=1; i<=objectNumber; ++i)
 	{
-		const int objectInstances=(int)script->function("getObjectInstances",Gorgon::LuaParam("n",i),1)->getNumericValue();
+		const int objectInstances=(int)mScript->function("getObjectInstances",Gorgon::LuaParam("n",i),1)->getNumericValue();
 		for(int j=1; j<=objectInstances; ++j)
 		{
-			objects.push_back
+			mObjects.push_back
 			(
 				new Object
 				(
-					script->function("getObjectScript",Gorgon::LuaParam("n",i),1)->getStringValue(),
+					mScript->function("getObjectScript",Gorgon::LuaParam("n",i),1)->getStringValue(),
 					Gorgon::Point
 					(
-						script->function("getObjectXPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue(),
-						script->function("getObjectYPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue()
+						mScript->function("getObjectXPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue(),
+						mScript->function("getObjectYPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue()
 					)
 				)
 			);
@@ -221,8 +225,8 @@ void Layer::setUp()
 {
 	loadGlobalVars();
 	//registerFunctions();
-	spritePack			= ResourceManager::SpriteManager::load(spritePackName);
-	animationPack		= ResourceManager::AnimationManager::load(animationPackName);
+	mSpritePack		= ResourceManager::SpriteManager::load(mSpritePackName);
+	mAnimationPack	= ResourceManager::AnimationManager::load(mAnimationPackName);
 	loadTiles();
 	loadObjects();
 }

@@ -3,146 +3,146 @@
 
 Character::Character()
 {
-	script->loadScript("data/character/character.lua");
+	mScript->loadScript("data/character/character.lua");
 }
 
 void Character::loadGlobalVars()
 {
-	life		= (int)script->getNumericVar("life");
-	imortalTime	= (int)script->getNumericVar("imortalTime");
+	mLife			= (int)mScript->getNumericVar("life");
+	mImortalTime	= (int)mScript->getNumericVar("imortalTime");
 }
 
 void Character::setUp()
 {
 	Object::setUp();
 	loadGlobalVars();
-	CharacterLua::registerFunctions(script);
-	currentLife	= life;
-	imortal		= 0;
-	ative		= false;
+	CharacterLua::registerFunctions(mScript);
+	mCurrentLife	= mLife;
+	mImortal		= 0;
+	mAtive			= false;
 	prepareHelpers();
 }
 
-Character::Character(const std::string& fileName,const Gorgon::Point& position)
+Character::Character(const std::string& pFileName,const Gorgon::Point& pPosition)
 {
-	script->loadScript("data/character/character.lua");
-	script->loadScript(fileName);
-	setPosition(position);
+	mScript->loadScript("data/character/character.lua");
+	mScript->loadScript(pFileName);
+	setPosition(pPosition);
 	setUp();
 }
 
 Character::~Character()
 {
-	for(int i=0; i<helpers.size(); ++i)
+	for(int i=0; i<mHelpers.size(); ++i)
 	{
-		for(int j=0; j<helpers[i].size(); ++j)
+		for(int j=0; j<mHelpers[i].size(); ++j)
 		{
-			delete helpers[i][j];
+			delete mHelpers[i][j];
 		}
 	}
 }
 
 int Character::getLife() const
 {
-	return currentLife;
+	return mCurrentLife;
 }
 
-void Character::setLife(const int& life)
+void Character::setLife(const int& pLife)
 {
-	currentLife=life;
+	mCurrentLife=pLife;
 }
 
-void Character::subLife(const int& life)
+void Character::subLife(const int& pLife)
 {
-	currentLife-=life;
+	mCurrentLife-=pLife;
 }
 
-void Character::addLife(const int& life)
+void Character::addLife(const int& pLife)
 {
-	currentLife+=life;
+	mCurrentLife+=pLife;
 }
 
 bool Character::isAlive() const
 {
-	return (currentLife>0) ? true : false;
+	return (mCurrentLife>0) ? true : false;
 }
 
 void Character::ativate()
 {
-	ative=true;
+	mAtive=true;
 }
 void Character::inativate()
 {
-	ative=false;
+	mAtive=false;
 }
 
 bool Character::isAtive() const
 {
-	return ative;
+	return mAtive;
 }
 
 bool Character::isImortal() const
 {
-	return imortal>0 ? true : false;
+	return mImortal>0 ? true : false;
 }
 
-void Character::hurt(const int& damage)
+void Character::hurt(const int& pDamage)
 {
-	subLife(damage);
-	imortal=imortalTime;
+	subLife(pDamage);
+	mImortal=mImortalTime;
 }
 
 void Character::prepareHelpers()
 {
-	const int &num=(int)script->function("getHelpersNumber",Gorgon::LuaParam(),1)->getNumericValue();
+	const int &num=(int)mScript->function("getHelpersNumber",Gorgon::LuaParam(),1)->getNumericValue();
 	for(int i=0; i<num; ++i)
 	{
-		const int numInstances	=script->function("getHelperMaxInstances",Gorgon::LuaParam("i",i+1),1)->getNumericValue();
-		std::string helperScriptFile	=script->function("getHelperScriptFile",Gorgon::LuaParam("i",i+1),1)->getStringValue();
+		const int numInstances			= mScript->function("getHelperMaxInstances",Gorgon::LuaParam("i",i+1),1)->getNumericValue();
+		std::string helperScriptFile	= mScript->function("getHelperScriptFile",Gorgon::LuaParam("i",i+1),1)->getStringValue();
 		std::vector<Character*> helper;
 		
 		for(int j=0; j<numInstances; ++j)
 		{
 			helper.push_back(new Character(helperScriptFile));
 		}
-		helpers.push_back(helper);
+		mHelpers.push_back(helper);
 	}
 }
 
 void Character::callHelper
 (
-	const Gorgon::Point& position,
-	const Gorgon::Mirroring& mirroring,
-	const int& helper
+	const Gorgon::Point&		pPosition,
+	const Gorgon::Mirroring&	pMirroring,
+	const int&					pHelper
 )
 {
-	for(int i=0; i<helpers[helper].size(); ++i)
+	for(int i=0; i<mHelpers[pHelper].size(); ++i)
 	{
-		if(!helpers[helper][i]->isAtive())
+		if(!mHelpers[pHelper][i]->isAtive())
 		{
-			helpers[helper][i]->setPosition(position);
-			helpers[helper][i]->ativate();
-			helpers[helper][i]->setMirroring(mirroring);
+			mHelpers[pHelper][i]->setPosition(pPosition);
+			mHelpers[pHelper][i]->ativate();
+			mHelpers[pHelper][i]->setMirroring(pMirroring);
 			break;
-		}	
+		}
 	}
 }
 
 void Character::draw() const
 {
-	if(ative)
+	if(mAtive)
 	{
-		if((imortal>0 && (imortal%2==0)) || imortal==0)
+		if((mImortal>0 && (mImortal%2==0)) || mImortal==0)
 		{
 			Object::draw();
 		}
-		for(int i=0; i<helpers.size(); ++i)
+		for(int i=0; i<mHelpers.size(); ++i)
 		{
-			for(int j=0; j<helpers[i].size(); ++j)
+			for(int j=0; j<mHelpers[i].size(); ++j)
 			{
-				if(helpers[i][j]->isAtive())
+				if(mHelpers[i][j]->isAtive())
 				{
-					helpers[i][j]->draw();
+					mHelpers[i][j]->draw();
 				}
 			}
 		}
@@ -152,17 +152,17 @@ void Character::draw() const
 void Character::logic()
 {
 	Object::logic();
-	if(imortal>0)
+	if(mImortal>0)
 	{
-		--imortal;
+		--mImortal;
 	}
-	for(int i=0; i<helpers.size(); ++i)
+	for(int i=0; i<mHelpers.size(); ++i)
 	{
-		for(int j=0; j<helpers[i].size(); ++j)
+		for(int j=0; j<mHelpers[i].size(); ++j)
 		{
-			if(helpers[i][j]->isAtive())
+			if(mHelpers[i][j]->isAtive())
 			{
-				helpers[i][j]->logic();
+				mHelpers[i][j]->logic();
 			}
 		}
 	}

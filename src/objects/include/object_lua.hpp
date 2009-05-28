@@ -1,4 +1,4 @@
-/**
+/*
  *
  *  ____              __       __          __
  * /\  _`\           /\ \     /\ \      __/\ \__
@@ -28,8 +28,14 @@
 #define	_OBJECT_LUA_
 #include "object.hpp"
 #include "../../../../gorgon++/src/script/include/gorgon_lua.hpp"
+
 /**
  * Bindings para os métodos de classe serem usados nos scritps em lua
+ *
+ * @author	Cantidio Oliveira Fontes
+ * @since	12/03/2009
+ * @version	28/05/2009
+ * @ingroup	Objects
  */
 namespace ObjectLua
 {
@@ -38,177 +44,177 @@ namespace ObjectLua
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	12/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_changeAnimation(lua_State* state);
+	int lua_changeAnimation(lua_State* pState);
 	/**
 	 * Função que retorna verdadeiro se a animação está tocando
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	12/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_animationIsPlaying(lua_State* state);
+	int lua_animationIsPlaying(lua_State* pState);
 	/**
 	 * Função que retorna o número da animação que está tocando
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	14/03/2009
-	 * @final	14/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	14/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_getAnimationOn(lua_State* state);
+	int lua_getAnimationOn(lua_State* pState);
 	/**
 	 * Função que retorna o número do frame atual da animação que está tocando
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	14/03/2009
-	 * @final	14/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	14/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_getFrameOn(lua_State* state);
+	int lua_getFrameOn(lua_State* pState);
 	/**
 	 * Função que retorna a posição x do objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	31/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	31/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_getXPosition(lua_State* state);
+	int lua_getXPosition(lua_State* pState);
 	/**
 	 * Função que retorna a posição y do objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	31/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	31/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_getYPosition(lua_State* state);
+	int lua_getYPosition(lua_State* pState);
 	/**
 	 * Função que seta a posição x do objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	31/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	31/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_setXPosition(lua_State* state);
+	int lua_setXPosition(lua_State* pState);
 	/**
 	 * Função que seta a posição y do objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	31/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	31/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_setYPosition(lua_State* state);
+	int lua_setYPosition(lua_State* pState);
 	/**
 	 * Função que seta a posição x y do objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	31/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	31/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_setPosition(lua_State* state);
+	int lua_setPosition(lua_State* pState);
 	/**
 	 * Função que adiciona um valor a posição x do objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	31/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	31/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_addXPosition(lua_State* state);
+	int lua_addXPosition(lua_State* pState);
 	/**
 	 * Função que adiciona um valor a posição y do objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	31/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	31/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_addYPosition(lua_State* state);
+	int lua_addYPosition(lua_State* pState);
 	/**
 	 * Função que adiciona um valor a posição xy do objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	31/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	31/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_addPosition(lua_State* state);
+	int lua_addPosition(lua_State* pState);
 	/**
 	 * Função que adiciona um valor a posição x do objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	31/03/2009
-	 * @final	31/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	31/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_subXPosition(lua_State* state);
+	int lua_subXPosition(lua_State* pState);
 	/**
 	 * Função que adiciona um valor a posição y do objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	31/03/2009
-	 * @final	31/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	31/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_subYPosition(lua_State* state);
+	int lua_subYPosition(lua_State* pState);
 	/**
 	 * Função que adiciona um valor a posição xy do objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	31/03/2009
-	 * @final	31/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	31/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_subPosition(lua_State* state);
+	int lua_subPosition(lua_State* pState);
 	/**
 	 * Função que seta o espelhamento do objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	12/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_setMirroring(lua_State* state);
+	int lua_setMirroring(lua_State* pState);
 	/**
 	 * Função que retorna o espelhamento do objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
-	 * @final	12/03/2009
-	 * @param	lua_State* state, estado do interpretador lua atual
+	 * @version	12/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_getMirroring(lua_State* state);
+	int lua_getMirroring(lua_State* pState);
 	/**
 	 * Método que registra as funçãode cenário para serem acessadas por um script
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	31/03/2009
-	 * @final	31/03/2009
+	 * @version	31/03/2009
 	 * @param	Gorgon::Lua* script, ponteiro para a classe lua que receberá as funções
 	 */
 	void registerFunctions(Gorgon::Lua* script);

@@ -1,4 +1,4 @@
-/**
+/*
  *
  *  ____              __       __          __
  * /\  _`\           /\ \     /\ \      __/\ \__
@@ -33,7 +33,8 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	12/03/2009
- * @final	31/03/2009
+ * @version	31/03/2009
+ * @ingroup	Objects
  */
 class Character : public Object
 {
@@ -41,49 +42,49 @@ class Character : public Object
 		/**
 		 * Colisão Superior do personagem
 		 */
-		Gorgon::Rectangle upColision;
+		Gorgon::Rectangle mUpColision;
 		/**
 		 * Colisão Inferior do personagem
 		 */
-		Gorgon::Rectangle downColision;
+		Gorgon::Rectangle mDownColision;
 		/**
 		 * Colisão a esquerda do personagem
 		 */
-		Gorgon::Rectangle leftColision;
+		Gorgon::Rectangle mLeftColision;
 		/**
 		 * Colisão a direita do personagem
 		 */
-		Gorgon::Rectangle rightColision;
+		Gorgon::Rectangle mRightColision;
 		/**
 		 * Vida do personagem
 		 */
-		int life;
+		int mLife;
 		/**
 		 * Vida corrente do personagem
 		 */
-		int currentLife;
+		int mCurrentLife;
 		/**
 		 * Se o maior que 0 o personagem está imortal
 		 */
-		int imortal;
+		int mImortal;
 		/**
 		 * O tempo que o personagem fica imortal após atingido
 		 */
-		int imortalTime;
+		int mImortalTime;
 		/**
 		 * Se o personagem está ativo
 		 */
-		bool ative;
+		bool mAtive;
 		/**
 		 * Vetor com os helpers do personagem
 		 */
-		std::vector< std::vector<Character*> > helpers;
+		std::vector< std::vector<Character*> > mHelpers;
 		/**
 		 * Método Construtor
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
-		 * @final	14/03/2009
+		 * @version	14/03/2009
 		 */
 		Character();
 		/**
@@ -91,7 +92,7 @@ class Character : public Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
-		 * @final	14/03/2009
+		 * @version	14/03/2009
 		 */
 		void loadGlobalVars();
 		/**
@@ -99,7 +100,7 @@ class Character : public Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
-		 * @final	31/03/2009
+		 * @version	31/03/2009
 		 */
 		void setUp();
 	public:
@@ -108,21 +109,21 @@ class Character : public Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	31/03/2009
-		 * @param	const std::string& fileName, localização do arquivo de script do personagem
-		 * @param	const Gorgon::Point& position, posição xy do personagem
+		 * @version	31/03/2009
+		 * @param	const std::string& pFileName, localização do arquivo de script do personagem
+		 * @param	const Gorgon::Point& pPosition, posição xy do personagem
 		 */
 		Character
 		(
-			const std::string& fileName,
-			const Gorgon::Point& position=Gorgon::Point(0,0)
+			const std::string& pFileName,
+			const Gorgon::Point& pPosition=Gorgon::Point(0,0)
 		);
 		/**
 		 * Método Destrutor
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
+		 * @version	12/03/2009
 		 */
 		virtual ~Character();
 		/**
@@ -130,7 +131,7 @@ class Character : public Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
+		 * @version	12/03/2009
 		 * @return	int
 		 */
 		int getLife() const;
@@ -139,34 +140,34 @@ class Character : public Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
-		 * @param	const int& life, vida do personagem
+		 * @version	12/03/2009
+		 * @param	const int& pLife, vida do personagem
 		 */
-		void setLife(const int& life);
+		void setLife(const int& pLife);
 		/**
 		 * Método que dimuniu a vida do personagem
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
-		 * @param	const int& life, valor a ser diminuído do life do personagem
+		 * @version	12/03/2009
+		 * @param	const int& pLife, valor a ser diminuído do life do personagem
 		 */
-		void subLife(const int& life);
+		void subLife(const int& pLife);
 		/**
 		 * Método para aumentar a vida do personagem
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
-		 * @param	const int& life, valor a ser somado ao life do personagem
+		 * @version	12/03/2009
+		 * @param	const int& pLife, valor a ser somado ao life do personagem
 		 */
-		void addLife(const int& life);
+		void addLife(const int& pLife);
 		/**
 		 * Método que retorna verdadeiro se o personagem estiver vivo
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
+		 * @version	12/03/2009
 		 * @return	bool
 		 */
 		bool isAlive() const;
@@ -175,7 +176,7 @@ class Character : public Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
+		 * @version	12/03/2009
 		 */
 		void ativate();
 		/**
@@ -183,7 +184,7 @@ class Character : public Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
+		 * @version	12/03/2009
 		 */
 		void inativate();
 		/**
@@ -191,7 +192,7 @@ class Character : public Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
+		 * @version	12/03/2009
 		 * @return	bool
 		 */
 		bool isAtive() const;
@@ -200,7 +201,7 @@ class Character : public Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
+		 * @version	12/03/2009
 		 * @return	bool
 		 */
 		bool isImortal() const;
@@ -209,18 +210,18 @@ class Character : public Object
 		 *
 		 * @author		Cantidio Oliveira Fontes
 		 * @since		12/03/2009
-		 * @final		12/03/2009
-		 * @param		const int& damage, dano
+		 * @version		12/03/2009
+		 * @param		const int& pDamage, dano recebido
 		 * @abstract	diminui o dano especificado e o deixa o personagem imortal o número de tempo espeficidado
 		 * na variável imortalTime
 		 */
-		void hurt(const int& damage);
+		void hurt(const int& pDamage);
 		/**
 		 * Método para preparar os helpers do personagem
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	31/03/2009
+		 * @version	31/03/2009
 		 */
 		void prepareHelpers();
 		/**
@@ -228,23 +229,23 @@ class Character : public Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	31/03/2009
-		 * @param	const Gorgon::Point& position, posição x que o helper será chamado
-		 * @param	const Gorgon::Mirroring& mirroring, espelhamento que o helper será chamado
-		 * @param	const int& helper, qual helper a chamar
+		 * @version	31/03/2009
+		 * @param	const Gorgon::Point& pPosition, posição x que o helper será chamado
+		 * @param	const Gorgon::Mirroring& pMirroring, espelhamento que o helper será chamado
+		 * @param	const int& pHelper, qual helper a chamar
 		 */
 		void callHelper
 		(
-			const Gorgon::Point& position,
-			const Gorgon::Mirroring& mirroring,
-			const int& helper=0
+			const Gorgon::Point&		pPosition,
+			const Gorgon::Mirroring&	pMirroring,
+			const int&					pHelper=0
 		);
 		/**
 		 * Método responsável por desenhar o personagem
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
+		 * @version	12/03/2009
 		 */
 		void draw() const;
 		/**
@@ -252,7 +253,7 @@ class Character : public Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
+		 * @version	12/03/2009
 		 */
 		void logic();
 };

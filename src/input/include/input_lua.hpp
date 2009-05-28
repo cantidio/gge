@@ -1,4 +1,4 @@
-/**
+/*
  *
  *  ____              __       __          __
  * /\  _`\           /\ \     /\ \      __/\ \__
@@ -29,145 +29,166 @@
 #include "input.hpp"
 #include "../../../../gorgon++/src/script/include/gorgon_lua.hpp"
 
+/**
+ * @defgroup	Input
+ *
+ * @author		Cantidio Oliveira Fontes
+ * @since		16/03/2009
+ * @version		28/05/2009
+ * @details
+ *				O módulo Input engloba todas as funcionalidades relacionadas
+ *				à parte de entrada de dados por parte do usuário
+ */
 
 /**
- * Função que retorna verdadeiro se o botão start estiver apertado
+ * NameSpace que engloba os wrappers de algumas funções em lua relacionadas ao input
  *
  * @author	Cantidio Oliveira Fontes
  * @since	16/03/2009
- * @final	16/03/2009
- * @param	lua_State* state, estado lua que a função será cadastrada
- * @return	int
+ * @version	28/05/2009
+ * @ingroup	Input
  */
-int lua_buttonStart(lua_State* state);
-/**
- * Função que retorna verdadeiro se o botão direcional para cima estiver apertado
- *
- * @author	Cantidio Oliveira Fontes
- * @since	16/03/2009
- * @final	16/03/2009
- * @param	lua_State* state, estado lua que a função será cadastrada
- * @return	int
- */
-int lua_buttonUp(lua_State* state);
-/**
- * Função que retorna verdadeiro se o botão direcional para baixo estiver apertado
- *
- * @author	Cantidio Oliveira Fontes
- * @since	16/03/2009
- * @final	16/03/2009
- * @param	lua_State* state, estado lua que a função será cadastrada
- * @return	int
- */
-int lua_buttonDown(lua_State* state);
-/**
- * Função que retorna verdadeiro se o botão direcional esquerdo estiver apertado
- *
- * @author	Cantidio Oliveira Fontes
- * @since	16/03/2009
- * @final	16/03/2009
- * @param	lua_State* state, estado lua que a função será cadastrada
- * @return	int
- */
-int lua_buttonLeft(lua_State* state);
-/**
- * Função que retorna verdadeiro se o botão direcional direito estiver apertado
- *
- * @author	Cantidio Oliveira Fontes
- * @since	16/03/2009
- * @final	16/03/2009
- * @param	lua_State* state, estado lua que a função será cadastrada
- * @return	int
- */
-int lua_buttonRight(lua_State* state);
-/**
- * Função que retorna verdadeiro se o botão1 estiver apertado
- *
- * @author	Cantidio Oliveira Fontes
- * @since	16/03/2009
- * @final	16/03/2009
- * @param	lua_State* state, estado lua que a função será cadastrada
- * @return	int
- */
-int lua_button1(lua_State* state);
-/**
- * Função que retorna verdadeiro se o botão2 estiver apertado
- *
- * @author	Cantidio Oliveira Fontes
- * @since	16/03/2009
- * @final	16/03/2009
- * @param	lua_State* state, estado lua que a função será cadastrada
- * @return	int
- */
-int lua_button2(lua_State* state);
-/**
- * Função que retorna verdadeiro se o botão3 estiver apertado
- *
- * @author	Cantidio Oliveira Fontes
- * @since	16/03/2009
- * @final	16/03/2009
- * @param	lua_State* state, estado lua que a função será cadastrada
- * @return	int
- */
-int lua_button3(lua_State* state);
-/**
- * Função que retorna verdadeiro se o botão4 estiver apertado
- *
- * @author	Cantidio Oliveira Fontes
- * @since	16/03/2009
- * @final	16/03/2009
- * @param	lua_State* state, estado lua que a função será cadastrada
- * @return	int
- */
-int lua_button4(lua_State* state);
-/**
- * Função que retorna verdadeiro se o botão5 estiver apertado
- *
- * @author	Cantidio Oliveira Fontes
- * @since	16/03/2009
- * @final	16/03/2009
- * @param	lua_State* state, estado lua que a função será cadastrada
- * @return	int
- */
-int lua_button5(lua_State* state);
-/**
- * Função que retorna verdadeiro se o botão6 estiver apertado
- *
- * @author	Cantidio Oliveira Fontes
- * @since	16/03/2009
- * @final	16/03/2009
- * @param	lua_State* state, estado lua que a função será cadastrada
- * @return	int
- */
-int lua_button6(lua_State* state);
-/**
- * Função que retorna verdadeiro se o botão7 estiver apertado
- *
- * @author	Cantidio Oliveira Fontes
- * @since	16/03/2009
- * @final	16/03/2009
- * @param	lua_State* state, estado lua que a função será cadastrada
- * @return	int
- */
-int lua_button7(lua_State* state);
-/**
- * Função que retorna verdadeiro se o botão8 estiver apertado
- *
- * @author	Cantidio Oliveira Fontes
- * @since	16/03/2009
- * @final	16/03/2009
- * @param	lua_State* state, estado lua que a função será cadastrada
- * @return	int
- */
-int lua_button8(lua_State* state);
-/**
- * Função que cadastra todas as funções em lua de input no estado indicado
- *
- * @author	Cantidio Oliveira Fontes
- * @since	16/03/2009
- * @final	16/03/2009
- * @param	lua_State* state, estado lua que a função será cadastrada
- * @return	int
- */
-void lua_registerInputFunctions(Gorgon::Lua* script);
+namespace InputLua
+{
+	/**
+	 * Função que retorna verdadeiro se o botão start estiver apertado
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	16/03/2009
+	 * @final	16/03/2009
+	 * @param	lua_State* pState, estado lua que a função será cadastrada
+	 * @return	int
+	 */
+	int lua_buttonStart(lua_State* pState);
+	/**
+	 * Função que retorna verdadeiro se o botão direcional para cima estiver apertado
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	16/03/2009
+	 * @final	16/03/2009
+	 * @param	lua_State* pState, estado lua que a função será cadastrada
+	 * @return	int
+	 */
+	int lua_buttonUp(lua_State* pState);
+	/**
+	 * Função que retorna verdadeiro se o botão direcional para baixo estiver apertado
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	16/03/2009
+	 * @final	16/03/2009
+	 * @param	lua_State* pState, estado lua que a função será cadastrada
+	 * @return	int
+	 */
+	int lua_buttonDown(lua_State* pState);
+	/**
+	 * Função que retorna verdadeiro se o botão direcional esquerdo estiver apertado
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	16/03/2009
+	 * @final	16/03/2009
+	 * @param	lua_State* pState, estado lua que a função será cadastrada
+	 * @return	int
+	 */
+	int lua_buttonLeft(lua_State* pState);
+	/**
+	 * Função que retorna verdadeiro se o botão direcional direito estiver apertado
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	16/03/2009
+	 * @final	16/03/2009
+	 * @param	lua_State* pState, estado lua que a função será cadastrada
+	 * @return	int
+	 */
+	int lua_buttonRight(lua_State* pState);
+	/**
+	 * Função que retorna verdadeiro se o botão1 estiver apertado
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	16/03/2009
+	 * @final	16/03/2009
+	 * @param	lua_State* pState, estado lua que a função será cadastrada
+	 * @return	int
+	 */
+	int lua_button1(lua_State* pState);
+	/**
+	 * Função que retorna verdadeiro se o botão2 estiver apertado
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	16/03/2009
+	 * @final	16/03/2009
+	 * @param	lua_State* pState, estado lua que a função será cadastrada
+	 * @return	int
+	 */
+	int lua_button2(lua_State* pState);
+	/**
+	 * Função que retorna verdadeiro se o botão3 estiver apertado
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	16/03/2009
+	 * @final	16/03/2009
+	 * @param	lua_State* pState, estado lua que a função será cadastrada
+	 * @return	int
+	 */
+	int lua_button3(lua_State* pState);
+	/**
+	 * Função que retorna verdadeiro se o botão4 estiver apertado
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	16/03/2009
+	 * @final	16/03/2009
+	 * @param	lua_State* pState, estado lua que a função será cadastrada
+	 * @return	int
+	 */
+	int lua_button4(lua_State* pState);
+	/**
+	 * Função que retorna verdadeiro se o botão5 estiver apertado
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	16/03/2009
+	 * @final	16/03/2009
+	 * @param	lua_State* pState, estado lua que a função será cadastrada
+	 * @return	int
+	 */
+	int lua_button5(lua_State* pState);
+	/**
+	 * Função que retorna verdadeiro se o botão6 estiver apertado
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	16/03/2009
+	 * @final	16/03/2009
+	 * @param	lua_State* pState, estado lua que a função será cadastrada
+	 * @return	int
+	 */
+	int lua_button6(lua_State* pState);
+	/**
+	 * Função que retorna verdadeiro se o botão7 estiver apertado
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	16/03/2009
+	 * @final	16/03/2009
+	 * @param	lua_State* pState, estado lua que a função será cadastrada
+	 * @return	int
+	 */
+	int lua_button7(lua_State* pState);
+	/**
+	 * Função que retorna verdadeiro se o botão8 estiver apertado
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	16/03/2009
+	 * @final	16/03/2009
+	 * @param	lua_State* pState, estado lua que a função será cadastrada
+	 * @return	int
+	 */
+	int lua_button8(lua_State* pState);
+	/**
+	 * Função que cadastra todas as funções em lua de input no estado indicado
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	16/03/2009
+	 * @final	16/03/2009
+	 * @param	lua_State* pState, estado lua que a função será cadastrada
+	 * @return	int
+	 */
+	void registerFunctions(Gorgon::Lua* pScript);
+}
 #endif

@@ -35,11 +35,23 @@
 #include "../../resource_manager/include/animation_manager.hpp"
 
 /**
+ * @defgroup	Objects
+ *
+ * @author		Cantidio Oliveira Fontes
+ * @since		11/03/2009
+ * @version		28/05/2009
+ * @details
+ *				O módulo Objects engloba todas as funcionalidades relacionadas
+ *				à parte de objetos e entidades relacionadas e derivadas dos mesmos
+ */
+
+/**
  * Classe que representa um objeto interativo
  *
  * @author	Cantidio Oliveira Fontes
  * @since	11/03/2009
- * @final	31/03/2009
+ * @version	28/05/2009
+ * @ingroup	Objects
  */
 class Object
 {
@@ -47,81 +59,81 @@ class Object
 		/**
 		 * Nome do arquivo de sprites do objeto
 		 */
-		std::string spritePackName;
+		std::string mSpritePackName;
 		/**
 		 * Nome do arquivo de animações do objeto
 		 */
-		std::string animationPackName;
+		std::string mAnimationPackName;
 		/**
 		 * Nome do arquivo de colisões do objeo
 		 */
-		std::string colisionPackName;
+		std::string mColisionPackName;
 		/**
 		 * Nome do arquivo da paleta de cores do objeto
 		 */
-		std::string paletteName;
+		std::string mPaletteName;
 		/**
 		 * Ponteiro para o spritePack do objeto
 		 */
-		Gorgon::SpritePack* spritePack;
+		Gorgon::SpritePack* mSpritePack;
 		/**
 		 * Ponteiro para o animationPack do objeto
 		 */
-		Gorgon::AnimationPack* animationPack;
+		Gorgon::AnimationPack* mAnimationPack;
 		/**
 		 * Ponteiro para a paleta de cores do objeto
 		 */
-		Gorgon::Palette* palette;
+		Gorgon::Palette* mPalette;
 		/**
 		 * Script que comanda as ações do objeto
 		 */
-		Gorgon::Lua* script;
+		Gorgon::Lua* mScript;
 		/**
 		 * Handler de animação do objeto
 		 */
-		Gorgon::AnimationHandler* animationHandler;
+		Gorgon::AnimationHandler* mAnimationHandler;
 		/**
 		 * Direção do objeto
 		 */
-		Gorgon::Mirroring direction;
+		Gorgon::Mirroring mDirection;
 		/**
 		 * Nome do objeto
 		 */
-		std::string name;
+		std::string mName;
 		/**
 		 * Localização do objeto no plano xy
 		 */
-		Gorgon::Point position;
+		Gorgon::Point mPosition;
 		/**
 		 * Peso do objeto
 		 */
-		double weight;
+		double mWeight;
 		/**
 		 * Impulso horizontal que o objeto dispõem
 		 */
-		double xPulse;
+		double mXPulse;
 		/**
 		 * Impulso máximo no eixo x
 		 */
-		double xPulseMax;
+		double mXPulseMax;
 		/**
 		 * Impulso vertical que o objeto dispõem
 		 */
-		double yPulse;
+		double mYPulse;
 		/**
 		 * Se o objeto é afetado pela gravidade
 		 */
-		bool gravityAffected;
+		bool mGravityAffected;
 		/**
 		 * Estado atual do objeto
 		 */
-		int stateOn;
+		int mStateOn;
 		/**
 		 * Método Construtor vazio
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
+		 * @version	28/05/2009
 		 */
 		Object();
 		/**
@@ -129,7 +141,7 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
+		 * @version	28/05/2009
 		 */
 		void loadGlobalVars();
 		/**
@@ -137,7 +149,7 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
+		 * @version	28/05/2009
 		 */
 		void setUp();
 	public:
@@ -146,17 +158,17 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	11/03/2009
-		 * @final	31/03/2009
-		 * @param	const std::string& scriptName, nome do script do objeto
-		 * @param	const Gorgon::Point& position, posição do objeto no eixo xy
+		 * @version	28/05/2009
+		 * @param	const std::string& pScriptName, nome do script do objeto
+		 * @param	const Gorgon::Point& pPosition, posição do objeto no eixo xy
 		 */
-		Object(const std::string& scriptName,const Gorgon::Point& position=Gorgon::Point(0,0));
+		Object(const std::string& pScriptName,const Gorgon::Point& pPosition=Gorgon::Point(0,0));
 		/**
 		 * Método Destrutor
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	11/03/2009
-		 * @final	11/03/2009
+		 * @version	28/05/2009
 		 */
 		virtual ~Object();
 		/**
@@ -164,7 +176,7 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	11/03/2009
-		 * @final	11/03/2009
+		 * @version	28/05/2009
 		 */
 		void draw() const;
 		/**
@@ -172,7 +184,7 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	11/03/2009
-		 * @final	11/03/2009
+		 * @version	28/05/2009
 		 */
 		void logic();
 		/**
@@ -180,16 +192,16 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
-		 * @param	const Gorgon::Mirroring& mirroring, espelhamento
+		 * @version	28/05/2009
+		 * @param	const Gorgon::Mirroring& pMirroring, espelhamento
 		 */
-		void setMirroring(const Gorgon::Mirroring& mirroring);
+		void setMirroring(const Gorgon::Mirroring& pMirroring);
 		/**
 		 * Método para retornar o espelhamento do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
+		 * @version	28/05/2009
 		 * @return	Gorgon::Mirroring
 		 */
 		Gorgon::Mirroring getMirroring() const;
@@ -198,90 +210,90 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	14/03/2009
-		 * @param	const double& x, nova posição no eixo x
+		 * @version	28/05/2009
+		 * @param	const double& pPosX, nova posição no eixo x
 		 */
-		void setXPosition(const double& x);
+		void setXPosition(const double& pPosX);
 		/**
 		 * Método para setar a posição y do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	14/03/2009
-		 * @param	const double& y, nova posição no eixo y
+		 * @version	28/05/2009
+		 * @param	const double& pPosY, nova posição no eixo y
 		 */
-		void setYPosition(const double& y);
+		void setYPosition(const double& pPosY);
 		/**
 		 * Método para setar a posição do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	31/03/2009
-		 * @param	const Gorgon::Point& newPosition, nova posição no eixo xy
+		 * @version	28/05/2009
+		 * @param	const Gorgon::Point& pPosition, nova posição no eixo xy
 		 */
-		void setPosition(const Gorgon::Point& newPosition);
+		void setPosition(const Gorgon::Point& pPosition);
 		/**
 		 * Método para adicionar um valor a posição x do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	14/03/2009
-		 * @param	const double& x, valor a ser adicionado a posição no eixo x
+		 * @version	28/05/2009
+		 * @param	const double& pPosX, valor a ser adicionado a posição no eixo x
 		 */
-		void addXPosition(const double& x);
+		void addXPosition(const double& pPosX);
 		/**
 		 * Método para adicionar um valor a posição y do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	14/03/2009
-		 * @param	const double& y, valor a ser adicionado a posição no eixo y
+		 * @version	28/05/2009
+		 * @param	const double& pPosY, valor a ser adicionado a posição no eixo y
 		 */
-		void addYPosition(const double& y);
+		void addYPosition(const double& pPosY);
 		/**
 		 * Método para adicionar um valor a posição x do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	14/03/2009
-		 * @param	const double& x, valor a ser adicionado a posição no eixo x
-		 * @param	conat double& y, valor a ser adicionado a posição no eixo y
+		 * @version	28/05/2009
+		 * @param	const double& pPosX, valor a ser adicionado a posição no eixo x
+		 * @param	conat double& pPosY, valor a ser adicionado a posição no eixo y
 		 */
-		void addPosition(const double& x,const double& y);
+		void addPosition(const double& pPosX,const double& pPosY);
 		/**
 		 * Método para subtrair um valor a posição x do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	31/03/2009
-		 * @final	31/03/2009
-		 * @param	const double& x, valor a ser subtraido a posição no eixo x
+		 * @version	28/05/2009
+		 * @param	const double& pPosX, valor a ser subtraido a posição no eixo x
 		 */
-		void subXPosition(const double& x);
+		void subXPosition(const double& pPosX);
 		/**
 		 * Método para subtrair um valor a posição y do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	31/03/2009
-		 * @final	31/03/2009
-		 * @param	const double& y, valor a ser subtraido a posição no eixo y
+		 * @version	28/05/2009
+		 * @param	const double& pPosY, valor a ser subtraido a posição no eixo y
 		 */
-		void subYPosition(const double& y);
+		void subYPosition(const double& pPosY);
 		/**
 		 * Método para subtrair um valor a posição x do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	31/03/2009
-		 * @final	31/03/2009
-		 * @param	const double& x, valor a ser subtraido a posição no eixo x
-		 * @param	conat double& y, valor a ser subtraido a posição no eixo y
+		 * @version	28/05/2009
+		 * @param	const double& pPosX, valor a ser subtraido a posição no eixo x
+		 * @param	conat double& pPosY, valor a ser subtraido a posição no eixo y
 		 */
-		void subPosition(const double& x,const double& y);
+		void subPosition(const double& pPosX,const double& pPosY);
 		/**
 		 * Método para retornar a posição x do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	14/03/2009
+		 * @version	28/05/2009
 		 * @return	double
 		 */
 		double getXPosition() const;
@@ -290,7 +302,7 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	14/03/2009
+		 * @version	28/05/2009
 		 * @return	double
 		 */
 		double getYPosition() const;
@@ -299,16 +311,16 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
-		 * @param	const int& animation, nova animação
+		 * @version	28/05/2009
+		 * @param	const int& pAnimation, nova animação
 		 */
-		void changeAnimation(const int& animation);
+		void changeAnimation(const int& pAnimation);
 		/**
 		 * Método para saber se a animação do objeto está tocando
 		 *
 		 * @author	Cantídio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
+		 * @version	28/05/2009
 		 * @return	bool
 		 */
 		bool animationIsPlaying() const;
@@ -317,7 +329,7 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
-		 * @final	14/03/2009
+		 * @version	28/05/2009
 		 * @return	int
 		 */
 		int getAnimationOn() const;
@@ -326,7 +338,7 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
-		 * @final	14/03/2009
+		 * @version	28/05/2009
 		 * @return	int
 		 */
 		int getFrameOn() const;
