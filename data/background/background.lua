@@ -21,10 +21,9 @@ player				= {
 	layer		= 1,
 	xPosition	= 0,
 	yPosition	= 0,
-	--mirroring	= mirroring.Normal, por causa disso tava dando pau
+--	mirroring	= mirroring.Normal,
 	initialState= 290 
 }
-
 -- Função para registrar o ponteiro do cenário que invocou o script
 --
 -- @author	Cantidio Oliveira Fontes

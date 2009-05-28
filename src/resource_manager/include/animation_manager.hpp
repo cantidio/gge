@@ -35,7 +35,7 @@ namespace ResourceManager
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	11/03/2009
-	 * @final	11/03/2009
+	 * @version	11/03/2009
 	 * @ingroup	ResourceManager
 	 */
 	typedef struct
@@ -50,7 +50,7 @@ namespace ResourceManager
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	11/03/2009
-	 * @final	28/05/2009
+	 * @version	28/05/2009
 	 * @ingroup	ResourceManager
 	 */
 	class AnimationManager
@@ -66,7 +66,7 @@ namespace ResourceManager
 			 *
 			 * @author	Cantidio Oliveira Fontes
 			 * @since	11/03/2009
-			 * @final	28/05/2009
+			 * @version	28/05/2009
 			 * @param	const std::string& pAnimationPackName, nome do animationPack
 			 * @return	Gorgon::AnimationPack*
 			 */
@@ -76,10 +76,10 @@ namespace ResourceManager
 			 *
 			 * @author		Cantidio Oliveira Fontes
 			 * @since		11/03/2009
-			 * @final		28/05/2009
+			 * @version		28/05/2009
 			 * @param		const std::string& pAnimationPackName, nome do animationPack a ser removido
 			 * @details
-			 *				esse método antes de remover o animationPack completamente,
+			 *				Esse método antes de remover o animationPack completamente,
 			 * verifica se algum outro objeto está usando o recurso do mesmo, se ninguém
 			 * mais estiver o usando então livra a memória do mesmo.
 			 */
@@ -89,7 +89,7 @@ namespace ResourceManager
 			 *
 			 * @author	Cantidio Oliveira Fontes
 			 * @since	11/03/2009
-			 * @final	28/05/2009
+			 * @version	28/05/2009
 			 */
 			static void clear();
 	};

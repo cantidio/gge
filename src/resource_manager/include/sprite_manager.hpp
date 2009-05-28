@@ -35,7 +35,7 @@ namespace ResourceManager
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	11/03/2009
-	 * @final	11/03/2009
+	 * @version	11/03/2009
 	 * @ingroup	ResourceManager
 	 */
 	typedef struct
@@ -50,7 +50,7 @@ namespace ResourceManager
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	11/03/2009
-	 * @final	28/05/2009
+	 * @version	28/05/2009
 	 * @ingroup	ResourceManager
 	 */
 	class SpriteManager
@@ -66,7 +66,7 @@ namespace ResourceManager
 			 *
 			 * @author	Cantidio Oliveira Fontes
 			 * @since	11/03/2009
-			 * @final	28/05/2009
+			 * @version	28/05/2009
 			 * @param	const std::string& pSpritePackName, nome do spritePack
 			 * @return	Gorgon::SpritePack*
 			 */
@@ -76,7 +76,7 @@ namespace ResourceManager
 			 *
 			 * @author	Cantidio Oliveira Fontes
 			 * @since	11/03/2009
-			 * @final	28/05/2009
+			 * @version	28/05/2009
 			 * @param	const std::string& pSpritePackName, nome do spritePack a ser removido
 			 * @details
 			 *			Esse método antes de remover o SpritePack completamente,
@@ -89,7 +89,7 @@ namespace ResourceManager
 			 *
 			 * @author	Cantidio Oliveira Fontes
 			 * @since	11/03/2009
-			 * @final	28/05/2009
+			 * @version	28/05/2009
 			 */
 			static void clear();
 	};

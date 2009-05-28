@@ -34,7 +34,8 @@ namespace ResourceManager
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	11/03/2009
-	 * @final	11/03/2009
+	 * @version	11/03/2009
+	 * @ingroup	ResourceManager
 	 */
 	typedef struct
 	{
@@ -48,7 +49,7 @@ namespace ResourceManager
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	11/03/2009
-	 * @final	11/03/2009
+	 * @version	11/03/2009
 	 */
 	class ColisionManager
 	{
@@ -56,35 +57,36 @@ namespace ResourceManager
 			/**
 			 * Tabela com os recursos de animação
 			 */
-			static vector<ColisionId> table;
+			static vector<ColisionId> mTable;
 		public:
 			/**
-			 * Para para carregar um spritePack, se o mesmo já tiver sido carregado retorna o ponteiro para o mesmo
+			 * Para para carregar um CollisionPack, se o mesmo já tiver sido carregado retorna o ponteiro para o mesmo
 			 *
 			 * @author	Cantidio Oliveira Fontes
 			 * @since	11/03/2009
-			 * @final	11/03/2009
-			 * @param	const string& name, nome do spritePack
-			 * SpritePack* ponteiro para o spritePack carregado
+			 * @version	11/03/2009
+			 * @param	const string& pColisionPackName, nome do ColisionPack a ser carregado
+			 * @return	Gorgon::ColisionPack*
 			 */
-			static Gorgon::ColisionPack* load(const string& name);
+			static Gorgon::ColisionPack* load(const string& pColisionPackName);
 			/**
 			 * Método para retirar da memória o spritePack carregado
 			 *
-			 * @author		Cantidio Oliveira Fontes
-			 * @since		11/03/2009
-			 * @final		11/03/2009
-			 * @param		const string& name, nome do spritePack a ser removido
-			 * @abstract	esse método antes de remover o sprite completamente, verifica se algum outro objeto está usando
+			 * @author	Cantidio Oliveira Fontes
+			 * @since	11/03/2009
+			 * @version	11/03/2009
+			 * @param	const string& pColisionPackName, nome do spritePack a ser removido
+			 * @details
+			 *			Esse método antes de remover o sprite completamente, verifica se algum outro objeto está usando
 			 * o recurso do mesmo, ninguém mais estiver o usando então livra a memória do mesmo.
 			 */
-			static void unload(const string& name);
+			static void unload(const string& pColisionPackName);
 			/**
 			 * Método para forçar a limpeza de toda tabela
 			 *
 			 * @author	Cantidio Oliveira Fontes
 			 * @since	11/03/2009
-			 * @final	11/03/2009
+			 * @version	11/03/2009
 			 */
 			static void clear();
 	};

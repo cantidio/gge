@@ -208,11 +208,12 @@ class Character : public Object
 		/**
 		 * Método que machuca o personagem
 		 *
-		 * @author		Cantidio Oliveira Fontes
-		 * @since		12/03/2009
-		 * @version		12/03/2009
-		 * @param		const int& pDamage, dano recebido
-		 * @abstract	diminui o dano especificado e o deixa o personagem imortal o número de tempo espeficidado
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @version	12/03/2009
+		 * @param	const int& pDamage, dano recebido
+		 * @details
+		 *			Diminui o dano especificado e o deixa o personagem imortal o número de tempo espeficidado
 		 * na variável imortalTime
 		 */
 		void hurt(const int& pDamage);

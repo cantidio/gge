@@ -44,7 +44,7 @@ class Enemy : public Character
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	11/03/2009
-		 * @final	11/03/2009
+		 * @version	11/03/2009
 		 */
 		Enemy(const string& script);
 		/**
@@ -52,7 +52,7 @@ class Enemy : public Character
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	11/03/2009
-		 * @final	11/03/2009
+		 * @version	11/03/2009
 		 */
 		virtual ~Enemy();
 };

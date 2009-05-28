@@ -127,8 +127,8 @@ class Background
 		(
 			const int&		pWidth,
 			const int&		pHeight,
-			const double&	pPosX=0,
-			const double&	pPosY=0
+			const double&	pPosX = 0,
+			const double&	pPosY = 0
 		);
 		/**
 		 * Método Construtor
