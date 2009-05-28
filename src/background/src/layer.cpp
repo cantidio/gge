@@ -206,8 +206,11 @@ void Layer::loadObjects()
 				new Object
 				(
 					script->function("getObjectScript",Gorgon::LuaParam("n",i),1)->getStringValue(),
-					script->function("getObjectXPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue(),
-					script->function("getObjectYPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue()
+					Gorgon::Point
+					(
+						script->function("getObjectXPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue(),
+						script->function("getObjectYPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue()
+					)
 				)
 			);
 		}

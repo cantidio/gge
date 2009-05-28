@@ -26,6 +26,7 @@
  */
 #ifndef _GSBGE_INPUT_
 #define	_GSBGE_INPUT_
+#include "../../../../gorgon++/src/core/include/gorgon_log.hpp"
 #include <allegro.h>
 #include <iostream>
 #include <fstream>

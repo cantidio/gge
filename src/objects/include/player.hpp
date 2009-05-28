@@ -77,17 +77,11 @@ class Player : public Character
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
-		 * @final	14/03/2009
-		 * @param	const string& fileName, localização do arquivo de script do jogador
-		 * @param	const int& x, posição x a criar o personagem
-		 * @param	const int& y, posição y a criar o personagem
+		 * @final	31/03/2009
+		 * @param	const std::string& fileName, localização do arquivo de script do jogador
+		 * @param	const Gorgon::Point& position, posição xy a criar o personagem
 		 */
-		Player
-		(
-			const string& fileName,
-			const int& x=0,
-			const int& y=0
-		);
+		Player(const std::string& fileName,const Gorgon::Point& position=Gorgon::Point(0,0));
 		/**
 		 * Método Destrutor
 		 *

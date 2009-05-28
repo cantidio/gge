@@ -65,15 +65,17 @@ void Background::save(const std::string& fileName) const
 	{
 		file << "--Background Script File just modify if you know what you are doing" << std::endl;
 		file << "--Background gravity" << std::endl;
-		file << "gravity	= " << gravity << std::endl;
+		file << "gravity		= " << gravity << std::endl;
+		file << "--Friction when not coliding" << std::endl;
+		file << "voidFriction	= " << voidFriction << std::endl;
 		file << "--width of the background" << std::endl;
-		file << "width		= " << width << std::endl;
+		file << "width			= " << width << std::endl;
 		file << "--height of the background" << std::endl;
-		file << "height		= " << height << std::endl;
+		file << "height			= " << height << std::endl;
 		file << "--init x position" << std::endl;
-		file << "posX		= " << posX << std::endl;
+		file << "posX			= " << posX << std::endl;
 		file << "--init y position" << std::endl;
-		file << "posY		= " << posY << std::endl;
+		file << "posY			= " << posY << std::endl;
 		file << "--vector with the layers of the background" << std::endl;
 		file << "layers	= {";
 
@@ -104,11 +106,12 @@ void Background::save(const std::string& fileName) const
 
 void Background::loadGlobalVars()
 {
-	gravity	= script->getNumericVar("gravity");
-	width	= script->getNumericVar("width");
-	height	= script->getNumericVar("height");
-	posX	= script->getNumericVar("posX");
-	posY	= script->getNumericVar("posY");
+	gravity			= script->getNumericVar("gravity");
+	voidFriction	= script->getNumericVar("voidFriction");
+	width			= script->getNumericVar("width");
+	height			= script->getNumericVar("height");
+	posX			= script->getNumericVar("posX");
+	posY			= script->getNumericVar("posY");
 }
 
 void Background::loadLayers()

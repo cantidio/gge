@@ -16,7 +16,6 @@ function stateStading()
 	if buttonRight() or buttonLeft() then
 			changeAnimation(1)
 			state=1;
-			print("state: walking");
 		end
 end
 
@@ -29,12 +28,11 @@ function stateWalking()
 	elseif buttonLeft() then
 		setMirroring(Mirroring.HFlip)
 		if getFrameOn()>0 and getXPosition()>10 then
-			addPosition(-xPulse,0)
+			subPosition(xPulse,0)
 		end
 	else
 		changeAnimation(0)
 		state=0
-		print("state: standing");
 	end
 end
 
@@ -45,4 +43,4 @@ function logic()
 		stateWalking()
 	end
 end
- 
+

@@ -1,4 +1,6 @@
 #include "../include/object.hpp"
+#include "../include/object_lua.hpp"
+
 Object::Object()
 {
 	script	= new Gorgon::Lua("data/object/object.lua");
@@ -14,45 +16,22 @@ void Object::loadGlobalVars()
 	xPulse				= script->getNumericVar("xPulse");
 	yPulse				= script->getNumericVar("yPulse");
 	xPulseMax			= script->getNumericVar("xPulseMax");
-}
-
-void Object::registerFunctions()
-{
-	script->function("getObject",Gorgon::LuaParam("N",this));
-	script->registerFunction("lua_changeAnimation",lua_changeAnimation);
-	script->registerFunction("lua_animationIsPlaying",lua_animationIsPlaying);
-	script->registerFunction("lua_getAnimationOn",lua_getAnimationOn);
-	script->registerFunction("lua_getFrameOn",lua_getFrameOn);
-	script->registerFunction("lua_getXPosition",lua_getXPosition);
-	script->registerFunction("lua_getYPosition",lua_getYPosition);
-	script->registerFunction("lua_setXPosition",lua_setXPosition);
-	script->registerFunction("lua_setYPosition",lua_setYPosition);
-	script->registerFunction("lua_setPosition",lua_setPosition);
-	script->registerFunction("lua_addXPosition",lua_addXPosition);
-	script->registerFunction("lua_addYPosition",lua_addYPosition);
-	script->registerFunction("lua_addPosition",lua_addPosition);
-	script->registerFunction("lua_setMirroring",lua_setMirroring);
-	script->registerFunction("lua_getMirroring",lua_getMirroring);
+	gravityAffected		= script->getBooleanVar("gravityAffected");
 }
 
 void Object::setUp()
 {
 	loadGlobalVars();
-	registerFunctions();
+	script->function("getObject",Gorgon::LuaParam("N",this));
+	ObjectLua::registerFunctions(script);
 	spritePack			= ResourceManager::SpriteManager::load(spritePackName);
 	animationPack		= ResourceManager::AnimationManager::load(animationPackName);
 	animationHandler	= new Gorgon::AnimationHandler(*spritePack,*animationPack);
 }
 
-Object::Object
-(
-	const string& scriptName,
-	const double& x,
-	const double& y
-)
+Object::Object(const std::string& scriptName,const Gorgon::Point& position)
 {
-	posX	= x;
-	posY	= y;
+	setPosition(position);
 	script	= new Gorgon::Lua("data/object/object.lua");
 	script->loadScript(scriptName);
 	setUp();
@@ -77,44 +56,59 @@ Gorgon::Mirroring Object::getMirroring() const
 
 void Object::setXPosition(const double& x)
 {
-	posX=x;
+	position.setX(x);
 }
 
 void Object::setYPosition(const double& y)
 {
-	posY=y;
+	position.setY(y);
 }
 
-void Object::setPosition(const double& x,const double& y)
+void Object::setPosition(const Gorgon::Point& newPosition)
 {
-	posX=x;
-	posY=y;
+	position=newPosition;
 }
 
 void Object::addXPosition(const double& x)
 {
-	posX+=x;
+	position.addX(x);
 }
 
 void Object::addYPosition(const double& y)
 {
-	posY+=y;
+	position.addY(y);
 }
 
 void Object::addPosition(const double& x,const double& y)
 {
-	posX+=x;
-	posY+=y;
+	position.addX(x);
+	position.addY(y);
+}
+
+void Object::subXPosition(const double& x)
+{
+	position.subX(x);
+}
+
+void Object::subYPosition(const double& y)
+{
+	position.subY(y);
+}
+
+void Object::subPosition(const double& x,const double& y)
+{
+	position.subX(x);
+	position.subY(y);
 }
 
 double Object::getXPosition() const
 {
-	return posX;
+	return position.getX();
 }
 
 double Object::getYPosition() const
 {
-	return posY;
+	return position.getY();
 }
 
 void Object::draw() const
@@ -122,8 +116,8 @@ void Object::draw() const
 	animationHandler->draw
 	(
 		*Gorgon::Video::get(),
-		(int)posX,
-		(int)posY,
+		(int)position.getX(),
+		(int)position.getY(),
 		direction
 	);
 }
@@ -152,136 +146,4 @@ void Object::logic()
 {
 	script->function("logic");
 	animationHandler->playByStep();
-}
-
-int lua_changeAnimation(lua_State* state)
-{
-	int pointer=lua_tointeger(state,1);
-	Object* a=(Object*)pointer;
-	a->changeAnimation((int)lua_tointeger(state,2));
-	return 0;
-}
-
-int lua_animationIsPlaying(lua_State* state)
-{
-	int pointer=lua_tointeger(state,1);
-	Object* a=(Object*)pointer;
-	lua_pushboolean(state,a->animationIsPlaying());;
-	return 1;
-}
-
-int lua_getAnimationOn(lua_State* state)
-{
-	int pointer=lua_tointeger(state,1);
-	Object* a=(Object*)pointer;
-	lua_pushnumber(state,a->getAnimationOn());;
-	return 1;
-}
-
-int lua_getFrameOn(lua_State* state)
-{
-	int pointer=lua_tointeger(state,1);
-	Object* a=(Object*)pointer;
-	lua_pushnumber(state,a->getFrameOn());;
-	return 1;
-}
-
-int lua_getXPosition(lua_State* state)
-{
-	int pointer=lua_tointeger(state,1);
-	Object* a=(Object*)pointer;
-	lua_pushnumber(state,a->getXPosition());
-	return 1;
-}
-
-int lua_getYPosition(lua_State* state)
-{
-	int pointer=lua_tointeger(state,1);
-	Object* a=(Object*)pointer;
-	lua_pushnumber(state,a->getYPosition());
-	return 1;
-}
-
-int lua_setXPosition(lua_State* state)
-{
-	int pointer=lua_tointeger(state,1);
-	Object* a=(Object*)pointer;
-	a->setXPosition(lua_tonumber(state,2));
-	return 0;
-}
-
-int lua_setYPosition(lua_State* state)
-{
-	int pointer=lua_tointeger(state,1);
-	Object* a=(Object*)pointer;
-	a->setYPosition(lua_tonumber(state,2));
-	return 0;
-}
-
-int lua_setPosition(lua_State* state)
-{
-	int pointer=lua_tointeger(state,1);
-	Object* a=(Object*)pointer;
-	a->setPosition
-	(
-		lua_tonumber(state,2),
-		lua_tonumber(state,3)
-	);
-	return 0;
-}
-
-int lua_addXPosition(lua_State* state)
-{
-	int pointer=lua_tointeger(state,1);
-	Object* a=(Object*)pointer;
-	a->addXPosition(lua_tonumber(state,2));
-	return 0;
-}
-
-int lua_addYPosition(lua_State* state)
-{
-	int pointer=lua_tointeger(state,1);
-	Object* a=(Object*)pointer;
-	a->addYPosition(lua_tonumber(state,2));
-	return 0;
-}
-
-int lua_addPosition(lua_State* state)
-{
-	int pointer=lua_tointeger(state,1);
-	Object* a=(Object*)pointer;
-	a->addPosition
-	(
-		lua_tonumber(state,2),
-		lua_tonumber(state,3)
-	);
-	return 0;
-}
-
-int lua_setMirroring(lua_State* state)
-{
-	int pointer=lua_tointeger(state,1);
-	Object* a=(Object*)pointer;
-	switch((int)lua_tointeger(state,2))
-	{
-		case 0:		a->setMirroring(Gorgon::Mirroring::Normal);	break;
-		case 1:		a->setMirroring(Gorgon::Mirroring::HFlip);	break;
-		case 2:		a->setMirroring(Gorgon::Mirroring::VFlip);	break;
-		default:	a->setMirroring(Gorgon::Mirroring::VHFlip);	break;
-	}
-	return 0;
-}
-
-int lua_getMirroring(lua_State* state)
-{
-	int pointer=lua_tointeger(state,1);
-	Object* a=(Object*)pointer;
-	switch(a->getMirroring().getType())
-	{
-		case Gorgon::Mirroring::Normal: lua_pushnumber(state,0);	break;
-		case Gorgon::Mirroring::HFlip:	lua_pushnumber(state,1);	break;
-		case Gorgon::Mirroring::VFlip:	lua_pushnumber(state,2);	break;
-		default:						lua_pushnumber(state,3);	break;
-	}
-	return 1;
 }

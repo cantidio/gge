@@ -51,6 +51,10 @@ class Background
 		 */
 		double gravity;
 		/**
+		 * Atrito exercido sobre os objetos quando não estão colidindo em nada
+		 */
+		double voidFriction;
+		/**
 		 * Posição x do background
 		 */
 		double posX;

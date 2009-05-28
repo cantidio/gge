@@ -601,7 +601,7 @@ Background* createYamattoBackground()
 
 	Background *bg;
 	bg= new Background(768,240);
-	bg->addLayer(layer0);
+	//bg->addLayer(layer0);
 	//bg->addLayer(layer);
 	Layer as("teste_layer1.lua");
 	bg->addLayer(new Layer("teste_layer1.lua"));

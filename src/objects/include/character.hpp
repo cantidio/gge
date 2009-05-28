@@ -33,11 +33,27 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	12/03/2009
- * @final	13/03/2009
+ * @final	31/03/2009
  */
 class Character : public Object
 {
 	protected:
+		/**
+		 * Colisão Superior do personagem
+		 */
+		Gorgon::Rectangle upColision;
+		/**
+		 * Colisão Inferior do personagem
+		 */
+		Gorgon::Rectangle downColision;
+		/**
+		 * Colisão a esquerda do personagem
+		 */
+		Gorgon::Rectangle leftColision;
+		/**
+		 * Colisão a direita do personagem
+		 */
+		Gorgon::Rectangle rightColision;
 		/**
 		 * Vida do personagem
 		 */
@@ -61,8 +77,7 @@ class Character : public Object
 		/**
 		 * Vetor com os helpers do personagem
 		 */
-		vector< vector<Character*> > helpers;
-
+		std::vector< std::vector<Character*> > helpers;
 		/**
 		 * Método Construtor
 		 *
@@ -80,19 +95,11 @@ class Character : public Object
 		 */
 		void loadGlobalVars();
 		/**
-		 * Método para registrar as funções a serem usadas nos scripts em lua
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	14/03/2009
-		 * @final	14/03/2009
-		 */
-		void registerFunctions();
-		/**
 		 * Método para preparar o personagem com as informações já recolhidas
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
-		 * @final	14/03/2009
+		 * @final	31/03/2009
 		 */
 		void setUp();
 	public:
@@ -101,16 +108,14 @@ class Character : public Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	14/03/2009
-		 * @param	const string& fileName, localização do arquivo de script do personagem
-		 * @param	const int& x, posição x do personagem
-		 * @param	const int& y, posição y do personagem
+		 * @final	31/03/2009
+		 * @param	const std::string& fileName, localização do arquivo de script do personagem
+		 * @param	const Gorgon::Point& position, posição xy do personagem
 		 */
 		Character
 		(
-			const string& fileName,
-			const int& x=0,
-			const int& y=0
+			const std::string& fileName,
+			const Gorgon::Point& position=Gorgon::Point(0,0)
 		);
 		/**
 		 * Método Destrutor
@@ -215,7 +220,7 @@ class Character : public Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	12/03/2009
+		 * @final	31/03/2009
 		 */
 		void prepareHelpers();
 		/**
@@ -223,16 +228,14 @@ class Character : public Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	13/03/2009
-		 * @param	const int& helper, qual helper a chamar
-		 * @param	const int& x, posição x que o helper será chamado
-		 * @param	const int& y, posição y que o helper será chamado
+		 * @final	31/03/2009
+		 * @param	const Gorgon::Point& position, posição x que o helper será chamado
 		 * @param	const Gorgon::Mirroring& mirroring, espelhamento que o helper será chamado
+		 * @param	const int& helper, qual helper a chamar
 		 */
 		void callHelper
 		(
-			const int& x,
-			const int& y,
+			const Gorgon::Point& position,
 			const Gorgon::Mirroring& mirroring,
 			const int& helper=0
 		);
@@ -253,117 +256,4 @@ class Character : public Object
 		 */
 		void logic();
 };
-/**
- * Bindings para os métodos de classe serem usados nos scritps em lua
- */
-/**
- * Função que retorna o life do personagem
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_getLife(lua_State* state);
-/**
- * Função que seta o life do personagem
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_setLife(lua_State* state);
-/**
- * Função que subtrai um valor do life do personagem
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_subLife(lua_State* state);
-/**
- * Função que adiciona um valor ao life do personagem
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_addLife(lua_State* state);
-/**
- * Função que retorna verdadeiro se o personagem está vivo
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_isAlive(lua_State* state);
-/**
- * Função que ativa o objeto
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_ativate(lua_State* state);
-/**
- * Função que desativa o objeto
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	13/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_inativate(lua_State* state);
-/**
- * Função que retorna verdadeiro se o personagem está ativo
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_isAtive(lua_State* state);
-/**
- * Função que retorna verdadeiro se o personagem está imortal
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_isImortal(lua_State* state);
-/**
- * Função que machuca o personagem
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_hurt(lua_State* state);
-/**
- * Função que chama um helper
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	14/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_callHelper(lua_State* state);
 #endif

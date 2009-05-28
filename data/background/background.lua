@@ -3,6 +3,8 @@
 BackgroundPointer	= nil
 --Background gravity
 gravity				= 0
+--Friction when not coliding
+voidFriction		= 1
 --width of the background
 width				= 0
 --height of the background
@@ -12,7 +14,16 @@ posX				= 0
 --init y position
 posY				= 0
 --vector with the layers of the background
-layers = { }
+layers				= { }
+--player information
+player				= {
+	script		= "",
+	layer		= 1,
+	xPosition	= 0,
+	yPosition	= 0,
+	mirroring	= mirroring.Normal,
+	initialState= 290 
+}
 
 -- Função para registrar o ponteiro do cenário que invocou o script
 --

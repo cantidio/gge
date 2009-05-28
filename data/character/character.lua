@@ -13,6 +13,35 @@ helperMaxInstances	= { }
 -- Arquivos de script do helper
 helperScriptFile	= { }
 
+-- colisão acima do personagem
+upColision			= {
+	width	= 0,
+	height	= 0,
+	xOffset	= 0,
+	yOffset	= 0
+}
+-- colisão a direita do personagem
+rightColision		= {
+	width	= 0,
+	height	= 0,
+	xOffset	= 0,
+	yOffset	= 0
+}
+-- colisão abaixo do personagem
+downColision		= {
+	width	= 0,
+	height	= 0,
+	xOffset	= 0,
+	yOffset	= 0
+}
+-- colisão a esquerda do personagem
+leftColision		= {
+	width	= 0,
+	height	= 0,
+	xOffset	= 0,
+	yOffset	= 0
+}
+
 -- Função que retorna o número de helpers que o personagem possui
 --
 -- @author	Cantidio Oliveira Fontes
@@ -155,5 +184,4 @@ end
 function callHelper(x,y,mirroring,helper)
 	lua_callHelper(objectPointer,x,y,mirroring,helper)
 end
-
 

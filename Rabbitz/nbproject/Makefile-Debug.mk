@@ -29,6 +29,8 @@ OBJECTDIR=build/Debug/${PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character.o \
+	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/object_lua.o \
+	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character_lua.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/player.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src/background_lua.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/resource_manager/src/animation_manager.o \
@@ -68,6 +70,16 @@ ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character.o:
 	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character.o /home/cantidio/Development/rabbitz/src/objects/src/character.cpp
+
+${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/object_lua.o: /home/cantidio/Development/rabbitz/src/objects/src/object_lua.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/object_lua.o /home/cantidio/Development/rabbitz/src/objects/src/object_lua.cpp
+
+${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character_lua.o: /home/cantidio/Development/rabbitz/src/objects/src/character_lua.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character_lua.o /home/cantidio/Development/rabbitz/src/objects/src/character_lua.cpp
 
 ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/player.o: /home/cantidio/Development/rabbitz/src/objects/src/player.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src

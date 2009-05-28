@@ -56,11 +56,11 @@ void Input::loadConfiguration()
 {
 	std::fstream *file;
 	file = new std::fstream("data/input.cfg",std::ios::in|std::ios::binary);
-	std::cout << "Loading input configuration... ";
+	Gorgon::LogRegister("Loading input configuration... ");
 	if(!file->is_open())
 	{
-		std::cout << "Error..." << std::endl;
-		std::cout << "Creating new default input configuration..." << std::endl;
+		Gorgon::LogRegister("Error...");
+		Gorgon::LogRegister("Creating new default input configuration...");
 		createDefaultConfiguration();
 		saveConfiguration();
 	}
@@ -79,7 +79,7 @@ void Input::loadConfiguration()
 		file->read((char*)&key_button6,sizeof(int));
 		file->read((char*)&key_button7,sizeof(int));
 		file->read((char*)&key_button8,sizeof(int));
-		std::cout << "OK" << std::endl;
+		Gorgon::LogRegister("OK");
 	}
 	file->close();
 	delete file;
@@ -89,10 +89,10 @@ void Input::saveConfiguration() const
 {
 	std::fstream *file;
 	file = new std::fstream("data/input.cfg",std::ios::out|std::ios::binary);
-	std::cout << "Saving input configuration... ";
+	Gorgon::LogRegister("Saving input configuration... ");
 	if(!file->is_open())
 	{
-		std::cout << "Error..." << std::endl;
+		Gorgon::LogRegister("Error...");
 	}
 	else
 	{
@@ -109,7 +109,7 @@ void Input::saveConfiguration() const
 		file->write((char*)&key_button6,sizeof(int));
 		file->write((char*)&key_button7,sizeof(int));
 		file->write((char*)&key_button8,sizeof(int));
-		std::cout << "OK" << std::endl;
+		Gorgon::LogRegister("OK");
 	}
 	file->close();
 	delete file;

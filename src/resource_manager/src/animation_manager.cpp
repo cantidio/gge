@@ -3,18 +3,22 @@
 namespace ResourceManager
 {
 	using namespace Gorgon;
-	vector<AnimationId> AnimationManager::table;	
+	std::vector<AnimationId> AnimationManager::table;
 	
-	AnimationPack* AnimationManager::load(const string& name)
+	AnimationPack* AnimationManager::load(const std::string& name)
 	{
+		Gorgon::LogRegister("Cheking the existence of the AnimationPack: \"%s\" ...",name.c_str());
 		for(int i=0; i<table.size(); ++i)
 		{
 			if(table[i].fileName==name)
 			{
+				Gorgon::LogRegister("AnimationPack found in position: %d",i);
 				++table[i].use;
 				return table[i].animationPack;
 			}
 		}
+		Gorgon::LogRegister("AnimationPack not found in AnimationManager Table...",name.c_str());
+		Gorgon::LogRegister("Putting new SpritePack in AnimationManager Table...",name.c_str());
 		AnimationId a;
 		a.use		= 1;
 		a.fileName	= name;
@@ -23,7 +27,7 @@ namespace ResourceManager
 		return a.animationPack;
 	}
 
-	void AnimationManager::unload(const string& name)
+	void AnimationManager::unload(const std::string& name)
 	{
 		for(int i=0; i<table.size(); ++i)
 		{
@@ -32,6 +36,7 @@ namespace ResourceManager
 				--table[i].use;
 				if(table[i].use<=0)
 				{
+					Gorgon::LogRegister("Taking \"%s\" out of AnimationManager Table...",name.c_str());
 					delete table[i].animationPack;
 					table.erase(table.begin()+i);
 				}
@@ -44,6 +49,7 @@ namespace ResourceManager
 	{
 		for(int i=0; i<table.size(); ++i)
 		{
+			Gorgon::LogRegister("Deleting animation in table position: %d...",i);
 			delete table[i].animationPack;
 		}
 		table.clear();

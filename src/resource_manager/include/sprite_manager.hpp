@@ -1,4 +1,4 @@
-/**
+/*
  *  ____              __       __          __
  * /\  _`\           /\ \     /\ \      __/\ \__
  * \ \ \L\ \     __  \ \ \____\ \ \____/\_\ \ ,_\  ____
@@ -26,6 +26,7 @@
 #ifndef _GSBGE_SPRITE_MANAGER_
 #define _GSBGE_SPRITE_MANAGER_
 #include "../../../../gorgon++/src/graphic/include/gorgon_spritepack.hpp"
+#include "../../../../gorgon++/src/core/include/gorgon_log.hpp"
 
 namespace ResourceManager
 {
@@ -39,7 +40,7 @@ namespace ResourceManager
 	typedef struct
 	{
 		Gorgon::SpritePack* spritePack;
-		string				fileName;
+		std::string			fileName;
 		int					use;
 	}SpriteId;
 	
@@ -53,29 +54,29 @@ namespace ResourceManager
 	class SpriteManager
 	{
 		private:
-			static vector<SpriteId> table;
+			static std::vector<SpriteId> table;
 		public:
 			/**
 			 * Para para carregar um spritePack, se o mesmo já tiver sido carregado retorna o ponteiro para o mesmo
 			 *
 			 * @author	Cantidio Oliveira Fontes
 			 * @since	11/03/2009
-			 * @final	11/03/2009
-			 * @param	const string& name, nome do spritePack
+			 * @final	26/03/2009
+			 * @param	const std::string& name, nome do spritePack
 			 * SpritePack* ponteiro para o spritePack carregado
 			 */
-			static Gorgon::SpritePack* load(const string& name);
+			static Gorgon::SpritePack* load(const std::string& name);
 			/**
 			 * Método para retirar da memória o spritePack carregado
 			 *
 			 * @author		Cantidio Oliveira Fontes
 			 * @since		11/03/2009
-			 * @final		11/03/2009
-			 * @param		const string& name, nome do spritePack a ser removido
+			 * @final		26/03/2009
+			 * @param		const std::string& name, nome do spritePack a ser removido
 			 * @abstract	esse método antes de remover o sprite completamente, verifica se algum outro objeto está usando
 			 * o recurso do mesmo, ninguém mais estiver o usando então livra a memória do mesmo.
 			 */
-			static void unload(const string& name);
+			static void unload(const std::string& name);
 			/**
 			 * Método para forçar a limpeza de toda tabela
 			 *

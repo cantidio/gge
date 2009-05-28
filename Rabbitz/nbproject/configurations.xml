@@ -29,13 +29,17 @@
       <logicalFolder name="objects" displayName="objects" projectFiles="true">
         <logicalFolder name="include" displayName="include" projectFiles="true">
           <itemPath>/home/cantidio/Development/rabbitz/src/objects/include/character.hpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/objects/include/character_lua.hpp</itemPath>
           <itemPath>/home/cantidio/Development/rabbitz/src/objects/include/enemy.hpp</itemPath>
           <itemPath>/home/cantidio/Development/rabbitz/src/objects/include/object.hpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/objects/include/object_lua.hpp</itemPath>
           <itemPath>/home/cantidio/Development/rabbitz/src/objects/include/player.hpp</itemPath>
         </logicalFolder>
         <logicalFolder name="src" displayName="src" projectFiles="true">
           <itemPath>/home/cantidio/Development/rabbitz/src/objects/src/character.cpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/objects/src/character_lua.cpp</itemPath>
           <itemPath>/home/cantidio/Development/rabbitz/src/objects/src/object.cpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/objects/src/object_lua.cpp</itemPath>
           <itemPath>/home/cantidio/Development/rabbitz/src/objects/src/player.cpp</itemPath>
         </logicalFolder>
       </logicalFolder>
@@ -137,10 +141,16 @@
       <item path="/home/cantidio/Development/rabbitz/src/objects/include/character.hpp">
         <itemTool>3</itemTool>
       </item>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/include/character_lua.hpp">
+        <itemTool>3</itemTool>
+      </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/include/enemy.hpp">
         <itemTool>3</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/include/object.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/include/object_lua.hpp">
         <itemTool>3</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/include/player.hpp">
@@ -149,7 +159,13 @@
       <item path="/home/cantidio/Development/rabbitz/src/objects/src/character.cpp">
         <itemTool>1</itemTool>
       </item>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/src/character_lua.cpp">
+        <itemTool>1</itemTool>
+      </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/src/object.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/src/object_lua.cpp">
         <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/src/player.cpp">
@@ -253,10 +269,16 @@
       <item path="/home/cantidio/Development/rabbitz/src/objects/include/character.hpp">
         <itemTool>3</itemTool>
       </item>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/include/character_lua.hpp">
+        <itemTool>3</itemTool>
+      </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/include/enemy.hpp">
         <itemTool>3</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/include/object.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/include/object_lua.hpp">
         <itemTool>3</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/include/player.hpp">
@@ -265,7 +287,13 @@
       <item path="/home/cantidio/Development/rabbitz/src/objects/src/character.cpp">
         <itemTool>1</itemTool>
       </item>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/src/character_lua.cpp">
+        <itemTool>1</itemTool>
+      </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/src/object.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/objects/src/object_lua.cpp">
         <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/src/player.cpp">

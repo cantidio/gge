@@ -24,6 +24,10 @@ xPulse			= 1
 xPulseMax		= 2
 -- impulso vertical do objeto
 yPulse			= 0
+-- Se o objeto é afetado pela gravidade do cenário em que está inserido
+gravityAffected	= false
+-- Se o objeto pode colidir com outros
+colisional		= false
 -- estado do objeto
 state			= 0
 
@@ -97,6 +101,16 @@ function getYPosition()
 	return lua_getYPosition(objectPointer)
 end
 
+-- Função para retornar a posição do objeto
+--
+-- @author	Cantidio Oliveira Fontes
+-- @since	31/03/2009
+-- @final	31/03/2009
+-- @return	table
+function getPosition()
+	return {x=getXPosition(),y=getYPosition()}
+end
+
 -- Função para setar a posiçãoX do objeto
 --
 -- @author	Cantidio Oliveira Fontes
@@ -159,16 +173,43 @@ function addPosition(x,y)
 	lua_addPosition(objectPointer,x,y)
 end
 
+-- Função para subtrair um valor a posição x do objeto
+--
+-- @author	Cantidio Oliveira Fontes
+-- @since	31/03/2009
+-- @final	31/03/2009
+-- @param	double x, valor a subtrair no eixo x do objeto
+function subXPosition(x)
+	lua_subXPosition(objectPointer,x)
+end
+
+-- Função para subtrair um valor a posição y do objeto
+--
+-- @author	Cantidio Oliveira Fontes
+-- @since	31/03/2009
+-- @final	31/03/2009
+-- @param	double y, valor a subtrair no exito y do objeto
+function subYPosition(y)
+	lua_subYPosition(objectPointer,y)
+end
+
+-- Função para subtrair um valor a posição xy do objeto
+--
+-- @author	Cantidio Oliveira Fontes
+-- @since	31/03/2009
+-- @final	31/03/2009
+-- @param	double x, valor a subtrair no eixo x do objeto
+-- @param	double y, valor a subtrair no eixo y do objeto
+function subPosition(x,y)
+	lua_subPosition(objectPointer,x,y)
+end
+
 -- Função para setar o espelhamento do objeto
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	11/03/2009
 -- @final	12/03/2009
 -- @param	int mirroring, espelhamento,
---	0 -> Normal,
---	1 -> invertido horizontalmente
---	2 -> invertido verticalmente
---	3 -> invertido horizontalmente e verticalmente
 function setMirroring(mirroring)
 	lua_setMirroring(objectPointer,mirroring)
 end

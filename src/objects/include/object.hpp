@@ -1,4 +1,4 @@
-/**
+/*
  *
  *  ____              __       __          __
  * /\  _`\           /\ \     /\ \      __/\ \__
@@ -29,6 +29,8 @@
 #include "../../../../gorgon++/src/graphic/include/gorgon_video.hpp"
 #include "../../../../gorgon++/src/graphic/include/gorgon_animation_handler.hpp"
 #include "../../../../gorgon++/src/script/include/gorgon_lua.hpp"
+#include "../../../../gorgon++/src/core/include/gorgon_log.hpp"
+#include "../../../../gorgon++/src/geometry/include/gorgon_rectangle.hpp"
 #include "../../resource_manager/include/sprite_manager.hpp"
 #include "../../resource_manager/include/animation_manager.hpp"
 
@@ -37,7 +39,7 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	11/03/2009
- * @final	14/03/2009
+ * @final	31/03/2009
  */
 class Object
 {
@@ -45,19 +47,19 @@ class Object
 		/**
 		 * Nome do arquivo de sprites do objeto
 		 */
-		string spritePackName;
+		std::string spritePackName;
 		/**
 		 * Nome do arquivo de animações do objeto
 		 */
-		string animationPackName;
+		std::string animationPackName;
 		/**
 		 * Nome do arquivo de colisões do objeo
 		 */
-		string colisionPackName;
+		std::string colisionPackName;
 		/**
 		 * Nome do arquivo da paleta de cores do objeto
 		 */
-		string paletteName;
+		std::string paletteName;
 		/**
 		 * Ponteiro para o spritePack do objeto
 		 */
@@ -85,15 +87,11 @@ class Object
 		/**
 		 * Nome do objeto
 		 */
-		string name;
+		std::string name;
 		/**
-		 * Posição do objeto no eixo x
+		 * Localização do objeto no plano xy
 		 */
-		double posX;
-		/**
-		 * Posição do objeto no eixo y
-		 */
-		double posY;
+		Gorgon::Point position;
 		/**
 		 * Peso do objeto
 		 */
@@ -103,13 +101,17 @@ class Object
 		 */
 		double xPulse;
 		/**
+		 * Impulso máximo no eixo x
+		 */
+		double xPulseMax;
+		/**
 		 * Impulso vertical que o objeto dispõem
 		 */
 		double yPulse;
 		/**
-		 * Impulso máximo no eixo x
+		 * Se o objeto é afetado pela gravidade
 		 */
-		double xPulseMax;
+		bool gravityAffected;
 		/**
 		 * Estado atual do objeto
 		 */
@@ -131,14 +133,6 @@ class Object
 		 */
 		void loadGlobalVars();
 		/**
-		 * Método para registrar as funções a serem usadas nos scripts em lua
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @final	12/03/2009
-		 */
-		void registerFunctions();
-		/**
 		 * Método para preparar o objeto com as informações já recolhidas
 		 *
 		 * @author	Cantidio Oliveira Fontes
@@ -152,17 +146,11 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	11/03/2009
-		 * @final	14/03/2009
-		 * @param	const string& scriptName, nome do script do objeto
-		 * @param	const double& x, posição x do objeto
-		 * @param	const double& y, posição y do objeto
+		 * @final	31/03/2009
+		 * @param	const std::string& scriptName, nome do script do objeto
+		 * @param	const Gorgon::Point& position, posição do objeto no eixo xy
 		 */
-		Object
-		(
-			const string& scriptName,
-			const double& x = 0,
-			const double& y = 0
-		);
+		Object(const std::string& scriptName,const Gorgon::Point& position=Gorgon::Point(0,0));
 		/**
 		 * Método Destrutor
 		 *
@@ -206,7 +194,7 @@ class Object
 		 */
 		Gorgon::Mirroring getMirroring() const;
 		/**
-		 * Método para setar a posição x do objeto
+		 * Método para setar a posição do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
@@ -224,15 +212,14 @@ class Object
 		 */
 		void setYPosition(const double& y);
 		/**
-		 * Método para setar a posição xy do objeto
+		 * Método para setar a posição do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @final	14/03/2009
-		 * @param	const double& x, nova posição no eixo x
-		 * @param	const double& y, nova posição no eixo y
+		 * @final	31/03/2009
+		 * @param	const Gorgon::Point& newPosition, nova posição no eixo xy
 		 */
-		void setPosition(const double& x,const double& y);
+		void setPosition(const Gorgon::Point& newPosition);
 		/**
 		 * Método para adicionar um valor a posição x do objeto
 		 *
@@ -261,6 +248,34 @@ class Object
 		 * @param	conat double& y, valor a ser adicionado a posição no eixo y
 		 */
 		void addPosition(const double& x,const double& y);
+		/**
+		 * Método para subtrair um valor a posição x do objeto
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	31/03/2009
+		 * @final	31/03/2009
+		 * @param	const double& x, valor a ser subtraido a posição no eixo x
+		 */
+		void subXPosition(const double& x);
+		/**
+		 * Método para subtrair um valor a posição y do objeto
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	31/03/2009
+		 * @final	31/03/2009
+		 * @param	const double& y, valor a ser subtraido a posição no eixo y
+		 */
+		void subYPosition(const double& y);
+		/**
+		 * Método para subtrair um valor a posição x do objeto
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	31/03/2009
+		 * @final	31/03/2009
+		 * @param	const double& x, valor a ser subtraido a posição no eixo x
+		 * @param	conat double& y, valor a ser subtraido a posição no eixo y
+		 */
+		void subPosition(const double& x,const double& y);
 		/**
 		 * Método para retornar a posição x do objeto
 		 *
@@ -316,148 +331,4 @@ class Object
 		 */
 		int getFrameOn() const;
 };
-/**
- * Bindings para os métodos de classe serem usados nos scritps em lua
- */
-/**
- * Função que muda a animação de um objeto
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_changeAnimation(lua_State* state);
-/**
- * Função que retorna verdadeiro se a animação está tocando
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_animationIsPlaying(lua_State* state);
-/**
- * Função que retorna o número da animação que está tocando
- *
- * @author	Cantidio Oliveira Fontes
- * @since	14/03/2009
- * @final	14/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_getAnimationOn(lua_State* state);
-/**
- * Função que retorna o número do frame atual da animação que está tocando
- *
- * @author	Cantidio Oliveira Fontes
- * @since	14/03/2009
- * @final	14/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_getFrameOn(lua_State* state);
-/**
- * Função que retorna a posição x do objeto
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_getXPosition(lua_State* state);
-/**
- * Função que retorna a posição y do objeto
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_getYPosition(lua_State* state);
-/**
- * Função que seta a posição x do objeto
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_setXPosition(lua_State* state);
-/**
- * Função que seta a posição y do objeto
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_setYPosition(lua_State* state);
-/**
- * Função que seta a posição x y do objeto
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_setPosition(lua_State* state);
-/**
- * Função que adiciona um valor a posição x do objeto
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_addXPosition(lua_State* state);
-/**
- * Função que adiciona um valor a posição y do objeto
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_addYPosition(lua_State* state);
-/**
- * Função que adiciona um valor a posição xy do objeto
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_addPosition(lua_State* state);
-/**
- * Função que seta o espelhamento do objeto
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_setMirroring(lua_State* state);
-/**
- * Função que retorna o espelhamento do objeto
- *
- * @author	Cantidio Oliveira Fontes
- * @since	12/03/2009
- * @final	12/03/2009
- * @param	lua_State* state, estado do interpretador lua atual
- * @return	int
- */
-int lua_getMirroring(lua_State* state);
-
 #endif

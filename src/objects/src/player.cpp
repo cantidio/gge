@@ -24,15 +24,13 @@ void Player::setUp()
 
 Player::Player
 (
-	const string& fileName,
-	const int& x,
-	const int& y
+	const std::string& fileName,
+	const Gorgon::Point& position
 )
 {
 	script->loadScript("data/character/player/player.lua");
 	script->loadScript(fileName);
-	posX=x;
-	posY=y;
+	setPosition(position);
 	setUp();
 }
 
