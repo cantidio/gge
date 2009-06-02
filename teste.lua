@@ -23,12 +23,12 @@ state			= 0
 
 function logic()
 	if state==0 then
-		addXPosition(4)
+		addXPosition(1)
 		if getXPosition() >=320 then
 			state=1
 		end
 	else
-		subXPosition(4)
+		subXPosition(1)
 		if getXPosition() <=-320 then
 			state=0
 		end

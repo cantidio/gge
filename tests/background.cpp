@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 		Gorgon::Video::init("Teste Player");
 		Input::init();
 		std::vector<Player*> objects;
-		objects.push_back(new Player("data/character/player/lemin.lua",Gorgon::Point(0,100)));
+		objects.push_back(new Player("data/character/player/mature.lua",Gorgon::Point(150,250)));
 		objects[objects.size()-1]->ativate();
 		
 		Background* bg = new Background("teste.lua");
