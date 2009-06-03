@@ -19,20 +19,23 @@ colision		= {
 	"",
 	""
 }
-state			= 0
 
-function logic()
-	if state==0 then
-		addXPosition(1)
-		if getXPosition() >=320 then
-			state=1
-		end
-	else
-		subXPosition(1)
-		if getXPosition() <=-320 then
-			state=0
-		end
+function state0()
+	addXPosition(10)
+	if getXPosition() >= 320 then
+		state = state1
 	end
-	--Put your background logic here
+end
+
+function state1()
+	subXPosition(10)
+	if getXPosition() <= -320 then
+		state = state0
+	end
+end
+
+state			= state0
+function logic()
+	state()
 end
 
