@@ -80,10 +80,11 @@ namespace CharacterLua
 	int lua_callHelper(lua_State* pState)
 	{
 		Character* character = getCharacterPointer(pState);
+		Character* helper;
 		switch(lua_tointeger(pState,4))
 		{
 			case 0:
-				character->callHelper
+				helper = character->callHelper
 				(
 					Gorgon::Point
 					(
@@ -95,7 +96,7 @@ namespace CharacterLua
 				);
 				break;
 			case 1:
-				character->callHelper
+				helper = character->callHelper
 				(
 					Gorgon::Point
 					(
@@ -107,7 +108,7 @@ namespace CharacterLua
 				);
 				break;
 			case 2:
-				character->callHelper
+				helper = character->callHelper
 				(
 					Gorgon::Point
 					(
@@ -119,7 +120,7 @@ namespace CharacterLua
 				);
 				break;
 			default:
-				character->callHelper
+				helper = character->callHelper
 				(
 					Gorgon::Point
 					(
@@ -131,7 +132,8 @@ namespace CharacterLua
 				);
 				break;
 		}
-		return 0;
+		lua_pushnumber(pState,(long)helper);
+		return 1;
 	}
 
 	void registerFunctions(Gorgon::Lua* pScript)

@@ -28,9 +28,10 @@ yPulse			= 0
 gravityAffected	= false
 -- Se o objeto pode colidir com outros
 colisional		= false
+-- estado inicial do objeto
+initState		= 0
 -- estado do objeto
-state			= 0
-
+state			= initState
 -- Função para registrar o ponteiro do objeto que invocou o script
 --
 -- @author	Cantidio Oliveira Fontes
@@ -41,14 +42,25 @@ function getObject(pointer)
 	objectPointer=pointer
 end
 
--- Função para mudar a animação do objeto
+-- Função para mudar a animação do objeto através de seu índice
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	11/03/2009
--- @final	12/03/2009
--- @param	int x, nova animação a trocar
-function changeAnimation(x)
-	lua_changeAnimation(objectPointer,x)
+-- @final	09/06/2009
+-- @param	int pRealIndex, nova animação a trocar
+function changeAnimationByIndex(pRealIndex)
+	lua_changeAnimationByIndex(objectPointer,pRealIndex)
+end
+
+-- Função para mudar a animação do objeto através do grupo e índice da mesma
+--
+-- @author	Cantidio Oliveira Fontes
+-- @since	09/06/2009
+-- @final	09/06/2009
+-- @param	int pGroup, grupo da nova animação
+-- @param	int pIndex, índice da nova animação
+function changeAnimation(pGroup,pIndex)
+	lua_changeAnimation(objectPointer,pGroup,pIndex)
 end
 
 -- Função que retorna verdadeiro se a animação atual ainda está tocando

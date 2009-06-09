@@ -124,7 +124,12 @@ void Object::draw() const
 
 void Object::changeAnimation(const int& pAnimation)
 {
-	mAnimationHandler->changeAnimation(pAnimation);
+	mAnimationHandler->changeAnimation(pAnimation,true);
+}
+
+void Object::changeAnimation(const int& pGroup, const int& pIndex)
+{
+	mAnimationHandler->changeAnimation(pGroup,pIndex,true);
 }
 
 bool Object::animationIsPlaying() const

@@ -7,10 +7,21 @@ namespace ObjectLua
 		return (Object*)lua_tointeger(pState,1);
 	}
 	
-	int lua_changeAnimation(lua_State* pState)
+	int lua_changeAnimationByIndex(lua_State* pState)
 	{
 		Object* object = getObjectPointer(pState);
 		object->changeAnimation((int)lua_tointeger(pState,2));
+		return 0;
+	}
+
+	int lua_changeAnimation(lua_State* pState)
+	{
+		Object* object = getObjectPointer(pState);
+		object->changeAnimation
+		(
+			(int)lua_tointeger(pState,2),
+			(int)lua_tointeger(pState,3)
+		);
 		return 0;
 	}
 
@@ -157,6 +168,7 @@ namespace ObjectLua
 	void registerFunctions(Gorgon::Lua* pScript)
 	{
 		pScript->registerFunction("lua_changeAnimation",lua_changeAnimation);
+		pScript->registerFunction("lua_changeAnimationByIndex",lua_changeAnimationByIndex);
 		pScript->registerFunction("lua_animationIsPlaying",lua_animationIsPlaying);
 		pScript->registerFunction("lua_getAnimationOn",lua_getAnimationOn);
 		pScript->registerFunction("lua_getFrameOn",lua_getFrameOn);

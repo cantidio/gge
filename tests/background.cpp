@@ -13,7 +13,9 @@ int main(int argc, char* argv[])
 		Gorgon::Video::init("Teste Player");
 		Input::init();
 		std::vector<Player*> objects;
-		objects.push_back(new Player("data/character/player/mature.lua",Gorgon::Point(150,250)));
+		//objects.push_back(new Player("data/character/player/mature.lua",Gorgon::Point(150,250)));
+
+		objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(150,250)));
 		objects[objects.size()-1]->ativate();
 		
 		Background* bg = new Background("teste.lua");
@@ -23,12 +25,19 @@ int main(int argc, char* argv[])
 			Gorgon::Video::get()->clear(0xAA0BDD);
 			bg->logic();
 
-			for(int i=0; i<objects.size(); objects[i]->logic(),++i);
+			for(int i = 0; i < objects.size(); ++i)
+			{
+				objects[i]->logic();
+			}
 			bg->draw(*Gorgon::Video::get());
-			for(int i=0; i<objects.size(); objects[i]->draw(),++i);
+
+			for(int i = 0; i < objects.size(); ++i)
+			{
+				objects[i]->draw();
+			}
 			
 			Gorgon::Video::get()->show();
-			rest(16);
+			rest(1);
 		}
 		for(int i=0; i<objects.size(); ++i)
 			delete objects[i];

@@ -34,17 +34,27 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	12/03/2009
- * @version	28/05/2009
+ * @version	09/06/2009
  * @ingroup	Objects
  */
 namespace ObjectLua
 {
 	/**
-	 * Função que muda a animação de um objeto
+	 * Função que muda a animação de um objeto através de um índice direto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
 	 * @version	12/03/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
+	 * @return	int
+	 */
+	int lua_changeAnimationByIndex(lua_State* pState);
+	/**
+	 * Função que muda a animação de um objeto por seu grupo e índice
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	09/06/2009
+	 * @version	09/06/2009
 	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */

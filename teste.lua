@@ -11,10 +11,10 @@ posX			= 0
 --init y position
 posY			= 0
 --vector with the layers of the background
-layers			= {
-	"teste_layer0.lua",
-	"teste_layer1.lua",
-}
+--layers			= {
+--	"teste_layer0.lua",
+--	"teste_layer1.lua",
+--}
 colision		= {
 	"",
 	""

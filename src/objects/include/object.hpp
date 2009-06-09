@@ -39,7 +39,7 @@
  *
  * @author		Cantidio Oliveira Fontes
  * @since		11/03/2009
- * @version		28/05/2009
+ * @version		09/06/2009
  * @details
  *				O módulo Objects engloba todas as funcionalidades relacionadas
  *				à parte de objetos e entidades relacionadas e derivadas dos mesmos
@@ -50,7 +50,7 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	11/03/2009
- * @version	28/05/2009
+ * @version	09/06/2009
  * @ingroup	Objects
  */
 class Object
@@ -315,6 +315,16 @@ class Object
 		 * @param	const int& pAnimation, nova animação
 		 */
 		void changeAnimation(const int& pAnimation);
+		/**
+		 * Método para mudar a animação atuante do objeto
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	09/06/2009
+		 * @version	09/06/2009
+		 * @param	const int& pGroup, grupo da nova animação
+		 * @param	const int& pIndex, índice da nova animação
+		 */
+		void changeAnimation(const int& pGroup, const int& pIndex);
 		/**
 		 * Método para saber se a animação do objeto está tocando
 		 *

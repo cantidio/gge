@@ -18,7 +18,7 @@ end
 
 function stateStandInit()
 	io.write("state stand initing...\n")
-	changeAnimation(0)
+	changeAnimationByIndex(0)
 	state = stateStanding
 end
 
@@ -32,7 +32,7 @@ end
 
 function stateKick1Init()
 	io.write("state kick1 initing...\n")
-	changeAnimation(1)
+	changeAnimation(10,0)
 	state = stateKicking1
 end
 
@@ -44,7 +44,7 @@ end
 
 function stateKick2Init()
 	io.write("state kick2 initing...\n")
-	changeAnimation(2)
+	changeAnimation(10,1)
 	state = stateKicking2
 end
 

@@ -1,5 +1,8 @@
 --Arquivo de script de personagens com diretivas básicas
-
+-- Ponteiro para o script que chamou esse
+callerPointer		= nil
+-- Ponteiro para o último helper chamado
+lastHelperCalled	= nil
 -- life do personagem
 life				= 0
 -- poder de ataque do personagem
@@ -41,6 +44,14 @@ leftColision		= {
 	xOffset	= 0,
 	yOffset	= 0
 }
+
+function setCallerPointer(pPointer)
+	callerPointer = pPointer
+end
+
+function setLastHelperCalledPointer(pPointer)
+	lastHelperCalled = pPointer
+end
 
 -- Função que retorna o número de helpers que o personagem possui
 --
@@ -140,6 +151,7 @@ end
 -- @final	12/03/2009
 function inativate()
 	lua_inativate(objectPointer)
+	state = initState
 end
 
 -- Função que retorna verdadeiro se o personagem está ativo
@@ -181,7 +193,16 @@ end
 -- @param	int pPosY			, posição y que o helper aparecerá
 -- @param	int pMirroring		, espelhamento do helper
 -- @param	int pHelperIndex	, número deo helper chamado, se não for passado, assume-se o primeiro helper
+-- @return	int	, Endereço para o helper chamado
 function callHelper(pPosX,pPosY,pMirroring,pHelperIndex)
-	lua_callHelper(objectPointer,pPosX,pPosY,pMirroring,pHelperIndex)
+	helperPointer = lua_callHelper(
+		objectPointer,
+		pPosX,
+		pPosY,
+		pMirroring,
+		pHelperIndex
+	)
+	setLastHelperCalledPointer(helperPointer)
+	return helperPointer
 end
 

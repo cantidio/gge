@@ -101,44 +101,46 @@ void Character::prepareHelpers()
 		std::string helperScriptFile	= mScript->function("getHelperScriptFile",Gorgon::LuaParam("i",i+1),1)->getStringValue();
 		std::vector<Character*> helper;
 		
-		for(int j=0; j<numInstances; ++j)
+		for(int j = 0; j<numInstances; ++j)
 		{
 			helper.push_back(new Character(helperScriptFile));
+			helper[j]->mScript->function("setCallerPointer",Gorgon::LuaParam("n",this));
 		}
 		mHelpers.push_back(helper);
 	}
 }
 
-void Character::callHelper
+Character* Character::callHelper
 (
 	const Gorgon::Point&		pPosition,
 	const Gorgon::Mirroring&	pMirroring,
 	const int&					pHelper
 )
 {
-	for(int i=0; i<mHelpers[pHelper].size(); ++i)
+	for(int i = 0; i < mHelpers[pHelper].size(); ++i)
 	{
 		if(!mHelpers[pHelper][i]->isAtive())
 		{
 			mHelpers[pHelper][i]->setPosition(pPosition);
 			mHelpers[pHelper][i]->ativate();
 			mHelpers[pHelper][i]->setMirroring(pMirroring);
-			break;
+			return mHelpers[pHelper][i];
 		}
 	}
+	return NULL;
 }
 
 void Character::draw() const
 {
 	if(mAtive)
 	{
-		if((mImortal>0 && (mImortal%2==0)) || mImortal==0)
+		if((mImortal > 0 && (mImortal % 2 == 0)) || mImortal==0)
 		{
 			Object::draw();
 		}
-		for(int i=0; i<mHelpers.size(); ++i)
+		for(int i = 0; i < mHelpers.size(); ++i)
 		{
-			for(int j=0; j<mHelpers[i].size(); ++j)
+			for(int j=0; j < mHelpers[i].size(); ++j)
 			{
 				if(mHelpers[i][j]->isAtive())
 				{
@@ -156,9 +158,9 @@ void Character::logic()
 	{
 		--mImortal;
 	}
-	for(int i=0; i<mHelpers.size(); ++i)
+	for(int i = 0; i < mHelpers.size(); ++i)
 	{
-		for(int j=0; j<mHelpers[i].size(); ++j)
+		for(int j = 0; j < mHelpers[i].size(); ++j)
 		{
 			if(mHelpers[i][j]->isAtive())
 			{

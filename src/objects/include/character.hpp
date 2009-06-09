@@ -234,13 +234,15 @@ class Character : public Object
 		 * @param	const Gorgon::Point& pPosition, posição x que o helper será chamado
 		 * @param	const Gorgon::Mirroring& pMirroring, espelhamento que o helper será chamado
 		 * @param	const int& pHelper, qual helper a chamar
+		 * @return	Character*
 		 */
-		void callHelper
+		Character* callHelper
 		(
 			const Gorgon::Point&		pPosition,
 			const Gorgon::Mirroring&	pMirroring,
 			const int&					pHelper=0
 		);
+		int getActiveHelpers() const;
 		/**
 		 * Método responsável por desenhar o personagem
 		 *
