@@ -34,11 +34,21 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	12/03/2009
- * @version	09/06/2009
+ * @version	18/06/2009
  * @ingroup	Objects
  */
 namespace ObjectLua
 {
+	/**
+	 * Função que retorna o índice real da animação dados o seu grupo e índice
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	18/06/2009
+	 * @version	18/06/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
+	 * @return	int
+	 */
+	int lua_getAnimationRealIndex(lua_State* pState);
 	/**
 	 * Função que muda a animação de um objeto através de um índice direto
 	 *

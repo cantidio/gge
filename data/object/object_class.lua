@@ -9,7 +9,19 @@
 function Object(pPointer)
 	local obj = { }
 	obj.pointer = pPointer
-	
+
+	-- Função para retornar o índice real da animação
+	--
+	-- @author	Cantidio Oliveira Fontes
+	-- @since	18/06/2009
+	-- @version	18/06/2009
+	-- @param	int pGroup, grupo da animação que deseja-se encontrar o índice real
+	-- @param	int pIndex, índice da animação que deseja-se encontrar o índice real
+	-- @return	int
+	function getAnimationRealIndex(pGroup,pIndex)
+		return lua_getAnimationRealIndex(obj.pointer,pGroup,pIndex)
+	end
+
 	-- Função para mudar a animação do objeto através de seu índice
 	--
 	-- @author	Cantidio Oliveira Fontes
@@ -204,6 +216,7 @@ function Object(pPointer)
 		return lua_getMirroring(obj.pointer)
 	end
 
+	obj.getAnimationRealIndex	= getAnimationRealIndex
 	obj.changeAnimationByIndex	= changeAnimationByIndex
 	obj.changeAnimation			= changeAnimation
 	obj.animationIsPlaying		= animationIsPlaying

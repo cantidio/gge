@@ -30,7 +30,6 @@ OBJECTDIR=build/Debug/${PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/object_lua.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/Rabbitz/../src/input/src/input_lua.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character_lua.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/player.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/resource_manager/src/animation_manager.o \
@@ -39,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src/layer.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src/background.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src/input.o \
+	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src/input_lua.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/background.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/resource_manager/src/sprite_manager.o \
 	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/object.o
@@ -75,11 +75,6 @@ ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/object_lua.o
 	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/object_lua.o /home/cantidio/Development/rabbitz/src/objects/src/object_lua.cpp
-
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/Rabbitz/../src/input/src/input_lua.o: ../src/input/src/input_lua.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/Rabbitz/../src/input/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/Rabbitz/../src/input/src/input_lua.o ../src/input/src/input_lua.cpp
 
 ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character_lua.o: /home/cantidio/Development/rabbitz/src/objects/src/character_lua.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src
@@ -120,6 +115,11 @@ ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src/input.o: /home
 	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src/input.o /home/cantidio/Development/rabbitz/src/input/src/input.cpp
+
+${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src/input_lua.o: /home/cantidio/Development/rabbitz/src/input/src/input_lua.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src/input_lua.o /home/cantidio/Development/rabbitz/src/input/src/input_lua.cpp
 
 ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/background.o: /home/cantidio/Development/rabbitz/tests/background.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests

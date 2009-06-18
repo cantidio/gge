@@ -69,11 +69,11 @@ bool Character::isAlive() const
 
 void Character::ativate()
 {
-	mAtive=true;
+	mAtive = true;
 }
 void Character::inativate()
 {
-	mAtive=false;
+	mAtive = false;
 }
 
 bool Character::isAtive() const
@@ -89,7 +89,7 @@ bool Character::isImortal() const
 void Character::hurt(const int& pDamage)
 {
 	subLife(pDamage);
-	mImortal=mImortalTime;
+	mImortal = mImortalTime;
 }
 
 void Character::prepareHelpers()
@@ -153,18 +153,21 @@ void Character::draw() const
 
 void Character::logic()
 {
-	Object::logic();
-	if(mImortal>0)
+	if(mAtive)
 	{
-		--mImortal;
-	}
-	for(int i = 0; i < mHelpers.size(); ++i)
-	{
-		for(int j = 0; j < mHelpers[i].size(); ++j)
+		Object::logic();
+		if(mImortal>0)
 		{
-			if(mHelpers[i][j]->isAtive())
+			--mImortal;
+		}
+		for(int i = 0; i < mHelpers.size(); ++i)
+		{
+			for(int j = 0; j < mHelpers[i].size(); ++j)
 			{
+				
+				
 				mHelpers[i][j]->logic();
+				
 			}
 		}
 	}

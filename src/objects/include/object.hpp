@@ -39,7 +39,7 @@
  *
  * @author		Cantidio Oliveira Fontes
  * @since		11/03/2009
- * @version		09/06/2009
+ * @version		18/06/2009
  * @details
  *				O módulo Objects engloba todas as funcionalidades relacionadas
  *				à parte de objetos e entidades relacionadas e derivadas dos mesmos
@@ -50,7 +50,7 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	11/03/2009
- * @version	09/06/2009
+ * @version	18/06/2009
  * @ingroup	Objects
  */
 class Object
@@ -306,6 +306,17 @@ class Object
 		 * @return	double
 		 */
 		double getYPosition() const;
+		/**
+		 * Método para retornar o índice real de uma animação
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	18/06/2009
+		 * @version	18/06/2009
+		 * @param	const int& pGroup , grupo da animação que deseja-se obter o índice real
+		 * @param	const int& pIndex , índice da animação que deseja-se obter o índice real
+		 * @return	int
+		 */
+		int getAnimationRealIndex(const int& pGroup, const int& pIndex) const;
 		/**
 		 * Método para mudar a animação atuante do objeto
 		 *

@@ -11,13 +11,13 @@ helperMaxInstances	= { }
 helperScriptFile	= { }
 
 function stateBorning()
-	io.write("state borning...\n")
+	io.write("mature state: borning\n")
 	setMirroring(Mirroring.HFlip)
 	state = stateStandInit
 end
 
 function stateStandInit()
-	io.write("state stand initing...\n")
+	io.write("mature state: stand\n")
 	changeAnimationByIndex(0)
 	state = stateStanding
 end
@@ -31,7 +31,7 @@ function stateStanding()
 end
 
 function stateKick1Init()
-	io.write("state kick1 initing...\n")
+	io.write("mature state: kick1\n")
 	changeAnimation(10,0)
 	state = stateKicking1
 end
@@ -43,7 +43,7 @@ function stateKicking1()
 end
 
 function stateKick2Init()
-	io.write("state kick2 initing...\n")
+	io.write("mature state: kick2\n")
 	changeAnimation(10,1)
 	state = stateKicking2
 end

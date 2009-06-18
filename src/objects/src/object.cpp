@@ -122,6 +122,11 @@ void Object::draw() const
 	);
 }
 
+int Object::getAnimationRealIndex(const int& pGroup, const int& pIndex) const
+{
+	return mAnimationHandler->getAnimationPack().getAnimationRealIndex(pGroup,pIndex);
+}
+
 void Object::changeAnimation(const int& pAnimation)
 {
 	mAnimationHandler->changeAnimation(pAnimation,true);

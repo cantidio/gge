@@ -9,7 +9,7 @@ colision			= "data/character/enemy/frozen_shade/frozen.gcpk"
 palette				= ""
 xPulse				= 1 
 xPulseMax			= 2
-helperMaxInstances	= { 1, 20}
+helperMaxInstances	= { 1, 50}
 helperScriptFile	= {
 	"data/character/enemy/frozen_shade/clone_effect.lua",
 	"data/character/enemy/frozen_shade/ice_shot.lua",
@@ -81,10 +81,9 @@ function stateStand()
 	end
 end
 
-initState			= stateStandBegin
-state = initState
+initState	= stateStandBegin
+state 		= initState
 function logic()
 	state()
-	--io.write("animationOn: " .. getAnimationOn() .. " frameOn: " .. getFrameOn() .. "\n")
 end
  

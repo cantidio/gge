@@ -11,30 +11,40 @@ posX			= 0
 --init y position
 posY			= 0
 --vector with the layers of the background
---layers			= {
---	"teste_layer0.lua",
---	"teste_layer1.lua",
---}
+layers			= {
+	"teste_layer0.lua",
+	"teste_layer1.lua",
+}
 colision		= {
 	"",
 	""
 }
 
-function state0()
-	addXPosition(10)
+function stateRightInit()
+	io.write("background state: stateRight\n")
+	state = stateRight
+end
+
+function stateRight()
+	addXPosition(1)
 	if getXPosition() >= 320 then
-		state = state1
+		state = stateLeftInit
 	end
 end
 
-function state1()
-	subXPosition(10)
+function stateLeftInit()
+	io.write("background state: stateLeft\n")
+	state = stateLeft
+end
+
+function stateLeft()
+	subXPosition(1)
 	if getXPosition() <= -320 then
-		state = state0
+		state = stateRightInit
 	end
 end
 
-state			= state0
+state = stateRightInit
 function logic()
 	state()
 end

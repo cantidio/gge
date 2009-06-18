@@ -7,6 +7,7 @@ colision			= "data/character/enemy/frozen_shade/frozen.gcpk"
 palette				= ""
 xPulse				= 1 
 xPulseMax			= 2
+yPulse				= 0
 helperMaxInstances	= { }
 helperScriptFile	= { }
 
@@ -19,7 +20,16 @@ end
 
 function stateStand()
 	addPosition(xPulse,yPulse)
-	if getXPosition() >= 320 or getYPosition() >= 240 then
+	if (getXPosition() >= 320 and xPulse > 0) or (getXPosition() <= 0 and xPulse < 0) then
+		xPulse = -1 * xPulse/2
+	end
+	if (getYPosition() >= 240 and yPulse > 0) or (getYPosition() <= 0 and yPulse < 0) then
+		yPulse = -1 * yPulse/2
+	end
+	if xPulse <= 0.5 and xPulse >= -0.5 then
+		inativate()
+	end
+	if yPulse <= 0.5 and yPulse >= -0.5 then
 		inativate()
 	end
 end

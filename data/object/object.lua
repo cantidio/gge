@@ -39,7 +39,19 @@ state			= initState
 -- @final	12/03/2009
 -- @param	int pointer, posição do objeto na memória
 function getObject(pointer)
-	objectPointer=pointer
+	objectPointer = pointer
+end
+
+-- Função para retornar o índice real da animação
+--
+-- @author	Cantidio Oliveira Fontes
+-- @since	18/06/2009
+-- @version	18/06/2009
+-- @param	int pGroup, grupo da animação que deseja-se encontrar o índice real
+-- @param	int pIndex, índice da animação que deseja-se encontrar o índice real
+-- @return	int
+function getAnimationRealIndex(pGroup,pIndex)
+	return lua_getAnimationRealIndex(objectPointer,pGroup,pIndex)
 end
 
 -- Função para mudar a animação do objeto através de seu índice

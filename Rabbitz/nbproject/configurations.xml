@@ -3,25 +3,26 @@
   <logicalFolder name="root" displayName="root" projectFiles="true">
     <logicalFolder name="data" displayName="data" projectFiles="true">
       <logicalFolder name="background" displayName="background" projectFiles="true">
-        <itemPath>../data/background/background.lua</itemPath>
-        <itemPath>../data/background/background_layer.lua</itemPath>
+        <itemPath>/home/cantidio/Development/rabbitz/data/background/background.lua</itemPath>
+        <itemPath>/home/cantidio/Development/rabbitz/data/background/background_layer.lua</itemPath>
       </logicalFolder>
       <logicalFolder name="character" displayName="character" projectFiles="true">
         <logicalFolder name="enemy" displayName="enemy" projectFiles="true">
-          <itemPath>../data/character/enemy/caterpie.lua</itemPath>
-          <itemPath>../data/character/enemy/klona.lua</itemPath>
-          <itemPath>../data/character/enemy/klona2.lua</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/data/character/enemy/caterpie.lua</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/data/character/enemy/klona.lua</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/data/character/enemy/klona2.lua</itemPath>
         </logicalFolder>
         <logicalFolder name="player" displayName="player" projectFiles="true">
-          <itemPath>../data/character/player/lemin.lua</itemPath>
-          <itemPath>../data/character/player/player.lua</itemPath>
-          <itemPath>../data/character/player/pong.lua</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/data/character/player/lemin.lua</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/data/character/player/player.lua</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/data/character/player/pong.lua</itemPath>
         </logicalFolder>
-        <itemPath>../data/character/character.lua</itemPath>
-        <itemPath>../data/character/joao.lua</itemPath>
+        <itemPath>/home/cantidio/Development/rabbitz/data/character/character.lua</itemPath>
+        <itemPath>/home/cantidio/Development/rabbitz/data/character/joao.lua</itemPath>
       </logicalFolder>
       <logicalFolder name="object" displayName="object" projectFiles="true">
-        <itemPath>../data/object/object.lua</itemPath>
+        <itemPath>/home/cantidio/Development/rabbitz/data/object/object.lua</itemPath>
+        <itemPath>/home/cantidio/Development/rabbitz/data/object/object_class.lua</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="src" displayName="src" projectFiles="true">
@@ -46,7 +47,7 @@
         </logicalFolder>
         <logicalFolder name="src" displayName="src" projectFiles="true">
           <itemPath>/home/cantidio/Development/rabbitz/src/input/src/input.cpp</itemPath>
-          <itemPath>../src/input/src/input_lua.cpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/input/src/input_lua.cpp</itemPath>
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="objects" displayName="objects" projectFiles="true">
@@ -72,7 +73,6 @@
         <logicalFolder name="include" displayName="include" projectFiles="true">
           <itemPath>/home/cantidio/Development/rabbitz/src/resource_manager/include/animation_manager.hpp</itemPath>
           <itemPath>/home/cantidio/Development/rabbitz/src/resource_manager/include/colision_manager.hpp</itemPath>
-          <itemPath>../src/resource_manager/include/resource_manager.hpp</itemPath>
           <itemPath>/home/cantidio/Development/rabbitz/src/resource_manager/include/sprite_manager.hpp</itemPath>
         </logicalFolder>
         <logicalFolder name="src" displayName="src" projectFiles="true">
@@ -98,7 +98,7 @@
   <sourceRootList>
     <Elem>/home/cantidio/Development/rabbitz/src</Elem>
     <Elem>/home/cantidio/Development/rabbitz/tests</Elem>
-    <Elem>../data</Elem>
+    <Elem>/home/cantidio/Development/rabbitz/data</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -127,43 +127,40 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="../data/background/background.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/background/background.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/background/background_layer.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/background/background_layer.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/character.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/character.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/enemy/caterpie.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/enemy/caterpie.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/enemy/klona.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/enemy/klona.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/enemy/klona2.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/enemy/klona2.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/joao.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/joao.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/player/lemin.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/player/lemin.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/player/player.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/player/player.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/player/pong.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/player/pong.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/object/object.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/object/object.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../src/input/src/input_lua.cpp">
-        <itemTool>1</itemTool>
-      </item>
-      <item path="../src/resource_manager/include/resource_manager.hpp">
+      <item path="/home/cantidio/Development/rabbitz/data/object/object_class.lua">
         <itemTool>3</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/background/include/background.hpp">
@@ -197,6 +194,9 @@
         <itemTool>3</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/input/src/input.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/input/src/input_lua.cpp">
         <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/include/character.hpp">
@@ -291,43 +291,40 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="../data/background/background.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/background/background.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/background/background_layer.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/background/background_layer.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/character.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/character.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/enemy/caterpie.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/enemy/caterpie.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/enemy/klona.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/enemy/klona.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/enemy/klona2.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/enemy/klona2.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/joao.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/joao.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/player/lemin.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/player/lemin.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/player/player.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/player/player.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/character/player/pong.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/character/player/pong.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../data/object/object.lua">
+      <item path="/home/cantidio/Development/rabbitz/data/object/object.lua">
         <itemTool>3</itemTool>
       </item>
-      <item path="../src/input/src/input_lua.cpp">
-        <itemTool>1</itemTool>
-      </item>
-      <item path="../src/resource_manager/include/resource_manager.hpp">
+      <item path="/home/cantidio/Development/rabbitz/data/object/object_class.lua">
         <itemTool>3</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/background/include/background.hpp">
@@ -361,6 +358,9 @@
         <itemTool>3</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/input/src/input.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/input/src/input_lua.cpp">
         <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/objects/include/character.hpp">
