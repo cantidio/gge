@@ -39,7 +39,7 @@
  *
  * @author		Cantidio Oliveira Fontes
  * @since		11/03/2009
- * @version		18/06/2009
+ * @version		21/06/2009
  * @details
  *				O módulo Objects engloba todas as funcionalidades relacionadas
  *				à parte de objetos e entidades relacionadas e derivadas dos mesmos
@@ -50,7 +50,7 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	11/03/2009
- * @version	18/06/2009
+ * @version	21/06/2009
  * @ingroup	Objects
  */
 class Object
@@ -176,7 +176,7 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	11/03/2009
-		 * @version	28/05/2009
+		 * @version	21/06/2009
 		 */
 		void draw() const;
 		/**

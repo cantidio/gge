@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
 	{
 		allegro_init();
 		Gorgon::Log::init("log.txt");
-		Gorgon::Video::init("Teste Player");
+		Gorgon::Video::init("Teste Player",320,240,true);
 		Input::init();
 		std::vector<Player*> objects;
 		//objects.push_back(new Player("data/character/player/mature.lua",Gorgon::Point(150,250)));
@@ -22,21 +22,21 @@ int main(int argc, char* argv[])
 
 		while(!key[KEY_ESC])
 		{
-			Gorgon::Video::get()->clear(0xAA0BDD);
+			Gorgon::Video::get().clear(0xAA0BDD);
 			bg->logic();
 
 			for(int i = 0; i < objects.size(); ++i)
 			{
 				objects[i]->logic();
 			}
-			bg->draw(*Gorgon::Video::get());
+			bg->draw(Gorgon::Video::get());
 
 			for(int i = 0; i < objects.size(); ++i)
 			{
 				objects[i]->draw();
 			}
 			
-			Gorgon::Video::get()->show();
+			Gorgon::Video::get().show();
 			rest(1);
 		}
 		for(int i=0; i<objects.size(); ++i)

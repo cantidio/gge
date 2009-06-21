@@ -115,7 +115,7 @@ void Object::draw() const
 {
 	mAnimationHandler->draw
 	(
-		*Gorgon::Video::get(),
+		Gorgon::Video::get(),
 		(int)mPosition.getX(),
 		(int)mPosition.getY(),
 		mDirection

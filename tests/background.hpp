@@ -8,9 +8,8 @@ Background* createYamattoBackground()
 	
 	for(int i=0; i<bgImg->getSize(); ++i)
 	{
-		Gorgon::Animation	*animation;
-		animation= new Gorgon::Animation((*bgImg)[i].getGroup(),0,true);
-		animation->add(0,new Gorgon::Frame((*bgImg)[i].getGroup(),(*bgImg)[i].getIndex(),-1));
+		Gorgon::Animation animation((*bgImg)[i].getGroup(),0,true);
+		animation.add(Gorgon::Frame((*bgImg)[i].getGroup(),(*bgImg)[i].getIndex(),-1),0);
 		bgAni->add(animation);
 	}
 	//bgAni->save("tests/yamatto.gapk");
