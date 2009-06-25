@@ -62,8 +62,17 @@ int main(int argc, char* argv[])
 		std::vector<Player*> objects;
 		//objects.push_back(new Player("data/character/player/mature.lua",Gorgon::Point(150,250)));
 
-		objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(150,250)));
-		objects[objects.size()-1]->ativate();
+		objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(150,200)));
+		objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(152,202)));
+		objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(154,204)));
+		objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(156,206)));
+		objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(158,208)));
+		objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(160,210)));
+
+		for(int i = 0; i< objects.size(); ++i)
+		{
+			objects[i]->ativate();
+		}
 		
 		Background* bg = new Background("teste.lua");
 

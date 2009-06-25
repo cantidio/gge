@@ -117,8 +117,7 @@ void Object::draw() const
 	(
 		Gorgon::Video::get(),
 		(int)mPosition.getX(),
-		(int)mPosition.getY(),
-		mDirection
+		(int)mPosition.getY()
 	);
 }
 
