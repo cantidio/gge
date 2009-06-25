@@ -7,8 +7,8 @@ sprite				= "data/character/enemy/frozen_shade/frozen.gspk"
 animation			= "data/character/enemy/frozen_shade/frozen.gapk"
 colision			= "data/character/enemy/frozen_shade/frozen.gcpk"
 palette				= ""
-xPulse				= 1 
-xPulseMax			= 2
+xPulse				= 3
+xPulseMax			= 5
 helperMaxInstances	= { 1, 50}
 helperScriptFile	= {
 	"data/character/enemy/frozen_shade/clone_effect.lua",
