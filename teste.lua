@@ -46,6 +46,6 @@ end
 
 state = stateRightInit
 function logic()
-	state()
+	--state()
 end
 

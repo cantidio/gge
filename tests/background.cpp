@@ -57,23 +57,18 @@ int main(int argc, char* argv[])
 		install_int( frame_rate, 1000 );
 		install_int_ex(game_time, BPS_TO_TIMER(60));
 		Gorgon::Log::init("log.txt");
-		Gorgon::Video::init("Teste Player",320,240,false);
+		//Gorgon::Video::init("Teste Player",320,180,false);
+		Gorgon::Video::init("Teste Player",426,240,false);
 		Input::init();
 		std::vector<Player*> objects;
-		//objects.push_back(new Player("data/character/player/mature.lua",Gorgon::Point(150,250)));
 
 		objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(150,200)));
-		objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(152,202)));
-		objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(154,204)));
-		objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(156,206)));
-		objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(158,208)));
-		objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(160,210)));
+		objects.push_back(new Player("data/character/player/mature.lua",Gorgon::Point(150,200)));
 
 		for(int i = 0; i< objects.size(); ++i)
 		{
 			objects[i]->ativate();
 		}
-		
 		Background* bg = new Background("teste.lua");
 
 		while(!key[KEY_ESC])
@@ -93,10 +88,8 @@ int main(int argc, char* argv[])
 				{
 					objects[i]->draw();
 				}
-
-				screenShot(key[KEY_P]);
-				
 				Gorgon::Video::get().drawText(10,10,0,-1,"FPS: %d",fps_antigo);
+				screenShot(key[KEY_P]);
 				Gorgon::Video::get().show();
 				--timer;
 				++fps;

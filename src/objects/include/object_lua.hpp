@@ -34,7 +34,7 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	12/03/2009
- * @version	18/06/2009
+ * @version	26/06/2009
  * @ingroup	Objects
  */
 namespace ObjectLua
@@ -230,6 +230,42 @@ namespace ObjectLua
 	 */
 	int lua_getMirroring(lua_State* pState);
 	/**
+	 * Função para setar o método de afterImage para Normal
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	26/06/2009
+	 * @version	26/06/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
+	 */
+	int setAfterImageMethodNormal(lua_State* pState);
+	/**
+	 * Função para setar o método de afterImage para add
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	26/06/2009
+	 * @version	26/06/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
+	 */
+	int setAfterImageMethodAdd(lua_State* pState);
+	/**
+	 * Função para setar o método de afterImage para Trans
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	26/06/2009
+	 * @version	26/06/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
+	 */
+	int setAfterImageMethodTrans(lua_State* pState);
+	/**
+	 * Função para setar o modo do sistema de afterImages
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	26/06/2009
+	 * @version	26/06/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
+	 */
+	int setAfterImageMode(lua_State* pState);
+	/**
 	 * Método que registra as funçãode cenário para serem acessadas por um script
 	 *
 	 * @author	Cantidio Oliveira Fontes
@@ -239,5 +275,4 @@ namespace ObjectLua
 	 */
 	void registerFunctions(Gorgon::Lua* script);
 }
-
 #endif

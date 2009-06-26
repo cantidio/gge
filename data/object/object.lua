@@ -248,3 +248,48 @@ function getMirroring()
 	return lua_getMirroring(objectPointer)
 end
 
+-- Função que seta o método das AfterImages para Normal
+--
+-- @author	Cantidio Oliveira Fontes
+-- @since	26/06/2009
+-- @version	26/06/2009
+function setAfterImageMethodNormal()
+	lua_setAfterImageMethodNormal(objectPointer)
+end
+
+-- Função que sera o método das AfterImages para add
+--
+-- @author	Cantidio Oliveira Fontes
+-- @since	26/06/2009
+-- @version	26/06/2009
+-- @param	int 	pColorAddRed	, componente vermelho a ser adicionado
+-- @param	int 	pColorAddGreen	, componente verde a ser adicionado
+-- @param	int 	pColorAddBlue	, componete azul a ser adicionado
+-- @param	int 	pColorSub		, componente vermelho a ser subtraído
+-- @param	int 	pColorSub		, componente verde a ser subtraído
+-- @param	int 	pColorSub		, componente azul a ser subtraído
+-- @param	float	pTrans			, valor da transparencia
+function setAfterImageMethodAdd(pColorAddRed,pColorAddGreen,pColorAddBlue,pColorSubRed,pColorSubGreen,pColorSubBlue,pTrans)
+	lua_setAfterImageMethodAdd(objectPointer,pColorAddRed,pColorAddGreen,pColorAddBlue,pColorSubRed,pColorSubGreen,pColorSubBlue,pTrans)
+end
+-- Função que sera o método das AfterImages para Trans
+--
+-- @author	Cantidio Oliveira Fontes
+-- @since	26/06/2009
+-- @version	26/06/2009
+-- @param	float	pTrans, valor da transparencia
+function setAfterImageMethodTrans(pTrans)
+	lua_setAfterImageMethodTrans(objectPointer,pTrans)
+end
+-- Função que sera o método das AfterImages para add
+--
+-- @author	Cantidio Oliveira Fontes
+-- @since	26/06/2009
+-- @version	26/06/2009
+-- @param	const bool& pEnabled		, se o modo está ativo
+-- @param	const int& 	pDelay			, delay para cada afterImage
+-- @param	const int& 	pImageNumber	, Número máximo de afterImages
+function setAfterImageMode(pEnabled,pDelay,pImageNumber)
+	lua_setAfterImageMode(objectPointer,pEnabled,pDelay,pImageNumber)
+end
+

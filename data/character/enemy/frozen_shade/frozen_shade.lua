@@ -81,8 +81,17 @@ function stateStand()
 	end
 end
 
+function stateInit()
+	io.write("state: Init\n")
+	setAfterImageMode(true,2,10)
+	--setAfterImageMethodAdd(0,0,50,0,0,0,0.5)
+	setAfterImageMethodNormal()
+	stateStandBegin()
+end
+
 initState	= stateStandBegin
-state 		= initState
+state 		= stateInit
+
 function logic()
 	state()
 end

@@ -39,18 +39,17 @@
  *
  * @author		Cantidio Oliveira Fontes
  * @since		11/03/2009
- * @version		21/06/2009
+ * @version		26/06/2009
  * @details
  *				O módulo Objects engloba todas as funcionalidades relacionadas
  *				à parte de objetos e entidades relacionadas e derivadas dos mesmos
  */
-
 /**
  * Classe que representa um objeto interativo
  *
  * @author	Cantidio Oliveira Fontes
  * @since	11/03/2009
- * @version	21/06/2009
+ * @version	26/06/2009
  * @ingroup	Objects
  */
 class Object
@@ -104,6 +103,50 @@ class Object
 		 * Localização do objeto no plano xy
 		 */
 		Gorgon::Point mPosition;
+		/**
+		 * Ponteiro para o método de renderização das afterImages
+		 */
+		void (Object::*mAfterImageMethod)(const int&)const;
+		/**
+		 * Variável que guarda se o sistema de afterImages está habilitado
+		 */
+		bool mAfterImageEnabled;
+		/**
+		 * Delay das afterImages
+		 */
+		int	mAfterImageDelay;
+		/**
+		 * Número de afterImages
+		 */
+		int mAfterImageNumber;
+		/**
+		 * Delay atual das afterImages
+		 */
+		int mAfterImageDelayInUse;
+		/**
+		 * Cor a ser adicionada no método de add
+		 */
+		Gorgon::Color mAfterImageColorAdd;
+		/**
+		 * Cor a ser subtraída no método de add
+		 */
+		Gorgon::Color mAfterImageColorSub;
+		/**
+		 * Porcentagem de transparência das afterImages
+		 */
+		float mAfterImageTrans;
+		/**
+		 * Variável que guarda as ultimas posições do objeto
+		 */
+		std::vector<Gorgon::Point>			mLastPositions;
+		/**
+		 * Variável que guarda as últimas direções do objeto
+		 */
+		std::vector<Gorgon::Mirroring>		mLastDirections;
+		/**
+		 * Variável que guarda os ponteiros dos últimos sprites usados
+		 */
+		std::vector<const Gorgon::Sprite*>	mLastSprites;
 		/**
 		 * Peso do objeto
 		 */
@@ -363,5 +406,136 @@ class Object
 		 * @return	int
 		 */
 		int getFrameOn() const;
+		/**
+		 * Método para setar o método de afterImage para Normal
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/06/2009
+		 * @version	26/06/2009
+		 */
+		void setAfterImageMethodNormal();
+		/**
+		 * Método para setar o método de afterImage para add
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/06/2009
+		 * @version	26/06/2009
+		 * @param	const Gorgon::Color&	pColorAdd	, cor a adicionar
+		 * @param	const Gorgon::Color&	pColorSub	, cor a subtrair
+		 * @param	const float&			pTrans		, porcentagem da transparência
+		 */
+		void setAfterImageMethodAdd
+		(
+			const Gorgon::Color&	pColorAdd,
+			const Gorgon::Color&	pColorSub,
+			const float&			pTrans
+		);
+		/**
+		 * Método para setar o método de afterImage para Transparent
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/06/2009
+		 * @version	26/06/2009
+		 * @param	const float& pTrans , porcentagem da transparência
+		 */
+		void setAfterImageMethodTrans(const float& pTrans);
+		/**
+		 * Método para abilitar ou desabilitar as AfterImages
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/06/2009
+		 * @version	26/06/2009
+		 * @param	const bool& pEnabled, se está habilitado ou não
+		 */
+		void setAfterImageEnabled(const bool& pEnabled);
+		/**
+		 * Método para setar o delay em gameticks das afterImages
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/06/2009
+		 * @version	26/06/2009
+		 * @param	const int& pDelay , delay em gameticks entre uma afterImage e outra
+		 */
+		void setAfterImageDelay(const int& pDelay);
+		/**
+		 * Método para setar o Número de afterImages
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/06/2009
+		 * @version	26/06/2009
+		 * @param	const int& pNumber, número de afterImages
+		 */
+		void setAfterImageNumber(const int& pNumber);
+		/**
+		 * Método que seta o modo de AfterImage
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/06/2009
+		 * @final	26/06/2009
+		 * @param	const bool& pEnabled		, se está abilitado
+		 * @param	const int&	pDelay			, delay entre as imagens
+		 * @param	const int&	pImageNumber	, número de afterImages
+		 */
+		void setAfterImageMode
+		(
+			const bool& pEnabled,
+			const int& pDelay,
+			const int& pImageNumber
+		);
+		/**
+		 * Método para retornar se o sistema de afterImages está habilitado
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/06/2009
+		 * @version	26/06/2009
+		 * @return	bool
+		 */
+		bool getAfterImageEnabled() const;
+		/**
+		 * Método para retornar o delay das afterImages
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/06/2009
+		 * @version	26/06/2009
+		 * @return	int
+		 */
+		int getAfterImageDelay() const;
+		/**
+		 * Método para retornar o número de afterImages
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/06/2009
+		 * @version	26/06/2009
+		 * @return	int
+		 */
+		int getAfterImageNumber() const;
+	protected:
+		/**
+		 * Método para desenhar uma afterImage usando o método Normal
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/06/2009
+		 * @version	26/06/2009
+		 * @param	const int& pImage, número da imagem no buffer  a desenhar
+		 */
+		void drawAfterImageNormal(const int& pImage) const;
+		/**
+		 * Método para desenhar uma afterImage usando o método de transparencia
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/06/2009
+		 * @version	26/06/2009
+		 * @param	const int& pImage, número da imagem no buffer  a desenhar
+		 */
+		void drawAfterImageTransparent(const int& pImage) const;
+		/**
+		 * Método para desenhar uma afterImage usando o método de Add
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/06/2009
+		 * @version	26/06/2009
+		 * @param	const int& pImage, número da imagem no buffer  a desenhar
+		 */
+		void drawAfterImageAdd(const int& pImage) const;
 };
 #endif

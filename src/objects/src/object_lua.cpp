@@ -180,6 +180,54 @@ namespace ObjectLua
 		return 1;
 	}
 
+	int lua_setAfterImageMethodNormal(lua_State* pState)
+	{
+		Object* object = getObjectPointer(pState);
+		object->setAfterImageMethodNormal();
+		return 0;
+	}
+
+	int lua_setAfterImageMethodAdd(lua_State* pState)
+	{
+		Object* object = getObjectPointer(pState);
+		object->setAfterImageMethodAdd
+		(
+			Gorgon::Color
+			(
+				lua_tonumber(pState,2),
+				lua_tonumber(pState,3),
+				lua_tonumber(pState,4)
+			),
+			Gorgon::Color
+			(
+				lua_tonumber(pState,5),
+				lua_tonumber(pState,6),
+				lua_tonumber(pState,7)
+			),
+			lua_tonumber(pState,8)
+		);
+		return 0;
+	}
+
+	int lua_setAfterImageMethodTrans(lua_State* pState)
+	{
+		Object* object = getObjectPointer(pState);
+		object->setAfterImageMethodTrans(lua_tonumber(pState,2));
+		return 0;
+	}
+
+	int lua_setAfterImageMode(lua_State* pState)
+	{
+		Object* object = getObjectPointer(pState);
+		object->setAfterImageMode
+		(
+			lua_toboolean(pState,2),
+			lua_tonumber(pState,3),
+			lua_tonumber(pState,4)
+		);
+		return 0;
+	}
+	
 	void registerFunctions(Gorgon::Lua* pScript)
 	{
 		pScript->registerFunction("lua_getAnimationRealIndex",lua_getAnimationRealIndex);
@@ -201,5 +249,9 @@ namespace ObjectLua
 		pScript->registerFunction("lua_subPosition",lua_subPosition);
 		pScript->registerFunction("lua_setMirroring",lua_setMirroring);
 		pScript->registerFunction("lua_getMirroring",lua_getMirroring);
+		pScript->registerFunction("lua_setAfterImageMode",lua_setAfterImageMode);
+		pScript->registerFunction("lua_setAfterImageMethodNormal",lua_setAfterImageMethodNormal);
+		pScript->registerFunction("lua_setAfterImageMethodAdd",lua_setAfterImageMethodAdd);
+		pScript->registerFunction("lua_setAfterImageMethodTrans",lua_setAfterImageMethodTrans);
 	}
 }
