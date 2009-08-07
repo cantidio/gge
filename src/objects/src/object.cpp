@@ -1,6 +1,3 @@
-
-#include <vector>
-
 #include "../include/object.hpp"
 #include "../include/object_lua.hpp"
 
@@ -30,6 +27,7 @@ void Object::setUp()
 	loadGlobalVars();
 	mScript->function("getObject",Gorgon::LuaParam("n",this));
 	ObjectLua::registerFunctions(mScript);
+	TextWindowLua::registerFunctions(mScript);
 	mSpritePack			= ResourceManager::SpriteManager::load(mSpritePackName);
 	mAnimationPack		= ResourceManager::AnimationManager::load(mAnimationPackName);
 	mAnimationHandler	= new Gorgon::AnimationHandler(*mSpritePack,*mAnimationPack);

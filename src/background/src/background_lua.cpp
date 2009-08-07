@@ -1,4 +1,4 @@
-	#include "../include/background_lua.hpp"
+#include "../include/background_lua.hpp"
 
 namespace BackgroundLua
 {

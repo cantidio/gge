@@ -18,7 +18,7 @@ helperScriptFile	= {
 clone 				= {}
 
 function stateInitShotBegin()
-	io.write("state: InitShot\n")
+	print("state: InitShot")
 	changeAnimation(100,0)
 	state = stateInitShot
 end
@@ -31,7 +31,7 @@ end
 
 function stateShotBegin()
 	changeAnimation(1000,2)
-	io.write("state: Shotting\n")
+	print("state: Shotting")
 	clone = Character(
 		callHelper(
 			getXPosition(),
@@ -59,7 +59,7 @@ function stateShot()
 end
 
 function stateStandBegin()
-	io.write("state: Stand\n")
+	print("state: Stand")
 	changeAnimation(0,0)
 	state = stateStand
 end
@@ -82,10 +82,10 @@ function stateStand()
 end
 
 function stateInit()
-	io.write("state: Init\n")
+	print("state: Init")
 	setAfterImageMode(true,2,10)
-	--setAfterImageMethodAdd(0,0,50,0,0,0,0.5)
-	setAfterImageMethodNormal()
+	setAfterImageMethodAdd(0,0,50,0,0,0,0.5)
+	--setAfterImageMethodNormal()
 	stateStandBegin()
 end
 
@@ -93,6 +93,7 @@ initState	= stateStandBegin
 state 		= stateInit
 
 function logic()
+	
 	state()
 end
  

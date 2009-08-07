@@ -12,8 +12,8 @@ helperScriptFile	= { }
 
 function stateBorning()
 	io.write("mature state: borning\n")
---	setAfterImageMethodTrans(0.5)
-	setAfterImageMethodAdd(200,0,0,0,0,0,0.5)
+	setAfterImageMethodTrans(0.5)
+--	setAfterImageMethodAdd(200,0,0,0,0,0,0.5)
 	--setMirroring(Mirroring.HFlip)
 	state = stateStandInit
 end
@@ -34,7 +34,7 @@ end
 
 function stateKick1Init()
 	io.write("mature state: kick1\n")
-	setAfterImageMode(true,10,10)
+	setAfterImageMode(true,2,10)
 	changeAnimation(10,0)
 	state = stateKicking1
 end
@@ -48,7 +48,7 @@ end
 
 function stateKick2Init()
 	io.write("mature state: kick2\n")
-	setAfterImageMode(true,5,1)
+	setAfterImageMode(true,2,10)
 	changeAnimation(10,1)
 	state = stateKicking2
 end
@@ -62,6 +62,7 @@ end
 
 state = stateBorning
 function logic()
+	inativate()
 	if buttonDown()  then
 		addYPosition(3)
 	elseif buttonUp() then

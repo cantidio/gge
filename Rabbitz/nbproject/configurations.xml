@@ -49,6 +49,16 @@
           <itemPath>/home/cantidio/Development/rabbitz/src/background/src/tile.cpp</itemPath>
         </logicalFolder>
       </logicalFolder>
+      <logicalFolder name="core" displayName="core" projectFiles="true">
+        <logicalFolder name="include" displayName="include" projectFiles="true">
+          <itemPath>/home/cantidio/Development/rabbitz/src/core/include/text_window.hpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/core/include/text_window_lua.hpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>/home/cantidio/Development/rabbitz/src/core/src/text_window.cpp</itemPath>
+          <itemPath>/home/cantidio/Development/rabbitz/src/core/src/text_window_lua.cpp</itemPath>
+        </logicalFolder>
+      </logicalFolder>
       <logicalFolder name="input" displayName="input" projectFiles="true">
         <logicalFolder name="include" displayName="include" projectFiles="true">
           <itemPath>/home/cantidio/Development/rabbitz/src/input/include/input.hpp</itemPath>
@@ -210,6 +220,18 @@
         <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/background/src/tile.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/core/include/text_window.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/core/include/text_window_lua.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/core/src/text_window.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/core/src/text_window_lua.cpp">
         <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/input/include/input.hpp">
@@ -386,6 +408,18 @@
         <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/background/src/tile.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/core/include/text_window.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/core/include/text_window_lua.hpp">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/core/src/text_window.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="/home/cantidio/Development/rabbitz/src/core/src/text_window_lua.cpp">
         <itemTool>1</itemTool>
       </item>
       <item path="/home/cantidio/Development/rabbitz/src/input/include/input.hpp">

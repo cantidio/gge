@@ -33,6 +33,7 @@
 #include "../../../../gorgon++/src/geometry/include/gorgon_rectangle.hpp"
 #include "../../resource_manager/include/sprite_manager.hpp"
 #include "../../resource_manager/include/animation_manager.hpp"
+#include "../../core/include/text_window_lua.hpp"
 
 /**
  * @defgroup	Objects

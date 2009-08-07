@@ -4,7 +4,8 @@
 #include <sstream>
 #include "../../gorgon++/src/core/include/gorgon_file.hpp"
 #include "background.hpp"
-
+#include "../src/core/include/text_window.hpp"
+#include "../../gorgon++/src/graphic/include/gorgon_image_format_bmp.hpp"
 int fps = 0;
 int fps_antigo = 0;
 int timer = 0;
@@ -25,7 +26,7 @@ END_OF_FUNCTION(game_time);
 void trySaveScreenShot(const int& pShotNumber)
 {
 	std::stringstream out;
-	out << "shots/shot" << pShotNumber << ".bmp";
+	out << "shots/shot" << pShotNumber << ".bmp" << std::endl;
 	Gorgon::File file(out.str(),std::ios::in | std::ios::binary);
 	if(file.is_open())
 	{
@@ -34,12 +35,13 @@ void trySaveScreenShot(const int& pShotNumber)
 	}
 	else
 	{
+		Gorgon::ImageFormatBmp imageFormat;
 		file.close();
-		Gorgon::ImageBmp::saveImage(Gorgon::Video::get(),out.str());
+		imageFormat.save(static_cast<Gorgon::Image&>(Gorgon::Video::get()),out.str());
 	}
 }
 
-void screenShot(const int& pKey)
+void screenShot()
 {
 	if(key[KEY_P])
 	{
@@ -47,6 +49,7 @@ void screenShot(const int& pKey)
 		key[KEY_P] = 0;
 	}
 }
+
 int main(int argc, char* argv[])
 {
 	try
@@ -58,7 +61,8 @@ int main(int argc, char* argv[])
 		install_int_ex(game_time, BPS_TO_TIMER(60));
 		Gorgon::Log::init("log.txt");
 		//Gorgon::Video::init("Teste Player",320,180,false);
-		Gorgon::Video::init("Teste Player",426,240,false);
+		Gorgon::Video::init("Teste GSBGE",400,300);
+
 		Input::init();
 		std::vector<Player*> objects;
 
@@ -75,21 +79,18 @@ int main(int argc, char* argv[])
 		{
 			while(timer >= 0 && !key[KEY_ESC])
 			{
+				screenShot();
 				Gorgon::Video::get().clear(0xAA0BDD);
 				bg->logic();
 
-				for(int i = 0; i < objects.size(); ++i)
-				{
-					objects[i]->logic();
-				}
+				for(int i = 0; i < objects.size(); ++i){	objects[i]->logic();	}
 				bg->draw(Gorgon::Video::get());
+				for(int i = 0; i < objects.size(); ++i){	objects[i]->draw();		}
 
-				for(int i = 0; i < objects.size(); ++i)
-				{
-					objects[i]->draw();
-				}
 				Gorgon::Video::get().drawText(10,10,0,-1,"FPS: %d",fps_antigo);
-				screenShot(key[KEY_P]);
+
+				
+				TextWindow::get().show();
 				Gorgon::Video::get().show();
 				--timer;
 				++fps;
