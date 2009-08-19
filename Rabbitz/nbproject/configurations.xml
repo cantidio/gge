@@ -129,6 +129,12 @@
         <platform>2</platform>
       </toolsSet>
       <compileType>
+        <ccCompilerTool>
+          <includeDirectories>
+            <directoryPath>/home/cantidio/Development</directoryPath>
+            <directoryPath>../src</directoryPath>
+          </includeDirectories>
+        </ccCompilerTool>
         <linkerTool>
           <linkerLibItems>
             <linkerLibProjectItem>

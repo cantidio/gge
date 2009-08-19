@@ -25,8 +25,8 @@
  */
 #ifndef _GSBGE_SPRITE_MANAGER_
 #define _GSBGE_SPRITE_MANAGER_
-#include "../../../../gorgon++/src/graphic/include/gorgon_spritepack.hpp"
-#include "../../../../gorgon++/src/core/include/gorgon_log.hpp"
+#include <gorgon++/include/graphic/gorgon_spritepack.hpp>
+#include <gorgon++/include/core/gorgon_log.hpp>
 
 namespace ResourceManager
 {

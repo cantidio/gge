@@ -27,7 +27,7 @@
 #ifndef _GSBGE_PLAYER_
 #define	_GSBGE_PLAYER_
 #include "character.hpp"
-#include "../../input/include/input_lua.hpp"
+#include "input/include/input_lua.hpp"
 
 /**
  * Classe que representa um jogador controlado por scripts

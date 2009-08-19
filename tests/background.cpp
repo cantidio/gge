@@ -1,11 +1,14 @@
-#include "../src/background/include/background.hpp"
-#include "../../gorgon++/src/core/include/gorgon_log.hpp"
-#include "../src/objects/include/player.hpp"
 #include <sstream>
-#include "../../gorgon++/src/core/include/gorgon_file.hpp"
+
+#include <gorgon++/include/core/gorgon_log.hpp>
+#include <gorgon++/include/graphic/gorgon_image_format_bmp.hpp>
+#include <gorgon++/include/core/gorgon_file.hpp>
+
+#include "background/include/background.hpp"
+#include "objects/include/player.hpp"
+#include "core/include/text_window.hpp"
 #include "background.hpp"
-#include "../src/core/include/text_window.hpp"
-#include "../../gorgon++/src/graphic/include/gorgon_image_format_bmp.hpp"
+
 int fps = 0;
 int fps_antigo = 0;
 int timer = 0;

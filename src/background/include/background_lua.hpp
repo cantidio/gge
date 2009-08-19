@@ -27,7 +27,7 @@
 #ifndef _BACKGROUND_LUA_
 #define	_BACKGROUND_LUA_
 #include "background.hpp"
-#include "../../../../gorgon++/src/script/include/gorgon_lua.hpp"
+#include <gorgon++/include/script/gorgon_script.hpp>
 
 /**
  * NameSpace que engloba os wrappers de algumas funções em lua relacionadas ao Backgrouns

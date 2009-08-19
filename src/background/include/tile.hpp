@@ -26,8 +26,8 @@
  */
 #ifndef _GSBGE_TILE_
 #define	_GSBGE_TILE_
-#include "../../../../gorgon++/src/graphic/include/gorgon_animation_handler.hpp"
-#include "../../../../gorgon++/src/graphic/include/gorgon_video.hpp"
+#include <gorgon++/include/graphic/gorgon_animation_handler.hpp>
+#include <gorgon++/include/graphic/gorgon_video.hpp>
 #include <vector>
 
 /**

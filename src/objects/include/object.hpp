@@ -26,14 +26,14 @@
  */
 #ifndef _GSBGE_OBJECT_
 #define	_GSBGE_OBJECT_
-#include "../../../../gorgon++/src/graphic/include/gorgon_video.hpp"
-#include "../../../../gorgon++/src/graphic/include/gorgon_animation_handler.hpp"
-#include "../../../../gorgon++/src/script/include/gorgon_lua.hpp"
-#include "../../../../gorgon++/src/core/include/gorgon_log.hpp"
-#include "../../../../gorgon++/src/geometry/include/gorgon_rectangle.hpp"
-#include "../../resource_manager/include/sprite_manager.hpp"
-#include "../../resource_manager/include/animation_manager.hpp"
-#include "../../core/include/text_window_lua.hpp"
+#include <gorgon++/include/graphic/gorgon_video.hpp>
+#include <gorgon++/include/graphic/gorgon_animation_handler.hpp>
+#include <gorgon++/include/script/gorgon_lua.hpp>
+#include <gorgon++/include/core/gorgon_log.hpp>
+#include <gorgon++/include/geometry/gorgon_rectangle.hpp>
+#include "resource_manager/include/sprite_manager.hpp"
+#include "resource_manager/include/animation_manager.hpp"
+#include "core/include/text_window_lua.hpp"
 
 /**
  * @defgroup	Objects

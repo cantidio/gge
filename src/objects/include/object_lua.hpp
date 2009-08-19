@@ -27,7 +27,7 @@
 #ifndef _OBJECT_LUA_
 #define	_OBJECT_LUA_
 #include "object.hpp"
-#include "../../../../gorgon++/src/script/include/gorgon_lua.hpp"
+#include <gorgon++/include/script/gorgon_lua.hpp>
 
 /**
  * Bindings para os métodos de classe serem usados nos scritps em lua

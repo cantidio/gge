@@ -26,9 +26,9 @@
  */
 #ifndef _GSBGE_LAYER_
 #define _GSBGE_LAYER_
-#include "../../resource_manager/include/sprite_manager.hpp"
-#include "../../resource_manager/include/animation_manager.hpp"
-#include "../../objects/include/object.hpp"
+#include "resource_manager/include/sprite_manager.hpp"
+#include "resource_manager/include/animation_manager.hpp"
+#include "objects/include/object.hpp"
 #include "tile.hpp"
 #include <vector>
 
