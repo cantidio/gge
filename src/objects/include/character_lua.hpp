@@ -27,7 +27,7 @@
 #ifndef _CHARACTER_LUA_
 #define	_CHARACTER_LUA_
 #include "character.hpp"
-#include <gorgon++/include/script/gorgon_lua.hpp>
+#include <gorgon++/gorgon.hpp>
 
 /**
  * Bindings para os métodos de classe serem usados nos scritps em lua

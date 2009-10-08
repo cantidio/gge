@@ -26,11 +26,7 @@
  */
 #ifndef _GSBGE_OBJECT_
 #define	_GSBGE_OBJECT_
-#include <gorgon++/include/graphic/gorgon_video.hpp>
-#include <gorgon++/include/graphic/gorgon_animation_handler.hpp>
-#include <gorgon++/include/script/gorgon_lua.hpp>
-#include <gorgon++/include/core/gorgon_log.hpp>
-#include <gorgon++/include/geometry/gorgon_rectangle.hpp>
+#include <gorgon++/gorgon.hpp>
 #include "resource_manager/include/sprite_manager.hpp"
 #include "resource_manager/include/animation_manager.hpp"
 #include "core/include/text_window_lua.hpp"

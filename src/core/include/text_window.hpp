@@ -26,8 +26,7 @@
  */
 #ifndef _TEXT_WINDOW_
 #define _TEXT_WINDOW_
-#include <gorgon++/include/graphic/gorgon_image.hpp>
-#include <gorgon++/include/graphic/gorgon_video.hpp>
+#include <gorgon++/gorgon.hpp>
 
 /**
  * Classe que representa uma janela de texto

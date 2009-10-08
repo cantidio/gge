@@ -25,8 +25,7 @@
  */
 #ifndef _GSBGE_ANIMATION_MANAGER_
 #define _GSBGE_ANIMATION_MANAGER_
-#include <gorgon++/include/graphic/gorgon_animationpack.hpp>
-#include <gorgon++/include/core/gorgon_log.hpp>
+#include <gorgon++/gorgon.hpp>
 
 namespace ResourceManager
 {

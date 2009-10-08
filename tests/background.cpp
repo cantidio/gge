@@ -1,9 +1,5 @@
 #include <sstream>
-
-#include <gorgon++/include/core/gorgon_log.hpp>
-#include <gorgon++/include/graphic/gorgon_image_format_bmp.hpp>
-#include <gorgon++/include/core/gorgon_file.hpp>
-
+#include <gorgon++/gorgon.hpp>
 #include "background/include/background.hpp"
 #include "objects/include/player.hpp"
 #include "core/include/text_window.hpp"

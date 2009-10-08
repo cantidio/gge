@@ -25,7 +25,7 @@
  */
 #ifndef _GSBGE_COLISION_MANAGER_
 #define _GSBGE_COLISION_MANAGER_
-#include <gorgon++/include/core/gorgon_log.hpp>
+#include <gorgon++/gorgon.hpp>
 
 namespace ResourceManager
 {

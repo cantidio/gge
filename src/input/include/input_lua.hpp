@@ -27,7 +27,7 @@
 #ifndef _GSBGE_INPUT_LUA_
 #define	_GSBGE_INPUT_LUA_
 #include "input.hpp"
-#include <gorgon++/include/script/gorgon_lua.hpp>
+#include <gorgon++/gorgon.hpp>
 
 /**
  * @defgroup	Input
