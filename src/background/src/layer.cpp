@@ -195,7 +195,7 @@ void Layer::loadGlobalVars()
 
 void Layer::loadTiles()
 {
-	const int tileNumber	=(int)mScript->function("getTileNumber",Gorgon::LuaParam(),1)->getNumericValue();
+	const int tileNumber	=(int)mScript->function("script_getTileNumber",Gorgon::LuaParam(),1)->getNumericValue();
 	for(int i=1; i <= tileNumber; ++i)
 	{
 		mTiles.push_back
@@ -204,16 +204,16 @@ void Layer::loadTiles()
 			(
 				*mSpritePack,
 				*mAnimationPack,
-				(int)mScript->function("getTileAnimation",Gorgon::LuaParam("n",i),1)->getNumericValue()
+				(int)mScript->function("script_getTileAnimation",Gorgon::LuaParam("n",i),1)->getNumericValue()
 			)
 		);
-		const int tileInstances =(int)mScript->function("getTileInstances",Gorgon::LuaParam("n",i),1)->getNumericValue();
-		for(int j=1; j<=tileInstances; ++j)
+		const int tileInstances =(int)mScript->function("script_getTileInstances",Gorgon::LuaParam("n",i),1)->getNumericValue();
+		for(int j = 1; j <= tileInstances; ++j)
 		{
 			mTiles[i-1]->add
 			(
-				(int)mScript->function("getTileXPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue(),
-				(int)mScript->function("getTileYPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue()
+				(int)mScript->function("script_getTileXPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue(),
+				(int)mScript->function("script_getTileYPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue()
 			);
 		}
 	}
@@ -221,21 +221,21 @@ void Layer::loadTiles()
 
 void Layer::loadObjects()
 {
-	const int objectNumber	=(int)mScript->function("getObjectNumber",Gorgon::LuaParam(),1)->getNumericValue();
+	const int objectNumber	=(int)mScript->function("script_getObjectNumber",Gorgon::LuaParam(),1)->getNumericValue();
 	for(int i=1; i<=objectNumber; ++i)
 	{
-		const int objectInstances=(int)mScript->function("getObjectInstances",Gorgon::LuaParam("n",i),1)->getNumericValue();
+		const int objectInstances=(int)mScript->function("script_getObjectInstances",Gorgon::LuaParam("n",i),1)->getNumericValue();
 		for(int j=1; j<=objectInstances; ++j)
 		{
 			mObjects.push_back
 			(
 				new Object
 				(
-					mScript->function("getObjectScript",Gorgon::LuaParam("n",i),1)->getStringValue(),
+					mScript->function("script_getObjectScript",Gorgon::LuaParam("n",i),1)->getStringValue(),
 					Gorgon::Point
 					(
-						mScript->function("getObjectXPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue(),
-						mScript->function("getObjectYPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue()
+						mScript->function("script_getObjectXPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue(),
+						mScript->function("script_getObjectYPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue()
 					)
 				)
 			);

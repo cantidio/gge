@@ -26,14 +26,91 @@ function setLayerPointer(pPointer)
 	layerPointer = pPointer
 end
 
---Função que retorna o número de tiles do layer
+function script_getTileNumber()
+	return #tiles;
+end
+
+function script_getTileAnimation(pTile)
+	return tiles[pTile].animation;
+end
+
+function script_getTileInstances(pTile)
+	return #tiles[pTile].position;
+end
+
+function script_getTileXPosition(pTile,pInst)
+	return tiles[pTile].position[pInst].x;
+end
+
+function script_getTileYPosition(pTile,pInst)
+	return tiles[pTile].position[pInst].y;
+end
+
+--Função que retorna o número de objects do layer
 --
 -- @author	Cantidio Oliveira Fontes
 -- @since	18/03/2009
 -- @version	18/03/2009
 -- @return	int
+function script_getObjectNumber()
+	return #objects;
+end
+
+--Função que retorna o script de um object do layer
+--
+-- @author	Cantidio Oliveira Fontes
+-- @since	18/03/2009
+-- @version	18/03/2009
+-- @return	int
+function script_getObjectScript(object)
+	return objectss[object].script;
+end
+
+--Função que retorna o número de instâncias de um object
+--
+-- @author	Cantidio Oliveira Fontes
+-- @since	18/03/2009
+-- @version	18/03/2009
+-- @return	int
+function script_getObjectInstances(object)
+	return #objects[object].position;
+end
+
+--Função que retorna a posição x de uma determinada instância de um determinado object
+--
+-- @author	Cantidio Oliveira Fontes
+-- @since	18/03/2009
+-- @version	18/03/2009
+-- @param	int object, índice do object
+-- @param	int inst, instância do object
+-- @return	int
+function script_getObjectXPosition(object,inst)
+	return objects[object].position[inst].x;	
+end
+
+--Função que retorna a posição y de uma determinada instância de um determinado object
+--
+-- @author	Cantidio Oliveira Fontes
+-- @since	18/03/2009
+-- @version	18/03/2009
+-- @param	int object, índice do object
+-- @param	int inst, instância do object
+-- @return	int
+function script_getObjectYPosition(object,inst)
+	return objects[object].position[inst].y;
+end
+
+-----------------------------------------------------------------------
+--[[
+	--Função que retorna o número de tiles do layer
+	--
+	-- @author	Cantidio Oliveira Fontes
+	-- @since	18/03/2009
+	-- @version	18/03/2009
+	-- @return	int
+-]]
 function getTileNumber()
-	return #tiles;
+	return lua_getTileNumber(layerPointer);
 end
 --[[
 	-- Função que retorna a animação de um tile do layer
@@ -44,7 +121,7 @@ end
 	-- @return	int
 -]]
 function getTileAnimation(pTile)
-	return tiles[pTile].animation;--lua_getTileAnimation(layerPointer,pTile);
+	return lua_getTileAnimation(layerPointer,pTile);
 end
 --[[
 	-- Funcão que muda a animacao do tile
@@ -56,7 +133,6 @@ end
 	-- @param	int pAnimation, numero da nova animacao
 -]]
 function setTileAnimation(pTile,pAnimation)
-	tiles[pTile].animation=pAnimation;
 	lua_setTileAnimation(layerPointer,pTile - 1,pAnimation);
 end
 --[[
@@ -69,7 +145,12 @@ end
 	-- @return	int
 -]]
 function getTileInstances(pTile)
-	return #tiles[pTile].position;
+	local inst = lua_getTileInstances(layerPointer,pTile);
+	for i = 1, #inst do
+		inst[i].x = inst[i][1];
+		inst[i].y = inst[i][2];
+	end
+	return inst;
 end
 --[[
 	-- Funcao que adiciona uma instancia a um determinado tile
@@ -81,7 +162,6 @@ end
 	-- @param	{x,y} pPos, posicão x,y do novo tile
 -]]
 function addTileInstance(pTile,pPos)
-	tiles[pTile].position[#tiles[pTile].position+1] = pPos;
 	lua_addTileInstance(
 		layerPointer,
 		pTile - 1,
@@ -99,7 +179,6 @@ end
 	-- @param	int pInst, indice da instancia do tile a ser removida
 -]]
 function removeTileInstance(pTile,pInst)
-	tiles[pTile].position[pInst] = nil; --@todo atualizart isso, fazer todas isntancias que estao depois serem alocadas para baixo
 	lua_removeTileInstance(
 		layerPointer,
 		pTile - 1,
@@ -107,13 +186,6 @@ function removeTileInstance(pTile,pInst)
 	);	
 end
 
-function getTileXPosition(pTile,pInst)
-	return tiles[pTile].position[pInst].x;
-end
-
-function getTileYPosition(pTile,pInst)
-	return tiles[pTile].position[pInst].y;
-end
 --[[
 	-- Funcão que retorna a posicão de uma determinada instancia de um determinado tile
 	--
@@ -125,8 +197,10 @@ end
 	-- @return	{x,y}
 -]]
 function getTilePosition(pTile,pInst)
-	return { x = tiles[pTile].position[pInst].x , y = tiles[pTile].position[pInst].y };
+	X,Y = lua_getTilePosition(layerPointer,pTile-1,pInst-1);
+	return { x = X, y = Y}
 end
+
 --[[
 	-- Funcao para setar a posicao de uma instancia de um tile
 	--
@@ -138,7 +212,6 @@ end
 	-- @param	int pPos	, nova posicao para o tile
 -]]
 function setTilePosition(pTile,pInst,pPos)
-	tiles[pTile].position[pInst] = pPos;
 	lua_setTilePosition(
 		layerPointer,
 		pTile - 1,

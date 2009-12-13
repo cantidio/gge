@@ -18,7 +18,7 @@ function Object(pPointer)
 	-- @param	int pGroup, grupo da animação que deseja-se encontrar o índice real
 	-- @param	int pIndex, índice da animação que deseja-se encontrar o índice real
 	-- @return	int
-	function getAnimationRealIndex(pGroup,pIndex)
+	local function getAnimationRealIndex(pGroup,pIndex)
 		return lua_getAnimationRealIndex(obj.pointer,pGroup,pIndex)
 	end
 

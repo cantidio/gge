@@ -175,6 +175,17 @@ int main(int argc, char** argv)
 {
     string bgImageName;
     int tileSize;
+	/*cout << "Digite quantas camadas o cenário possui: ";
+	cin << bglayerNumber;
+	for(int i = 0; i < bglayerNumber; ++i)
+	{
+	 cout << "Digite o nome da imagem do layer: " << i+1 << " do cenário: ";
+	 cin >> s
+
+
+
+
+	}*/
     cout << "Digite o nome da imagem do cenário: ";
     cin >> bgImageName;
     cout << endl;
