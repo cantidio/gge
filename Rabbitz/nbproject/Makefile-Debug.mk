@@ -16,34 +16,38 @@ CC=gcc
 CCC=g++
 CXX=g++
 FC=
+AS=as
 
 # Macros
-PLATFORM=GNU-Linux-x86
+CND_PLATFORM=GNU-Linux-x86
+CND_CONF=Debug
+CND_DISTDIR=dist
 
 # Include project Makefile
 include Makefile
 
 # Object Directory
-OBJECTDIR=build/Debug/${PLATFORM}
+OBJECTDIR=build/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/core/src/text_window_lua.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character_lua.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/player.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src/background_lua.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src/tile.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src/layer.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src/background.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src/input.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/resource_manager/src/sprite_manager.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/object.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/object_lua.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/core/src/text_window.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/Rabbitz/../src/input/src/input_lua.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/resource_manager/src/animation_manager.o \
-	${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/background.o
+	${OBJECTDIR}/_ext/_DOTDOT/src/resource_manager/src/sprite_manager.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/character_lua.o \
+	${OBJECTDIR}/_ext/_DOTDOT/tests/background.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/resource_manager/src/animation_manager.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/background/src/background.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/core/src/text_window.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/character.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/input/src/input.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/player.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/background/src/layer.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/input/src/input_lua.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/object.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/background/src/tile.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/background/src/background_lua.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/core/src/text_window_lua.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/object_lua.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/background/src/layer_lua.o
 
 # C Compiler Flags
 CFLAGS=
@@ -55,111 +59,119 @@ CXXFLAGS=
 # Fortran Compiler Flags
 FFLAGS=
 
+# Assembler Flags
+ASFLAGS=
+
 # Link Libraries and Options
-LDLIBSOPTIONS=-Wl,-rpath /home/cantidio/Development/gorgon++/Gorgon++/dist/Debug/GNU-Linux-x86 -L/home/cantidio/Development/gorgon++/Gorgon++/dist/Debug/GNU-Linux-x86 -lgorgon `allegro-config --libs`  
+LDLIBSOPTIONS=`allegro-config --libs` -Wl,-rpath /home/aniquilator/Development/gorgon++/Gorgon++/dist/Debug/GNU-Linux-x86 -L/home/aniquilator/Development/gorgon++/Gorgon++/dist/Debug/GNU-Linux-x86 -lgorgon  
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	${MAKE}  -f nbproject/Makefile-Debug.mk dist/Debug/${PLATFORM}/rabbitz
+	${MAKE}  -f nbproject/Makefile-Debug.mk dist/Debug/GNU-Linux-x86/rabbitz
 
-dist/Debug/${PLATFORM}/rabbitz: /home/cantidio/Development/gorgon++/Gorgon++/dist/Debug/GNU-Linux-x86/libgorgon.so
+dist/Debug/GNU-Linux-x86/rabbitz: /home/aniquilator/Development/gorgon++/Gorgon++/dist/Debug/GNU-Linux-x86/libgorgon.so
 
-dist/Debug/${PLATFORM}/rabbitz: ${OBJECTFILES}
-	${MKDIR} -p dist/Debug/${PLATFORM}
-	${LINK.cc} -o dist/Debug/${PLATFORM}/rabbitz ${OBJECTFILES} ${LDLIBSOPTIONS} 
+dist/Debug/GNU-Linux-x86/rabbitz: ${OBJECTFILES}
+	${MKDIR} -p dist/Debug/GNU-Linux-x86
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/rabbitz ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character.o: /home/cantidio/Development/rabbitz/src/objects/src/character.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src
+${OBJECTDIR}/_ext/_DOTDOT/src/resource_manager/src/sprite_manager.o: nbproject/Makefile-${CND_CONF}.mk ../src/resource_manager/src/sprite_manager.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/resource_manager/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character.o /home/cantidio/Development/rabbitz/src/objects/src/character.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/resource_manager/src/sprite_manager.o ../src/resource_manager/src/sprite_manager.cpp
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/core/src/text_window_lua.o: /home/cantidio/Development/rabbitz/src/core/src/text_window_lua.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/core/src
+${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/character_lua.o: nbproject/Makefile-${CND_CONF}.mk ../src/objects/src/character_lua.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/objects/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/core/src/text_window_lua.o /home/cantidio/Development/rabbitz/src/core/src/text_window_lua.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/character_lua.o ../src/objects/src/character_lua.cpp
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character_lua.o: /home/cantidio/Development/rabbitz/src/objects/src/character_lua.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src
+${OBJECTDIR}/_ext/_DOTDOT/tests/background.o: nbproject/Makefile-${CND_CONF}.mk ../tests/background.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/tests
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/character_lua.o /home/cantidio/Development/rabbitz/src/objects/src/character_lua.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/tests/background.o ../tests/background.cpp
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/player.o: /home/cantidio/Development/rabbitz/src/objects/src/player.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src
+${OBJECTDIR}/_ext/_DOTDOT/src/resource_manager/src/animation_manager.o: nbproject/Makefile-${CND_CONF}.mk ../src/resource_manager/src/animation_manager.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/resource_manager/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/player.o /home/cantidio/Development/rabbitz/src/objects/src/player.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/resource_manager/src/animation_manager.o ../src/resource_manager/src/animation_manager.cpp
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src/background_lua.o: /home/cantidio/Development/rabbitz/src/background/src/background_lua.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src
+${OBJECTDIR}/_ext/_DOTDOT/src/background/src/background.o: nbproject/Makefile-${CND_CONF}.mk ../src/background/src/background.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/background/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src/background_lua.o /home/cantidio/Development/rabbitz/src/background/src/background_lua.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/background/src/background.o ../src/background/src/background.cpp
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src/tile.o: /home/cantidio/Development/rabbitz/src/background/src/tile.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src
+${OBJECTDIR}/_ext/_DOTDOT/src/core/src/text_window.o: nbproject/Makefile-${CND_CONF}.mk ../src/core/src/text_window.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/core/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src/tile.o /home/cantidio/Development/rabbitz/src/background/src/tile.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/core/src/text_window.o ../src/core/src/text_window.cpp
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src/layer.o: /home/cantidio/Development/rabbitz/src/background/src/layer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src
+${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/character.o: nbproject/Makefile-${CND_CONF}.mk ../src/objects/src/character.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/objects/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src/layer.o /home/cantidio/Development/rabbitz/src/background/src/layer.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/character.o ../src/objects/src/character.cpp
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src/background.o: /home/cantidio/Development/rabbitz/src/background/src/background.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src
+${OBJECTDIR}/_ext/_DOTDOT/src/input/src/input.o: nbproject/Makefile-${CND_CONF}.mk ../src/input/src/input.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/input/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/background/src/background.o /home/cantidio/Development/rabbitz/src/background/src/background.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/input/src/input.o ../src/input/src/input.cpp
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src/input.o: /home/cantidio/Development/rabbitz/src/input/src/input.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src
+${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/player.o: nbproject/Makefile-${CND_CONF}.mk ../src/objects/src/player.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/objects/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/input/src/input.o /home/cantidio/Development/rabbitz/src/input/src/input.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/player.o ../src/objects/src/player.cpp
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/resource_manager/src/sprite_manager.o: /home/cantidio/Development/rabbitz/src/resource_manager/src/sprite_manager.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/resource_manager/src
+${OBJECTDIR}/_ext/_DOTDOT/src/background/src/layer.o: nbproject/Makefile-${CND_CONF}.mk ../src/background/src/layer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/background/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/resource_manager/src/sprite_manager.o /home/cantidio/Development/rabbitz/src/resource_manager/src/sprite_manager.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/background/src/layer.o ../src/background/src/layer.cpp
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/object.o: /home/cantidio/Development/rabbitz/src/objects/src/object.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src
+${OBJECTDIR}/_ext/_DOTDOT/src/input/src/input_lua.o: nbproject/Makefile-${CND_CONF}.mk ../src/input/src/input_lua.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/input/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/object.o /home/cantidio/Development/rabbitz/src/objects/src/object.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/input/src/input_lua.o ../src/input/src/input_lua.cpp
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/object_lua.o: /home/cantidio/Development/rabbitz/src/objects/src/object_lua.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src
+${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/object.o: nbproject/Makefile-${CND_CONF}.mk ../src/objects/src/object.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/objects/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/objects/src/object_lua.o /home/cantidio/Development/rabbitz/src/objects/src/object_lua.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/object.o ../src/objects/src/object.cpp
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/core/src/text_window.o: /home/cantidio/Development/rabbitz/src/core/src/text_window.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/core/src
+${OBJECTDIR}/_ext/_DOTDOT/src/background/src/tile.o: nbproject/Makefile-${CND_CONF}.mk ../src/background/src/tile.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/background/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/core/src/text_window.o /home/cantidio/Development/rabbitz/src/core/src/text_window.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/background/src/tile.o ../src/background/src/tile.cpp
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/Rabbitz/../src/input/src/input_lua.o: ../src/input/src/input_lua.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/Rabbitz/../src/input/src
+${OBJECTDIR}/_ext/_DOTDOT/src/background/src/background_lua.o: nbproject/Makefile-${CND_CONF}.mk ../src/background/src/background_lua.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/background/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/Rabbitz/../src/input/src/input_lua.o ../src/input/src/input_lua.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/background/src/background_lua.o ../src/background/src/background_lua.cpp
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/resource_manager/src/animation_manager.o: /home/cantidio/Development/rabbitz/src/resource_manager/src/animation_manager.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/resource_manager/src
+${OBJECTDIR}/_ext/_DOTDOT/src/core/src/text_window_lua.o: nbproject/Makefile-${CND_CONF}.mk ../src/core/src/text_window_lua.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/core/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/src/resource_manager/src/animation_manager.o /home/cantidio/Development/rabbitz/src/resource_manager/src/animation_manager.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/core/src/text_window_lua.o ../src/core/src/text_window_lua.cpp
 
-${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/background.o: /home/cantidio/Development/rabbitz/tests/background.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests
+${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/object_lua.o: nbproject/Makefile-${CND_CONF}.mk ../src/objects/src/object_lua.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/objects/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/home/cantidio/Development -I../src -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/home/cantidio/Development/rabbitz/tests/background.o /home/cantidio/Development/rabbitz/tests/background.cpp
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/object_lua.o ../src/objects/src/object_lua.cpp
+
+${OBJECTDIR}/_ext/_DOTDOT/src/background/src/layer_lua.o: nbproject/Makefile-${CND_CONF}.mk ../src/background/src/layer_lua.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/background/src
+	${RM} $@.d
+	$(COMPILE.cc) -g -I../src -I../.. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/background/src/layer_lua.o ../src/background/src/layer_lua.cpp
 
 # Subprojects
 .build-subprojects:
-	cd /home/cantidio/Development/gorgon++/Gorgon++ && ${MAKE}  -f Makefile CONF=Debug
+	cd /home/aniquilator/Development/gorgon++/Gorgon++ && ${MAKE}  -f Makefile CONF=Debug
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r build/Debug
-	${RM} dist/Debug/${PLATFORM}/rabbitz
+	${RM} dist/Debug/GNU-Linux-x86/rabbitz
 
 # Subprojects
 .clean-subprojects:
-	cd /home/cantidio/Development/gorgon++/Gorgon++ && ${MAKE}  -f Makefile CONF=Debug clean
+	cd /home/aniquilator/Development/gorgon++/Gorgon++ && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl

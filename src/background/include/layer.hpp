@@ -172,6 +172,33 @@ class Layer
 		 * @param	Tile* pTile, Tile a ser adicionado
 		 */
 		void addTile(Tile* pTile);
+                /**
+                 * Método para retornar o ponteiro do spritePack do layer
+                 * 
+                 * @author  Cantidio Oliveira Fontes
+                 * @since   12/12/2009
+                 * @version 12/12/2009
+                 * @return  Gorgon::SpritePack*
+                 */
+                Gorgon::SpritePack* getSpritePack();
+                /**
+                 * Método para retornar o ponteiro do animationPack do layer
+                 *
+                 * @author  Cantidio Oliveira Fontes
+                 * @since   12/12/2009
+                 * @version 12/12/2009
+                 * @return  Gorgon::AnimationPack*
+                 */
+                Gorgon::AnimationPack* getAnimationPack();
+		/**
+		 * Método para retornar o número de tiles do layer
+		 * 
+		 * @author  Cantidio Oliveira Fontes
+		 * @since   12/12/2009
+		 * @version 12/12/2009
+		 * @return  int
+		 */
+		int getTileNumber() const;
 		/**
 		 * Método para retornar a posição x real do layer
 		 *
@@ -234,5 +261,25 @@ class Layer
 		 * @param	const std::string& pFileName, nome do arquivo a carregar
 		 */
 		void load(const std::string& pFileName);
+		/**
+		 * Operador para acessar algum tile dada sua posição
+		 *
+		 * @author	Cantídio Oliveira Fontes
+		 * @since	12/12/2009
+		 * @version	12/12/2009
+		 * @param	const int& pPos, a posição que deseja-se selecionar
+		 * @return	Tile&
+		 */
+		Tile& operator [](const int& pPos);
+		/**
+		 * Operador para acessar algum tile dada sua posição, de forma constante
+		 *
+		 * @author	Cantídio Oliveira Fontes
+		 * @since	12/12/2009
+		 * @version	12/12/2009
+		 * @param	const int& pPos, a posição que deseja-se selecionar
+		 * @return	const Tile&
+		 */
+		const Tile& operator [](const int& pPos) const;
 };
 #endif

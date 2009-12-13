@@ -1,10 +1,15 @@
 #include "../include/layer.hpp"
+#include "../include/layer_lua.hpp"
 
 Layer::Layer(const double& pXScrollSpeed,const double& pYScrollSpeed)
 {
 	mScript			= new Gorgon::Lua("data/background/background_layer.lua");
 	mXScrollSpeed	= pXScrollSpeed;
 	mYScrollSpeed	= pYScrollSpeed;
+	mSpritePack     = new Gorgon::SpritePack();
+	mAnimationPack  = new Gorgon::AnimationPack();
+	mScript->function("setLayerPointer",Gorgon::LuaParam("n",this));
+	LayerLua::registerFunctions(mScript);
 }
 
 Layer::Layer(const Layer& pOrig)
@@ -41,6 +46,21 @@ void Layer::describe() const
 		std::cout << "Tile: " << i << std::endl;
 		mTiles[i]->describe();
 	}
+}
+
+Gorgon::SpritePack* Layer::getSpritePack()
+{
+    return mSpritePack;
+}
+
+Gorgon::AnimationPack* Layer::getAnimationPack()
+{
+    return mAnimationPack;
+}
+
+int Layer::getTileNumber() const
+{
+	return mTiles.size();
 }
 
 int Layer::getRealPosX(const int& pPosX) const
@@ -124,8 +144,8 @@ void Layer::save(const std::string& pFileName) const
 				file << "\t\tposition	= {"	<< std::endl;
 				for(int j=0; j<mTiles[i]->getSize(); ++j)
 				{
-					file << "\t\t\t{ x = " << mTiles[i]->getXPostion(j);
-					file << ", y = " << mTiles[i]->getYPostion(j) << " }," << std::endl;
+					file << "\t\t\t{ x = " << mTiles[i]->getXPosition(j);
+					file << ", y = " << mTiles[i]->getYPosition(j) << " }," << std::endl;
 				}
 				file << "\t\t}"	<< std::endl;
 				file << "\t},"	<< std::endl;
@@ -161,6 +181,8 @@ void Layer::load(const std::string& pFileName)
 	mScript->loadScript(pFileName);
 	loadGlobalVars();
 	setUp();
+	std::cout << "toaki" << std::endl;
+	
 }
 
 void Layer::loadGlobalVars()
@@ -174,7 +196,7 @@ void Layer::loadGlobalVars()
 void Layer::loadTiles()
 {
 	const int tileNumber	=(int)mScript->function("getTileNumber",Gorgon::LuaParam(),1)->getNumericValue();
-	for(int i=1; i<=tileNumber; ++i)
+	for(int i=1; i <= tileNumber; ++i)
 	{
 		mTiles.push_back
 		(
@@ -224,9 +246,27 @@ void Layer::loadObjects()
 void Layer::setUp()
 {
 	loadGlobalVars();
+	mScript->function("setLayerPointer",Gorgon::LuaParam("n",this));
+	LayerLua::registerFunctions(mScript);
 	//registerFunctions();
 	mSpritePack		= ResourceManager::SpriteManager::load(mSpritePackName);
 	mAnimationPack	= ResourceManager::AnimationManager::load(mAnimationPackName);
 	loadTiles();
 	loadObjects();
+}
+
+Tile& Layer::operator [](const int& pPos)
+{
+	if(pPos < mTiles.size())
+	{
+		return *mTiles[pPos];
+	}
+}
+
+const Tile& Layer::operator [](const int& pPos) const
+{
+	if(pPos < mTiles.size())
+	{
+		return *mTiles[pPos];
+	}
 }

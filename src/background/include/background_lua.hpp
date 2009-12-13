@@ -140,7 +140,7 @@ namespace BackgroundLua
 	 */
 	int scrollUnlock(lua_State* pState);
 	/**
-	 * Método que registra as funçãode cenário para serem acessadas por um script
+	 * Método que registra as funçoes de cenário para serem acessadas por um script
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	19/03/2009

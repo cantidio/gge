@@ -34,7 +34,7 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	17/03/2009
- * @version	28/05/2009
+ * @version	13/12/2009
  * @ingroup	Background
  * @todo	Substituir o vetor de posição x e y, por um vetor de Gorgon::Point(x,y)
  */
@@ -96,6 +96,15 @@ class Tile
 		 * @return	int
 		 */
 		int getAnimation() const;
+                /**
+                 * Método para mudar a animacao do tile
+                 *
+                 * @author  Cantidio Oliveira Fontes
+                 * @since   13/12/2009
+                 * @version 13/12/2009
+                 * @param   const int& pAnimation, o numero da nova animacão
+                 */
+                void setAnimation(const int& pAnimation);
 		/**
 		 * Método para retornar a posição x do tile de índice indicado
 		 *
@@ -105,7 +114,7 @@ class Tile
 		 * @param	const int& pIndex, índice do tile
 		 * @return	int
 		 */
-		int getXPostion(const int& pIndex) const;
+		int getXPosition(const int& pIndex) const;
 		/**
 		 * Método para retornar a posição y do tile de índice indicado
 		 *
@@ -115,7 +124,23 @@ class Tile
 		 * @param	const int& pIndex, índice do tile
 		 * @return	int
 		 */
-		int getYPostion(const int& pIndex) const;
+		int getYPosition(const int& pIndex) const;
+                /**
+                 * Método para setar a posicão de uma instancia do tile
+                 * 
+                 * @author  Cantidio oliveira Fontes
+                 * @since   13/12/2009
+                 * @version 13/12/2009
+                 * @param   const int& pIndex, indice da instancia do tile
+                 * @param   const int& pPosX, posicao X 
+                 * @param   const int& pPosY, posicao Y
+                 */
+                void setPosition
+                (
+                    const int& pIndex,
+                    const int& pPosX,
+                    const int& pPosY
+                );
 		/**
 		 * Método para retornar o número de tiles
 		 *
@@ -135,6 +160,15 @@ class Tile
 		 * @param	const int& pPosY, posição y do tile
 		 */
 		void add(const int& pPosX, const int& pPosY);
+                /**
+                 * Método para remover uma determinada instância do tile
+                 * 
+                 * @author  Cantidio Oliveira Fontes
+                 * @since   13/12/2009
+                 * @version 13/12/2009
+                 * @param   const int& pIndex, indice da instancia a ser removida
+                 */
+                void remove(const int& pIndex);
 		/**
 		 * Método que executa a lógica envolvida no tile
 		 *

@@ -15,7 +15,7 @@ Tile::Tile
 Tile::Tile(const Tile& pOrig)
 {
 	mAnimationHandler= new Gorgon::AnimationHandler(*pOrig.mAnimationHandler);
-	for(int i=0; i < pOrig.mPosX.size(); ++i)
+	for(int i = 0; i < pOrig.mPosX.size(); ++i)
 	{
 		mPosX.push_back(pOrig.mPosX[i]);
 		mPosY.push_back(pOrig.mPosY[i]);
@@ -35,11 +35,11 @@ Tile::~Tile()
 
 void Tile::describe() const
 {
-	std::cout << "Tile Describer" << std::endl;
-	std::cout << "Memory SprPack:" << &mAnimationHandler->getSpritePack() << std::endl;
-	std::cout << "Memory AniPack:" << &mAnimationHandler->getAnimationPack()<< std::endl;
-	std::cout << "Animation:" << mAnimationHandler->getAnimationOn() << std::endl;
-	std::cout << "Positions:" << std::endl;
+	std::cout << "Tile Describer"	<<	std::endl;
+	std::cout << "Memory SprPack:"	<<	&mAnimationHandler->getSpritePack()		<< std::endl;
+	std::cout << "Memory AniPack:"	<<	&mAnimationHandler->getAnimationPack()	<< std::endl;
+	std::cout << "Animation:"		<<	mAnimationHandler->getAnimationOn()		<< std::endl;
+	std::cout << "Positions:"		<<	std::endl;
 
 	for(int i=0; i < mPosX.size(); ++i)
 	{
@@ -52,7 +52,12 @@ int Tile::getAnimation() const
 	return mAnimationHandler->getAnimationOn();
 }
 
-int Tile::getXPostion(const int& pIndex) const
+void Tile::setAnimation(const int& pAnimation)
+{
+	mAnimationHandler->changeAnimation(pAnimation);
+}
+
+int Tile::getXPosition(const int& pIndex) const
 {
 	if(pIndex < mPosX.size())
 	{
@@ -61,13 +66,27 @@ int Tile::getXPostion(const int& pIndex) const
 	return 0;
 }
 
-int Tile::getYPostion(const int& pIndex) const
+int Tile::getYPosition(const int& pIndex) const
 {
 	if(pIndex < mPosY.size())
 	{
 		return mPosY[pIndex];
 	}
 	return 0;
+}
+
+void Tile::setPosition
+(
+	const int& pIndex,
+	const int& pPosX,
+	const int& pPosY
+)
+{
+	if(pIndex < mPosY.size())
+	{
+		mPosX[pIndex] = pPosX;
+		mPosY[pIndex] = pPosY;
+	}
 }
 
 int Tile::getSize() const
@@ -79,6 +98,11 @@ void Tile::add(const int& pPosX, const int& pPosY)
 {
 	mPosX.push_back(pPosX);
 	mPosY.push_back(pPosY);
+}
+
+void Tile::remove(const int& pIndex)
+{
+	mPosX.erase(mPosX.begin() + pIndex);
 }
 
 void Tile::logic()
