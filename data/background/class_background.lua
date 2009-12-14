@@ -13,7 +13,7 @@ function script_getGravity()
 	return this.gravity
 end
 
-function script_getvoidFriction()
+function script_getVoidFriction()
 	return this.voidFriction
 end
 

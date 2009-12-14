@@ -33,7 +33,7 @@
  *
  * @author		Cantidio Oliveira Fontes
  * @since		18/03/2009
- * @version		28/05/2009
+ * @version		15/12/2009
  * @details
  *				O módulo Background engloba todas as funcionalidades relacionadas
  *				à parte de cenários, camadas de cenários, tiles e a interação dos mesmos
@@ -44,7 +44,7 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	18/03/2009
- * @version	28/05/2009
+ * @version	15/12/2009
  * @ingroup	Background
  */
 class Background
@@ -100,7 +100,7 @@ class Background
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @version	28/05/2009
+		 * @version	15/12/2009
 		 */
 		void loadLayers();
 		/**
@@ -244,34 +244,34 @@ class Background
 		 */
 		double getYPos() const;
 
-                /**
-                 * Método para retornar o número de layers do cenário
-                 *
-                 * @author  Cantidio Oliveira Fontes
-                 * @since   14/12/2009
-                 * @version 14/12/2009
-                 * @return  int
-                 */
-                int getLayerNumber() const;
-                /**
-                 * Operador
-                 *
-                 * @author  Cantídio Oliveira Fontes
-                 * @since   14/12/2009
-                 * @version 14/12/2009
-                 * @param   const int& pPos, posicão a recuperar o Layer
-                 * @return  const Layer&
-                 */
-                const Layer& operator [](const int& pPos) const;
-                /**
-                 * Operador
-                 *
-                 * @author  Cantídio Oliveira Fontes
-                 * @since   14/12/2009
-                 * @version 14/12/2009
-                 * @param   const int& pPos, posicão a recuperar o Layer
-                 * @return  Layer&
-                 */
-                Layer& operator [](const int& pPos);
+		/**
+		 * Método para retornar o número de layers do cenário
+		 *
+		 * @author  Cantidio Oliveira Fontes
+		 * @since   14/12/2009
+		 * @version 14/12/2009
+		 * @return  int
+		 */
+		int getLayerNumber() const;
+		/**
+		 * Operador
+		 *
+		 * @author  Cantídio Oliveira Fontes
+		 * @since   14/12/2009
+		 * @version 14/12/2009
+		 * @param   const int& pPos, posicão a recuperar o Layer
+		 * @return  const Layer&
+		 */
+		const Layer& operator [](const int& pPos) const;
+		/**
+		 * Operador
+		 *
+		 * @author  Cantídio Oliveira Fontes
+		 * @since   14/12/2009
+		 * @version 14/12/2009
+		 * @param   const int& pPos, posicão a recuperar o Layer
+		 * @return  Layer&
+		 */
+		Layer& operator [](const int& pPos);
 };
 #endif

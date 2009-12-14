@@ -1,4 +1,4 @@
-
+/*
 Background* createYamattoBackground()
 {
 	Gorgon::SpritePack		*bgImg;
@@ -605,4 +605,4 @@ Background* createYamattoBackground()
 	Layer as("teste_layer1.lua");
 	bg->addLayer(new Layer("teste_layer1.lua"));
 	return bg;
-}
+}*/

@@ -119,7 +119,14 @@ void Background::loadLayers()
 	const int layerNumber =(int)mScript->function("script_getLayerNumber",Gorgon::LuaParam(),1)->getNumericValue();
 	for(int i = 1; i <= layerNumber; ++i)
 	{
-		mLayers.push_back(new Layer(mScript->function("script_getLayer",Gorgon::LuaParam("n",i),1)->getStringValue()));
+		mLayers.push_back
+		(
+			new Layer
+			(
+				mScript->function("script_getLayer",Gorgon::LuaParam("n",i),1)->getStringValue(),
+				this
+			)
+		);
 	}
 }
 

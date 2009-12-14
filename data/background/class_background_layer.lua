@@ -1,3 +1,4 @@
+dofile("data/background/class_tile.lua")
 --[[
 	-- Funcão
 	--
@@ -153,69 +154,35 @@ function Layer()
 		-- @return	int
 	-]]
 	local function getTileNumber()
-		return lua_getTileNumber(obj.pointer);
+		return lua_layer_getTileNumber(obj.pointer);
 	end
 	--[[
-		-- Função que retorna a animação de um tile do layer
+		--Função que retorna um tile
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	18/03/2009
-		-- @version	13/12/2009
-		-- @return	int
+		-- @version	14/12/2009
+		-- @param	int pTile, indice do tile
+		-- @return	Tile
 	-]]
-	local function getTileAnimation(pTile)
-		return lua_getTileAnimation(obj.pointer,pTile);
+	local function getTile(pTile)
+		local tile = Tile(lua_layer_getTilePointer(obj.pointer,pTile-1))
+		return tile;
 	end
 	--[[
-		-- Funcão que muda a animacao do tile
-		-- 
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	13/12/2009
-		-- @version	13/12/2009
-		-- @param	int pTile, numero do tile a mudar a animacao
-		-- @param	int pAnimation, numero da nova animacao
-	-]]
-	local function setTileAnimation(pTile,pAnimation)
-		lua_setTileAnimation(
-			obj.pointer,
-			pTile - 1,
-			pAnimation
-		);
-	end
-	--[[
-		--Função que retorna o número de instâncias de um tile
+		--Função que retorna o background do Layer
 		--
 		-- @author	Cantidio Oliveira Fontes
-		-- @since	18/03/2009
-		-- @version	18/03/2009
-		-- @param	int pTile, indice do tile
-		-- @return	int
+		-- @since	15/12/2009
+		-- @version	15/12/2009
+		-- @return	Background
 	-]]
-	local function getTileInstances(pTile)
-		local inst = lua_getTileInstances(obj.pointer,pTile);
-		for i = 1, #inst do
-			inst[i].x = inst[i][1];
-			inst[i].y = inst[i][2];
-		end
-		return inst;
+	local function getBackground()
+		local background = Background()
+		background.setPointer(lua_layer_getBackgroundPointer(obj.pointer))
+		return background;
 	end
-	--[[
-		-- Funcao que adiciona uma instancia a um determinado tile
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	13/12/2009
-		-- @version	13/12/2009
-		-- @param	int pTile, indice do tile
-		-- @param	{x,y} pPos, posicão x,y do novo tile
-	-]]
-	local function addTileInstance(pTile,pPos)
-		lua_addTileInstance(
-			obj.pointer,
-			pTile - 1,
-			pPos.x,
-			pPos.y
-		);	
-	end
+	
 	--[[
 		-- Funcao que remove uma instancia de um determinado tile
 		--
@@ -225,50 +192,15 @@ function Layer()
 		-- @param	int pTile, indice do tile
 		-- @param	int pInst, indice da instancia do tile a ser removida
 	-]]
-	local function removeTileInstance(pTile,pInst)
-		lua_removeTileInstance(
-			obj.pointer,
-			pTile - 1,
-			pInst - 1
-		);	
-	end
-	--[[
-		-- Funcão que retorna a posicão de uma determinada instancia de um determinado tile
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	13/12/2009
-		-- @version	13/12/2009
-		-- @param	int pTile, indice do tile
-		-- @param	int pInst, instancia do tile
-		-- @return	{x,y}
-	-]]
-	local function getTilePosition(pTile,pInst)
-		X,Y = lua_getTilePosition(
-		obj.pointer,
-		pTile - 1,
-		pInst - 1
-		);
-		return { x = X, y = Y}
-	end
-	--[[
-		-- Funcao para setar a posicao de uma instancia de um tile
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	13/12/2009
-		-- @version	13/12/2009
-		-- @param	int pTile	, indice do tile
-		-- @param	int pInst	, instancia do tile
-		-- @param	int pPos	, nova posicao para o tile
-	-]]
-	local function setTilePosition(pTile,pInst,pPos)
-		lua_setTilePosition(
-			obj.pointer,
-			pTile - 1,
-			pInst - 1,
-			pPos.x,
-			pPos.y
-		);	
-	end
+--	local function removeTileInstance(pTile,pInst)
+--		lua_removeTileInstance(
+--			obj.pointer,
+--			pTile - 1,
+--			pInst - 1
+--		);	
+--	end
+
+
 --[[
 	--Função que retorna o número de objects do layer
 	--
@@ -334,19 +266,10 @@ function Layer()
 	end
 
 	obj.setPointer				= setPointer
-	obj.script_getTileNumber	= script_getTileNumbe
-	obj.script_getTileAnimation	= script_getTileAnimation
-	obj.script_getTileInstances	= script_getTileInstances
-	obj.script_getTileXPosition	= script_getTileXPosition
-	obj.script_getTileYPosition	= script_getTileYPosition
 	obj.getTileNumber			= getTileNumber
-	obj.getTileAnimation		= getTileAnimation
-	obj.setTileAnimation		= setTileAnimation
-	obj.getTileInstances		= getTileInstances
-	obj.addTileInstance			= addTileInstance
-	obj.removeTileInstance		= removeTileInstance
-	obj.getTilePosition			= getTilePosition
-	obj.setTilePosition			= setTilePosition
+	obj.getTile					= getTile
+	obj.getBackground			= getBackground
+--	obj.removeTileInstance		= removeTileInstance
 	obj.logic					= logic
 
 	obj.pointer			= nil

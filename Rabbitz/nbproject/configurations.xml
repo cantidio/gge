@@ -42,6 +42,7 @@
           <itemPath>../src/background/include/layer.hpp</itemPath>
           <itemPath>../src/background/include/layer_lua.hpp</itemPath>
           <itemPath>../src/background/include/tile.hpp</itemPath>
+          <itemPath>../src/background/include/tile_lua.hpp</itemPath>
         </logicalFolder>
         <logicalFolder name="src" displayName="src" projectFiles="true">
           <itemPath>../src/background/src/background.cpp</itemPath>
@@ -49,6 +50,7 @@
           <itemPath>../src/background/src/layer.cpp</itemPath>
           <itemPath>../src/background/src/layer_lua.cpp</itemPath>
           <itemPath>../src/background/src/tile.cpp</itemPath>
+          <itemPath>../src/background/src/tile_lua.cpp</itemPath>
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="core" displayName="core" projectFiles="true">

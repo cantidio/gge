@@ -32,12 +32,13 @@
 #include "tile.hpp"
 #include <vector>
 
+class Background;
 /**
  * Classe que representa uma camada de um cenário
  *
  * @author	Cantidio Oliveira Fontes
  * @since	17/03/2009
- * @version	28/05/2009
+ * @version	15/12/2009
  * @ingroup	Background
  */
 class Layer
@@ -83,6 +84,10 @@ class Layer
 		 * Velocidade de deslocamento vertical do layer
 		 */
 		double mYScrollSpeed;
+		/**
+		 * Ponteiro para o background do layer
+		 */
+		Background* mBackground;
 	protected:
 		/**
 		 * Carrega as variáveis globais da classe
@@ -136,8 +141,9 @@ class Layer
 		 * @since	19/03/2009
 		 * @version	28/05/2009
 		 * @param	const std::string& pScriptName, nome do script do layer
+		 * @param	Background* pBackground, ponteiro para o Background do layer
 		 */
-		Layer(const std::string& pScriptName);
+		Layer(const std::string& pScriptName,Background* pBackground);
 		/**
 		 * Método Destrutor
 		 *
@@ -154,6 +160,15 @@ class Layer
 		 * @version	28/05/2009
 		 */
 		void describe() const;
+		/**
+		 * Método para retornar o ponteiro do Background do Layer
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	15/12/2009
+		 * @version	15/12/2009
+		 * @return	Background*
+		 */
+		Background* getBackground();
 		/**
 		 * Método para se adicionar um Object ao layer
 		 *
@@ -172,24 +187,24 @@ class Layer
 		 * @param	Tile* pTile, Tile a ser adicionado
 		 */
 		void addTile(Tile* pTile);
-                /**
-                 * Método para retornar o ponteiro do spritePack do layer
-                 * 
-                 * @author  Cantidio Oliveira Fontes
-                 * @since   12/12/2009
-                 * @version 12/12/2009
-                 * @return  Gorgon::SpritePack*
-                 */
-                Gorgon::SpritePack* getSpritePack();
-                /**
-                 * Método para retornar o ponteiro do animationPack do layer
-                 *
-                 * @author  Cantidio Oliveira Fontes
-                 * @since   12/12/2009
-                 * @version 12/12/2009
-                 * @return  Gorgon::AnimationPack*
-                 */
-                Gorgon::AnimationPack* getAnimationPack();
+		/**
+		 * Método para retornar o ponteiro do spritePack do layer
+		 *
+		 * @author  Cantidio Oliveira Fontes
+		 * @since   12/12/2009
+		 * @version 12/12/2009
+		 * @return  Gorgon::SpritePack*
+		 */
+		Gorgon::SpritePack* getSpritePack();
+		/**
+		 * Método para retornar o ponteiro do animationPack do layer
+		 *
+		 * @author  Cantidio Oliveira Fontes
+		 * @since   12/12/2009
+		 * @version 12/12/2009
+		 * @return  Gorgon::AnimationPack*
+		 */
+		Gorgon::AnimationPack* getAnimationPack();
 		/**
 		 * Método para retornar o número de tiles do layer
 		 * 
@@ -203,22 +218,12 @@ class Layer
 		 * Método para retornar a posição x real do layer
 		 *
 		 * @author	Cantidio Oliveira Fontes
-		 * @since	17/03/2009
-		 * @version	28/05/2009
-		 * @param	const int& pPosX, posição x
-		 * @return	int
+		 * @since	14/12/2009
+		 * @version	15/12/2009
+		 * @param	const Gorgon::Point& pPosition, posição
+		 * @return	Gorgon::Point
 		 */
-		int getRealPosX(const int& pPosX) const;
-		/**
-		 * Método para retornar a posição y real do layer
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	17/03/2009
-		 * @version	28/05/2009
-		 * @param	const int& pPosY, posição y
-		 * @return	int
-		 */
-		int getRealPosY(const int& pPosY) const;
+		Gorgon::Point getRealPosition(const Gorgon::Point& pPosition) const;
 		/**
 		 * Método que executa a lógica envolvida no layer
 		 *

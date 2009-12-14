@@ -29,6 +29,7 @@
 #include <gorgon++/gorgon.hpp>
 #include <vector>
 
+class Layer;
 /**
  * Classe que representa um tilede um cenário
  *
@@ -48,11 +49,11 @@ class Tile
 		/**
 		 * Posição do objeto no eixo x
 		 */
-		std::vector<int> mPosX;
+		Gorgon::Point mPosition;
 		/**
-		 * Posição do objeto no eixo y
+		 * Ponteiro para o layer do tile
 		 */
-		std::vector<int> mPosY;
+		Layer* mLayer;
 	public:
 		/**
 		 * Método Construtor
@@ -62,13 +63,17 @@ class Tile
 		 * @version	28/05/2009
 		 * @param	Gorgon::SpritePack*		pSpritePack			, ponteiro para o pacote de sprites
 		 * @param	Gorgon::AnimationPack*	pAnimationPack		, ponteiro para o pacote de animações
-		 * @param	const int&				pAnimationNumber	, número da animação do tile
+		 * @param	const int&              pAnimationNumber	, número da animação do tile
+		 * @param	const Gorgon::Point&	pPosition			, posicão do tile
+		 * @param	Layer*					pLayer				, ponteiro para o layer do tile
 		 */
 		Tile
 		(
 			Gorgon::SpritePack&		pSpritePack,
 			Gorgon::AnimationPack&	pAnimationPack,
-			const int&				pAnimationNumber
+			const int&				pAnimationNumber,
+			const Gorgon::Point&    pPosition,
+			Layer*					pLayer = NULL
 		);
 		Tile(const Tile& orig);
 		/**
@@ -88,6 +93,15 @@ class Tile
 		 */
 		void describe() const;
 		/**
+		 * Método para retornar o ponteiro do layer do Tile
+		 *
+		 * @author	Cantídio Oliveira Fontes
+		 * @since	14/12/2009
+		 * @version	14/12/2009
+		 * @return	Layer*
+		 */
+		Layer* getLayer();
+		/**
 		 * Método para retornar a animação do tile
 		 *
 		 * @author	Cantidio Oliveira Fontes
@@ -96,79 +110,33 @@ class Tile
 		 * @return	int
 		 */
 		int getAnimation() const;
-                /**
-                 * Método para mudar a animacao do tile
-                 *
-                 * @author  Cantidio Oliveira Fontes
-                 * @since   13/12/2009
-                 * @version 13/12/2009
-                 * @param   const int& pAnimation, o numero da nova animacão
-                 */
-                void setAnimation(const int& pAnimation);
+		/**
+		* Método para mudar a animacao do tile
+		*
+		* @author  Cantidio Oliveira Fontes
+		* @since   13/12/2009
+		* @version 13/12/2009
+		* @param   const int& pAnimation, o numero da nova animacão
+		*/
+		void setAnimation(const int& pAnimation);
 		/**
 		 * Método para retornar a posição x do tile de índice indicado
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @version	28/05/2009
-		 * @param	const int& pIndex, índice do tile
-		 * @return	int
+		 * @version	14/12/2009
+		 * @return	Gorgon::Point
 		 */
-		int getXPosition(const int& pIndex) const;
+		Gorgon::Point getPosition() const;
 		/**
-		 * Método para retornar a posição y do tile de índice indicado
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	19/03/2009
-		 * @version	28/05/2009
-		 * @param	const int& pIndex, índice do tile
-		 * @return	int
-		 */
-		int getYPosition(const int& pIndex) const;
-                /**
-                 * Método para setar a posicão de uma instancia do tile
-                 * 
-                 * @author  Cantidio oliveira Fontes
-                 * @since   13/12/2009
-                 * @version 13/12/2009
-                 * @param   const int& pIndex, indice da instancia do tile
-                 * @param   const int& pPosX, posicao X 
-                 * @param   const int& pPosY, posicao Y
-                 */
-                void setPosition
-                (
-                    const int& pIndex,
-                    const int& pPosX,
-                    const int& pPosY
-                );
-		/**
-		 * Método para retornar o número de tiles
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	19/03/2009
-		 * @version	28/05/2009
-		 * @return	int
-		 */
-		int getSize() const;
-		/**
-		 * Método para se adicionar um tile na posição indicada
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	17/03/2009
-		 * @version	28/05/2009
-		 * @param	const int& pPosX, posição x do tile
-		 * @param	const int& pPosY, posição y do tile
-		 */
-		void add(const int& pPosX, const int& pPosY);
-                /**
-                 * Método para remover uma determinada instância do tile
-                 * 
-                 * @author  Cantidio Oliveira Fontes
-                 * @since   13/12/2009
-                 * @version 13/12/2009
-                 * @param   const int& pIndex, indice da instancia a ser removida
-                 */
-                void remove(const int& pIndex);
+		* Método para setar a posicão de uma instancia do tile
+		*
+		* @author  Cantidio oliveira Fontes
+		* @since   13/12/2009
+		* @version 14/12/2009
+		* @param   const Gorgon::Point& pPosisiotn, posicao
+		*/
+		void setPosition(const Gorgon::Point& pPosition);
 		/**
 		 * Método que executa a lógica envolvida no tile
 		 *
@@ -184,15 +152,9 @@ class Tile
 		 * @since	17/03/2009
 		 * @version	28/05/2009
 		 * @param	const Gorgon::Sprite&	pSprite, sprite que o tile será desenhado
-		 * @param	const int&				pPosX, posição x base
-		 * @param	const int&				pPosY, posição y base
+		 * @param	const Gorgon::Point&	pPosition, posição
 		 */
-		void draw
-		(
-			Gorgon::Sprite& pSprite,
-			const int& pPosX = 0,
-			const int& pPosY = 0
-		);
+		void draw(Gorgon::Sprite& pSprite,const Gorgon::Point& pPosition = Gorgon::Point(0,0));
 };
 
 #endif

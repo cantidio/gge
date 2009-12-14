@@ -33,6 +33,7 @@ OBJECTDIR=build/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/_ext/_DOTDOT/src/resource_manager/src/sprite_manager.o \
 	${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/character_lua.o \
+	${OBJECTDIR}/_ext/_DOTDOT/src/background/src/tile_lua.o \
 	${OBJECTDIR}/_ext/_DOTDOT/tests/background.o \
 	${OBJECTDIR}/_ext/_DOTDOT/src/resource_manager/src/animation_manager.o \
 	${OBJECTDIR}/_ext/_DOTDOT/src/background/src/background.o \
@@ -87,6 +88,11 @@ ${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/character_lua.o: nbproject/Makefile-${
 	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/objects/src
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/objects/src/character_lua.o ../src/objects/src/character_lua.cpp
+
+${OBJECTDIR}/_ext/_DOTDOT/src/background/src/tile_lua.o: nbproject/Makefile-${CND_CONF}.mk ../src/background/src/tile_lua.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src/background/src
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/background/src/tile_lua.o ../src/background/src/tile_lua.cpp
 
 ${OBJECTDIR}/_ext/_DOTDOT/tests/background.o: nbproject/Makefile-${CND_CONF}.mk ../tests/background.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/tests
