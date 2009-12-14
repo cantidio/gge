@@ -3,12 +3,12 @@
 
 Layer::Layer(const double& pXScrollSpeed,const double& pYScrollSpeed)
 {
-	mScript			= new Gorgon::Lua("data/background/background_layer.lua");
+	mScript			= new Gorgon::Lua("data/background/class_background_layer.lua");
 	mXScrollSpeed	= pXScrollSpeed;
 	mYScrollSpeed	= pYScrollSpeed;
 	mSpritePack     = new Gorgon::SpritePack();
 	mAnimationPack  = new Gorgon::AnimationPack();
-	mScript->function("setLayerPointer",Gorgon::LuaParam("n",this));
+	mScript->function("setPointer",Gorgon::LuaParam("n",this));
 	LayerLua::registerFunctions(mScript);
 }
 
@@ -85,7 +85,7 @@ void Layer::addObject(Object* pObject)
 
 void Layer::logic()
 {
-	mScript->function("logic");
+	mScript->function("script_logic");
 	int i;
 	for(i=0; i<mTiles.size(); ++i)
 	{
@@ -177,20 +177,18 @@ void Layer::save(const std::string& pFileName) const
 
 void Layer::load(const std::string& pFileName)
 {
-	mScript	= new Gorgon::Lua("data/background/background_layer.lua");
+	mScript	= new Gorgon::Lua("data/background/class_background_layer.lua");
 	mScript->loadScript(pFileName);
 	loadGlobalVars();
 	setUp();
-	std::cout << "toaki" << std::endl;
-	
 }
 
 void Layer::loadGlobalVars()
 {
-	mSpritePackName		= mScript->getStringVar("sprite");
-	mAnimationPackName	= mScript->getStringVar("animation");
-	mXScrollSpeed		= mScript->getNumericVar("xScrollingSpeed");
-	mYScrollSpeed		= mScript->getNumericVar("yScrollingSpeed");
+	mSpritePackName		= mScript->function("script_getSpritePack",Gorgon::LuaParam(),1)->getStringValue();
+	mAnimationPackName	= mScript->function("script_getAnimationPack",Gorgon::LuaParam(),1)->getStringValue();
+	mXScrollSpeed		= mScript->function("script_getXScroolingSpeed",Gorgon::LuaParam(),1)->getNumericValue();
+	mYScrollSpeed		= mScript->function("script_getYScroolingSpeed",Gorgon::LuaParam(),1)->getNumericValue();
 }
 
 void Layer::loadTiles()
@@ -221,32 +219,32 @@ void Layer::loadTiles()
 
 void Layer::loadObjects()
 {
-	const int objectNumber	=(int)mScript->function("script_getObjectNumber",Gorgon::LuaParam(),1)->getNumericValue();
+	/*const int objectNumber	=(int)mScript->function("this.script_getObjectNumber",Gorgon::LuaParam(),1)->getNumericValue();
 	for(int i=1; i<=objectNumber; ++i)
 	{
-		const int objectInstances=(int)mScript->function("script_getObjectInstances",Gorgon::LuaParam("n",i),1)->getNumericValue();
+		const int objectInstances=(int)mScript->function("this.script_getObjectInstances",Gorgon::LuaParam("n",i),1)->getNumericValue();
 		for(int j=1; j<=objectInstances; ++j)
 		{
 			mObjects.push_back
 			(
 				new Object
 				(
-					mScript->function("script_getObjectScript",Gorgon::LuaParam("n",i),1)->getStringValue(),
+					mScript->function("this.script_getObjectScript",Gorgon::LuaParam("n",i),1)->getStringValue(),
 					Gorgon::Point
 					(
-						mScript->function("script_getObjectXPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue(),
-						mScript->function("script_getObjectYPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue()
+						mScript->function("this.script_getObjectXPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue(),
+						mScript->function("this.script_getObjectYPosition",Gorgon::LuaParam("nn",i,j),1)->getNumericValue()
 					)
 				)
 			);
 		}
-	}
+	}*/
 }
 
 void Layer::setUp()
 {
 	loadGlobalVars();
-	mScript->function("setLayerPointer",Gorgon::LuaParam("n",this));
+	mScript->function("setPointer",Gorgon::LuaParam("n",this));
 	LayerLua::registerFunctions(mScript);
 	//registerFunctions();
 	mSpritePack		= ResourceManager::SpriteManager::load(mSpritePackName);

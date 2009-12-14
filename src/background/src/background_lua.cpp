@@ -76,6 +76,19 @@ namespace BackgroundLua
 		background->scroolUnlock();
 		return 0;
 	}
+	int getLayerNumber(lua_State* pState)
+	{
+		Background* background = getBackgroundPointer(pState);
+		lua_pushnumber(pState,background->getLayerNumber());
+		return 1;
+	}
+	
+	int getLayer(lua_State* pState)
+	{
+		Background* background = getBackgroundPointer(pState);
+		lua_pushnumber(pState,(int)&(*background)[(int)lua_tonumber(pState,2)]);
+		return 1;
+	}
 
 	void registerFunctions(Gorgon::Lua* pScript)
 	{
@@ -89,6 +102,8 @@ namespace BackgroundLua
 		pScript->registerFunction("lua_subYPosition",subYPosition);
 		pScript->registerFunction("lua_scrollLock",scrollLock);
 		pScript->registerFunction("lua_scrollUnlock",scrollUnlock);
+		pScript->registerFunction("lua_getLayerNumber",getLayerNumber);
+		pScript->registerFunction("lua_getLayer",getLayer);
 	}
 }
 

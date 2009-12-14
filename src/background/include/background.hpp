@@ -243,5 +243,35 @@ class Background
 		 * @return	double
 		 */
 		double getYPos() const;
+
+                /**
+                 * Método para retornar o número de layers do cenário
+                 *
+                 * @author  Cantidio Oliveira Fontes
+                 * @since   14/12/2009
+                 * @version 14/12/2009
+                 * @return  int
+                 */
+                int getLayerNumber() const;
+                /**
+                 * Operador
+                 *
+                 * @author  Cantídio Oliveira Fontes
+                 * @since   14/12/2009
+                 * @version 14/12/2009
+                 * @param   const int& pPos, posicão a recuperar o Layer
+                 * @return  const Layer&
+                 */
+                const Layer& operator [](const int& pPos) const;
+                /**
+                 * Operador
+                 *
+                 * @author  Cantídio Oliveira Fontes
+                 * @since   14/12/2009
+                 * @version 14/12/2009
+                 * @param   const int& pPos, posicão a recuperar o Layer
+                 * @return  Layer&
+                 */
+                Layer& operator [](const int& pPos);
 };
 #endif

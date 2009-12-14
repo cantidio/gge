@@ -1,3 +1,34 @@
+
+function Background()
+	this = { }
+	--Memory Address for the background class that called the script
+	this.pointer			= nil
+	--Background gravity
+	this.gravity			= 0
+	--Friction when not coliding
+	this.voidFriction		= 1
+	--width of the background
+	this.width				= 0
+	--height of the background
+	this.height				= 0
+	--init x position
+	this.posX				= 0
+	--init y position
+	this.posY				= 0
+	--vector with the layers of the background
+	this.layers				= { }
+	--player information
+	this.player				= {
+		script		= "",
+		layer		= 1,
+		xPosition	= 0,
+		yPosition	= 0,
+	--	mirroring	= mirroring.Normal,
+		initialState= 290 
+	}
+	return this
+end
+
 --background
 --Memory Address for the background class that called the script
 backgroundPointer	= nil

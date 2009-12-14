@@ -1,11 +1,11 @@
 
---
--- Classe para representar um Object em LUA
---
--- @author	Cantidio Oliveira Fontes
--- @since
--- @version	09/08/2009
---
+--[[
+	-- Classe para representar um Object em LUA
+	--
+	-- @author	Cantidio Oliveira Fontes
+	-- @since
+	-- @version	09/08/2009
+-]]
 function Object(pPointer)
 	local obj = { }
 	obj.pointer = pPointer

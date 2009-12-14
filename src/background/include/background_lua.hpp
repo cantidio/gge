@@ -139,6 +139,10 @@ namespace BackgroundLua
 	 * @return	int
 	 */
 	int scrollUnlock(lua_State* pState);
+        
+        int getLayerNumber(lua_State* pState);
+        int getLayer(lua_State* pState);
+
 	/**
 	 * Método que registra as funçoes de cenário para serem acessadas por um script
 	 *
