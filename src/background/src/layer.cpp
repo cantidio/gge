@@ -4,7 +4,7 @@
 Layer::Layer(const double& pXScrollSpeed,const double& pYScrollSpeed)
 {
 	mBackground		= NULL;
-	mScript			= new Gorgon::Lua("data/background/class_background_layer.lua");
+	mScript			= new Gorgon::Lua("data/background/class_layer.lua");
 	mXScrollSpeed	= pXScrollSpeed;
 	mYScrollSpeed	= pYScrollSpeed;
 	mSpritePack     = new Gorgon::SpritePack();
@@ -176,7 +176,7 @@ void Layer::save(const std::string& pFileName) const
 
 void Layer::load(const std::string& pFileName)
 {
-	mScript	= new Gorgon::Lua("data/background/class_background_layer.lua");
+	mScript	= new Gorgon::Lua("data/background/class_layer.lua");
 	mScript->loadScript(pFileName);
 	loadGlobalVars();
 	setUp();

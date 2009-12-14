@@ -123,7 +123,7 @@ end
 function script_logic()
 	this.logic();
 end
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------
 --[[
 	-- Classe que representa um layer de um Cenário
 	--
@@ -132,7 +132,7 @@ end
 	-- @version	14/12/2009
 -]]
 function Layer()
-	local obj = {}
+	local this = {}
 
 	--[[
 		-- Metodo para setar o ponteiro da classe
@@ -143,7 +143,7 @@ function Layer()
 		-- @param	int pPointer, endereco na memoria da classe
 	-]]
 	local function setPointer(pPointer)
-		obj.pointer = pPointer
+		this.pointer = pPointer
 	end
 	--[[
 		--Função que retorna o número de tiles do layer
@@ -154,7 +154,7 @@ function Layer()
 		-- @return	int
 	-]]
 	local function getTileNumber()
-		return lua_layer_getTileNumber(obj.pointer);
+		return lua_layer_getTileNumber(this.pointer);
 	end
 	--[[
 		--Função que retorna um tile
@@ -166,7 +166,7 @@ function Layer()
 		-- @return	Tile
 	-]]
 	local function getTile(pTile)
-		local tile = Tile(lua_layer_getTilePointer(obj.pointer,pTile-1))
+		local tile = Tile(lua_layer_getTilePointer(this.pointer,pTile-1))
 		return tile;
 	end
 	--[[
@@ -179,7 +179,7 @@ function Layer()
 	-]]
 	local function getBackground()
 		local background = Background()
-		background.setPointer(lua_layer_getBackgroundPointer(obj.pointer))
+		background.setPointer(lua_layer_getBackgroundPointer(this.pointer))
 		return background;
 	end
 	
@@ -265,26 +265,25 @@ function Layer()
 		--put your logic here
 	end
 
-	obj.setPointer				= setPointer
-	obj.getTileNumber			= getTileNumber
-	obj.getTile					= getTile
-	obj.getBackground			= getBackground
---	obj.removeTileInstance		= removeTileInstance
-	obj.logic					= logic
+	this.setPointer				= setPointer
+	this.getTileNumber			= getTileNumber
+	this.getTile				= getTile
+	this.getBackground			= getBackground
+	this.logic					= logic
 
-	obj.pointer			= nil
+	this.pointer			= nil
 	-- Localização do arquivo de sprites do layer
-	obj.sprite			= ""
+	this.sprite				= ""
 	--localização do arquivo de animações do layer
-	obj.animation		= ""
+	this.animation			= ""
 	--velocidade de deslocamento horizontal do layer
-	obj.xScroolingSpeed = 1.0
+	this.xScroolingSpeed	= 1.0
 	--velocidade de deslocamento vertical do layer
-	obj.yScroolingSpeed = 1.0
+	this.yScroolingSpeed	= 1.0
 	--vetor com os tiles e suas posições no layer
-	obj.tiles			= { }
+	this.tiles				= { }
 	--vetor com os objetcs e suas posições no layer
-	obj.objects			= { }
-	return obj;
+	this.objects			= { }
+	return this
 end
 

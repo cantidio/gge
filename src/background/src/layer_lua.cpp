@@ -28,7 +28,7 @@ namespace LayerLua
 
 	int getBackgroundPointer(lua_State* pState)
 	{
-		Layer* layer	= getLayerPointer(pState);
+		Layer* layer = getLayerPointer(pState);
 		lua_pushnumber(pState,(int)layer->getBackground());
 		return 1;
 	}

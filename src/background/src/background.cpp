@@ -15,7 +15,7 @@ Background::Background
 	mHeight	= pHeight;
 	mPosX	= pPosX;
 	mPosY	= pPosY;
-	mScript->function("script_setPointer",Gorgon::LuaParam("n",this));
+	mScript->function("script_background_setPointer",Gorgon::LuaParam("n",this));
 	BackgroundLua::registerFunctions(mScript);
 	LayerLua::registerFunctions(mScript);
 }
@@ -42,7 +42,7 @@ void Background::addLayer(Layer* pLayer)
 
 void Background::logic()
 {
-	mScript->function("script_logic");
+	mScript->function("script_background_logic");
 	for(int i=0; i<mLayers.size(); ++i)
 	{
 		mLayers[i]->logic();
@@ -106,24 +106,24 @@ void Background::save(const std::string& pFileName) const
 
 void Background::loadGlobalVars()
 {
-	mGravity		= mScript->function("script_getGravity"		,Gorgon::LuaParam(),1)->getNumericValue();
-	mVoidFriction	= mScript->function("script_getVoidFriction",Gorgon::LuaParam(),1)->getNumericValue();
-	mWidth			= mScript->function("script_getWidth"		,Gorgon::LuaParam(),1)->getNumericValue();
-	mHeight			= mScript->function("script_getHeight"		,Gorgon::LuaParam(),1)->getNumericValue();
-	mPosX			= mScript->function("script_getPosX"		,Gorgon::LuaParam(),1)->getNumericValue();
-	mPosY			= mScript->function("script_getPosY"		,Gorgon::LuaParam(),1)->getNumericValue();
+	mGravity		= mScript->function("script_background_getGravity"		,Gorgon::LuaParam(),1)->getNumericValue();
+	mVoidFriction	= mScript->function("script_background_getVoidFriction"	,Gorgon::LuaParam(),1)->getNumericValue();
+	mWidth			= mScript->function("script_background_getWidth"		,Gorgon::LuaParam(),1)->getNumericValue();
+	mHeight			= mScript->function("script_background_getHeight"		,Gorgon::LuaParam(),1)->getNumericValue();
+	mPosX			= mScript->function("script_background_getPosX"			,Gorgon::LuaParam(),1)->getNumericValue();
+	mPosY			= mScript->function("script_background_getPosY"			,Gorgon::LuaParam(),1)->getNumericValue();
 }
 
 void Background::loadLayers()
 {
-	const int layerNumber =(int)mScript->function("script_getLayerNumber",Gorgon::LuaParam(),1)->getNumericValue();
+	const int layerNumber =(int)mScript->function("script_background_getLayerNumber",Gorgon::LuaParam(),1)->getNumericValue();
 	for(int i = 1; i <= layerNumber; ++i)
 	{
 		mLayers.push_back
 		(
 			new Layer
 			(
-				mScript->function("script_getLayer",Gorgon::LuaParam("n",i),1)->getStringValue(),
+				mScript->function("script_background_getLayer",Gorgon::LuaParam("n",i),1)->getStringValue(),
 				this
 			)
 		);
@@ -133,7 +133,7 @@ void Background::loadLayers()
 void Background::setUp()
 {
 	loadGlobalVars();
-	mScript->function("script_setPointer",Gorgon::LuaParam("n",this));
+	mScript->function("script_background_setPointer",Gorgon::LuaParam("n",this));
 	BackgroundLua::registerFunctions(mScript);
 	LayerLua::registerFunctions(mScript);
 	loadLayers();
