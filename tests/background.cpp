@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
 		{
 			objects[i]->ativate();
 		}
-		Background* bg = new Background("breakman_bg.lua");
+		Background* bg = new Background("data/background/breakman/breakman_background.lua");
 
 		while(!key[KEY_ESC])
 		{

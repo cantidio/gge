@@ -3,8 +3,9 @@
   <logicalFolder name="root" displayName="root" projectFiles="true">
     <logicalFolder name="data" displayName="data" projectFiles="true">
       <logicalFolder name="background" displayName="background" projectFiles="true">
-        <itemPath>../data/background/background.lua</itemPath>
-        <itemPath>../data/background/background_layer.lua</itemPath>
+        <itemPath>../data/background/class_background.lua</itemPath>
+        <itemPath>../data/background/class_layer.lua</itemPath>
+        <itemPath>../data/background/class_tile.lua</itemPath>
       </logicalFolder>
       <logicalFolder name="character" displayName="character" projectFiles="true">
         <logicalFolder name="enemy" displayName="enemy" projectFiles="true">

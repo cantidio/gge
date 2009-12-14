@@ -53,8 +53,8 @@ end
 	-- @param	int pInst, instancia do tile
 	-- @return	int
 -]]
-function script_getTileXPosition(pTile,pInst)
-	return this.tiles[pTile].position[pInst].x;
+function script_getTileXPosition(pTile)
+	return this.tiles[pTile].position.x;
 end
 --[[
 	-- Funcão que retorna a posicao y de uma instancia de um tile
@@ -66,8 +66,8 @@ end
 	-- @param	int pInst, instancia do tile
 	-- @return	int
 -]]
-function script_getTileYPosition(pTile,pInst)
-	return this.tiles[pTile].position[pInst].y;
+function script_getTileYPosition(pTile)
+	return this.tiles[pTile].position.y;
 end
 --[[
 	-- Funcão que retorna o nome do pacote de sprites do layer

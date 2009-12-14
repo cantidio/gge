@@ -117,33 +117,21 @@ int doBackgroundFromImage(const string& pBgImageName, const int& pTileSize)
 			);
 			if(!aux->isEmpty())
 			{
-				for(int i = layer.getTileNumber() - 1; i > -1; --i)
+				for(int i = spritePack->getSize() - 1; i > -1; --i)
 				{
-					if((*spritePack)[(*animationPack)[layer[i].getAnimation()][0].getIndex()] == *aux)
+					if((*spritePack)[i] == *aux)
 					{
-						isEqual = true;
-						layer[i].add(w,h);
-					}
-				}
-				if(!isEqual)
-				{
-					for(int i = spritePack->getSize() - 1; i > -1; --i)
-					{
-						if((*spritePack)[i] == *aux)
-						{
-	//						cout << "addtile" << endl;
-							layer.addTile
+						layer.addTile
+						(
+							new Tile
 							(
-								new Tile
-								(
-									*spritePack,
-									*animationPack,
-									i
-								)
-							);
-							layer[layer.getTileNumber()-1].add(w,h);
-							break;
-						}
+								*spritePack,
+								*animationPack,
+								i,
+								Point(w,h)
+							)
+						);
+						break;
 					}
 				}
 			}
@@ -154,13 +142,15 @@ int doBackgroundFromImage(const string& pBgImageName, const int& pTileSize)
 	Video::get().show();
 	while(!key[KEY_ESC]);
 
-	
-	string spriteName		= pBgImageName;
-	string animationName	= pBgImageName;
-	string layerName		= pBgImageName;
+	std::string baseName = pBgImageName;
+	baseName.erase(baseName.find_first_of('.'));
 
-	spriteName.append(".gspk");
-	animationName.append(".gapk");
+	string spriteName		= baseName;
+	string animationName	= baseName;
+	string layerName		= baseName;
+
+	spriteName.append("_layer.gspk");
+	animationName.append("_layer.gapk");
 	layerName.append("_layer.lua");
 
 	spritePack->save(spriteName);
@@ -175,6 +165,9 @@ int main(int argc, char** argv)
 {
     string bgImageName;
     int tileSize;
+
+	
+
 	/*cout << "Digite quantas camadas o cenário possui: ";
 	cin << bglayerNumber;
 	for(int i = 0; i < bglayerNumber; ++i)

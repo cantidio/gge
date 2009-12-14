@@ -121,36 +121,48 @@ void Layer::draw
 void Layer::save(const std::string& pFileName) const
 {
 	std::fstream file(pFileName.c_str(),std::ios::out);
-
+	std::string baseName = pFileName;
+	baseName.erase(baseName.find_first_of('.'));
+	std::string className = baseName;
+	className.erase(0,className.find_last_of('/') + 1);
+	className.erase(0,className.find_last_of('\\') + 1);
+	
 	if(file.is_open())
 	{
-		file << "--Layer Script File just modify if you know what you are doing" << std::endl;
-		file << "--location of the layer spritePack" << std::endl;
-		file << "sprite\t\t\t\t= " << "\"" << "Blobs" << "\"" << std::endl;
-		file << "--location of the layer animationPack" << std::endl;
-		file << "animation\t\t\t= " << "\"" << "Blobs" << "\"" << std::endl;
-		file << "--x scrolling velocity" << std::endl;
-		file << "xScrollingSpeed\t\t= " << mXScrollSpeed << std::endl;
-		file << "--y scrolling velocity" << std::endl;
-		file << "yScrollingSpeed\t\t= " << mYScrollSpeed << std::endl;
-		file << "--vector with the tiles of the layer" << std::endl;
-		file << "tiles\t\t\t\t= {";
+//		file << "--Layer Script File just modify if you know what you are doing" << std::endl;
+		file << "function " << className << "()" << std::endl;
+		file << "\tlocal this\t= Layer()" << std::endl;
+//		file << "\t--location of the layer spritePack" << std::endl;
+		file << "\tthis.sprite\t\t\t\t= " << "\"" << baseName << ".gspk" << "\"" << std::endl;
+//		file << "\t--location of the layer animationPack" << std::endl;
+		file << "\tthis.animation\t\t\t= " << "\"" << baseName << ".gapk" << "\"" << std::endl;
+//		file << "\t--x scrolling velocity" << std::endl;
+		file << "\tthis.xScrollingSpeed\t= " << mXScrollSpeed << std::endl;
+//		file << "\t--y scrolling velocity" << std::endl;
+		file << "\tthis.yScrollingSpeed\t= " << mYScrollSpeed << std::endl;
+//		file << "v--vector with the tiles of the layer" << std::endl;
+		file << "\tthis.tiles\t\t\t\t= {";
 
-		if(mTiles.size()>0)
+		if(mTiles.size() > 0)
 		{
 			file << std::endl;
-			for(int i=0; i<mTiles.size(); ++i)
+			for(int i = 0; i < mTiles.size(); ++i)
 			{
-				file << "\t{" << std::endl;
-				file << "\t\tanimation	= "		<< mTiles[i]->getAnimation() << "," << std::endl;
-				file << "\t\tposition	= {"	<< std::endl;
-				file << "\t\t\t{ x = " << mTiles[i]->getPosition().getX();
-				file << ", y = " << mTiles[i]->getPosition().getY() << " }," << std::endl;
-				file << "\t\t}"	<< std::endl;
-				file << "\t},"	<< std::endl;
+				file << "\t\t{" << std::endl;
+				file << "\t\t\tanimation\t= "	<< mTiles[i]->getAnimation() << "," << std::endl;
+				file << "\t\t\tposition\t= ";
+				file << "{ x = "				<< mTiles[i]->getPosition().getX();
+				file << ", y = "				<< mTiles[i]->getPosition().getY() << " }" << std::endl;
+				file << "\t\t},"				<< std::endl;
 			}
 		}
-		file << "}" << std::endl << std::endl;
+		file << "\t}" << std::endl;
+		file << "\tthis.logic = function ()" << std::endl;
+		file << "\t\t--Put your Layer Logic Here" << std::endl;
+		file << "\tend" << std::endl;
+		file << "\treturn this" << std::endl;
+		file << "end" << std::endl;
+		file << "this = " << className << "()";
 		/*file << "objects				= {";
 		if(objects.size()>0)
 		{
@@ -163,13 +175,10 @@ void Layer::save(const std::string& pFileName) const
 		}
 		file << "}" << std::endl << std::endl;ss
 */
-		file << "function logic()" << std::endl;
-		file << "\t--Put your layer logic here" << std::endl;
-		file << "end" << std::endl << std::endl;
 	}
 	else
 	{
-		std::cout <<"Erro ao salvar cenário!\n";
+		std::cout << "Erro ao salvar cenário!\n";
 	}
 	file.close();
 }
@@ -195,6 +204,22 @@ void Layer::loadTiles()
 	const int tileNumber	=(int)mScript->function("script_getTileNumber",Gorgon::LuaParam(),1)->getNumericValue();
 	for(int i = 1; i <= tileNumber; ++i)
 	{
+		mTiles.push_back
+		(
+			new Tile
+			(
+				*mSpritePack,
+				*mAnimationPack,
+				(int)mScript->function("script_getTileAnimation",Gorgon::LuaParam("n",i),1)->getNumericValue(),
+				Gorgon::Point
+				(
+					(int)mScript->function("script_getTileXPosition",Gorgon::LuaParam("nn",i),1)->getNumericValue(),
+					(int)mScript->function("script_getTileYPosition",Gorgon::LuaParam("nn",i),1)->getNumericValue()
+				),
+				this
+			)
+		);
+		/*
 		const int tileInstances =(int)mScript->function("script_getTileInstances",Gorgon::LuaParam("n",i),1)->getNumericValue();
 
 		for(int j = 1; j <= tileInstances; ++j)
@@ -214,7 +239,7 @@ void Layer::loadTiles()
 					this
 				)
 			);
-		}
+		}*/
 	}
 }
 
