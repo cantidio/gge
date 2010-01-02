@@ -67,13 +67,14 @@ class Background
 		 */
 		double mVoidFriction;
 		/**
-		 * Posição x do background
+		 * Posição do background
 		 */
-		double mPosX;
+		Gorgon::Point mPosition;
+//		double mPosX;
 		/**
 		 * Posição y do background
 		 */
-		double mPosY;
+//		double mPosY;
 		/**
 		 * Largura do background
 		 */
@@ -118,17 +119,15 @@ class Background
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
 		 * @version	28/05/2009
-		 * @param	const int& pWidth	, largura do cenário
-		 * @param	const int& pHeight	, altura do cenário
-		 * @param	const int& pPosX	, posição x que o cenário se encontra
-		 * @param	const int& pPosY	, posição y que o cenário se encontra
+		 * @param	const int&				pWidth		, largura do cenário
+		 * @param	const int&				pHeight		, altura do cenário
+		 * @param	const Gorgon::Point&	pPosition	, posição que o cenário se encontra
 		 */
 		Background
 		(
-			const int&		pWidth,
-			const int&		pHeight,
-			const double&	pPosX = 0,
-			const double&	pPosY = 0
+			const int&				pWidth,
+			const int&				pHeight,
+			const Gorgon::Point&	pPosition = Gorgon::Point(0,0)
 		);
 		/**
 		 * Método Construtor
@@ -208,42 +207,59 @@ class Background
 		 */
 		void scroolUnlock();
 		/**
-		 * Método para setar a posição x do cenário
+		 * Método para retornar a largura do cenário
 		 *
 		 * @author	Cantidio Oliveira Fontes
-		 * @since	19/03/2009
-		 * @version	28/05/2009
-		 * @param	const double& pPosX, posição no eixo x
+		 * @since	02/01/2009
+		 * @version	02/01/2009
+		 * @return	int
 		 */
-		void setXPos(const double& pPosX);
+		int getWidth() const;
 		/**
-		 * Método para setar a posição y do cenário
+		 * Método para retornar a altura do cenário
 		 *
 		 * @author	Cantidio Oliveira Fontes
-		 * @since	19/03/2009
-		 * @version	28/05/2009
-		 * @param	const double& pPosY, posição no eixo y
+		 * @since	02/01/2009
+		 * @version	02/01/2009
+		 * @return	int
 		 */
-		void setYPos(const double& pPosY);
+		int getHeight() const;
 		/**
-		 * Método para retornar a posição x do cenário
+		 * Método para setar a posição do cenário
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @version	28/05/2009
-		 * @return	double
+		 * @version	02/01/2010
+		 * @param	const Gorgon::Point& pPosition, posição do cenário
 		 */
-		double getXPos() const;
+		void setPosition(const Gorgon::Point& pPosition);
 		/**
 		 * Método para retornar a posição y do cenário
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/03/2009
-		 * @version	28/05/2009
-		 * @return	double
+		 * @version	02/01/2010
+		 * @return	Gorgon::Point
 		 */
-		double getYPos() const;
-
+		Gorgon::Point getPosition() const;
+		/**
+		 * Método para adicionar uma posicão a posicão atual do cenário
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	02/01/2010
+		 * @version	02/01/2010
+		 * @param	const Gorgon::Point& pPosition, posicão a ser adicionada ao cenário
+		 */
+		void addPosition(const Gorgon::Point& pPosition);
+		/**
+		 * Método para subtrair uma posicão a posicão atual do cenário
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	02/01/2010
+		 * @version	02/01/2010
+		 * @param	const Gorgon::Point& pPosition, posicão a ser subtraída ao cenário
+		 */
+		void subPosition(const Gorgon::Point& pPosition);
 		/**
 		 * Método para retornar o número de layers do cenário
 		 *

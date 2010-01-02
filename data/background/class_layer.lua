@@ -121,7 +121,7 @@ end
 	-- @version	14/12/2009
 -]]
 function script_logic()
-	this.logic();
+	this.logic()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 --[[
@@ -129,11 +129,11 @@ end
 	--
 	-- @author	Cantidio Oliveira Fontes
 	-- @since	13/12/2009
-	-- @version	14/12/2009
+	-- @version	17/12/2009
+	-- @param	int pPointer, endereco na memoria da classe
 -]]
-function Layer()
+function Layer(pPointer)
 	local this = {}
-
 	--[[
 		-- Metodo para setar o ponteiro da classe
 		--
@@ -174,12 +174,11 @@ function Layer()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	15/12/2009
-		-- @version	15/12/2009
+		-- @version	17/12/2009
 		-- @return	Background
 	-]]
 	local function getBackground()
-		local background = Background()
-		background.setPointer(lua_layer_getBackgroundPointer(this.pointer))
+		local background = Background(lua_layer_getBackgroundPointer(this.pointer))
 		return background;
 	end
 	
@@ -271,19 +270,19 @@ function Layer()
 	this.getBackground			= getBackground
 	this.logic					= logic
 
-	this.pointer			= nil
+	this.pointer				= pPointer
 	-- Localização do arquivo de sprites do layer
-	this.sprite				= ""
+	this.sprite					= ""
 	--localização do arquivo de animações do layer
-	this.animation			= ""
+	this.animation				= ""
 	--velocidade de deslocamento horizontal do layer
-	this.xScroolingSpeed	= 1.0
+	this.xScroolingSpeed		= 1.0
 	--velocidade de deslocamento vertical do layer
-	this.yScroolingSpeed	= 1.0
+	this.yScroolingSpeed		= 1.0
 	--vetor com os tiles e suas posições no layer
-	this.tiles				= { }
+	this.tiles					= { }
 	--vetor com os objetcs e suas posições no layer
-	this.objects			= { }
+	this.objects				= { }
 	return this
 end
 

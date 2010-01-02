@@ -60,20 +60,21 @@ int main(int argc, char* argv[])
 		install_int_ex(game_time, BPS_TO_TIMER(60));
 		Gorgon::Log::init("log.txt");
 		//Gorgon::Video::init("Teste Player",320,180,false);
-		Gorgon::Video::init("Teste GSBGE",400,300);
+		Gorgon::Video::init("Teste GGE",400,300);
 
 		Input::init();
-		std::vector<Player*> objects;
+		std::vector<Object*> objects;
 
-		objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(150,200)));
+		//objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(150,200)));
+		objects.push_back(new Object("data/character/enemy/caterpie/caterpie.lua",Gorgon::Point(150,200)));
 		//objects.push_back(new Player("data/character/player/mature.lua",Gorgon::Point(150,200)));
 
-		for(int i = 0; i< objects.size(); ++i)
+		for(int i = 0; i < objects.size(); ++i)
 		{
-			objects[i]->ativate();
+			//objects[i]->ativate();
 		}
 		Background* bg = new Background("data/background/breakman/breakman_background.lua");
-
+		objects[0]->setLayer(&(*bg)[0]);
 		while(!key[KEY_ESC])
 		{
 			while(timer >= 0 && !key[KEY_ESC])

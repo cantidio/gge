@@ -1,4 +1,7 @@
 #include "../include/object_lua.hpp"
+#include "../../background/include/background_lua.hpp"
+#include "../../background/include/layer_lua.hpp"
+#include "../../background/include/tile_lua.hpp"
 
 namespace ObjectLua
 {
@@ -61,33 +64,13 @@ namespace ObjectLua
 		return 1;
 	}
 
-	int lua_getXPosition(lua_State* pState)
+	int lua_getPosition(lua_State* pState)
 	{
-		Object* object = getObjectPointer(pState);
-		lua_pushnumber(pState,object->getXPosition());
-		return 1;
-	}
-
-	int lua_getYPosition(lua_State* pState)
-	{
-		Object* object = getObjectPointer(pState);
-		lua_pushnumber(pState,object->getYPosition());
-		return 1;
-	}
-
-
-	int lua_setXPosition(lua_State* pState)
-	{
-		Object* object = getObjectPointer(pState);
-		object->setXPosition(lua_tonumber(pState,2));
-		return 0;
-	}
-
-	int lua_setYPosition(lua_State* pState)
-	{
-		Object* object = getObjectPointer(pState);
-		object->setYPosition(lua_tonumber(pState,2));
-		return 0;
+		Object*				object		= getObjectPointer(pState);
+		const Gorgon::Point	position	= object->getPosition();
+		lua_pushnumber(pState,position.getX());
+		lua_pushnumber(pState,position.getY());
+		return 2;
 	}
 
 	int lua_setPosition(lua_State* pState)
@@ -104,42 +87,17 @@ namespace ObjectLua
 		return 0;
 	}
 
-	int lua_addXPosition(lua_State* pState)
-	{
-		Object* object = getObjectPointer(pState);
-		object->addXPosition(lua_tonumber(pState,2));
-		return 0;
-	}
-
-	int lua_addYPosition(lua_State* pState)
-	{
-		Object* object = getObjectPointer(pState);
-		object->addYPosition(lua_tonumber(pState,2));
-		return 0;
-	}
-
 	int lua_addPosition(lua_State* pState)
 	{
 		Object* object = getObjectPointer(pState);
 		object->addPosition
 		(
-			lua_tonumber(pState,2),
-			lua_tonumber(pState,3)
+			Gorgon::Point
+			(
+				lua_tonumber(pState,2),
+				lua_tonumber(pState,3)
+			)
 		);
-		return 0;
-	}
-
-	int lua_subXPosition(lua_State* pState)
-	{
-		Object* object = getObjectPointer(pState);
-		object->subXPosition(lua_tonumber(pState,2));
-		return 0;
-	}
-
-	int lua_subYPosition(lua_State* pState)
-	{
-		Object* object = getObjectPointer(pState);
-		object->subYPosition(lua_tonumber(pState,2));
 		return 0;
 	}
 
@@ -148,8 +106,11 @@ namespace ObjectLua
 		Object* object = getObjectPointer(pState);
 		object->subPosition
 		(
-			lua_tonumber(pState,2),
-			lua_tonumber(pState,3)
+			Gorgon::Point
+			(
+				lua_tonumber(pState,2),
+				lua_tonumber(pState,3)
+			)
 		);
 		return 0;
 	}
@@ -177,6 +138,13 @@ namespace ObjectLua
 			case Gorgon::Mirroring::VFlip:	lua_pushnumber(pState,2);	break;
 			default:						lua_pushnumber(pState,3);	break;
 		}
+		return 1;
+	}
+
+	int lua_getLayer(lua_State* pState)
+	{
+		Object* object = getObjectPointer(pState);
+		lua_pushnumber(pState,(int)object->getLayer());
 		return 1;
 	}
 
@@ -227,31 +195,29 @@ namespace ObjectLua
 		);
 		return 0;
 	}
-	
+
 	void registerFunctions(Gorgon::Lua* pScript)
 	{
-		pScript->registerFunction("lua_getAnimationRealIndex",lua_getAnimationRealIndex);
-		pScript->registerFunction("lua_changeAnimation",lua_changeAnimation);
-		pScript->registerFunction("lua_changeAnimationByIndex",lua_changeAnimationByIndex);
-		pScript->registerFunction("lua_animationIsPlaying",lua_animationIsPlaying);
-		pScript->registerFunction("lua_getAnimationOn",lua_getAnimationOn);
-		pScript->registerFunction("lua_getFrameOn",lua_getFrameOn);
-		pScript->registerFunction("lua_getXPosition",lua_getXPosition);
-		pScript->registerFunction("lua_getYPosition",lua_getYPosition);
-		pScript->registerFunction("lua_setXPosition",lua_setXPosition);
-		pScript->registerFunction("lua_setYPosition",lua_setYPosition);
-		pScript->registerFunction("lua_setPosition",lua_setPosition);
-		pScript->registerFunction("lua_addXPosition",lua_addXPosition);
-		pScript->registerFunction("lua_addYPosition",lua_addYPosition);
-		pScript->registerFunction("lua_addPosition",lua_addPosition);
-		pScript->registerFunction("lua_subXPosition",lua_subXPosition);
-		pScript->registerFunction("lua_subYPosition",lua_subYPosition);
-		pScript->registerFunction("lua_subPosition",lua_subPosition);
-		pScript->registerFunction("lua_setMirroring",lua_setMirroring);
-		pScript->registerFunction("lua_getMirroring",lua_getMirroring);
-		pScript->registerFunction("lua_setAfterImageMode",lua_setAfterImageMode);
-		pScript->registerFunction("lua_setAfterImageMethodNormal",lua_setAfterImageMethodNormal);
-		pScript->registerFunction("lua_setAfterImageMethodAdd",lua_setAfterImageMethodAdd);
-		pScript->registerFunction("lua_setAfterImageMethodTrans",lua_setAfterImageMethodTrans);
+		pScript->registerFunction("lua_object_getAnimationRealIndex",lua_getAnimationRealIndex);
+		pScript->registerFunction("lua_object_changeAnimation",lua_changeAnimation);
+		pScript->registerFunction("lua_object_changeAnimationByIndex",lua_changeAnimationByIndex);
+		pScript->registerFunction("lua_object_animationIsPlaying",lua_animationIsPlaying);
+		pScript->registerFunction("lua_object_getAnimationOn",lua_getAnimationOn);
+		pScript->registerFunction("lua_object_getFrameOn",lua_getFrameOn);
+		pScript->registerFunction("lua_object_getPosition",lua_getPosition);
+		pScript->registerFunction("lua_object_setPosition",lua_setPosition);
+		pScript->registerFunction("lua_object_addPosition",lua_addPosition);
+		pScript->registerFunction("lua_object_subPosition",lua_subPosition);
+		pScript->registerFunction("lua_object_setMirroring",lua_setMirroring);
+		pScript->registerFunction("lua_object_getMirroring",lua_getMirroring);
+		pScript->registerFunction("lua_object_getLayer",lua_getLayer);
+		pScript->registerFunction("lua_object_setAfterImageMode",lua_setAfterImageMode);
+		pScript->registerFunction("lua_object_setAfterImageMethodNormal",lua_setAfterImageMethodNormal);
+		pScript->registerFunction("lua_object_setAfterImageMethodAdd",lua_setAfterImageMethodAdd);
+		pScript->registerFunction("lua_object_setAfterImageMethodTrans",lua_setAfterImageMethodTrans);
+		
+		BackgroundLua::registerFunctions(pScript);
+		LayerLua::registerFunctions(pScript);
+		TileLua::registerFunctions(pScript);
 	}
 }

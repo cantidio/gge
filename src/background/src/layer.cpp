@@ -103,17 +103,16 @@ void Layer::logic()
 void Layer::draw
 (
 	Gorgon::Sprite& pSprite,
-	const int& pPosX,
-	const int& pPosY
+	const Gorgon::Point& pPosition
 )
 {
 	int i;
-	for(i=0; i<mTiles.size(); ++i)
+	for(i = 0; i < mTiles.size(); ++i)
 	{
 		mTiles[i]->draw
 		(
 			pSprite,
-			getRealPosition(Gorgon::Point(pPosX,pPosY))
+			getRealPosition(pPosition)
 		);
 	}
 }

@@ -125,9 +125,10 @@ end
 	--
 	-- @author	Cantidio Oliveira Fontes
 	-- @since	19/03/2009
-	-- @version	14/12/1009
+	-- @version	17/12/1009
+	-- @param	int pPointer, endereço do cenário na memória
 -]]
-function Background()
+function Background(pPointer)
 	local this = { }
 	--[[
 		-- Método para registrar o ponteiro do cenário que invocou o script
@@ -146,11 +147,11 @@ function Background()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	19/03/2009
-		-- @version	19/03/2009
+		-- @version	17/12/2009
 		-- @return	int
 	-]]
 	local function getLayerNumber()
-		return lua_getLayerNumber(this.pointer)
+		return lua_background_getLayerNumber(this.pointer)
 	end
 
 	--[[
@@ -158,86 +159,80 @@ function Background()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	19/03/2009
-		-- @version	19/03/2009
+		-- @version	17/12/2009
 		-- @param	int index, índice do layer
 		-- @return	string
 	-]]
 	local function getLayer(pIndex)
-		local layer = Layer();
-		layer.setPointer(lua_getLayer(this.pointer,pIndex-1));
+		local layer = Layer(lua_background_getLayer(this.pointer,pIndex - 1));
 		return layer;
 	end
-
 	--[[
-		-- Método que retorna a posição x atual do cenário
+		-- Método que retorna a largura do cenário
 		--
 		-- @author	Cantidio Oliveira Fontes
-		-- @since	19/03/2009
-		-- @version	20/03/2009
+		-- @since	02/01/2010
+		-- @version	02/01/2010
 		-- @return	int
 	-]]
-	local function getXPosition()
-		return lua_getXPosition(this.pointer)
+	local function getWidth()
+		return lua_background_getWidth(this.pointer)
 	end
-
 	--[[
-		-- Método que retorna a posição y atual do cenário
+		-- Método que retorna a altura do cenário
 		--
 		-- @author	Cantidio Oliveira Fontes
-		-- @since	19/03/2009
-		-- @version	20/03/2009
+		-- @since	02/01/2010
+		-- @version	02/01/2010
 		-- @return	int
 	-]]
-	local function getYPosition()
-		return lua_getYPosition(this.pointer)
+	local function getHeight()
+		return lua_background_getHeight(this.pointer)
 	end
 
 	--[[
-		-- Método que seta a posição x atual do cenário
+		-- Método que retorna a posição atual do cenário
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	19/03/2009
-		-- @version	19/03/2009
-		-- @param	int pPosX, nova posição x
+		-- @version	02/01/2010
+		-- @return	{x,y}
 	-]]
-	local function setXPosition(pPosX)
-		lua_setXPosition(this.pointer,pPosX)
+	local function getPosition()
+		local X,Y = lua_background_getPosition(this.pointer)
+		return {x = X, y = Y}
 	end
 
 	--[[
-		-- Método que seta a posição y atual do cenário
+		-- Método que seta a posição atual do cenário
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	19/03/2009
-		-- @version	19/03/2009
-		-- @param	int pPosY, nova posição y
+		-- @version	02/01/2010
+		-- @param	{x,y} pPosition, nova posição do cenário
 	-]]
-	local function setYPosition(pPosY)
-		lua_setYPosition(this.pointer,pPosY)
+	local function setPosition(pPosition)
+		lua_background_setPosition(
+			this.pointer,
+			pPosition.x,
+			pPosition.y
+		)
 	end
 
 	--[[
-		-- Método que adiciona um valor a posição x do cenário
+		-- Método que adiciona um valor a posição do cenário
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	19/03/2009
-		-- @version	19/03/2009
-		-- @param	int pPosX, valor a ser adicionado a posição x
+		-- @version	02/01/2010
+		-- @param	int pPosition, valor a ser adicionado a posição do cenário
 	-]]
-	local function addXPosition(pPosX)
-		lua_addXPosition(this.pointer,pPosX)
-	end
-
-	--[[
-		-- Método que adiciona um valor a posição y do cenário
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	19/03/2009
-		-- @version	19/03/2009
-		-- @param	int pPosY, valor a ser adicionado a posição y
-	-]]
-	local function addYPosition(pPosY)
-		lua_addYPosition(this.pointer,pPosY)
+	local function addPosition(pPosition)
+		lua_background_addPosition(
+			this.pointer,
+			pPosition.x,
+			pPosition.y
+		)
 	end
 
 	--[[
@@ -245,23 +240,15 @@ function Background()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	19/03/2009
-		-- @version	19/03/2009
-		-- @param	int pPosX, valor a ser subtraído da posição x
+		-- @version	02/01/2010
+		-- @param	{x,y} pPosition, valor a ser subtraído da posição do cenário
 	-]]
-	local function subXPosition(pPosX)
-		lua_subXPosition(this.pointer,pPosX)
-	end
-
-	--[[
-		-- Método que subtrai um valor a posição y do cenário
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	19/03/2009
-		-- @version	19/03/2009
-		-- @param	int pPosY, valor a ser subtraído da posição y
-	-]]
-	local function subYPosition(pPosY)
-		lua_subYPosition(this.pointer,pPosY)
+	local function subPosition(pPosition)
+		lua_background_subPosition(
+			this.pointer,
+			pPosition.x,
+			pPosition.y
+		)
 	end
 
 	--[[
@@ -270,10 +257,9 @@ function Background()
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	19/03/2009
 		-- @version	19/03/2009
-		-- @param	int x, valor a ser adicionado a posição x
 	-]]
 	local function scrollLock()
-		lua_scrollLock(this.pointer)
+		lua_background_scrollLock(this.pointer)
 	end
 
 	--[[
@@ -282,10 +268,9 @@ function Background()
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	19/03/2009
 		-- @version	19/03/2009
-		-- @param	int x, valor a ser adicionado a posição x
 	-]]
 	local function scrollUnlock()
-		lua_scrollUnlock(this.pointer)
+		lua_background_scrollUnlock(this.pointer)
 	end
 
 	--[[
@@ -312,21 +297,19 @@ function Background()
 	this.setPointer		= setPointer
 	this.getLayerNumber	= getLayerNumber
 	this.getLayer		= getLayer
-	this.getXPosition	= getXPosition
-	this.getYPosition	= getYPosition
-	this.setXPosition	= setXPosition
-	this.setYPosition	= setYPosition
-	this.addXPosition	= addXPosition
-	this.addYPosition	= addYPosition
-	this.subXPosition	= subXPosition
-	this.subYPosition	= subYPosition
+	this.getWidth		= getWidth
+	this.getHeight		= getHeight
+	this.getPosition	= getPosition
+	this.setPosition	= setPosition
+	this.addPosition	= addPosition
+	this.subPosition	= subPosition
 	this.scrollLock		= scrollLock
 	this.scrollUnlock	= scrollUnlock
 	this.finished		= finished
 	this.logic			= logic
 
 	--Memory Address for the background class that called the script
-	this.pointer			= nil
+	this.pointer			= pPointer
 	--Background gravity
 	this.gravity			= 0
 	--Friction when not coliding

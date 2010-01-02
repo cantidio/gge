@@ -4,17 +4,15 @@
 
 Background::Background
 (
-	const int&		pWidth,
-	const int&		pHeight,
-	const double&	pPosX,
-	const double&	pPosY
+	const int&				pWidth,
+	const int&				pHeight,
+	const Gorgon::Point&	pPosition
 )
 {
-	mScript	= new Gorgon::Lua("data/background/class_background.lua");
-	mWidth	= pWidth;
-	mHeight	= pHeight;
-	mPosX	= pPosX;
-	mPosY	= pPosY;
+	mScript		= new Gorgon::Lua("data/background/class_background.lua");
+	mWidth		= pWidth;
+	mHeight		= pHeight;
+	mPosition	= pPosition;
 	mScript->function("script_background_setPointer",Gorgon::LuaParam("n",this));
 	BackgroundLua::registerFunctions(mScript);
 	LayerLua::registerFunctions(mScript);
@@ -53,7 +51,7 @@ void Background::draw(Gorgon::Sprite& pSprite)
 {
 	for(int i=0; i<mLayers.size(); ++i)
 	{
-		mLayers[i]->draw(pSprite,mPosX,mPosY);
+		mLayers[i]->draw(pSprite,mPosition);
 	}
 }
 
@@ -73,9 +71,9 @@ void Background::save(const std::string& pFileName) const
 		file << "--height of the background" << std::endl;
 		file << "height			= "		<< mHeight << std::endl;
 		file << "--init x position"		<< std::endl;
-		file << "posX			= "		<< mPosX << std::endl;
+		file << "posX			= "		<< mPosition.getX() << std::endl;
 		file << "--init y position"		<< std::endl;
-		file << "posY			= "		<< mPosY << std::endl;
+		file << "posY			= "		<< mPosition.getY() << std::endl;
 		file << "--vector with the layers of the background" << std::endl;
 		file << "layers	= {";
 
@@ -110,8 +108,8 @@ void Background::loadGlobalVars()
 	mVoidFriction	= mScript->function("script_background_getVoidFriction"	,Gorgon::LuaParam(),1)->getNumericValue();
 	mWidth			= mScript->function("script_background_getWidth"		,Gorgon::LuaParam(),1)->getNumericValue();
 	mHeight			= mScript->function("script_background_getHeight"		,Gorgon::LuaParam(),1)->getNumericValue();
-	mPosX			= mScript->function("script_background_getPosX"			,Gorgon::LuaParam(),1)->getNumericValue();
-	mPosY			= mScript->function("script_background_getPosY"			,Gorgon::LuaParam(),1)->getNumericValue();
+	mPosition.setX	( mScript->function("script_background_getPosX"			,Gorgon::LuaParam(),1)->getNumericValue());
+	mPosition.setY	( mScript->function("script_background_getPosY"			,Gorgon::LuaParam(),1)->getNumericValue());
 }
 
 void Background::loadLayers()
@@ -147,38 +145,45 @@ void Background::load(const std::string& pFileName)
 
 void Background::scroolLock()
 {
-	mLockScrool=true;
+	mLockScrool = true;
 }
 
 void Background::scroolUnlock()
 {
-	mLockScrool=false;
+	mLockScrool = false;
 }
 
-void Background::setXPos(const double& pPosX)
+int Background::getWidth() const
+{
+	return mWidth;
+}
+
+int Background::getHeight() const
+{
+	return mHeight;
+}
+
+void Background::setPosition(const Gorgon::Point& pPosition)
 {
 	if(!mLockScrool)
 	{
-		mPosX=pPosX;
+		mPosition = pPosition;
 	}
 }
 
-void Background::setYPos(const double& pPosY)
+Gorgon::Point Background::getPosition() const
 {
-	if(!mLockScrool)
-	{
-		mPosY=pPosY;
-	}
+	return mPosition;
 }
 
-double Background::getXPos() const
+void Background::addPosition(const Gorgon::Point& pPosition)
 {
-	return mPosX;
+	setPosition(mPosition + pPosition);
 }
 
-double Background::getYPos() const
+void Background::subPosition(const Gorgon::Point& pPosition)
 {
-	return mPosY;
+	setPosition(mPosition - pPosition);
 }
 
 int Background::getLayerNumber() const

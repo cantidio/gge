@@ -100,7 +100,7 @@ namespace ObjectLua
 	 */
 	int lua_getFrameOn(lua_State* pState);
 	/**
-	 * Função que retorna a posição x do objeto
+	 * Função que retorna a posição do objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	12/03/2009
@@ -108,37 +108,7 @@ namespace ObjectLua
 	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	int lua_getXPosition(lua_State* pState);
-	/**
-	 * Função que retorna a posição y do objeto
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @version	31/03/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int lua_getYPosition(lua_State* pState);
-	/**
-	 * Função que seta a posição x do objeto
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @version	31/03/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int lua_setXPosition(lua_State* pState);
-	/**
-	 * Função que seta a posição y do objeto
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @version	31/03/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int lua_setYPosition(lua_State* pState);
+	int lua_getPosition(lua_State* pState);
 	/**
 	 * Função que seta a posição x y do objeto
 	 *
@@ -150,26 +120,6 @@ namespace ObjectLua
 	 */
 	int lua_setPosition(lua_State* pState);
 	/**
-	 * Função que adiciona um valor a posição x do objeto
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @version	31/03/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int lua_addXPosition(lua_State* pState);
-	/**
-	 * Função que adiciona um valor a posição y do objeto
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @version	31/03/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int lua_addYPosition(lua_State* pState);
-	/**
 	 * Função que adiciona um valor a posição xy do objeto
 	 *
 	 * @author	Cantidio Oliveira Fontes
@@ -179,26 +129,6 @@ namespace ObjectLua
 	 * @return	int
 	 */
 	int lua_addPosition(lua_State* pState);
-	/**
-	 * Função que adiciona um valor a posição x do objeto
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	31/03/2009
-	 * @version	31/03/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int lua_subXPosition(lua_State* pState);
-	/**
-	 * Função que adiciona um valor a posição y do objeto
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	31/03/2009
-	 * @version	31/03/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int lua_subYPosition(lua_State* pState);
 	/**
 	 * Função que adiciona um valor a posição xy do objeto
 	 *
@@ -229,6 +159,16 @@ namespace ObjectLua
 	 * @return	int
 	 */
 	int lua_getMirroring(lua_State* pState);
+	/**
+	 * Função que retorna o ponteiro do layer do objeto
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	20/01/2009
+	 * @version	02/01/2009
+	 * @param	lua_State* pState, estado do interpretador lua atual
+	 * @return	int
+	 */
+	int lua_getLayer(lua_State* pState);
 	/**
 	 * Função para setar o método de afterImage para Normal
 	 *

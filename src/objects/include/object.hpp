@@ -41,6 +41,7 @@
  *				O módulo Objects engloba todas as funcionalidades relacionadas
  *				à parte de objetos e entidades relacionadas e derivadas dos mesmos
  */
+class Layer;
 /**
  * Classe que representa um objeto interativo
  *
@@ -85,6 +86,10 @@ class Object
 		 */
 		Gorgon::Lua* mScript;
 		/**
+		 * Layer que o Object se encontra
+		 */
+		Layer* mLayer;
+		/**
 		 * Handler de animação do objeto
 		 */
 		Gorgon::AnimationHandler* mAnimationHandler;
@@ -96,6 +101,10 @@ class Object
 		 * Nome do objeto
 		 */
 		std::string mName;
+		/**
+		 * ID do objeto
+		 */
+		std::string mId;
 		/**
 		 * Localização do objeto no plano xy
 		 */
@@ -144,38 +153,16 @@ class Object
 		 * Variável que guarda os ponteiros dos últimos sprites usados
 		 */
 		std::vector<const Gorgon::Sprite*>	mLastSprites;
-		/**
-		 * Peso do objeto
-		 */
-		double mWeight;
-		/**
-		 * Impulso horizontal que o objeto dispõem
-		 */
-		double mXPulse;
-		/**
-		 * Impulso máximo no eixo x
-		 */
-		double mXPulseMax;
-		/**
-		 * Impulso vertical que o objeto dispõem
-		 */
-		double mYPulse;
-		/**
-		 * Se o objeto é afetado pela gravidade
-		 */
-		bool mGravityAffected;
-		/**
-		 * Estado atual do objeto
-		 */
-		int mStateOn;
+		
 		/**
 		 * Método Construtor vazio
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @version	28/05/2009
+		 * @version	17/12/2009
+		 * @param	Layer* pLayer, layer que o objeto se encontra
 		 */
-		Object();
+		Object(Layer* pLayer = NULL);
 		/**
 		 * Método para carregar as variáveis globais de um objeto declaradas no script
 		 *
@@ -199,10 +186,16 @@ class Object
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	11/03/2009
 		 * @version	28/05/2009
-		 * @param	const std::string& pScriptName, nome do script do objeto
-		 * @param	const Gorgon::Point& pPosition, posição do objeto no eixo xy
+		 * @param	const std::string&		pScriptName	, nome do script do objeto
+		 * @param	const Gorgon::Point&	pPosition	, posição do objeto no eixo xy
+		 * @param	Layer*					pLayer		, layer em que o objeto está presente
 		 */
-		Object(const std::string& pScriptName,const Gorgon::Point& pPosition=Gorgon::Point(0,0));
+		Object
+		(
+			const std::string& pScriptName,
+			const Gorgon::Point& pPosition = Gorgon::Point(0,0),
+			Layer* pLayer = NULL
+		);
 		/**
 		 * Método Destrutor
 		 *
@@ -227,6 +220,8 @@ class Object
 		 * @version	28/05/2009
 		 */
 		void logic();
+		void setLayer(Layer* pLayer);
+		Layer* getLayer();
 		/**
 		 * Método para setar o espelhamento do objeto
 		 *
@@ -253,7 +248,7 @@ class Object
 		 * @version	28/05/2009
 		 * @param	const double& pPosX, nova posição no eixo x
 		 */
-		void setXPosition(const double& pPosX);
+		//void setXPosition(const double& pPosX);
 		/**
 		 * Método para setar a posição y do objeto
 		 *
@@ -262,7 +257,7 @@ class Object
 		 * @version	28/05/2009
 		 * @param	const double& pPosY, nova posição no eixo y
 		 */
-		void setYPosition(const double& pPosY);
+		//void setYPosition(const double& pPosY);
 		/**
 		 * Método para setar a posição do objeto
 		 *
@@ -277,75 +272,28 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @version	28/05/2009
-		 * @param	const double& pPosX, valor a ser adicionado a posição no eixo x
+		 * @version	17/12/2009
+		 * @param	const Gorgon::Point& pPosition, valor a ser adicionado a posição
 		 */
-		void addXPosition(const double& pPosX);
-		/**
-		 * Método para adicionar um valor a posição y do objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	28/05/2009
-		 * @param	const double& pPosY, valor a ser adicionado a posição no eixo y
-		 */
-		void addYPosition(const double& pPosY);
-		/**
-		 * Método para adicionar um valor a posição x do objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	28/05/2009
-		 * @param	const double& pPosX, valor a ser adicionado a posição no eixo x
-		 * @param	conat double& pPosY, valor a ser adicionado a posição no eixo y
-		 */
-		void addPosition(const double& pPosX,const double& pPosY);
+		void addPosition(const Gorgon::Point& pPosition);
 		/**
 		 * Método para subtrair um valor a posição x do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	31/03/2009
-		 * @version	28/05/2009
-		 * @param	const double& pPosX, valor a ser subtraido a posição no eixo x
+		 * @version	17/12/2009
+		 * @param	const Gorgon::Point& pPosition, valor a ser subtraido a posição
 		 */
-		void subXPosition(const double& pPosX);
-		/**
-		 * Método para subtrair um valor a posição y do objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	31/03/2009
-		 * @version	28/05/2009
-		 * @param	const double& pPosY, valor a ser subtraido a posição no eixo y
-		 */
-		void subYPosition(const double& pPosY);
-		/**
-		 * Método para subtrair um valor a posição x do objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	31/03/2009
-		 * @version	28/05/2009
-		 * @param	const double& pPosX, valor a ser subtraido a posição no eixo x
-		 * @param	conat double& pPosY, valor a ser subtraido a posição no eixo y
-		 */
-		void subPosition(const double& pPosX,const double& pPosY);
+		void subPosition(const Gorgon::Point& pPosition);
 		/**
 		 * Método para retornar a posição x do objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
 		 * @version	28/05/2009
-		 * @return	double
+		 * @return	Gorgon::Point
 		 */
-		double getXPosition() const;
-		/**
-		 * Método para retornar a posição y do objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	28/05/2009
-		 * @return	double
-		 */
-		double getYPosition() const;
+		Gorgon::Point getPosition() const;
 		/**
 		 * Método para retornar o índice real de uma animação
 		 *

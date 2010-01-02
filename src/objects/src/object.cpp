@@ -1,31 +1,34 @@
 #include "../include/object.hpp"
 #include "../include/object_lua.hpp"
 
-Object::Object()
+Object::Object(Layer* pLayer)
 {
 	setAfterImageMode(false,0,0);
-	mAfterImageMethod = NULL;
-	mScript = new Gorgon::Lua("data/object/object.lua");
+	mAfterImageMethod	= NULL;
+	mScript				= new Gorgon::Lua("data/object/class_object.lua");
+	mLayer				= pLayer;
 }
 
-void Object::loadGlobalVars()
+Object::Object
+(
+	const std::string&		pScriptName,
+	const Gorgon::Point&	pPosition,
+	Layer*					pLayer
+)
 {
-	mName				= mScript->getStringVar("name");
-	mSpritePackName		= mScript->getStringVar("sprite");
-	mAnimationPackName	= mScript->getStringVar("animation");
-	mColisionPackName	= mScript->getStringVar("colision");
-	mPaletteName		= mScript->getStringVar("palette");
-	mXPulse				= mScript->getNumericVar("xPulse");
-	mYPulse				= mScript->getNumericVar("yPulse");
-	mXPulseMax			= mScript->getNumericVar("xPulseMax");
-	mGravityAffected	= mScript->getBooleanVar("gravityAffected");
+	setPosition(pPosition);
 	setAfterImageMode(false,0,0);
+	mAfterImageMethod	= NULL;
+	mLayer				= pLayer;
+	mScript				= new Gorgon::Lua("data/object/class_object.lua");
+	mScript->loadScript(pScriptName);
+	setUp();
 }
 
 void Object::setUp()
 {
 	loadGlobalVars();
-	mScript->function("getObject",Gorgon::LuaParam("n",this));
+	mScript->function("script_object_setPointer",Gorgon::LuaParam("n",this));
 	ObjectLua::registerFunctions(mScript);
 	TextWindowLua::registerFunctions(mScript);
 	mSpritePack			= ResourceManager::SpriteManager::load(mSpritePackName);
@@ -33,14 +36,16 @@ void Object::setUp()
 	mAnimationHandler	= new Gorgon::AnimationHandler(*mSpritePack,*mAnimationPack);
 }
 
-Object::Object(const std::string& pScriptName,const Gorgon::Point& pPosition)
+void Object::loadGlobalVars()
 {
-	setPosition(pPosition);
+	mName				= mScript->function("script_object_getName",Gorgon::LuaParam(),1)->getStringValue();
+	mId					= mScript->function("script_object_getId",Gorgon::LuaParam(),1)->getStringValue();
+	mSpritePackName		= mScript->function("script_object_getSpritePack",Gorgon::LuaParam(),1)->getStringValue();
+	mAnimationPackName	= mScript->function("script_object_getAnimationPack",Gorgon::LuaParam(),1)->getStringValue();
+
+	//mColisionPackName	= mScript->getStringVar("colision");
+	//mPaletteName		= mScript->getStringVar("palette");
 	setAfterImageMode(false,0,0);
-	mAfterImageMethod = NULL;
-	mScript	= new Gorgon::Lua("data/object/object.lua");
-	mScript->loadScript(pScriptName);
-	setUp();
 }
 
 Object::~Object()
@@ -53,6 +58,16 @@ Object::~Object()
 	delete mAnimationHandler;
 }
 
+void Object::setLayer(Layer* pLayer)
+{
+	mLayer = pLayer;
+}
+
+Layer* Object::getLayer()
+{
+	return mLayer;
+}
+
 void Object::setMirroring(const Gorgon::Mirroring& pMirroring)
 {
 	mDirection = pMirroring;
@@ -63,61 +78,24 @@ Gorgon::Mirroring Object::getMirroring() const
 	return mDirection;
 }
 
-void Object::setXPosition(const double& pPosX)
-{
-	mPosition.setX(pPosX);
-}
-
-void Object::setYPosition(const double& pPosY)
-{
-	mPosition.setY(pPosY);
-}
-
 void Object::setPosition(const Gorgon::Point& pPosition)
 {
 	mPosition = pPosition;
 }
 
-void Object::addXPosition(const double& pPosX)
+void Object::addPosition(const Gorgon::Point& pPosition)
 {
-	mPosition.addX(pPosX);
+	mPosition += pPosition;
 }
 
-void Object::addYPosition(const double& pPosY)
+void Object::subPosition(const Gorgon::Point& pPosition)
 {
-	mPosition.addY(pPosY);
+	mPosition -= pPosition;
 }
 
-	void Object::addPosition(const double& pPosX,const double& pPosY)
+Gorgon::Point Object::getPosition() const
 {
-	mPosition.addX(pPosX);
-	mPosition.addY(pPosY);
-}
-
-void Object::subXPosition(const double& pPosX)
-{
-	mPosition.subX(pPosX);
-}
-
-void Object::subYPosition(const double& pPosY)
-{
-	mPosition.subY(pPosY);
-}
-
-void Object::subPosition(const double& pPosX,const double& pPosY)
-{
-	mPosition.subX(pPosX);
-	mPosition.subY(pPosY);
-}
-
-double Object::getXPosition() const
-{
-	return mPosition.getX();
-}
-
-double Object::getYPosition() const
-{
-	return mPosition.getY();
+	return mPosition;
 }
 
 void Object::draw() const
@@ -127,7 +105,7 @@ void Object::draw() const
 		const int size	= mLastSprites.size() - 1;
 		const int limit	= (getAfterImageNumber()-1 > size) ? size + 1 : getAfterImageNumber();
 
-		for(register int i = 0; i <limit ; ++i)
+		for(register int i = 0; i < limit ; ++i)
 		{
 			((this)->*mAfterImageMethod)(size - i);
 		}
@@ -174,7 +152,7 @@ int Object::getFrameOn() const
 
 void Object::logic()
 {
-	mScript->function("logic");
+	mScript->function("script_object_logic");
 	mAnimationHandler->playByStep();
 
 	if(mAfterImageDelayInUse%getAfterImageDelay() == 0)
@@ -242,7 +220,7 @@ void Object::drawAfterImageAdd(const int& pImage) const
 
 void Object::setAfterImageDelay(const int& pDelay)
 {
-	mAfterImageDelay = (pDelay>0) ? pDelay : 1;
+	mAfterImageDelay = (pDelay > 0) ? pDelay : 1;
 }
 
 void Object::setAfterImageEnabled(const bool& pEnabled)

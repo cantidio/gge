@@ -1,3 +1,14 @@
+--[[
+	-- Funcão
+	--
+	-- @author	Cantidio Oliveira Fontes
+	-- @since	13/12/2009
+	-- @version	14/12/2009
+	-- @param	int pPointer, endereco na memoria da classe do layer
+-]]
+function script_object_getPointer(pPointer)
+	this.pointer = pPointer
+end
 
 --[[
 	-- Classe para representar um Object em LUA

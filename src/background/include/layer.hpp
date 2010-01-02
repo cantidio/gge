@@ -239,15 +239,9 @@ class Layer
 		 * @since	17/03/2009
 		 * @version	28/05/2009
 		 * @param	Gorgon::Sprite& sprite, sprite que o layer será desenhado
-		 * @param	const int& posX, posição x que o layer será desenhado
-		 * @param	const int& posY, posição y que o layer será desenhado
+		 * @param	const Gorgon::Point& pPosition, posição que o layer será desenhado
 		 */
-		void draw
-		(
-			Gorgon::Sprite& sprite,
-			const int& posX,
-			const int& posY
-		);
+		void draw(Gorgon::Sprite& sprite,const Gorgon::Point& pPosition);
 		/**
 		 * Método para salvar os dados da camada em um script lua
 		 *

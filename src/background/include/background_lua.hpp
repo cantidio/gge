@@ -34,11 +34,31 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	19/03/2009
- * @version	14/12/2009
+ * @version	02/01/2010
  * @ingroup	Background
  */
 namespace BackgroundLua
 {
+	/**
+	 * Função que retorna a largura do cenário
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	02/01/2010
+	 * @version	02/01/2010
+	 * @param	lua_State* pState, estado do interpretador lua atual
+	 * @return	int
+	 */
+	int getWidth(lua_State* pState);
+	/**
+	 * Função que retorna a altura do cenário
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	02/01/2010
+	 * @version	02/01/2010
+	 * @param	lua_State* pState, estado do interpretador lua atual
+	 * @return	int
+	 */
+	int getHeight(lua_State* pState);
 	/**
 	 * Função que retorna a posição x do cenário
 	 *
