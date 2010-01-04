@@ -1,24 +1,65 @@
 dofile("data/background/class_background.lua")
+--[[
+	-- Funcão para retornar a localizacão do pacote de sprites do objeto
+	--
+	-- @author	Cantidio Oliveira Fontes
+	-- @since	02/01/2009
+	-- @version	04/01/2009
+	-- @return	string
+-]]
 function script_object_getSpritePack()
 	return this.spritePack
 end
-
+--[[
+	-- Funcão para retornar a localizacão do pacote de animacões do objeto
+	--
+	-- @author	Cantidio Oliveira Fontes
+	-- @since	02/01/2009
+	-- @version	04/01/2009
+	-- @return	string
+-]]
 function script_object_getAnimationPack()
 	return this.animationPack
 end
-
+--[[
+	-- Funcão para retornar o nome do objeto
+	--
+	-- @author	Cantidio Oliveira Fontes
+	-- @since	02/01/2009
+	-- @version	04/01/2009
+	-- @return	string
+-]]
 function script_object_getName()
-	return this.name;
+	return this.name
 end
-
+--[[
+	-- Funcão para retornar o id do objeto
+	--
+	-- @author	Cantidio Oliveira Fontes
+	-- @since	02/01/2009
+	-- @version	04/01/2009
+	-- @return	string
+-]]
 function script_object_getId()
 	return this.id
 end
-
+--[[
+	-- Funcão para setar o ponteiro da classe em c++ para o objeto em Lua
+	--
+	-- @author	Cantidio Oliveira Fontes
+	-- @since	02/01/2009
+	-- @version	04/01/2009
+-]]
 function script_object_setPointer(pPointer)
 	this.mPointer = pPointer
 end
-
+--[[
+	-- Funcão para rodar a lógica dos scripts
+	--
+	-- @author	Cantidio Oliveira Fontes
+	-- @since	02/01/2009
+	-- @version	04/01/2009
+-]]
 function script_object_logic()
 	this.logic()
 end
@@ -37,7 +78,7 @@ Mirroring = {
 	--
 	-- @author	Cantidio Oliveira Fontes
 	-- @since	17/12/2009
-	-- @version	02/01/2010
+	-- @version	04/01/2010
 -]]
 function Object(pPointer)
 	local this = { }
@@ -187,31 +228,142 @@ function Object(pPointer)
 		local layer = Layer(lua_object_getLayer(this.mPointer))
 		return layer
 	end
+	--[[
+		-- Função que seta o método das AfterImages para Normal
+		--
+		-- @author      Cantidio Oliveira Fontes
+		-- @since       26/06/2009
+		-- @version     02/01/2010
+	-]]
+	local function setAfterImageMethodNormal()
+        lua_object_setAfterImageMethodNormal(this.mPointer)
+	end
+	--[[
+		-- Função que sera o método das AfterImages para add
+		--
+		-- @author      Cantidio Oliveira Fontes
+		-- @since       26/06/2009
+		-- @version     02/01/2010
+		-- @param       {red,blue,green}	pColorAdd	, componente vermelho a ser adicionado
+		-- @param       {red,blue,green}	pColorSub	, componente vermelho a ser subtraído
+		-- @param       float   			pTrans		, valor da transparencia
+	-]]
+	local function setAfterImageMethodAdd(
+		pColorAdd,
+		pColorSub,
+		pTrans
+	)
+		lua_object_setAfterImageMethodAdd(
+			this.mPointer,
+			pColorAdd.red,
+			pColorAdd.green,
+			pColorAdd.blue,
+			pColorSub.red,
+			pColorSub.green,
+			pColorSub.blue,
+			pTrans
+		)
+	end
+
+	--[[
+		-- Função que sera o método das AfterImages para Trans
+		--
+		-- @author      Cantidio Oliveira Fontes
+		-- @since       26/06/2009
+		-- @version     02/01/2010
+		-- @param       float   pTrans, valor da transparencia
+	-]]
+	local function setAfterImageMethodTrans(pTrans)
+		lua_object_setAfterImageMethodTrans(this.mPointer,pTrans)
+	end
+
+	--[[
+		-- Método para retornar se o modo de after images está habilitado
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/06/2009
+		-- @version	04/01/2010
+		-- @param	bool pEnabled, se o modo de after images está habilitado ou não
+	-]]
+	local function setAfterImageEnabled(pEnabled)
+		lua_object_setAfterImageEnabled(this.mPointer,pEnabled)
+	end
+	
+	--[[
+		-- Método para retornar se o modo de after images está habilitado
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/06/2009
+		-- @version	04/01/2010
+		-- @param	int pDelay, delay entre cada after image
+	-]]
+	local function setAfterImageDelay(pDelay)
+		lua_object_setAfterImageDelay(this.mPointer,pDelay)
+	end
+	
+	--[[
+		-- Método para retornar se o modo de after images está habilitado
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/06/2009
+		-- @version	04/01/2010
+		-- @return	int pNumber, número de afterImages máximo permitido
+	-]]
+	local function setAfterImageNumber(pNumber)
+		lua_object_setAfterImageNumber(this.mPointer,pNumber)
+	end
+
+	--[[
+		-- Método para setar o método de afterImages
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/06/2009
+		-- @version	04/01/2010
+		-- @param	bool	pEnabled		, se o modo de after images está habilitado ou não
+		-- @param	int		pDelay			, delay entra cada after image
+		-- @param	int		pImageNumber	, número máximo de after images	
+	-]]
+	local function setAfterImageMode(
+		pEnabled,
+		pDelay,
+		pImageNumber
+	)
+		lua_object_setAfterImageMode(
+			this.mPointer,
+			pEnabled,
+			pDelay,
+			pImageNumber
+		)
+	end
 
 	local function logic()
 		--logic of the object
 	end
 	
-	this.getName				= getName
-	this.getId					= getId
-	this.getMirroring			= getMirroring
-	this.setMirroring			= setMirroring
-
-	this.getLayer				= getLayer
-
-	this.getPosition			= getPosition
-	this.setPosition			= setPosition
-
-	this.addPosition			= addPosition
-	this.subPosition			= subPosition
+	this.getName					= getName
+	this.getId						= getId
+	this.getMirroring				= getMirroring
+	this.setMirroring				= setMirroring
+	this.getLayer					= getLayer
+	this.getPosition				= getPosition
+	this.setPosition				= setPosition
+	this.addPosition				= addPosition
+	this.subPosition				= subPosition
+	this.getAnimationRealIndex		= getAnimationRealIndex
+	this.changeAnimation			= changeAnimation
+	this.isAnimationPlaying 		= isAnimationPlaying
+	this.getAnimationPlaying		= getAnimationPlaying
+	this.getFrameOn 				= getFrameOn
+	this.setFrameOn 				= setFrameOn
+	this.logic						= logic
 	
-	this.getAnimationRealIndex	= getAnimationRealIndex
-	this.changeAnimation		= changeAnimation
-	this.isAnimationPlaying 	= isAnimationPlaying
-	this.getAnimationPlaying	= getAnimationPlaying
-	this.getFrameOn 			= getFrameOn
-	this.setFrameOn 			= setFrameOn
-	this.logic					= logic
+	this.setAfterImageMethodNormal	= setAfterImageMethodNormal
+	this.setAfterImageMethodAdd		= setAfterImageMethodAdd
+	this.setAfterImageMethodTrans	= setAfterImageMethodTrans
+	this.setAfterImageEnabled		= setAfterImageEnabled
+	this.setAfterImageDelay			= setAfterImageDelay
+	this.setAfterImageNumber		= setAfterImageNumber
+	this.setAfterImageMode			= setAfterImageMode
 
 --[[	setAfterImageMethodNormal
 	setAfterImageMethodAdd
