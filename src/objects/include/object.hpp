@@ -8,7 +8,7 @@
  *    \ \_\ \_\ \__/.\_\\ \_,__/ \ \_,__/\ \_\ \__\ /\____\
  *     \/_/\/ /\/__/\/_/ \/___/   \/___/  \/_/\/__/ \/____/
  *
- *  Copyright (C) 2008-2009  Gorgon Team
+ *  Copyright (C) 2008-2010  Gorgon Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@
  *
  * @author		Cantidio Oliveira Fontes
  * @since		11/03/2009
- * @version		26/06/2009
+ * @version		25/01/2010
  * @details
  *				O módulo Objects engloba todas as funcionalidades relacionadas
  *				à parte de objetos e entidades relacionadas e derivadas dos mesmos
@@ -47,7 +47,7 @@ class Layer;
  *
  * @author	Cantidio Oliveira Fontes
  * @since	11/03/2009
- * @version	26/06/2009
+ * @version	25/01/2010
  * @ingroup	Objects
  */
 class Object
@@ -110,6 +110,10 @@ class Object
 		 */
 		Gorgon::Point mPosition;
 		/**
+		 * Se o objeto está ativo
+		 */
+		bool mActive;
+		/**
 		 * Ponteiro para o método de renderização das afterImages
 		 */
 		void (Object::*mAfterImageMethod)(const int&)const;
@@ -159,10 +163,21 @@ class Object
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @version	17/12/2009
-		 * @param	Layer* pLayer, layer que o objeto se encontra
+		 * @version	25/01/2010
+		 * @param	const Gorgon::Point&	pPosition	, posićão do objeto
+		 * @param	Layer*					pLayer		, layer que o objeto se encontra
+		 * @param	const bool&				pActive		, se o objeto comećará ativo ou não.
+		 * @see		persistentFunction
+		 * @details
+		 *			Se o objeto estiver inativo, nenhum do seus métodos será invocado, com excessão do método
+		 * persistentFunction, que sempre é chamado a cada iteraćão do jogo
 		 */
-		Object(Layer* pLayer = NULL);
+		Object
+		(
+			const Gorgon::Point& pPosition	 = Gorgon::Point(),
+			Layer* pLayer					 = NULL,
+			const bool& pActive				 = true
+		);
 		/**
 		 * Método para carregar as variáveis globais de um objeto declaradas no script
 		 *
@@ -189,12 +204,18 @@ class Object
 		 * @param	const std::string&		pScriptName	, nome do script do objeto
 		 * @param	const Gorgon::Point&	pPosition	, posição do objeto no eixo xy
 		 * @param	Layer*					pLayer		, layer em que o objeto está presente
+		 * @param	const bool&				pActive		, se o objeto comećará ativo ou não
+		 * @see		persistentFunction
+		 * @details
+		 *			Se o objeto estiver inativo, nenhum do seus métodos será invocado, com excessão do método
+		 * persistentFunction, que sempre é chamado a cada iteraćão do jogo
 		 */
 		Object
 		(
-			const std::string& pScriptName,
-			const Gorgon::Point& pPosition = Gorgon::Point(0,0),
-			Layer* pLayer = NULL
+			const std::string&		pScriptName,
+			const Gorgon::Point&	pPosition	= Gorgon::Point(0,0),
+			Layer*					pLayer		= NULL,
+			const bool&				pActive		= true
 		);
 		/**
 		 * Método Destrutor
@@ -205,11 +226,36 @@ class Object
 		 */
 		virtual ~Object();
 		/**
+		 * Método para retornar se o objeto está ativo
+		 * 
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/01/2010
+		 * @version	26/01/2010
+		 * @return	bool
+		 */
+		bool isActive() const;
+		/**
+		 * Método para ativar o objeto
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @version	25/01/2010
+		 */
+		void activate();
+		/**
+		 * Método para desativar o personagem
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @version	25/01/2010
+		 */
+		void inactivate();
+		/**
 		 * Método para desenhar o objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	11/03/2009
-		 * @version	21/06/2009
+		 * @version	25/01/2010
 		 */
 		void draw() const;
 		/**
@@ -220,7 +266,34 @@ class Object
 		 * @version	28/05/2009
 		 */
 		void logic();
+		/**
+		 * Método que checa pela ativaćão do objeto
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since
+		 * @version
+		 * @details
+		 *			Esse método é chamado a cada iteraćão do jogo, verificando assim
+		 * se é para ser ativado o objeto, ou re
+		 */
+		void persistentFunction();
+		/**
+		 * Método para setar o Layer do objeto
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	04/01/2010
+		 * @version	04/01/2010
+		 * @param	Layer* pLayer, ponteiro para o layer do objeto
+		 */
 		void setLayer(Layer* pLayer);
+		/**
+		 * Método para retornar o Layer do objeto
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	04/01/2010
+		 * @version	04/01/2010
+		 * @return	Layer*
+		 */
 		Layer* getLayer();
 		/**
 		 * Método para setar o espelhamento do objeto
@@ -240,24 +313,6 @@ class Object
 		 * @return	Gorgon::Mirroring
 		 */
 		Gorgon::Mirroring getMirroring() const;
-		/**
-		 * Método para setar a posição do objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	28/05/2009
-		 * @param	const double& pPosX, nova posição no eixo x
-		 */
-		//void setXPosition(const double& pPosX);
-		/**
-		 * Método para setar a posição y do objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	28/05/2009
-		 * @param	const double& pPosY, nova posição no eixo y
-		 */
-		//void setYPosition(const double& pPosY);
 		/**
 		 * Método para setar a posição do objeto
 		 *

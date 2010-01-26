@@ -63,6 +63,16 @@ end
 function script_object_logic()
 	this.logic()
 end
+--[[
+	-- Funcão para rodar a funcão persistent do objeto
+	--
+	-- @author	Cantidio Oliveira Fontes
+	-- @since	25/01/2010
+	-- @version	25/01/2010
+-]]
+function script_object_persistentFunction()
+	this.persistentFunction()
+end
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 Mirroring = {
@@ -105,6 +115,37 @@ function Object(pPointer)
 	-]]
 	local function getId()
 		return lua_object_getId(this.mPointer)
+	end
+	--[[
+		-- Método para retornar se o objeto está ativo
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	26/01/2010
+		-- @return	bool
+	-]]
+	local function isActive()
+		return lua_object_isActive(this.mPointer)
+	end
+	--[[
+		-- Método para ativar o objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	26/01/2010
+	-]]
+	local function activate()
+		lua_object_activate(this.mPointer)
+	end
+	--[[
+		-- Método para desativar o objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	26/01/2010
+	-]]
+	local function inactivate()
+		lua_object_inactivate(this.mPointer)
 	end
 	--[[
 		-- Método para retornar o espelhamento do objeto
@@ -340,8 +381,15 @@ function Object(pPointer)
 		--logic of the object
 	end
 	
+	local function persistentFunction()
+		--
+	end
+	
 	this.getName					= getName
 	this.getId						= getId
+	this.ativate					= ativate
+	this.inativate					= inativate
+	this.isAtive					= isAtive
 	this.getMirroring				= getMirroring
 	this.setMirroring				= setMirroring
 	this.getLayer					= getLayer
@@ -356,7 +404,7 @@ function Object(pPointer)
 	this.getFrameOn 				= getFrameOn
 	this.setFrameOn 				= setFrameOn
 	this.logic						= logic
-	
+	this.persistentFunction			= persistentFunction
 	this.setAfterImageMethodNormal	= setAfterImageMethodNormal
 	this.setAfterImageMethodAdd		= setAfterImageMethodAdd
 	this.setAfterImageMethodTrans	= setAfterImageMethodTrans

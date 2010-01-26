@@ -40,6 +40,36 @@
 namespace ObjectLua
 {
 	/**
+	 * Funćão que retorna se o objeto está ativo
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	26/01/2010
+	 * @version	26/01/2010
+	 * @param	lua_State* pState, estado do interpretador lua atual
+	 * @return	int
+	 */
+	int lua_isActive(lua_State* pState);
+	/**
+	 * Funćão que ativa o objeto
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	26/01/2010
+	 * @version	26/01/2010
+	 * @param	lua_State* pState, estado do interpretador lua atual
+	 * @return	int
+	 */
+	int lua_activate(lua_State* pState);
+	/**
+	 * Funćão que inativa o objeto
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	26/01/2010
+	 * @version	26/01/2010
+	 * @param	lua_State* pState, estado do interpretador lua atual
+	 * @return	int
+	 */
+	int lua_inativate(lua_State* pState);
+	/**
 	 * Função que retorna o índice real da animação dados o seu grupo e índice
 	 *
 	 * @author	Cantidio Oliveira Fontes

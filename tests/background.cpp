@@ -66,15 +66,16 @@ int main(int argc, char* argv[])
 		std::vector<Object*> objects;
 
 		//objects.push_back(new Player("data/character/enemy/frozen_shade/frozen_shade.lua",Gorgon::Point(150,200)));
-		objects.push_back(new Object("data/character/enemy/caterpie/caterpie.lua",Gorgon::Point(150,200)));
+		objects.push_back(new Player("data/character/player/mature/mature.lua",Gorgon::Point(150,250)));
 		//objects.push_back(new Player("data/character/player/mature.lua",Gorgon::Point(150,200)));
 
 		for(int i = 0; i < objects.size(); ++i)
 		{
-			//objects[i]->ativate();
+			objects[i]->activate();
 		}
 		Background* bg = new Background("data/background/breakman/breakman_background.lua");
 		objects[0]->setLayer(&(*bg)[0]);
+
 		while(!key[KEY_ESC])
 		{
 			while(timer >= 0 && !key[KEY_ESC])

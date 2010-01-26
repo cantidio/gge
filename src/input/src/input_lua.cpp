@@ -82,18 +82,18 @@ namespace InputLua
 
 	void registerFunctions(Gorgon::Lua* pScript)
 	{
-		pScript->registerFunction("buttonStart",lua_buttonStart);
-		pScript->registerFunction("buttonUp",lua_buttonUp);
-		pScript->registerFunction("buttonDown",lua_buttonDown);
-		pScript->registerFunction("buttonLeft",lua_buttonLeft);
-		pScript->registerFunction("buttonRight",lua_buttonRight);
-		pScript->registerFunction("button1",lua_button1);
-		pScript->registerFunction("button2",lua_button2);
-		pScript->registerFunction("button3",lua_button3);
-		pScript->registerFunction("button4",lua_button4);
-		pScript->registerFunction("button5",lua_button5);
-		pScript->registerFunction("button6",lua_button6);
-		pScript->registerFunction("button7",lua_button7);
-		pScript->registerFunction("button8",lua_button8);
+		pScript->registerFunction("lua_input_buttonStart"	, lua_buttonStart	);
+		pScript->registerFunction("lua_input_buttonUp"		, lua_buttonUp		);
+		pScript->registerFunction("lua_input_buttonDown"	, lua_buttonDown	);
+		pScript->registerFunction("lua_input_buttonLeft"	, lua_buttonLeft	);
+		pScript->registerFunction("lua_input_buttonRight"	, lua_buttonRight	);
+		pScript->registerFunction("lua_input_button1"		, lua_button1		);
+		pScript->registerFunction("lua_input_button2"		, lua_button2		);
+		pScript->registerFunction("lua_input_button3"		, lua_button3		);
+		pScript->registerFunction("lua_input_button4"		, lua_button4		);
+		pScript->registerFunction("lua_input_button5"		, lua_button5		);
+		pScript->registerFunction("lua_input_button6"		, lua_button6		);
+		pScript->registerFunction("lua_input_button7"		, lua_button7		);
+		pScript->registerFunction("lua_input_button8"		, lua_button8		);
 	}
 }

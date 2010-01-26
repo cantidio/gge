@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-	mScript->loadScript("data/character/player/player.lua");
+	mScript->loadScript("data/character/player/class_player.lua");
 }
 
 void Player::loadGlobalVars()
@@ -23,9 +23,11 @@ void Player::setUp()
 
 Player::Player
 (
-	const std::string& pFileName,
-	const Gorgon::Point& pPosition
-)
+	const std::string&		pFileName,
+	const Gorgon::Point&	pPosition,
+	Layer*					pLayer,
+	const bool&				pActive
+) : Character(pPosition,pLayer,pActive)
 {
 	mScript->loadScript("data/character/player/player.lua");
 	mScript->loadScript(pFileName);

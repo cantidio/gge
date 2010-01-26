@@ -138,7 +138,7 @@ int doBackgroundFromImage(const string& pBgImageName, const int& pTileSize)
 			delete aux;
         }
     }
-	layer.draw(Video::get(),10,10);
+	layer.draw(Video::get(),Gorgon::Point(10,10));
 	Video::get().show();
 	while(!key[KEY_ESC]);
 

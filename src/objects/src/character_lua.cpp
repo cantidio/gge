@@ -42,27 +42,6 @@ namespace CharacterLua
 		return 1;
 	}
 
-	int lua_ativate(lua_State* pState)
-	{
-		Character* character = getCharacterPointer(pState);
-		character->ativate();
-		return 0;
-	}
-
-	int lua_inativate(lua_State* pState)
-	{
-		Character* character = getCharacterPointer(pState);
-		character->inativate();
-		return 0;
-	}
-
-	int lua_isAtive(lua_State* pState)
-	{
-		Character* character = getCharacterPointer(pState);
-		lua_pushboolean(pState,character->isAtive());
-		return 1;
-	}
-
 	int lua_isImortal(lua_State* pState)
 	{
 		Character* character = getCharacterPointer(pState);
@@ -138,15 +117,12 @@ namespace CharacterLua
 
 	void registerFunctions(Gorgon::Lua* pScript)
 	{
-		pScript->registerFunction("lua_getLife",lua_getLife);
-		pScript->registerFunction("lua_setLife",lua_setLife);
-		pScript->registerFunction("lua_subLife",lua_subLife);
-		pScript->registerFunction("lua_addLife",lua_addLife);
-		pScript->registerFunction("lua_ativate",lua_ativate);
-		pScript->registerFunction("lua_inativate",lua_inativate);
-		pScript->registerFunction("lua_isAlive",lua_isAlive);
-		pScript->registerFunction("lua_isAtive",lua_isAtive);
-		pScript->registerFunction("lua_hurt",lua_hurt);
-		pScript->registerFunction("lua_callHelper",lua_callHelper);
+		pScript->registerFunction("lua_character_getLife",lua_getLife);
+		pScript->registerFunction("lua_character_setLife",lua_setLife);
+		pScript->registerFunction("lua_character_subLife",lua_subLife);
+		pScript->registerFunction("lua_character_addLife",lua_addLife);
+		pScript->registerFunction("lua_character_isAlive",lua_isAlive);
+		pScript->registerFunction("lua_character_hurt",lua_hurt);
+		pScript->registerFunction("lua_character_callHelper",lua_callHelper);
 	}
 }

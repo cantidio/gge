@@ -90,36 +90,6 @@ namespace CharacterLua
 	 */
 	int lua_isAlive(lua_State* pState);
 	/**
-	 * Função que ativa o objeto
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @version	28/05/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int lua_ativate(lua_State* pState);
-	/**
-	 * Função que desativa o objeto
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @version	28/05/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int lua_inativate(lua_State* pState);
-	/**
-	 * Função que retorna verdadeiro se o personagem está ativo
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @version	28/05/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int lua_isAtive(lua_State* pState);
-	/**
 	 * Função que retorna verdadeiro se o personagem está imortal
 	 *
 	 * @author	Cantidio Oliveira Fontes

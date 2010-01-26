@@ -1,25 +1,34 @@
 #include "../include/object.hpp"
 #include "../include/object_lua.hpp"
 
-Object::Object(Layer* pLayer)
+Object::Object
+(
+	const Gorgon::Point& pPosition,
+	Layer* pLayer,
+	const bool& pActive
+)
 {
 	setAfterImageMode(false,0,0);
 	mAfterImageMethod	= NULL;
 	mScript				= new Gorgon::Lua("data/object/class_object.lua");
+	mPosition			= pPosition;
 	mLayer				= pLayer;
+	mActive				= pActive;
 }
 
 Object::Object
 (
 	const std::string&		pScriptName,
 	const Gorgon::Point&	pPosition,
-	Layer*					pLayer
+	Layer*					pLayer,
+	const bool&				pActive
 )
 {
 	setPosition(pPosition);
 	setAfterImageMode(false,0,0);
 	mAfterImageMethod	= NULL;
 	mLayer				= pLayer;
+	mActive				= pActive;
 	mScript				= new Gorgon::Lua("data/object/class_object.lua");
 	mScript->loadScript(pScriptName);
 	setUp();
@@ -38,9 +47,9 @@ void Object::setUp()
 
 void Object::loadGlobalVars()
 {
-	mName				= mScript->function("script_object_getName",Gorgon::LuaParam(),1)->getStringValue();
-	mId					= mScript->function("script_object_getId",Gorgon::LuaParam(),1)->getStringValue();
-	mSpritePackName		= mScript->function("script_object_getSpritePack",Gorgon::LuaParam(),1)->getStringValue();
+	mName				= mScript->function("script_object_getName"			,Gorgon::LuaParam(),1)->getStringValue();
+	mId					= mScript->function("script_object_getId"			,Gorgon::LuaParam(),1)->getStringValue();
+	mSpritePackName		= mScript->function("script_object_getSpritePack"	,Gorgon::LuaParam(),1)->getStringValue();
 	mAnimationPackName	= mScript->function("script_object_getAnimationPack",Gorgon::LuaParam(),1)->getStringValue();
 
 	//mColisionPackName	= mScript->getStringVar("colision");
@@ -56,6 +65,21 @@ Object::~Object()
 	mLastDirections.clear();
 	mLastSprites.clear();
 	delete mAnimationHandler;
+}
+
+bool Object::isActive() const
+{
+	return mActive;
+}
+
+void Object::activate()
+{
+	mActive = true;
+}
+
+void Object::inactivate()
+{
+	mActive = false;
 }
 
 void Object::setLayer(Layer* pLayer)
@@ -100,24 +124,26 @@ Gorgon::Point Object::getPosition() const
 
 void Object::draw() const
 {
-	if(mAfterImageMethod != NULL)
+	if(mActive)
 	{
-		const int size	= mLastSprites.size() - 1;
-		const int limit	= (getAfterImageNumber()-1 > size) ? size + 1 : getAfterImageNumber();
-
-		for(register int i = 0; i < limit ; ++i)
+		if(mAfterImageMethod != NULL)
 		{
-			((this)->*mAfterImageMethod)(size - i);
+			const int size	= mLastSprites.size() - 1;
+			const int limit	= (getAfterImageNumber()-1 > size) ? size + 1 : getAfterImageNumber();
+
+			for(register int i = 0; i < limit ; ++i)
+			{
+				((this)->*mAfterImageMethod)(size - i);
+			}
 		}
+		mAnimationHandler->draw
+		(
+			Gorgon::Video::get(),
+			(int)mPosition.getX(),
+			(int)mPosition.getY(),
+			mDirection
+		);
 	}
-	
-	mAnimationHandler->draw
-	(
-		Gorgon::Video::get(),
-		(int)mPosition.getX(),
-		(int)mPosition.getY(),
-		mDirection
-	);
 }
 
 int Object::getAnimationRealIndex(const int& pGroup, const int& pIndex) const
@@ -150,12 +176,22 @@ int Object::getFrameOn() const
 	return mAnimationHandler->getFrameOn();
 }
 
+void Object::persistentFunction()
+{
+	mScript->function("script_object_persistentFunction");
+}
+
 void Object::logic()
 {
+	persistentFunction();
+	if(!mActive)
+	{
+		return;
+	}
 	mScript->function("script_object_logic");
 	mAnimationHandler->playByStep();
 
-	if(mAfterImageDelayInUse%getAfterImageDelay() == 0)
+	if(mAfterImageDelayInUse % getAfterImageDelay() == 0)
 	{
 		mAfterImageDelayInUse = 0;
 		if(getAfterImageEnabled())
@@ -171,7 +207,7 @@ void Object::logic()
 			mLastPositions.push_back(mPosition);
 			mLastSprites.push_back(&mAnimationHandler->getCurrentSprite());
 		}
-		else if(mLastDirections.size()>0)
+		else if(mLastDirections.size() > 0)
 		{
 			mAfterImageDelayInUse = 0;
 			mLastDirections.erase(mLastDirections.begin());

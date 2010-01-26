@@ -72,10 +72,6 @@ class Character : public Object
 		 */
 		int mImortalTime;
 		/**
-		 * Se o personagem está ativo
-		 */
-		bool mAtive;
-		/**
 		 * Vetor com os helpers do personagem
 		 */
 		std::vector< std::vector<Character*> > mHelpers;
@@ -86,7 +82,12 @@ class Character : public Object
 		 * @since	14/03/2009
 		 * @version	14/03/2009
 		 */
-		Character();
+		Character
+		(
+			const Gorgon::Point&	pPosition	= Gorgon::Point(0,0),
+			Layer*					pLayer		= NULL,
+			const bool&				pActive		= true
+		);
 		/**
 		 * Método para carregar as variáveis globais de um personagem declaradas no script
 		 *
@@ -110,13 +111,16 @@ class Character : public Object
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
 		 * @version	31/03/2009
-		 * @param	const std::string& pFileName, localização do arquivo de script do personagem
-		 * @param	const Gorgon::Point& pPosition, posição xy do personagem
+		 * @param	const std::string&		pFileName	, localização do arquivo de script do personagem
+		 * @param	const Gorgon::Point&	pPosition	, posição xy do personagem
+		 * @param	const bool&				pActive		, se o personagem está ativo
 		 */
 		Character
 		(
-			const std::string& pFileName,
-			const Gorgon::Point& pPosition=Gorgon::Point(0,0)
+			const std::string&		pFileName,
+			const Gorgon::Point&	pPosition	= Gorgon::Point(0,0),
+			Layer*					pLayer		= NULL,
+			const bool&				pActive		= true
 		);
 		/**
 		 * Método Destrutor
@@ -171,22 +175,7 @@ class Character : public Object
 		 * @return	bool
 		 */
 		bool isAlive() const;
-		/**
-		 * Método para ativar o personagem
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	12/03/2009
-		 */
-		void ativate();
-		/**
-		 * Método para desativar o personagem
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	12/03/2009
-		 */
-		void inativate();
+		
 		/**
 		 * Método que retorna verdadeiro se o personagem estiver ativo
 		 *
