@@ -36,7 +36,7 @@
  *
  * @author		Cantidio Oliveira Fontes
  * @since		11/03/2009
- * @version		25/01/2010
+ * @version		26/01/2010
  * @details
  *				O módulo Objects engloba todas as funcionalidades relacionadas
  *				à parte de objetos e entidades relacionadas e derivadas dos mesmos
@@ -47,7 +47,7 @@ class Layer;
  *
  * @author	Cantidio Oliveira Fontes
  * @since	11/03/2009
- * @version	25/01/2010
+ * @version	26/01/2010
  * @ingroup	Objects
  */
 class Object
@@ -159,6 +159,23 @@ class Object
 		std::vector<const Gorgon::Sprite*>	mLastSprites;
 		
 		/**
+		 * Método para carregar as variáveis globais de um objeto declaradas no script
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @version	28/05/2009
+		 */
+		void loadGlobalVars();
+		/**
+		 * Método para preparar o objeto com as informações já recolhidas
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @version	28/05/2009
+		 */
+		void setUp();
+	public:
+		/**
 		 * Método Construtor vazio
 		 *
 		 * @author	Cantidio Oliveira Fontes
@@ -178,23 +195,6 @@ class Object
 			Layer* pLayer					 = NULL,
 			const bool& pActive				 = true
 		);
-		/**
-		 * Método para carregar as variáveis globais de um objeto declaradas no script
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	28/05/2009
-		 */
-		void loadGlobalVars();
-		/**
-		 * Método para preparar o objeto com as informações já recolhidas
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	28/05/2009
-		 */
-		void setUp();
-	public:
 		/**
 		 * Método Construtor
 		 *
@@ -406,6 +406,24 @@ class Object
 		 * @return	int
 		 */
 		int getFrameOn() const;
+		/**
+		 * Método que retorna o grupo da animaćão que está tocando
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/01/2010
+		 * @version	26/01/2010
+		 * @return	int
+		 */
+		int getAnimationOnGroup() const;
+		/**
+		 * Método que retornar o índice da animaćão que está tocando
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/01/2010
+		 * @version	26/01/2010
+		 * @return	int
+		 */
+		int getAnimationOnIndex() const;
 		/**
 		 * Método para setar o método de afterImage para Normal
 		 *

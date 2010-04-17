@@ -159,26 +159,26 @@ namespace BackgroundLua
 	 * @return	int
 	 */
 	int scrollUnlock(lua_State* pState);
-        /**
-         * Método para retornar o número de layers que o cenário possui
-         *
-         * @author  Cantidio Oliveira Fontes
-         * @since   14/12/2009
-         * @version 14/12/2009
-         * @param   lua_State* pState, estado do interpretador lua atual
-         * @return  int
-         */
-        int getLayerNumber(lua_State* pState);
-        /**
-         * Método para retornar um layer do cenário
-         *
-         * @author  Cantidio Oliveira Fontes
-         * @since   14/12/2009
-         * @version 14/12/2009
-         * @param   lua_State* pState, estado do interpretador lua atual
-         * @return  int
-         */
-        int getLayer(lua_State* pState);
+	/**
+	 * Método para retornar o número de layers que o cenário possui
+	 *
+	 * @author  Cantidio Oliveira Fontes
+	 * @since   14/12/2009
+	 * @version 14/12/2009
+	 * @param   lua_State* pState, estado do interpretador lua atual
+	 * @return  int
+	 */
+	int getLayerNumber(lua_State* pState);
+	/**
+	 * Método para retornar um layer do cenário
+	 *
+	 * @author  Cantidio Oliveira Fontes
+	 * @since   14/12/2009
+	 * @version 14/12/2009
+	 * @param   lua_State* pState, estado do interpretador lua atual
+	 * @return  int
+	 */
+	int getLayer(lua_State* pState);
 
 	/**
 	 * Método que registra as funçoes de cenário para serem acessadas por um script

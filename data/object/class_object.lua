@@ -92,7 +92,14 @@ Mirroring = {
 -]]
 function Object(pPointer)
 	local this = { }
-	this.mPointer = pPointer
+	
+--[[	if pPointer == nil then
+		this.mPointer = lua_object_create(0,0)
+	else
+		this.mPointer = pPointer
+	end
+-]]
+	this.mPointer = pPointer	
 	--[[
 		-- Método para retornar o nome do objeto
 		--
@@ -235,11 +242,11 @@ function Object(pPointer)
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	17/12/2009
-		-- @version	17/12/2009
+		-- @version	26/01/2010
 		-- @param	int pIndex, índice real da animacão
 	-]]
 	local function changeAnimationByIndex(pIndex)
-		lua_object_changeAnimation(this.mPointer,pIndex - 1)
+		lua_object_changeAnimationByIndex(this.mPointer, pIndex - 1)
 	end
 	--[[
 		-- Método para mudar a animacão do objeto pelo seu grupo e índice
@@ -256,6 +263,55 @@ function Object(pPointer)
 			pGroup,
 			pIndex
 		)
+	end
+	--[[
+		-- Método para retornar a grupo e o índice do grupo da animacão que o objeto está executando
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	26/01/2010
+		-- @return	{group,index}
+	-]]
+	local function getAnimationOn()
+		local Group, Index = lua_object_getAnimationOn(this.mPointer)
+		return  {group = Group,index = Index }
+	end
+	--[[
+		-- Método para retornar o índice da animacão que o objeto está executando
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	26/01/2010
+		-- @return	{group,index}
+	-]]
+	local function getAnimationOnIndex()
+		return lua_object_getAnimationOnIndex(this.mPointer) + 1
+	end
+	--[[
+		-- Método para retornar se alguma animaćão está tocando
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	26/01/2010
+		-- @return	bool
+	-]]
+	local function animationIsPlaying()
+		return lua_object_animationIsPlaying(this.mPointer)
+	end
+	--[[
+		-- Método para retornar o índice real da animaćão
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	26/01/2010
+		-- @return	{group,index}
+	-]]
+	local function getAnimationRealIndex(pGroup,pIndex)
+		return lua_object_getAnimationRealIndex(
+			this.mPointer,
+			pGroup,
+			pIndex
+		) + 1
 	end
 	--[[
 		-- Método para retornar o layer do objeto
@@ -399,8 +455,10 @@ function Object(pPointer)
 	this.subPosition				= subPosition
 	this.getAnimationRealIndex		= getAnimationRealIndex
 	this.changeAnimation			= changeAnimation
-	this.isAnimationPlaying 		= isAnimationPlaying
-	this.getAnimationPlaying		= getAnimationPlaying
+	this.changeAnimationByIndex		= changeAnimationByIndex
+	this.animationIsPlaying 		= animationIsPlaying
+	this.getAnimationOn				= getAnimationOn
+	this.getAnimationOnIndex		= getAnimationOnIndex
 	this.getFrameOn 				= getFrameOn
 	this.setFrameOn 				= setFrameOn
 	this.logic						= logic

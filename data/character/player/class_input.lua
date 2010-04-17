@@ -5,7 +5,7 @@
 	-- @since	26/01/2010
 	-- @version	26/01/2010
 -]]
-function Input
+function Input()
 	this = {}
 	--[[
 		-- Método para verificar se o botão start está apertado

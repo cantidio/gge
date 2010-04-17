@@ -10,6 +10,26 @@ namespace ObjectLua
 		return (Object*)lua_tointeger(pState,1);
 	}
 
+	int lua_create(lua_State* pState)
+	{
+		Object* object = new Object
+		(
+			Gorgon::Point
+			(
+				(int)lua_tointeger(pState,1),
+				(int)lua_tointeger(pState,2)
+			)
+		);
+		lua_pushnumber(pState,(int)object);
+		return 1;
+	}
+	
+	int lua_destroy(lua_State* pState)
+	{
+		Object* object = getObjectPointer(pState);
+		delete object;
+	}
+
 	int lua_isActive(lua_State* pState)
 	{
 		Object* object = getObjectPointer(pState);
@@ -70,6 +90,14 @@ namespace ObjectLua
 	}
 
 	int lua_getAnimationOn(lua_State* pState)
+	{
+		Object* object = getObjectPointer(pState);
+		lua_pushnumber(pState,object->getAnimationOnGroup());
+		lua_pushnumber(pState,object->getAnimationOnIndex());
+		return 2;
+	}
+
+	int lua_getAnimationOnIndex(lua_State* pState)
 	{
 		Object* object = getObjectPointer(pState);
 		lua_pushnumber(pState,object->getAnimationOn());
@@ -227,6 +255,7 @@ namespace ObjectLua
 		pScript->registerFunction("lua_object_changeAnimationByIndex",lua_changeAnimationByIndex);
 		pScript->registerFunction("lua_object_animationIsPlaying",lua_animationIsPlaying);
 		pScript->registerFunction("lua_object_getAnimationOn",lua_getAnimationOn);
+		pScript->registerFunction("lua_object_getAnimationOnIndex",lua_getAnimationOnIndex);
 		pScript->registerFunction("lua_object_getFrameOn",lua_getFrameOn);
 		pScript->registerFunction("lua_object_getPosition",lua_getPosition);
 		pScript->registerFunction("lua_object_setPosition",lua_setPosition);

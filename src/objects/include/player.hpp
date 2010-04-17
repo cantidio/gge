@@ -34,7 +34,7 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	14/03/2009
- * @version	16/03/2009
+ * @version	26/01/2010
  * @ingroup	Objects
  */
 class Player : public Character
@@ -45,7 +45,7 @@ class Player : public Character
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
-		 * @version	14/03/2009
+		 * @version	26/01/2010
 		 */
 		Player();
 		/**

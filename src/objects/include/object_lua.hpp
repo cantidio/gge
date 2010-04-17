@@ -110,15 +110,25 @@ namespace ObjectLua
 	 */
 	int lua_animationIsPlaying(lua_State* pState);
 	/**
-	 * Função que retorna o número da animação que está tocando
+	 * Função que retorna o grupo e o índice da animação que está tocando
 	 *
 	 * @author	Cantidio Oliveira Fontes
-	 * @since	14/03/2009
-	 * @version	14/03/2009
+	 * @since	26/01/2010
+	 * @version	26/01/2010
 	 * @param	lua_State* pState, estado do interpretador lua atual
 	 * @return	int
 	 */
 	int lua_getAnimationOn(lua_State* pState);
+	/**
+	 * Função que retorna o índice da animação que está tocando
+	 *
+	 * @author	Cantidio Oliveira Fontes
+	 * @since	14/03/2009
+	 * @version	26/01/2010
+	 * @param	lua_State* pState, estado do interpretador lua atual
+	 * @return	int
+	 */
+	int lua_getAnimationOnIndex(lua_State* pState);
 	/**
 	 * Função que retorna o número do frame atual da animação que está tocando
 	 *

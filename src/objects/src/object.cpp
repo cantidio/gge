@@ -171,6 +171,15 @@ int Object::getAnimationOn() const
 	return mAnimationHandler->getAnimationOn();
 }
 
+int Object::getAnimationOnGroup() const
+{
+	return mAnimationHandler->getAnimationOnGroup();
+}
+
+int Object::getAnimationOnIndex() const
+{
+	return mAnimationHandler->getAnimationOnIndex();
+}
 int Object::getFrameOn() const
 {
 	return mAnimationHandler->getFrameOn();
