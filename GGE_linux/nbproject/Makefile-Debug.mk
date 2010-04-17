@@ -64,13 +64,11 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=`allegro-config --libs` -Wl,-rpath /home/aniquilator/Development/gorgon++/Gorgon++/dist/Debug/GNU-Linux-x86 -L/home/aniquilator/Development/gorgon++/Gorgon++/dist/Debug/GNU-Linux-x86 -lgorgon  
+LDLIBSOPTIONS=`allegro-config --libs` `gorgon-config --libs`  
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
 	${MAKE}  -f nbproject/Makefile-Debug.mk dist/Debug/GNU-Linux-x86/rabbitz
-
-dist/Debug/GNU-Linux-x86/rabbitz: /home/aniquilator/Development/gorgon++/Gorgon++/dist/Debug/GNU-Linux-x86/libgorgon.so
 
 dist/Debug/GNU-Linux-x86/rabbitz: ${OBJECTFILES}
 	${MKDIR} -p dist/Debug/GNU-Linux-x86
@@ -168,16 +166,14 @@ ${OBJECTDIR}/_ext/_DOTDOT/src/background/src/layer_lua.o: nbproject/Makefile-${C
 
 # Subprojects
 .build-subprojects:
-	cd /home/aniquilator/Development/gorgon++/Gorgon++ && ${MAKE}  -f Makefile CONF=Debug
 
 # Clean Targets
-.clean-conf: ${CLEAN_SUBPROJECTS}
+.clean-conf:
 	${RM} -r build/Debug
 	${RM} dist/Debug/GNU-Linux-x86/rabbitz
 
 # Subprojects
 .clean-subprojects:
-	cd /home/aniquilator/Development/gorgon++/Gorgon++ && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl
