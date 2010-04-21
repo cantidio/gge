@@ -7,7 +7,7 @@ function Breakman()
 	this.posX			= 0
 	this.posY			= 0
 	this.layers			= {
-		"data/background/breakman/breakman_layer.lua"
+		"tests/background/breakman/breakman_layer.lua"
 	}
 	this.colision		= {
 		"",

@@ -241,12 +241,13 @@ void Object::drawAfterImageNormal(const int& pImage) const
 
 void Object::drawAfterImageTransparent(const int& pImage) const
 {
-	Gorgon::Video::get().drawSpriteTrans
+	Gorgon::Video::get().drawSpriteTransFlipped
 	(
 		*mLastSprites[pImage],
 		(int)mLastPositions[pImage].getX(),
 		(int)mLastPositions[pImage].getY(),
-		mAfterImageTrans
+		mAfterImageTrans,
+		mLastDirections[pImage]
 	);
 }
 

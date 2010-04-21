@@ -1,7 +1,7 @@
 function breakman_layer()
 	local this	= Layer()
-	this.sprite				= "data/background/breakman/breakman_layer.gspk"
-	this.animation			= "data/background/breakman/breakman_layer.gapk"
+	this.sprite				= "tests/background/breakman/breakman_layer.gspk"
+	this.animation			= "tests/background/breakman/breakman_layer.gapk"
 	this.xScrollingSpeed	= 1
 	this.yScrollingSpeed	= 1
 	this.tiles				= {
