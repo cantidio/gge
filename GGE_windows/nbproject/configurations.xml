@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="62">
+  <logicalFolder name="root" displayName="root" projectFiles="true">
+    <logicalFolder name="src" displayName="src" projectFiles="true">
+      <logicalFolder name="background" displayName="background" projectFiles="true">
+        <logicalFolder name="include" displayName="include" projectFiles="true">
+          <itemPath>../src/background/include/background.hpp</itemPath>
+          <itemPath>../src/background/include/background_lua.hpp</itemPath>
+          <itemPath>../src/background/include/layer.hpp</itemPath>
+          <itemPath>../src/background/include/layer_lua.hpp</itemPath>
+          <itemPath>../src/background/include/tile.hpp</itemPath>
+          <itemPath>../src/background/include/tile_lua.hpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>../src/background/src/background.cpp</itemPath>
+          <itemPath>../src/background/src/background_lua.cpp</itemPath>
+          <itemPath>../src/background/src/layer.cpp</itemPath>
+          <itemPath>../src/background/src/layer_lua.cpp</itemPath>
+          <itemPath>../src/background/src/tile.cpp</itemPath>
+          <itemPath>../src/background/src/tile_lua.cpp</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="core" displayName="core" projectFiles="true">
+        <logicalFolder name="include" displayName="include" projectFiles="true">
+          <itemPath>../src/core/include/text_window.hpp</itemPath>
+          <itemPath>../src/core/include/text_window_lua.hpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>../src/core/src/text_window.cpp</itemPath>
+          <itemPath>../src/core/src/text_window_lua.cpp</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="input" displayName="input" projectFiles="true">
+        <logicalFolder name="include" displayName="include" projectFiles="true">
+          <itemPath>../src/input/include/input.hpp</itemPath>
+          <itemPath>../src/input/include/input_lua.hpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>../src/input/src/input.cpp</itemPath>
+          <itemPath>../src/input/src/input_lua.cpp</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="objects" displayName="objects" projectFiles="true">
+        <logicalFolder name="include" displayName="include" projectFiles="true">
+          <itemPath>../src/objects/include/character.hpp</itemPath>
+          <itemPath>../src/objects/include/character_lua.hpp</itemPath>
+          <itemPath>../src/objects/include/enemy.hpp</itemPath>
+          <itemPath>../src/objects/include/object.hpp</itemPath>
+          <itemPath>../src/objects/include/object_lua.hpp</itemPath>
+          <itemPath>../src/objects/include/player.hpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>../src/objects/src/character.cpp</itemPath>
+          <itemPath>../src/objects/src/character_lua.cpp</itemPath>
+          <itemPath>../src/objects/src/object.cpp</itemPath>
+          <itemPath>../src/objects/src/object_lua.cpp</itemPath>
+          <itemPath>../src/objects/src/player.cpp</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="resource_manager"
+                     displayName="resource_manager"
+                     projectFiles="true">
+        <logicalFolder name="include" displayName="include" projectFiles="true">
+          <itemPath>../src/resource_manager/include/animation_manager.hpp</itemPath>
+          <itemPath>../src/resource_manager/include/colision_manager.hpp</itemPath>
+          <itemPath>../src/resource_manager/include/resource_manager.hpp</itemPath>
+          <itemPath>../src/resource_manager/include/sprite_manager.hpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>../src/resource_manager/src/animation_manager.cpp</itemPath>
+          <itemPath>../src/resource_manager/src/sprite_manager.cpp</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <itemPath>../tests/background.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Arquivos importantes"
+                   projectFiles="false">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>../src</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <compilerSet>MinGW|MinGW</compilerSet>
+        <platform>3</platform>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <incDir>
+            <pElem>../src</pElem>
+            <pElem>../..</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>-lalleg</linkerOptionItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../../gorgon++/Gorgon++_windows"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../../gorgon++/Gorgon++_windows"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="dist/Debug/MinGW-Windows/libGorgon___windows.dll">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibFileItem>../../gorgon++/third_party/lua51.lib</linkerLibFileItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <compilerSet>MinGW|MinGW</compilerSet>
+        <platform>3</platform>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <linkerTool>
+          <linkerLibItems>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+    </conf>
+  </confs>
+</configurationDescriptor>
