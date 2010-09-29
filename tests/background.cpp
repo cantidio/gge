@@ -62,6 +62,7 @@ int main(int argc, char* argv[])
 		//Gorgon::Video::init("Teste Player",320,180,false);
 		Gorgon::Video::init("Teste GGE",320,240,true);
 
+
 		Input::init();
 		std::vector<Object*> objects;
 
@@ -109,4 +110,4 @@ int main(int argc, char* argv[])
 	}
 	Input::halt();
 	return 0;
-}
+}END_OF_MAIN()
