@@ -1,85 +1,35 @@
 #include "../include/object.hpp"
-#include "../include/object_lua.hpp"
+//#include "../include/object_lua.hpp"
 
 Object::Object
 (
-	const Gorgon::Point& pPosition,
-	Layer* pLayer,
-	const bool& pActive
+	const std::string& pSpritePackName,
+	const std::string& pAnimationPackName,
+	Layer* pLayer
 )
 {
-	setAfterImageMode(false,0,0);
-	mAfterImageMethod	= NULL;
-	mScript				= new Gorgon::Lua("data/object/class_object.lua");
-	mPosition			= pPosition;
+//	setAfterImageMode(false,0,0);
+//	mAfterImageMethod	= NULL;
+	
+	
 	mLayer				= pLayer;
-	mActive				= pActive;
-}
-
-Object::Object
-(
-	const std::string&		pScriptName,
-	const Gorgon::Point&	pPosition,
-	Layer*					pLayer,
-	const bool&				pActive
-)
-{
-	setPosition(pPosition);
-	setAfterImageMode(false,0,0);
-	mAfterImageMethod	= NULL;
-	mLayer				= pLayer;
-	mActive				= pActive;
-	mScript				= new Gorgon::Lua("data/object/class_object.lua");
-	mScript->loadScript(pScriptName);
-	setUp();
-}
-
-void Object::setUp()
-{
-	loadGlobalVars();
-	mScript->function("script_object_setPointer",Gorgon::LuaParam("n",this));
-	ObjectLua::registerFunctions(mScript);
-	TextWindowLua::registerFunctions(mScript);
+	mSpritePackName		= pSpritePackName;
+	mAnimationPackName	= pAnimationPackName;
 	mSpritePack			= ResourceManager::SpriteManager::load(mSpritePackName);
 	mAnimationPack		= ResourceManager::AnimationManager::load(mAnimationPackName);
 	mAnimationHandler	= new Gorgon::AnimationHandler(*mSpritePack,*mAnimationPack);
 }
 
-void Object::loadGlobalVars()
-{
-	mName				= mScript->function("script_object_getName"			,Gorgon::LuaParam(),1)->getStringValue();
-	mId					= mScript->function("script_object_getId"			,Gorgon::LuaParam(),1)->getStringValue();
-	mSpritePackName		= mScript->function("script_object_getSpritePack"	,Gorgon::LuaParam(),1)->getStringValue();
-	mAnimationPackName	= mScript->function("script_object_getAnimationPack",Gorgon::LuaParam(),1)->getStringValue();
-
-	//mColisionPackName	= mScript->getStringVar("colision");
-	//mPaletteName		= mScript->getStringVar("palette");
-	setAfterImageMode(false,0,0);
-}
+//TextWindowLua::registerFunctions(mScript);
 
 Object::~Object()
 {
 	ResourceManager::SpriteManager::unload(mSpritePackName);
 	ResourceManager::AnimationManager::unload(mAnimationPackName);
-	mLastPositions.clear();
-	mLastDirections.clear();
-	mLastSprites.clear();
+//	mLastPositions.clear();
+//	mLastDirections.clear();
+//	mLastSprites.clear();
 	delete mAnimationHandler;
-}
-
-bool Object::isActive() const
-{
-	return mActive;
-}
-
-void Object::activate()
-{
-	mActive = true;
-}
-
-void Object::inactivate()
-{
-	mActive = false;
 }
 
 void Object::setLayer(Layer* pLayer)
@@ -92,58 +42,31 @@ Layer* Object::getLayer()
 	return mLayer;
 }
 
-void Object::setMirroring(const Gorgon::Mirroring& pMirroring)
+void Object::draw(const Gorgon::Point& mPosition, const Gorgon::Mirroring& pMirroring) const
 {
-	mDirection = pMirroring;
-}
-
-Gorgon::Mirroring Object::getMirroring() const
-{
-	return mDirection;
-}
-
-void Object::setPosition(const Gorgon::Point& pPosition)
-{
-	mPosition = pPosition;
-}
-
-void Object::addPosition(const Gorgon::Point& pPosition)
-{
-	mPosition += pPosition;
-}
-
-void Object::subPosition(const Gorgon::Point& pPosition)
-{
-	mPosition -= pPosition;
-}
-
-Gorgon::Point Object::getPosition() const
-{
-	return mPosition;
-}
-
-void Object::draw() const
-{
-	if(mActive)
+/*	if(mAfterImageMethod != NULL)
 	{
-		if(mAfterImageMethod != NULL)
-		{
-			const int size	= mLastSprites.size() - 1;
-			const int limit	= (getAfterImageNumber()-1 > size) ? size + 1 : getAfterImageNumber();
+		const int size	= mLastSprites.size() - 1;
+		const int limit	= (getAfterImageNumber()-1 > size) ? size + 1 : getAfterImageNumber();
 
-			for(register int i = 0; i < limit ; ++i)
-			{
-				((this)->*mAfterImageMethod)(size - i);
-			}
+		for(register int i = 0; i < limit ; ++i)
+		{
+			((this)->*mAfterImageMethod)(size - i);
 		}
-		mAnimationHandler->draw
-		(
-			Gorgon::Video::get(),
-			(int)mPosition.getX(),
-			(int)mPosition.getY(),
-			mDirection
-		);
 	}
+*/
+	mAnimationHandler->draw
+	(
+		Gorgon::Video::get(),
+		(int)mPosition.getX(),
+		(int)mPosition.getY(),
+		pMirroring
+	);
+}
+
+void Object::animationRunStep() 
+{
+	mAnimationHandler->playByStep();
 }
 
 int Object::getAnimationRealIndex(const int& pGroup, const int& pIndex) const
@@ -180,24 +103,19 @@ int Object::getAnimationOnIndex() const
 {
 	return mAnimationHandler->getAnimationOnIndex();
 }
+
 int Object::getFrameOn() const
 {
 	return mAnimationHandler->getFrameOn();
 }
 
-void Object::persistentFunction()
+void Object::setFrameOn(const int& pFrame)
 {
-	mScript->function("script_object_persistentFunction");
+	mAnimationHandler->jumpToFrame(pFrame);
 }
 
-void Object::logic()
+/*void Object::logic()
 {
-	persistentFunction();
-	if(!mActive)
-	{
-		return;
-	}
-	mScript->function("script_object_logic");
 	mAnimationHandler->playByStep();
 
 	if(mAfterImageDelayInUse % getAfterImageDelay() == 0)
@@ -225,6 +143,7 @@ void Object::logic()
 		}
 	}
 	++mAfterImageDelayInUse;
+	
 }
 
 void Object::drawAfterImageNormal(const int& pImage) const
@@ -330,3 +249,4 @@ int Object::getAfterImageNumber() const
 {
 	return mAfterImageNumber;
 }
+*/

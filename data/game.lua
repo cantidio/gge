@@ -1,48 +1,52 @@
+dofile("players.lua")
+dofile("backgrounds.lua")
 function Game()
 	local this = { }
 
-	this.mName				= "nome do jogo"
+	this.mName				= ""
 	this.mVersion			= "0.0"
-
 	this.debugWindow		= true -- não sei o que fazer com isso ainda. kkkk
 
-	this.mFramesPerSecond	= 60
-	this.mScreen.width		= 320
-	this.mScreen.height		= 240
-	this.mScreen.windowed	= true
+	this.mVideo		= {
+		width		= 320,
+		height		= 240,
+		FPS			= 60,
+		windowed	= true,
+	}
 
 	this.mWindow.logo		= ""
-	this.mWindow.title		= "titulo da janela"
+	this.mWindow.title		= ""
 
 
-
-	local function init()
-
-		return ,
-
-		GGE_initVideo()
-		GGE_setGameName(this.mName)
-		GGE_setGameVersion(this.mVersion)
-		GGE_setFPS(this.mFramesPerSecond)
+	--[[
+		--Método para iniciar o vídeo do engine
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	29/09/2010
+		-- @version	29/09/2010
+	-]]
+	this.init = function()
+		if not GGE_init( --inicia o vídeo, o input e o audio*
+			this.mWindow.title,
+			this.mVideo.width,
+			this.mVideo.height,
+			this.mVideo.windowed
+		)										or 
+		not GGE_setGameName(this.mName)			or
+		not GGE_setGameVersion(this.mVersion)	or
+		not GGE_setFPS(this.mVideo.FPS)			then
+			return nil
+		end
+		return true
 	end
+	
 	--[[
 		-- MÃ©todo chamado a cada iteraÄ‡Ã£o do jogo
 	-]]
-	local function logic()
+	this.logic = function()
 		this.state()
 	end
 
-	player = new(Player())
-
-	function new(pClass)
-		pClass.cppCreate()
-
-		local function cppCreate()
-			this.mPointer = lua_player_create()
-		end
-
-		return pClass
-	end
 
 	local function getNextMission(pBackground,pPlayer)
 		if pBackground.name == "jonas" then
@@ -77,17 +81,19 @@ function Game()
 
 	end
 
-	local function stateMenuInit()
+	this.stateMenuInit = function()
 		this.background = Background("data/background/menu.lua")
 		this.player		= Player("data/player/menu_player.lua")
 		this.state		= this.stateMenu
+		
+		this.background.addObject(this.player)
+		this.background.setCamera(this.player,{x=0,y=0})
+		
 	end
 
 	local function stateMenu()
 		this.background.logic()
-		this.player.logic()
 		this.background.draw()
-		this.player.draw()
 	end
 
 	local function stateNewGameInit()
@@ -102,7 +108,15 @@ function Game()
 
 		pBackground.draw()
 		pPlayer.draw()
-
+		
+		cenario.setCamera(jogador+jogador2,{x=12,y=12})
+		
+		logic{
+			move lanlanlanl
+			desloca com a camera
+			roda a lógica de todos os layers
+				os layers rodam a lógica de todos objetos dentro deles
+		}
 		pGui.draw()
 	end
 

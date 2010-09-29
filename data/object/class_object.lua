@@ -1,79 +1,4 @@
 dofile("data/background/class_background.lua")
---[[
-	-- Funcão para retornar a localizacão do pacote de sprites do objeto
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	02/01/2009
-	-- @version	04/01/2009
-	-- @return	string
--]]
-function script_object_getSpritePack()
-	return this.spritePack
-end
---[[
-	-- Funcão para retornar a localizacão do pacote de animacões do objeto
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	02/01/2009
-	-- @version	04/01/2009
-	-- @return	string
--]]
-function script_object_getAnimationPack()
-	return this.animationPack
-end
---[[
-	-- Funcão para retornar o nome do objeto
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	02/01/2009
-	-- @version	04/01/2009
-	-- @return	string
--]]
-function script_object_getName()
-	return this.name
-end
---[[
-	-- Funcão para retornar o id do objeto
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	02/01/2009
-	-- @version	04/01/2009
-	-- @return	string
--]]
-function script_object_getId()
-	return this.id
-end
---[[
-	-- Funcão para setar o ponteiro da classe em c++ para o objeto em Lua
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	02/01/2009
-	-- @version	04/01/2009
--]]
-function script_object_setPointer(pPointer)
-	this.mPointer = pPointer
-end
---[[
-	-- Funcão para rodar a lógica dos scripts
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	02/01/2009
-	-- @version	04/01/2009
--]]
-function script_object_logic()
-	this.logic()
-end
---[[
-	-- Funcão para rodar a funcão persistent do objeto
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	25/01/2010
-	-- @version	25/01/2010
--]]
-function script_object_persistentFunction()
-	this.persistentFunction()
-end
-
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 Mirroring = {
 	Normal	= 0,
@@ -90,70 +15,11 @@ Mirroring = {
 	-- @since	17/12/2009
 	-- @version	04/01/2010
 -]]
-function Object(pPointer)
+function OLD_Object(pPointer)
 	local this = { }
 	
---[[	if pPointer == nil then
-		this.mPointer = lua_object_create(0,0)
-	else
-		this.mPointer = pPointer
-	end
--]]
 	this.mPointer = pPointer	
-	--[[
-		-- Método para retornar o nome do objeto
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	17/12/2009
-		-- @version	17/12/2009
-		-- @return	string
-	-]]
-	local function getName()
-		return lua_object_getName(this.mPointer)
-	end
-
-	--[[
-		-- Método para retornar o id do objeto
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	17/12/2009
-		-- @version	17/12/2009
-		-- @return	string
-	-]]
-	local function getId()
-		return lua_object_getId(this.mPointer)
-	end
-	--[[
-		-- Método para retornar se o objeto está ativo
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	26/01/2010
-		-- @version	26/01/2010
-		-- @return	bool
-	-]]
-	local function isActive()
-		return lua_object_isActive(this.mPointer)
-	end
-	--[[
-		-- Método para ativar o objeto
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	26/01/2010
-		-- @version	26/01/2010
-	-]]
-	local function activate()
-		lua_object_activate(this.mPointer)
-	end
-	--[[
-		-- Método para desativar o objeto
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	26/01/2010
-		-- @version	26/01/2010
-	-]]
-	local function inactivate()
-		lua_object_inactivate(this.mPointer)
-	end
+	
 	--[[
 		-- Método para retornar o espelhamento do objeto
 		--
@@ -176,155 +42,7 @@ function Object(pPointer)
 	local function setMirroring(pMirroring)
 		lua_object_setMirroring(this.mPointer,pMirroring)
 	end
-	--[[
-		-- Método para retornar a posicão do objeto
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	17/12/2009
-		-- @version	17/12/2009
-		-- @return	{x,y}
-	-]]
-	local function getPosition()
-		local X,Y = lua_object_getPosition(this.mPointer)
-		return {x = X, y = Y}
-	end
-	--[[
-		-- Método para setar a posicão do objeto
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	17/12/2009
-		-- @version	17/12/2009
-		-- @param	{x,y} pPosition, posicão a ser setada ao objeto
-		-- @example
-					obj = Object()
-					pos	= { x = 1, y = 2 }
-					obj.setPosition(pos)
-	-]]
-	local function setPosition(pPosition)
-		lua_object_setPosition(
-			this.mPointer,
-			pPosition.x,
-			pPosition.y
-		)
-	end
-	--[[
-		-- Método para adicionar uma posicão do objeto
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	17/12/2009
-		-- @version	17/12/2009
-		-- @param	{x,y} pPosition, posicão a ser adicionada ao objeto
-	-]]
-	local function addPosition(pPosition)
-		lua_object_addPosition(
-			this.mPointer,
-			pPosition.x,
-			pPosition.y
-		)
-	end
-	--[[
-		-- Método para subtrair uma posicão do objeto
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	17/12/2009
-		-- @version	17/12/2009
-		-- @param	{x,y} pPosition, posicão a ser subtraída ao objeto
-	-]]
-	local function subPosition(pPosition)
-		lua_object_subPosition(
-			this.mPointer,
-			pPosition.x,
-			pPosition.y
-		)
-	end
-	--[[
-		-- Método para mudar a animacão do objeto pelo seu índice
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	17/12/2009
-		-- @version	26/01/2010
-		-- @param	int pIndex, índice real da animacão
-	-]]
-	local function changeAnimationByIndex(pIndex)
-		lua_object_changeAnimationByIndex(this.mPointer, pIndex - 1)
-	end
-	--[[
-		-- Método para mudar a animacão do objeto pelo seu grupo e índice
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	17/12/2009
-		-- @version	17/12/2009
-		-- @param	int pGroup, grupo da animacão
-		-- @param	int pIndex, índice da animacão
-	-]]
-	local function changeAnimation(pGroup,pIndex)
-		lua_object_changeAnimation(
-			this.mPointer,
-			pGroup,
-			pIndex
-		)
-	end
-	--[[
-		-- Método para retornar a grupo e o índice do grupo da animacão que o objeto está executando
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	26/01/2010
-		-- @version	26/01/2010
-		-- @return	{group,index}
-	-]]
-	local function getAnimationOn()
-		local Group, Index = lua_object_getAnimationOn(this.mPointer)
-		return  {group = Group,index = Index }
-	end
-	--[[
-		-- Método para retornar o índice da animacão que o objeto está executando
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	26/01/2010
-		-- @version	26/01/2010
-		-- @return	{group,index}
-	-]]
-	local function getAnimationOnIndex()
-		return lua_object_getAnimationOnIndex(this.mPointer) + 1
-	end
-	--[[
-		-- Método para retornar se alguma animaćão está tocando
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	26/01/2010
-		-- @version	26/01/2010
-		-- @return	bool
-	-]]
-	local function animationIsPlaying()
-		return lua_object_animationIsPlaying(this.mPointer)
-	end
-	--[[
-		-- Método para retornar o índice real da animaćão
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	26/01/2010
-		-- @version	26/01/2010
-		-- @return	{group,index}
-	-]]
-	local function getAnimationRealIndex(pGroup,pIndex)
-		return lua_object_getAnimationRealIndex(
-			this.mPointer,
-			pGroup,
-			pIndex
-		) + 1
-	end
-	--[[
-		-- Método para retornar o layer do objeto
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	17/12/2009
-		-- @version	17/12/2009
-		-- @return	Layer
-	-]]
-	local function getLayer()
-		local layer = Layer(lua_object_getLayer(this.mPointer))
-		return layer
-	end
+	
 	--[[
 		-- Função que seta o método das AfterImages para Normal
 		--
@@ -433,56 +151,320 @@ function Object(pPointer)
 		)
 	end
 
-	local function logic()
-		--logic of the object
-	end
-	
-	local function persistentFunction()
+	return this
+end
+-------------------------------------------------------------------------------------------------_NEW_
+--[[
+	-- Classe que representa um objeto
+	--
+	-- @author	Cantidio Oliveira Fontes
+	-- @since	17/12/2009
+	-- @version	29/09/2010
+-]]
+function Object(pSprite, pAnimation)
+	local this = { }
+
+	this.mDirection	= Mirroring.normal
+	this.mPosition	= { x = 0, y = 0 }
+	this.mId		= 0
+	this.mName		= ""
+	this.mLayer		= { } --layer que o objeto se encontra
+	this.mActive	= true
+	--this.mSprite	= "" 
+	--this.mAnimation	= ""
+
+	this.mPointer	= GGE_object_new(pSprite,pAnimation)
+	--[[
+		-- Método para ativar o objeto
 		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	29/09/2010
+	-]]
+	this.activate = function()
+		this.mActive = true
 	end
 	
-	this.getName					= getName
-	this.getId						= getId
-	this.ativate					= ativate
-	this.inativate					= inativate
-	this.isAtive					= isAtive
+	--[[
+		-- Método para desativar o objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	29/09/2010
+	-]]
+	this.inactivate = function()
+		this.mActive = false
+	end
+	
+	--[[
+		-- Método para retornar se o objeto está ativo
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	29/09/2010
+		-- @return	bool
+	-]]
+	this.isActive = function()
+		return this.mActive
+	end
+	
 	this.getMirroring				= getMirroring
 	this.setMirroring				= setMirroring
 	this.getLayer					= getLayer
-	this.getPosition				= getPosition
-	this.setPosition				= setPosition
-	this.addPosition				= addPosition
-	this.subPosition				= subPosition
-	this.getAnimationRealIndex		= getAnimationRealIndex
-	this.changeAnimation			= changeAnimation
-	this.changeAnimationByIndex		= changeAnimationByIndex
-	this.animationIsPlaying 		= animationIsPlaying
-	this.getAnimationOn				= getAnimationOn
-	this.getAnimationOnIndex		= getAnimationOnIndex
-	this.getFrameOn 				= getFrameOn
-	this.setFrameOn 				= setFrameOn
-	this.logic						= logic
-	this.persistentFunction			= persistentFunction
-	this.setAfterImageMethodNormal	= setAfterImageMethodNormal
-	this.setAfterImageMethodAdd		= setAfterImageMethodAdd
-	this.setAfterImageMethodTrans	= setAfterImageMethodTrans
-	this.setAfterImageEnabled		= setAfterImageEnabled
-	this.setAfterImageDelay			= setAfterImageDelay
-	this.setAfterImageNumber		= setAfterImageNumber
-	this.setAfterImageMode			= setAfterImageMode
+	
+	--[[
+		-- Método para setar o id do objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	29/09/2010
+		-- @version	29/09/2010
+		-- @param	string pId, o id do objeto
+	-]]
+	this.setId = function(pId)
+		this.mId = pId
+	end
+	
+	--[[
+		-- Método para retornar o id do objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	17/12/2009
+		-- @version	29/09/2010
+		-- @return	string
+	-]]
+	this.getId = function()
+		return this.mId
+	end
 
---[[	setAfterImageMethodNormal
-	setAfterImageMethodAdd
-	setAfterImageMethodTrans
-	setAfterImageEnabled
-	setAfterImageDelay
-	setAfterImageNumber
-	setAfterImageMode
-	getAfterImageEnabled
-	getAfterImageDelay
-	getAfterImageNumber
--]]
+	--[[
+		-- Método para setar o nome do objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	29/09/2010
+		-- @version	29/09/2010
+		-- @param	string pName, o nome do objeto
+	-]]
+	this.setName = function(pName)
+		this.mName = pName
+	end
+	
+	--[[
+		-- Método para retornar o nome do objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	17/12/2009
+		-- @version	29/09/2010
+		-- @return	string
+	-]]
+	this.getName = function()
+		return this.mName
+	end
+
+	--[[
+		-- Método para retornar o layer do objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	17/12/2009
+		-- @version	29/09/2010
+		-- @return	Layer
+		-- @todo rever isso
+	-]]
+	this.getLayer = function()
+		--local layer = Layer( GGE_object_getLayer(this.mPointer) )
+		return this.mLayer
+	end
+
+	--[[
+		-- Método para retornar a posicão do objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	17/12/2009
+		-- @version	29/09/2010
+		-- @return	{x,y}
+	-]]
+	this.getPosition = function()
+		return this.mPosition
+	end
+
+	--[[
+		-- Método para setar a posicão do objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	17/12/2009
+		-- @version	29/09/2010
+		-- @param	{x,y} pPosition, posicão a ser setada ao objeto
+		-- @example
+					obj = Object()
+					pos	= { x = 1, y = 2 }
+					obj.setPosition(pos)
+	-]]
+	this.setPosition = function(pPosition)
+		this.mPosition = pPosition
+	end
+
+	--[[
+		-- Método para adicionar uma posicão ao objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	17/12/2009
+		-- @version	29/09/2010
+		-- @param	{x,y} pPosition, posicão a ser adicionada ao objeto
+	-]]
+	this.addPosition = function(pPosition)
+		this.mPosition.x += pPosition.x
+		this.mPosition.y += pPosition.y
+	end
+
+	--[[
+		-- Método para subtrair uma posicão do objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	17/12/2009
+		-- @version	29/09/2010
+		-- @param	{x,y} pPosition, posicão a ser subtraída ao objeto
+	-]]
+	this.subPosition = function(pPosition)
+		this.mPosition.x -= pPosition.x
+		this.mPosition.y -= pPosition.y
+	end
+	
+	--[[
+		-- Método para mudar a animacão do objeto pelo seu índice
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	17/12/2009
+		-- @version	29/09/2010
+		-- @param	int pIndex, índice real da animacão
+	-]]
+	this.changeAnimationByIndex = function(pIndex)
+		GGE_object_animationChangeByIndex(this.mPointer, pIndex - 1)
+	end
+	--[[
+		-- Método para mudar a animacão do objeto pelo seu grupo e índice
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	17/12/2009
+		-- @version	29/09/2010
+		-- @param	int pGroup, grupo da animacão
+		-- @param	int pIndex, índice da animacão
+	-]]
+	this.changeAnimation = function(pGroup, pIndex)
+		GGE_object_animationChange(
+			this.mPointer,
+			pGroup,
+			pIndex
+		)
+	end
+	--[[
+		-- Método para retornar a grupo e o índice do grupo da animacão que o objeto está executando
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	29/09/2010
+		-- @return	{group, index, realIndex}
+	-]]
+	local function getAnimationOn()
+		local Group, Index, Real = GGE_object_animationOnGet(this.mPointer)
+		return  { group = Group, index = Index, realIndex = Real }
+	end
+	--[[
+		-- Método para retornar se alguma animaćão está tocando
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	29/09/2010
+		-- @return	bool
+	-]]
+	this.animationIsPlaying = function()
+		return GGE_object_animationIsPlaying(this.mPointer)
+	end
+	--[[
+		-- Método para retornar o índice real da animaćão
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	29/09/2010
+		-- @return	{group,index}
+	-]]
+	this.getAnimationRealIndex = function(pGroup,pIndex)
+		return GGE_object_animationGetRealIndex(
+			this.mPointer,
+			pGroup,
+			pIndex
+		) + 1
+	end
+	--[[
+		-- Método para recuperar o frame da animacão atual
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	29/09/2010
+		-- @version	29/09/2010
+		-- @return	int
+	-]]
+	this.getFrameOn = function()
+		return GGE_object_animationGetFrameOn(this.mPointer)
+	end
+	--[[
+		-- Método para setar o frame da animacão atual
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	29/09/2010
+		-- @version	29/09/2010
+		-- @param	int pFrame, indice do frame a setar
+	-]]
+	this.setFrameOn = function(pFrame)
+		GGE_object_animationSetFrameOn(this.mPointer, pFrame)
+	end
+	
+	--[[
+		-- Método para desenhar normalmente
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	29/09/2010
+		-- @version	29/09/2010
+	-]]
+	this.draw = function()
+		GGE_object_draw(
+			this.mPointer,
+			this.mPosition.x,
+			this.mPosition.y,
+			this.mDirection
+		)
+	end
+	--[[
+		-- Método para desenhar
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	29/09/2010
+		-- @version	29/09/2010
+		-- @param	{x,y} pPosition, posicão a desenhar o objeto
+		-- @param	Mirroring pDirection, direcao do personagem
+	-]]
+	this.directDraw = function(pPosition, pDirection)
+		if this.isActive() then
+			GGE_objectDraw(
+				this.mPointer,
+				pPosition.x,
+				pPosition.y,
+				pDirection
+			)
+		end
+	end
+
+	--[[
+		-- Método para executar a lógica do objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	29/09/2010
+		-- @version	29/09/2010
+		-- @details
+		--	Esse método deve ser impletado pela classe que derivar
+	-]]
+	this.logic = function()
+		GGE_object_animationRunStep(this.mPointer)
+		--logica do objeto
+	end
+
+	print("classe Object criada, ponteiro de acesso em c++: " .. this.mPointer)
 	return this
 end
-
-

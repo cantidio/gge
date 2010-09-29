@@ -29,7 +29,7 @@
 #include <gorgon++/gorgon.hpp>
 #include "resource_manager/include/sprite_manager.hpp"
 #include "resource_manager/include/animation_manager.hpp"
-#include "core/include/text_window_lua.hpp"
+//#include "core/include/text_window_lua.hpp"
 
 /**
  * @defgroup	Objects
@@ -47,7 +47,7 @@ class Layer;
  *
  * @author	Cantidio Oliveira Fontes
  * @since	11/03/2009
- * @version	26/01/2010
+ * @version	29/09/2010
  * @ingroup	Objects
  */
 class Object
@@ -94,128 +94,64 @@ class Object
 		 */
 		Gorgon::AnimationHandler* mAnimationHandler;
 		/**
-		 * Direção do objeto
-		 */
-		Gorgon::Mirroring mDirection;
-		/**
-		 * Nome do objeto
-		 */
-		std::string mName;
-		/**
-		 * ID do objeto
-		 */
-		std::string mId;
-		/**
-		 * Localização do objeto no plano xy
-		 */
-		Gorgon::Point mPosition;
-		/**
-		 * Se o objeto está ativo
-		 */
-		bool mActive;
-		/**
 		 * Ponteiro para o método de renderização das afterImages
 		 */
-		void (Object::*mAfterImageMethod)(const int&)const;
+//		void (Object::*mAfterImageMethod)(const int&)const;
 		/**
 		 * Variável que guarda se o sistema de afterImages está habilitado
 		 */
-		bool mAfterImageEnabled;
+//		bool mAfterImageEnabled;
 		/**
 		 * Delay das afterImages
 		 */
-		int	mAfterImageDelay;
+//		int	mAfterImageDelay;
 		/**
 		 * Número de afterImages
 		 */
-		int mAfterImageNumber;
+//		int mAfterImageNumber;
 		/**
 		 * Delay atual das afterImages
 		 */
-		int mAfterImageDelayInUse;
+//		int mAfterImageDelayInUse;
 		/**
 		 * Cor a ser adicionada no método de add
 		 */
-		Gorgon::Color mAfterImageColorAdd;
+//		Gorgon::Color mAfterImageColorAdd;
 		/**
 		 * Cor a ser subtraída no método de add
 		 */
-		Gorgon::Color mAfterImageColorSub;
+//		Gorgon::Color mAfterImageColorSub;
 		/**
 		 * Porcentagem de transparência das afterImages
 		 */
-		float mAfterImageTrans;
+//		float mAfterImageTrans;
 		/**
 		 * Variável que guarda as ultimas posições do objeto
 		 */
-		std::vector<Gorgon::Point>			mLastPositions;
+//		std::vector<Gorgon::Point>			mLastPositions;
 		/**
 		 * Variável que guarda as últimas direções do objeto
 		 */
-		std::vector<Gorgon::Mirroring>		mLastDirections;
+//		std::vector<Gorgon::Mirroring>		mLastDirections;
 		/**
 		 * Variável que guarda os ponteiros dos últimos sprites usados
 		 */
-		std::vector<const Gorgon::Sprite*>	mLastSprites;
+//		std::vector<const Gorgon::Sprite*>	mLastSprites;
 		
-		/**
-		 * Método para carregar as variáveis globais de um objeto declaradas no script
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	28/05/2009
-		 */
-		void loadGlobalVars();
-		/**
-		 * Método para preparar o objeto com as informações já recolhidas
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	28/05/2009
-		 */
-		void setUp();
 	public:
 		/**
 		 * Método Construtor vazio
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
-		 * @version	25/01/2010
-		 * @param	const Gorgon::Point&	pPosition	, posićão do objeto
+		 * @version	29/09/2010
 		 * @param	Layer*					pLayer		, layer que o objeto se encontra
-		 * @param	const bool&				pActive		, se o objeto comećará ativo ou não.
-		 * @see		persistentFunction
-		 * @details
-		 *			Se o objeto estiver inativo, nenhum do seus métodos será invocado, com excessão do método
-		 * persistentFunction, que sempre é chamado a cada iteraćão do jogo
 		 */
 		Object
 		(
-			const Gorgon::Point& pPosition	 = Gorgon::Point(),
-			Layer* pLayer					 = NULL,
-			const bool& pActive				 = true
-		);
-		/**
-		 * Método Construtor
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	11/03/2009
-		 * @version	28/05/2009
-		 * @param	const std::string&		pScriptName	, nome do script do objeto
-		 * @param	const Gorgon::Point&	pPosition	, posição do objeto no eixo xy
-		 * @param	Layer*					pLayer		, layer em que o objeto está presente
-		 * @param	const bool&				pActive		, se o objeto comećará ativo ou não
-		 * @see		persistentFunction
-		 * @details
-		 *			Se o objeto estiver inativo, nenhum do seus métodos será invocado, com excessão do método
-		 * persistentFunction, que sempre é chamado a cada iteraćão do jogo
-		 */
-		Object
-		(
-			const std::string&		pScriptName,
-			const Gorgon::Point&	pPosition	= Gorgon::Point(0,0),
-			Layer*					pLayer		= NULL,
-			const bool&				pActive		= true
+			const std::string& pSpriteFile,
+			const std::string& pAnimationFile,
+			Layer* pLayer = NULL
 		);
 		/**
 		 * Método Destrutor
@@ -226,38 +162,15 @@ class Object
 		 */
 		virtual ~Object();
 		/**
-		 * Método para retornar se o objeto está ativo
-		 * 
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	26/01/2010
-		 * @version	26/01/2010
-		 * @return	bool
-		 */
-		bool isActive() const;
-		/**
-		 * Método para ativar o objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	25/01/2010
-		 */
-		void activate();
-		/**
-		 * Método para desativar o personagem
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	25/01/2010
-		 */
-		void inactivate();
-		/**
 		 * Método para desenhar o objeto
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	11/03/2009
-		 * @version	25/01/2010
+		 * @version	29/09/2010
+		 * @param	const Point&		pPosition	, posicão a desenhar o objeto
+		 * @param	const Mirroring&	pMirroring	, espelhamento a desenhar o objeto
 		 */
-		void draw() const;
+		void draw(const Gorgon::Point& mPosition, const Gorgon::Mirroring& pMirroring) const;
 		/**
 		 * Método que realiza as operações lógicas do objeto
 		 *
@@ -265,18 +178,7 @@ class Object
 		 * @since	11/03/2009
 		 * @version	28/05/2009
 		 */
-		void logic();
-		/**
-		 * Método que checa pela ativaćão do objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since
-		 * @version
-		 * @details
-		 *			Esse método é chamado a cada iteraćão do jogo, verificando assim
-		 * se é para ser ativado o objeto, ou re
-		 */
-		void persistentFunction();
+		//void logic();
 		/**
 		 * Método para setar o Layer do objeto
 		 *
@@ -296,59 +198,13 @@ class Object
 		 */
 		Layer* getLayer();
 		/**
-		 * Método para setar o espelhamento do objeto
+		 * Método para rodar 1 passo da animaćão
 		 *
 		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	28/05/2009
-		 * @param	const Gorgon::Mirroring& pMirroring, espelhamento
+		 * @since	29/09/2010
+		 * @version	29/09/2010
 		 */
-		void setMirroring(const Gorgon::Mirroring& pMirroring);
-		/**
-		 * Método para retornar o espelhamento do objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	28/05/2009
-		 * @return	Gorgon::Mirroring
-		 */
-		Gorgon::Mirroring getMirroring() const;
-		/**
-		 * Método para setar a posição do objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	28/05/2009
-		 * @param	const Gorgon::Point& pPosition, nova posição no eixo xy
-		 */
-		void setPosition(const Gorgon::Point& pPosition);
-		/**
-		 * Método para adicionar um valor a posição x do objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	17/12/2009
-		 * @param	const Gorgon::Point& pPosition, valor a ser adicionado a posição
-		 */
-		void addPosition(const Gorgon::Point& pPosition);
-		/**
-		 * Método para subtrair um valor a posição x do objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	31/03/2009
-		 * @version	17/12/2009
-		 * @param	const Gorgon::Point& pPosition, valor a ser subtraido a posição
-		 */
-		void subPosition(const Gorgon::Point& pPosition);
-		/**
-		 * Método para retornar a posição x do objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	12/03/2009
-		 * @version	28/05/2009
-		 * @return	Gorgon::Point
-		 */
-		Gorgon::Point getPosition() const;
+		void animationRunStep();
 		/**
 		 * Método para retornar o índice real de uma animação
 		 *
@@ -401,6 +257,16 @@ class Object
 		 * Método que retorna o frame atual da animação que está tocando
 		 *
 		 * @author	Cantidio Oliveira Fontes
+		 * @since	29/09/2010
+		 * @version	29/09/2010
+		 * @param	const int& pFrame, novo frame
+		 * @return	void
+		 */
+		void setFrameOn(const int& pFrame);
+		/**
+		 * Método que retorna o frame atual da animação que está tocando
+		 *
+		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
 		 * @version	28/05/2009
 		 * @return	int
@@ -431,7 +297,7 @@ class Object
 		 * @since	26/06/2009
 		 * @version	26/06/2009
 		 */
-		void setAfterImageMethodNormal();
+//		void setAfterImageMethodNormal();
 		/**
 		 * Método para setar o método de afterImage para add
 		 *
@@ -442,12 +308,12 @@ class Object
 		 * @param	const Gorgon::Color&	pColorSub	, cor a subtrair
 		 * @param	const float&			pTrans		, porcentagem da transparência
 		 */
-		void setAfterImageMethodAdd
-		(
-			const Gorgon::Color&	pColorAdd,
-			const Gorgon::Color&	pColorSub,
-			const float&			pTrans
-		);
+//		void setAfterImageMethodAdd
+//		(
+//			const Gorgon::Color&	pColorAdd,
+//			const Gorgon::Color&	pColorSub,
+//			const float&			pTrans
+//		);
 		/**
 		 * Método para setar o método de afterImage para Transparent
 		 *
@@ -456,7 +322,7 @@ class Object
 		 * @version	26/06/2009
 		 * @param	const float& pTrans , porcentagem da transparência
 		 */
-		void setAfterImageMethodTrans(const float& pTrans);
+//		void setAfterImageMethodTrans(const float& pTrans);
 		/**
 		 * Método para abilitar ou desabilitar as AfterImages
 		 *
@@ -465,7 +331,7 @@ class Object
 		 * @version	26/06/2009
 		 * @param	const bool& pEnabled, se está habilitado ou não
 		 */
-		void setAfterImageEnabled(const bool& pEnabled);
+//		void setAfterImageEnabled(const bool& pEnabled);
 		/**
 		 * Método para setar o delay em gameticks das afterImages
 		 *
@@ -474,7 +340,7 @@ class Object
 		 * @version	26/06/2009
 		 * @param	const int& pDelay , delay em gameticks entre uma afterImage e outra
 		 */
-		void setAfterImageDelay(const int& pDelay);
+//		void setAfterImageDelay(const int& pDelay);
 		/**
 		 * Método para setar o Número de afterImages
 		 *
@@ -483,7 +349,7 @@ class Object
 		 * @version	26/06/2009
 		 * @param	const int& pNumber, número de afterImages
 		 */
-		void setAfterImageNumber(const int& pNumber);
+//		void setAfterImageNumber(const int& pNumber);
 		/**
 		 * Método que seta o modo de AfterImage
 		 *
@@ -494,12 +360,12 @@ class Object
 		 * @param	const int&	pDelay			, delay entre as imagens
 		 * @param	const int&	pImageNumber	, número de afterImages
 		 */
-		void setAfterImageMode
-		(
-			const bool& pEnabled,
-			const int& pDelay,
-			const int& pImageNumber
-		);
+//		void setAfterImageMode
+//		(
+//			const bool& pEnabled,
+//			const int& pDelay,
+//			const int& pImageNumber
+//		);
 		/**
 		 * Método para retornar se o sistema de afterImages está habilitado
 		 *
@@ -508,7 +374,7 @@ class Object
 		 * @version	26/06/2009
 		 * @return	bool
 		 */
-		bool getAfterImageEnabled() const;
+//		bool getAfterImageEnabled() const;
 		/**
 		 * Método para retornar o delay das afterImages
 		 *
@@ -517,7 +383,7 @@ class Object
 		 * @version	26/06/2009
 		 * @return	int
 		 */
-		int getAfterImageDelay() const;
+//		int getAfterImageDelay() const;
 		/**
 		 * Método para retornar o número de afterImages
 		 *
@@ -526,7 +392,7 @@ class Object
 		 * @version	26/06/2009
 		 * @return	int
 		 */
-		int getAfterImageNumber() const;
+//		int getAfterImageNumber() const;
 	protected:
 		/**
 		 * Método para desenhar uma afterImage usando o método Normal
@@ -536,7 +402,7 @@ class Object
 		 * @version	26/06/2009
 		 * @param	const int& pImage, número da imagem no buffer  a desenhar
 		 */
-		void drawAfterImageNormal(const int& pImage) const;
+//		void drawAfterImageNormal(const int& pImage) const;
 		/**
 		 * Método para desenhar uma afterImage usando o método de transparencia
 		 *
@@ -545,7 +411,7 @@ class Object
 		 * @version	26/06/2009
 		 * @param	const int& pImage, número da imagem no buffer  a desenhar
 		 */
-		void drawAfterImageTransparent(const int& pImage) const;
+//		void drawAfterImageTransparent(const int& pImage) const;
 		/**
 		 * Método para desenhar uma afterImage usando o método de Add
 		 *
@@ -554,6 +420,6 @@ class Object
 		 * @version	26/06/2009
 		 * @param	const int& pImage, número da imagem no buffer  a desenhar
 		 */
-		void drawAfterImageAdd(const int& pImage) const;
+//		void drawAfterImageAdd(const int& pImage) const;
 };
 #endif
