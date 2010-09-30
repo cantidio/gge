@@ -7,7 +7,7 @@ dofile("data/background/class_layer.lua")
 	-- @version	17/12/1009
 	-- @param	int pPointer, endereço do cenário na memória
 -]]
-function Background(pPointer)
+function GGE_Background(pPointer)
 	local this			= {}
 	this.mLayers		= {}		--Vetor com os Layers do cenário
 	this.mWidth			= 0			--Largura do cenário

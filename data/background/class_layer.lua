@@ -5,9 +5,9 @@ dofile("data/background/class_tile.lua")
 	-- @author	Cantidio Oliveira Fontes
 	-- @since	13/12/2009
 	-- @version	30/09/2010
-	-- @param	Background pBackground, cenário ao qual o layer está inserido
+	-- @param	GGE_Background pBackground, cenário ao qual o layer está inserido
 -]]
-function Layer(pBackground)
+function GGE_Layer(pBackground)
 	local this			= {}
 	this.mBackground	= pBackground		--Referencia ao cenário do layer
 	this.mTiles			= {}				--Vetor com os tiles do layer
@@ -248,7 +248,7 @@ function Layer(pBackground)
 		for key, tile in pairs (pTiles) do 
 			io.write(key .. ": anim: " .. tile.animation .. ", ")
 			this.addTile(
-				Tile(
+				GGE_Tile(
 					this.mSpritePack,
 					this.mAnimationPack,
 					tile.animation,

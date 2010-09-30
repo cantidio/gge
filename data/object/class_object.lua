@@ -159,15 +159,18 @@ end
 	--
 	-- @author	Cantidio Oliveira Fontes
 	-- @since	17/12/2009
-	-- @version	29/09/2010
+	-- @version	30/09/2010
+	-- @param	string		pSprite		, nome do pacote de sprites do objeto
+	-- @param	string		pAnimation	, nome do pacote de anima√√es do objeto
+	-- @param	GGE_Layer	pLayer		, layer o qual o objeto se encontra
 -]]
-function Object(pSprite, pAnimation)
+function GGE_Object(pSprite, pAnimation,pLayer)
 	local this = { }
 
-	this.mDirection	= Mirroring.normal
-	this.mPosition	= { x = 0, y = 0 }
-	this.mId		= 0
-	this.mLayer		= { } --layer que o objeto se encontra
+	this.mDirection	= Mirroring.normal	--espelhamento do objeto
+	this.mPosition	= { x = 0, y = 0 }	--posi√ß√£o do objeto
+	this.mId		= ""				--
+	this.mLayer		= pLayer --layer que o objeto se encontra
 	this.mActive	= true
 	--this.mSprite	= "" 
 	--this.mAnimation	= ""

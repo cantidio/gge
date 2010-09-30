@@ -5,8 +5,8 @@
 	-- @since	26/01/2010
 	-- @version	26/01/2010
 -]]
-function Input()
-	this = {}
+function GGE_Input()
+	local this = {}
 	--[[
 		-- Método para verificar se o botão start está apertado
 		--
@@ -15,8 +15,8 @@ function Input()
 		-- @version	26/01/2010
 		-- @return	bool
 	-]]
-	local function buttonStart()
-		return lua_input_buttonStart()
+	this.buttonStart = function()
+		return GGE_input_buttonStart()
 	end
 	--[[
 		-- Método para verificar se o botão cima está apertado
@@ -26,8 +26,8 @@ function Input()
 		-- @version	26/01/2010
 		-- @return	bool
 	-]]
-	local function buttonUp()
-		return lua_input_buttonUp()
+	this. buttonUp = function()
+		return GGE_input_buttonUp()
 	end
 	--[[
 		-- Método para verificar se o botão baixo está apertado
@@ -37,8 +37,8 @@ function Input()
 		-- @version	26/01/2010
 		-- @return	bool
 	-]]
-	local function buttonDown()
-		return lua_input_buttonDown()
+	this.buttonDown = function()
+		return GGE_input_buttonDown()
 	end
 	--[[
 		-- Método para verificar se o botão esquerda está apertado
@@ -48,8 +48,8 @@ function Input()
 		-- @version	26/01/2010
 		-- @return	bool
 	-]]
-	local function buttonLeft()
-		return lua_input_buttonLeft()
+	this.buttonLeft = function()
+		return GGE_input_buttonLeft()
 	end
 	--[[
 		-- Método para verificar se o botão direita está apertado
@@ -59,8 +59,8 @@ function Input()
 		-- @version	26/01/2010
 		-- @return	bool
 	-]]
-	local function buttonRight()
-		return lua_input_buttonRight()
+	this.buttonRight = function()
+		return GGE_input_buttonRight()
 	end
 	--[[
 		-- Método para verificar se o botão1 está apertado
@@ -70,8 +70,8 @@ function Input()
 		-- @version	26/01/2010
 		-- @return	bool
 	-]]
-	local function button1()
-		return lua_input_button1()
+	this.button1 = function()
+		return GGE_input_button1()
 	end
 	--[[
 		-- Método para verificar se o botão2 está apertado
@@ -81,8 +81,8 @@ function Input()
 		-- @version	26/01/2010
 		-- @return	bool
 	-]]
-	local function button2()
-		return lua_input_button2()
+	this.button2 = function()
+		return GGE_input_button2()
 	end
 	--[[
 		-- Método para verificar se o botão3 está apertado
@@ -92,8 +92,8 @@ function Input()
 		-- @version	26/01/2010
 		-- @return	bool
 	-]]
-	local function button3()
-		return lua_input_button3()
+	this.button3 = function()
+		return GGE_input_button3()
 	end
 	--[[
 		-- Método para verificar se o botão4 está apertado
@@ -103,8 +103,8 @@ function Input()
 		-- @version	26/01/2010
 		-- @return	bool
 	-]]
-	local function button4()
-		return lua_input_button4()
+	this.button4 = function()
+		return GGE_input_button4()
 	end
 	--[[
 		-- Método para verificar se o botão5 está apertado
@@ -114,8 +114,8 @@ function Input()
 		-- @version	26/01/2010
 		-- @return	bool
 	-]]
-	local function button5()
-		return lua_input_button5()
+	this.button5 = function()
+		return GGE_input_button5()
 	end
 	--[[
 		-- Método para verificar se o botão6 está apertado
@@ -125,8 +125,8 @@ function Input()
 		-- @version	26/01/2010
 		-- @return	bool
 	-]]
-	local function button6()
-		return lua_input_button6()
+	this.button6 = function()
+		return GGE_input_button6()
 	end
 	--[[
 		-- Método para verificar se o botão7 está apertado
@@ -136,8 +136,8 @@ function Input()
 		-- @version	26/01/2010
 		-- @return	bool
 	-]]
-	local function button7()
-		return lua_input_button7()
+	this.button7 = function()
+		return GGE_input_button7()
 	end
 	--[[
 		-- Método para verificar se o botão8 está apertado
@@ -147,24 +147,10 @@ function Input()
 		-- @version	26/01/2010
 		-- @return	bool
 	-]]
-	local function button8()
-		return lua_input_button8()
+	this.button8 = function()
+		return GGE_input_button8()
 	end
 	
-	this.buttonStart	= buttonStart
-	this.buttonUp		= buttonUp
-	this.buttonDown		= buttonDown
-	this.buttonLeft		= buttonLeft
-	this.buttonRight	= buttonRight
-	this.button1		= button1
-	this.button2		= button2
-	this.button3		= button3
-	this.button4		= button4
-	this.button5		= button5
-	this.button6		= button6
-	this.button7		= button7
-	this.button8		= button8
-
 	return this
 end
 

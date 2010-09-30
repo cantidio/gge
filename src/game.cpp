@@ -58,6 +58,7 @@ void Game::registerLuaFunctions()
 	ObjectLua::registerFunctions(mScript);
 	TileLua::registerFunctions(mScript);
 	InputLua::registerFunctions(mScript);
+	mScript->loadScript("data/");
 }
 
 void Game::run()

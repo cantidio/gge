@@ -8,16 +8,16 @@
 	-- @param	string	pAnimationPack	, pacote de animaćões
 	-- @param	int		pAnimation		, animaćão do tile
 	-- @param	{x,y}	pPosition		, posićão do tile
-	-- @param	Layer	pLayer			, layer em que o tile se encontra
+	-- @param	GGE_Layer	pLayer			, layer em que o tile se encontra
 -]]
-function Tile(
+function GGE_Tile(
 	pSpritePack,
 	pAnimationPack,
 	pAnimation,
 	pPosition,
 	pLayer
 )
-	local this			= {}
+	local this		= {}
 	this.mSpritePack	= pSpritePack
 	this.mAnimationPack	= pAnimationPack
 	this.mPosition		= pPosition
