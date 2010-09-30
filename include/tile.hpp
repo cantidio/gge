@@ -27,7 +27,7 @@
 #ifndef _GGE_TILE_
 #define	_GGE_TILE_
 #include <gorgon++/gorgon.hpp>
-
+#include "resource_manager.hpp"
 /**
  * Classe que representa um tilede um cenário
  *

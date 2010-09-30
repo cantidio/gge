@@ -27,8 +27,8 @@
 #ifndef _GSBGE_OBJECT_
 #define	_GSBGE_OBJECT_
 #include <gorgon++/gorgon.hpp>
-#include "resource_manager/include/sprite_manager.hpp"
-#include "resource_manager/include/animation_manager.hpp"
+#include "sprite_manager.hpp"
+#include "animation_manager.hpp"
 //#include "core/include/text_window_lua.hpp"
 
 /**

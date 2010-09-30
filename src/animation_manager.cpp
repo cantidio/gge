@@ -14,7 +14,7 @@ namespace ResourceManager
 			{
 				Gorgon::LogRegister("AnimationPack found in position: %d",i);
 				++mTable[i].use;
-				return mTable[i].animationPack;
+				return *mTable[i].animationPack;
 			}
 		}
 		Gorgon::LogRegister("AnimationPack not found in AnimationManager Table...",pAnimationPackName.c_str());

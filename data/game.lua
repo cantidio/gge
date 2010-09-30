@@ -11,7 +11,7 @@ function Game()
 		width		= 320,
 		height		= 240,
 		FPS			= 60,
-		windowed	= true,
+		fullScreen	= true,
 	}
 
 	this.mWindow.logo		= ""
@@ -30,7 +30,7 @@ function Game()
 			this.mWindow.title,
 			this.mVideo.width,
 			this.mVideo.height,
-			this.mVideo.windowed
+			this.mVideo.fullScreen
 		)										or 
 		not GGE_setGameName(this.mName)			or
 		not GGE_setGameVersion(this.mVersion)	or

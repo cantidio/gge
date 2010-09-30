@@ -1,7 +1,4 @@
 #include "../include/object_lua.hpp"
-#include "../../background/include/background_lua.hpp"
-#include "../../background/include/layer_lua.hpp"
-#include "../../background/include/tile_lua.hpp"
 
 namespace ObjectLua
 {

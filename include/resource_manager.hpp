@@ -38,5 +38,6 @@
  *				à parte de gestão de recursos na engine, como recursos visuais, sonoros,
  *				recursos de animações entre outros
  */
-
+#include"animation_manager.hpp"
+#include "sprite_manager.hpp"
 #endif

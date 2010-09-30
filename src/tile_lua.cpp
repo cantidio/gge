@@ -1,5 +1,4 @@
 #include "../include/tile_lua.hpp"
-#include "../include/layer.hpp"
 
 namespace TileLua
 {

@@ -13,7 +13,7 @@ namespace ResourceManager
 			{
 				Gorgon::LogRegister("SpritePack found in position: %d",i);
 				++mTable[i].use;
-				return mTable[i].spritePack;
+				return *mTable[i].spritePack;
 			}
 		}
 		Gorgon::LogRegister("SpritePack not found in SpriteManager Table...",pSpritePackName.c_str());

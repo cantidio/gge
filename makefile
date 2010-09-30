@@ -1,33 +1,18 @@
-INCLUDEDIR= "./src/"
+
 all: 
-	g++						\
-	./src/main.cpp			\
-	./obj/video.o			\
-	./obj/background.o		\
-	./obj/object.o			\
-	./obj/player.o			\
-	./obj/item.o			\
-	./obj/itens.o			\
-	./obj/gui.o				\
-	./obj/enemy.o			\
-	./obj/caterpie.o		\
-	./obj/mush.o			\
-	./obj/rabbit.o			\
-	-o main.e				\
-	`gorgon-config --libs`	\
-	`allegro-config --libs`	\
-
-video: ./include/video.hpp ./src/video.cpp
-	g++ -c ./src/video.cpp
-	mv video.o ./obj/video.o
-
-background: ./include/background.hpp ./src/background.cpp
-	g++ -c ./src/background.cpp
-	mv background.o ./obj/background.o
-	
-object: ./include/object.hpp ./src/object.cpp
-	g++ -c ./src/object.cpp
-	mv object.o ./obj/object.o
+	g++ -c src/animation_manager.cpp
+	g++ -c src/input.cpp
+	g++ -c src/object_lua.cpp
+	g++ -c src/text_window.cpp
+	g++ -c src/tile.cpp
+	g++ -c src/game.cpp
+	g++ -c src/input_lua.cpp
+	g++ -c src/object.cpp
+	g++ -c src/sprite_manager.cpp
+	g++ -c src/text_window_lua.cpp
+	g++ -c src/tile_lua.cpp
+	mv *.o obj/
+	g++ src/main.cpp obj/*.o  `gorgon-config --libs` `allegro-config --libs`
 
 clean:
 	@rm -rf main.e
