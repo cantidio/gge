@@ -38,6 +38,7 @@ function Tile(
 	-]]
 	this.delete = function()
 		GGE_tile_delete(this.mPointer)
+		this = {}
 	end
 	--[[
 		-- Função que retorna a animação do tile
@@ -118,6 +119,22 @@ function Tile(
 			pPosition.y
 		)
 	end
+
+	--[[
+		-- Método para desenhar o tile
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	29/09/2010
+		-- @version	29/09/2010
+		-- @param	{x,y} pPosition, posićão a desenhar o tile
+	-]]
+	this.draw = function(pPosition)
+		GGE_tile_draw(
+			this.mPointer,
+			this.mPosition.x + pPosition.x,
+			this.mPosition.y + pPosition.y
+		)
+	end
 	
 	--[[
 		-- Funcao para retornar o layer do tile
@@ -131,6 +148,9 @@ function Tile(
 		return this.mLayer
 	end
 
+	this.logic = function()
+		GGE_tile_logic(this.mPointer)
+	end
 	return this
 end
 

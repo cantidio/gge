@@ -167,13 +167,23 @@ function Object(pSprite, pAnimation)
 	this.mDirection	= Mirroring.normal
 	this.mPosition	= { x = 0, y = 0 }
 	this.mId		= 0
-	this.mName		= ""
 	this.mLayer		= { } --layer que o objeto se encontra
 	this.mActive	= true
 	--this.mSprite	= "" 
 	--this.mAnimation	= ""
 
 	this.mPointer	= GGE_object_new(pSprite,pAnimation)
+	--[[
+		-- Método destrutor
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	30/09/2010
+		-- @version	30/09/2010
+	-]]
+	this.delete = function()
+		GGE_object_delete(this.mPointer)
+		this = {}
+	end
 	--[[
 		-- Método para ativar o objeto
 		--
@@ -207,11 +217,10 @@ function Object(pSprite, pAnimation)
 	this.isActive = function()
 		return this.mActive
 	end
-	
-	this.getMirroring				= getMirroring
-	this.setMirroring				= setMirroring
-	this.getLayer					= getLayer
-	
+----------------------------------------------------------------------------------------------------------------------------------------------------	
+--	this.getMirroring				= getMirroring
+--	this.setMirroring				= setMirroring
+----------------------------------------------------------------------------------------------------------------------------------------------------	
 	--[[
 		-- Método para setar o id do objeto
 		--
@@ -234,30 +243,6 @@ function Object(pSprite, pAnimation)
 	-]]
 	this.getId = function()
 		return this.mId
-	end
-
-	--[[
-		-- Método para setar o nome do objeto
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	29/09/2010
-		-- @version	29/09/2010
-		-- @param	string pName, o nome do objeto
-	-]]
-	this.setName = function(pName)
-		this.mName = pName
-	end
-	
-	--[[
-		-- Método para retornar o nome do objeto
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	17/12/2009
-		-- @version	29/09/2010
-		-- @return	string
-	-]]
-	this.getName = function()
-		return this.mName
 	end
 
 	--[[
@@ -423,11 +408,11 @@ function Object(pSprite, pAnimation)
 		-- @since	29/09/2010
 		-- @version	29/09/2010
 	-]]
-	this.draw = function()
+	this.draw = function(pPosition)
 		GGE_object_draw(
 			this.mPointer,
-			this.mPosition.x,
-			this.mPosition.y,
+			this.mPosition.x + pPosition.x,
+			this.mPosition.y + pPosition.y,
 			this.mDirection
 		)
 	end

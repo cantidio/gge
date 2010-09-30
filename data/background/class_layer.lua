@@ -1,288 +1,324 @@
 dofile("data/background/class_tile.lua")
 --[[
-	-- Funcão
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	13/12/2009
-	-- @version	14/12/2009
-	-- @param	int pPointer, endereco na memoria da classe do layer
--]]
-function setPointer(pPointer)
-	this.pointer = pPointer
-end
---[[
-	-- Funcão que retorna o numero de tiles do layer
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	13/12/2009
-	-- @version	14/12/2009
-	-- @return	int
--]]
-function script_getTileNumber()
-	return #this.tiles;
-end
---[[
-	-- Funcão que retorna a animacao de um tile
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	13/12/2009
-	-- @version	14/12/2009
-	-- @return	int
--]]
-function script_getTileAnimation(pTile)
-	return this.tiles[pTile].animation;
-end
---[[
-	-- Funcão que retorna as instancias de um tile
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	13/12/2009
-	-- @version	14/12/2009
-	-- @return	{}{x,y}
--]]
-function script_getTileInstances(pTile)
-	return #this.tiles[pTile].position;
-end
---[[
-	-- Funcão que retorna a posicao x de uma instancia de um tile
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	13/12/2009
-	-- @version	14/12/2009
-	-- @param	int pTile, indice do tile
-	-- @param	int pInst, instancia do tile
-	-- @return	int
--]]
-function script_getTileXPosition(pTile)
-	return this.tiles[pTile].position.x;
-end
---[[
-	-- Funcão que retorna a posicao y de uma instancia de um tile
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	13/12/2009
-	-- @version	14/12/2009
-	-- @param	int pTile, indice do tile
-	-- @param	int pInst, instancia do tile
-	-- @return	int
--]]
-function script_getTileYPosition(pTile)
-	return this.tiles[pTile].position.y;
-end
---[[
-	-- Funcão que retorna o nome do pacote de sprites do layer
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	13/12/2009
-	-- @version	14/12/2009
-	-- @return	string
--]]
-function script_getSpritePack()
-	return this.sprite
-end
---[[
-	-- Funcão que retorna o nome do pacote de animacoes do layer
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	13/12/2009
-	-- @version	14/12/2009
-	-- @return	string
--]]
-function script_getAnimationPack()
-	return this.animation
-end
---[[
-	-- Funcão que retorna a velocidade de scrooling do eixo x
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	13/12/2009
-	-- @version	14/12/2009
-	-- @return	double
--]]
-function script_getXScroolingSpeed()
-	return this.xScroolingSpeed
-end
---[[
-	-- Funcão que retorna a velocidade de scrooling do eixo y
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	13/12/2009
-	-- @version	14/12/2009
-	-- @return	double
--]]
-function script_getYScroolingSpeed()
-	return this.yScroolingSpeed
-end
---[[
-	-- Funcão que executa a lógica de um script
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	13/12/2009
-	-- @version	14/12/2009
--]]
-function script_logic()
-	this.logic()
-end
----------------------------------------------------------------------------------------------------------------------------------------------------------
---[[
 	-- Classe que representa um layer de um Cenário
 	--
 	-- @author	Cantidio Oliveira Fontes
 	-- @since	13/12/2009
-	-- @version	17/12/2009
-	-- @param	int pPointer, endereco na memoria da classe
+	-- @version	30/09/2010
+	-- @param	Background pBackground, cenário ao qual o layer está inserido
 -]]
-function Layer(pPointer)
-	local this = {}
+function Layer(pBackground)
+	local this			= {}
+	this.mBackground	= pBackground		--Referencia ao cenário do layer
+	this.mTiles			= {}				--Vetor com os tiles do layer
+	this.mObjects		= {}				--Vetor com os objetos do layer
+	this.mSpritePack	= ""				--Localização do arquivo de sprites do layer
+	this.mAnimationPack	= ""				--Localização do arquivo de animações do layer
+	this.mScroolSpeed	= {x = 1, y = 1}	--Velocidade de deslocamento do layer
+	this.mId			= ""
+
 	--[[
-		-- Metodo para setar o ponteiro da classe
+		-- Método destrutor
 		--
 		-- @author	Cantidio Oliveira Fontes
-		-- @since	13/12/2009
-		-- @version	13/12/2009
-		-- @param	int pPointer, endereco na memoria da classe
+		-- @since	30/09/2010
+		-- @version	30/09/2010
 	-]]
-	local function setPointer(pPointer)
-		this.pointer = pPointer
+	this.delete = function()
+		print("layer delete tiles:")
+		for key, tile in pairs (this.mTiles) do 
+			io.write(key .. ",")
+			tile.delete()
+		end
+		io.write("\n")
+
+		print ("layer delete objects:")
+		for key, object in pairs (this.mObjects) do 
+			io.write(key .. ",")
+			object.delete()
+		end
+		io.write("\n")
+		this = {}
 	end
+	
 	--[[
-		--Função que retorna o número de tiles do layer
+		-- Método para setar o id do layer
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	30/09/2010
+		-- @version	30/09/2010
+		-- @param	string pId, id do layer
+	-]]
+	this.setId = function(pId)
+		this.mId = pId
+	end
+	
+	--[[
+		-- Método para pegar o id do layer
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	30/09/2010
+		-- @version	30/09/2010
+		-- @return	string, id do layer
+	-]]
+	this.getId = function()
+		return this.mId
+	end
+	
+	--[[
+		-- Método para adicionar um tile ao layer
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	30/09/2010
+		-- @version	30/09/2010
+		-- @param	Tile pTile, tile a ser adicionado
+	-]]
+	this.addTile = function(pTile)
+		this.mTiles[#this.mTiles + 1] = pTile
+	end
+	
+	--[[
+		-- Método que retorna o número de tiles do layer
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	18/03/2009
-		-- @version	18/03/2009
+		-- @version	29/09/2010
 		-- @return	int
 	-]]
-	local function getTileNumber()
-		return lua_layer_getTileNumber(this.pointer);
+	this.getTileNumber = function()
+		return #this.mTiles;
 	end
+	
 	--[[
-		--Função que retorna um tile
+		-- Método que retorna um tile
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	18/03/2009
-		-- @version	14/12/2009
+		-- @version	29/09/2010
 		-- @param	int pTile, indice do tile
 		-- @return	Tile
 	-]]
-	local function getTile(pTile)
-		local tile = Tile(lua_layer_getTilePointer(this.pointer,pTile-1))
-		return tile;
+	this.getTile = function(pTile)
+		return this.mTiles[pTile]
 	end
+	
+	--[[
+		-- Funcao que remove um tile
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	13/12/2009
+		-- @version	29/09/2010
+		-- @param	int pTile, indice do tile
+	-]]
+	this.removeTile = function (pTile)
+		if this.mTiles[pTile] != nil then
+			this.mTiles[pTile].delete()
+			this.mTiles[pTile] = nil
+		end
+	end
+	
 	--[[
 		--Função que retorna o background do Layer
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	15/12/2009
-		-- @version	17/12/2009
+		-- @version	29/09/2010
 		-- @return	Background
 	-]]
-	local function getBackground()
-		local background = Background(lua_layer_getBackgroundPointer(this.pointer))
-		return background;
+	this.getBackground = function()
+		return this.mBackground
+	end
+
+	--[[
+		--Função que seta o background do Layer
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	15/12/2009
+		-- @version	29/09/2010
+		-- @param	Background pBackground, o nome cenário
+	-]]
+	this.setBackground = function(pBackground)
+		this.mBackground = pBackground
 	end
 	
 	--[[
-		-- Funcao que remove uma instancia de um determinado tile
+		--Função que retorna o número de objects do layer
 		--
 		-- @author	Cantidio Oliveira Fontes
-		-- @since	13/12/2009
-		-- @version	13/12/2009
-		-- @param	int pTile, indice do tile
-		-- @param	int pInst, indice da instancia do tile a ser removida
+		-- @since	18/03/2009
+		-- @version	29/09/2010
+		-- @return	int
 	-]]
---	local function removeTileInstance(pTile,pInst)
---		lua_removeTileInstance(
---			obj.pointer,
---			pTile - 1,
---			pInst - 1
---		);	
---	end
-
-
---[[
-	--Função que retorna o número de objects do layer
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	18/03/2009
-	-- @version	18/03/2009
-	-- @return	int
-	local function getObjectNumber()
-		return #objects;
+	this.getObjectNumber = function()
+		return #this.mObjects
+	end
+	
+	--[[
+		-- Método para retornar 
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	29/09/2010
+		-- @version	30/09/2010
+		-- @param	string pObjectId, id do objeto a ser procurado
+		-- @return	{{position,object}} tabela com todos os objetos encontrados, possui sua posicao no layer e o objeto
+	-]]
+	this.getObjectById = function(pObjectId)
+		local objects = {}
+		for key, tile in pairs(this.mTiles) do 
+			if tile.getId() == pObjectId then
+				objects[#objects + 1] = { position = key, object = tile }
+			end
+		end
+		return objects
 	end
 
-	--Função que retorna o script de um object do layer
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	18/03/2009
-	-- @version	18/03/2009
-	-- @return	int
-	local function getObjectScript(object)
-		return objects[object].script;
+	--[[
+		-- Método para retornar 
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	29/09/2010
+		-- @version	30/09/2010
+		-- @param	int pObjectPos, posicao do objeto
+		-- @return	Object or nil
+	-]]
+	this.getObject = function(pObjectPos)
+		return this.mObjects[pObjectPos]
+	end
+	
+	--[[
+		-- Método para remover um objeto do layer
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	30/09/2010
+		-- @version	30/09/2010
+		-- @param	int pObjectPosition, posićao do objeto
+	-]]
+	this.removeObject = function(pObjectPosition)
+		if this.mObjects[pObjectPosition] != nil then
+			this.mObjects[pObjectPosition].delete()
+			this.mObjects[pObjectPosition] = nil
+		end
+	end
+	
+	--[[
+		-- Método para remover todos objetos com o id fornecido
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	29/09/2010
+		-- @version	30/09/2010
+		-- @param	string pObjectId, id do objeto
+		-- @return	int número de objetos encontrados e removidos
+	-]]
+	this.removeObjectById = function(pObjectId)
+		local objects = this.getObjectById(pObjectId)
+		for iterator = 1, #objects, 1 do
+			objects[iterator].object.delete()
+			this.mObjects[objects[iterator].position] = nil
+		end
+		return #objects
+	end
+	
+	--[[
+		-- Método para retornar a posićão real do layer
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	30/09/2010
+		-- @version	30/09/2010
+		-- @return	{x,y} posicao real
+	-]]
+	this.getRealPosition = function(pPosition)
+		local position = {}
+		position.x = pPosition.x * this.mScrollSpeed.x
+		position.y = pPosition.y * this.mScrollSpeed.y
+		return position
+	end
+	
+	--[[
+		-- Método para carregar os tiles no layer
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	30/09/2010
+		-- @version	30/09/2010
+		-- @param	string pSpritePack			, nome do pacote de sprites
+		-- @param	string pAnimationPack		, nome do pacote de animaćões
+		-- @param	{animation,position} Ptiles	, vetor com os tiles
+	-]]
+	this.loadTiles = function(pSpritePack,pAnimationPack,pTiles)
+		print ("layer add tiles:")
+		for key, tile in pairs (pTiles) do 
+			io.write(key .. ": anim: " .. tile.animation .. ", ")
+			this.addTile(
+				Tile(
+					this.mSpritePack,
+					this.mAnimationPack,
+					tile.animation,
+					tile.position,
+					this
+				)
+			)
+		end
+		io.write("\n")
 	end
 
-	--Função que retorna o número de instâncias de um object
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	18/03/2009
-	-- @version	18/03/2009
-	-- @return	int
-	local function getObjectInstances(object)
-		return #objects[object].position;
+	--[[
+		-- Método para desenhar o layer
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	30/09/2010
+		-- @version	30/09/2010
+		-- @param	{x,y} pPosition, posićão a desenhar o layer
+		-- @details
+		--	Esse método desenha todos os tiles e todos os objetos contidos no layer as well
+	-]]
+	this.draw = function(pPosition)
+		local position = this.getRealPosition(pPosition)
+		print("layer draws tiles:")
+		for key, tile in pairs (this.mTiles) do 
+			io.write(key .. ",")
+			tile.draw(position)
+		end
+		io.write("\n")
+
+		print ("layer draws objects:")
+		for key, object in pairs (this.mObjects) do 
+			io.write(key .. ",")
+			object.draw(position)
+		end
+		io.write("\n")
 	end
 
-	--Função que retorna a posição x de uma determinada instância de um determinado object
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	18/03/2009
-	-- @version	18/03/2009
-	-- @param	int object, índice do object
-	-- @param	int inst, instância do object
-	-- @return	int
-	local function getObjectXPosition(object,inst)
-		return objects[object].position[inst].x;	
-	end
+	--[[
+		--Função que executa a lógica básica do layer
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	18/03/2009
+		-- @version	30/09/2010
+	-]]
+	this.basicLogic = function()
+		print("layer logic tiles:")
+		for key, tile in pairs (this.mTiles) do 
+			io.write(key .. ",")
+			tile.logic()
+		end
+		io.write("\n")
 
-	--Função que retorna a posição y de uma determinada instância de um determinado object
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	18/03/2009
-	-- @version	18/03/2009
-	-- @param	int object, índice do object
-	-- @param	int inst, instância do object
-	-- @return	int
-	local function getObjectYPosition(object,inst)
-		return objects[object].position[inst].y;
+		print ("layer logic objects:")
+		for key, object in pairs (this.mObjects) do 
+			io.write(key .. ",")
+			object.logic()
+		end
+		io.write("\n")
 	end
--]]
-	--Função que executa a lógica do layer
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	18/03/2009
-	-- @version	18/03/2009
-	local function logic()
-		--put your logic here
-	end
-
-	this.setPointer				= setPointer
-	this.getTileNumber			= getTileNumber
-	this.getTile				= getTile
-	this.getBackground			= getBackground
-	this.logic					= logic
-
-	this.pointer				= pPointer
-	-- Localização do arquivo de sprites do layer
-	this.sprite					= ""
-	--localização do arquivo de animações do layer
-	this.animation				= ""
-	--velocidade de deslocamento horizontal do layer
-	this.xScroolingSpeed		= 1.0
-	--velocidade de deslocamento vertical do layer
-	this.yScroolingSpeed		= 1.0
-	--vetor com os tiles e suas posições no layer
-	this.tiles					= { }
-	--vetor com os objetcs e suas posições no layer
-	this.objects				= { }
+	
+	--[[
+		--Função que executa a lógica do layer
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	30/09/2010
+		-- @version	30/09/2010
+	-]]
+	this.logic = this.basicLogic
+	
 	return this
 end
 
