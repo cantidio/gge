@@ -8,7 +8,7 @@
  *    \ \_\ \_\ \__/.\_\\ \_,__/ \ \_,__/\ \_\ \__\ /\____\
  *     \/_/\/ /\/__/\/_/ \/___/   \/___/  \/_/\/__/ \/____/
  *
- *  Copyright (C) 2008-2009  Gorgon Team
+ *  Copyright (C) 2008-2010  Gorgon Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,10 +24,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
  */
-#ifndef _TILE_LUA_
-#define	_TILE_LUA_
+#ifndef _GGE_TILE_LUA_
+#define	_GGE_TILE_LUA_
 #include "tile.hpp"
-#include <gorgon++/gorgon.hpp>
+//#include <gorgon++/gorgon.hpp>
 
 /**
  * NameSpace que engloba os wrappers de algumas funções em lua relacionadas ao Layers
@@ -59,46 +59,6 @@ namespace TileLua
 	 * @return	int
 	 */
 	int setAnimation(lua_State* pState);
-	/**
-	 * Função que clona o tile
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	14/12/2009
-	 * @version	15/12/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int clone(lua_State* pState);
-	/**
-	 * Função que retorna a posicao do tile
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	14/12/2009
-	 * @version	15/12/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int getPosition(lua_State* pState);
-	/**
-	 * Função que seta a posicao do tile
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	14/12/2009
-	 * @version	15/12/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int setPosition(lua_State* pState);
-	/**
-	 * Função que retorna o endereco de memoria do layer do tile
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	14/12/2009
-	 * @version	15/12/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int getLayerPointer(lua_State* pState);
 	/**
 	 * Método que registra as funçoes do tile para serem acessadas por um script
 	 *

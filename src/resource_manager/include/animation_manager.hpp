@@ -49,7 +49,7 @@ namespace ResourceManager
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	11/03/2009
-	 * @version	28/05/2009
+	 * @version	29/09/2010
 	 * @ingroup	ResourceManager
 	 */
 	class AnimationManager
@@ -65,11 +65,11 @@ namespace ResourceManager
 			 *
 			 * @author	Cantidio Oliveira Fontes
 			 * @since	11/03/2009
-			 * @version	28/05/2009
+			 * @version	29/09/2010
 			 * @param	const std::string& pAnimationPackName, nome do animationPack
-			 * @return	Gorgon::AnimationPack*
+			 * @return	Gorgon::AnimationPack&
 			 */
-			static Gorgon::AnimationPack* load(const std::string& pAnimationPackName);
+			static Gorgon::AnimationPack& load(const std::string& pAnimationPackName);
 			/**
 			 * Método para retirar da memória o spritePack carregado
 			 *

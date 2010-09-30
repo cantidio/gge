@@ -49,7 +49,7 @@ namespace ResourceManager
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	11/03/2009
-	 * @version	28/05/2009
+	 * @version	29/09/2010
 	 * @ingroup	ResourceManager
 	 */
 	class SpriteManager
@@ -65,11 +65,11 @@ namespace ResourceManager
 			 *
 			 * @author	Cantidio Oliveira Fontes
 			 * @since	11/03/2009
-			 * @version	28/05/2009
+			 * @version	29/09/2010
 			 * @param	const std::string& pSpritePackName, nome do spritePack
-			 * @return	Gorgon::SpritePack*
+			 * @return	Gorgon::SpritePack&
 			 */
-			static Gorgon::SpritePack* load(const std::string& pSpritePackName);
+			static Gorgon::SpritePack& load(const std::string& pSpritePackName);
 			/**
 			 * Método para retirar da memória o spritePack carregado
 			 *

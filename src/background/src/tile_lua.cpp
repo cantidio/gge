@@ -8,26 +8,29 @@ namespace TileLua
 		return (Tile*)lua_tointeger(pState,1);
 	}
 
-	int getAnimation(lua_State* pState)
+	int GGE_tile_new(lua_State* pState)
 	{
-		Tile* tile = getTilePointer(pState);
-		lua_pushnumber(pState,tile->getAnimation());
+		Tile* tile = new Tile
+		(
+			ResourceManager::SpriteManager::load(lua_tostring(pState,1)),
+			ResourceManager::AnimationManager::load(lua_tostring(pState,2)),
+			(int)lua_tonumber(pState,3)
+		);
+		lua_pushnumber(pState,(int)tile);
 		return 1;
 	}
 
-	int setAnimation(lua_State* pState)
+	int GGE_tile_delete(lua_State* pState)
 	{
 		Tile* tile = getTilePointer(pState);
-		tile->setAnimation((int)lua_tonumber(pState,2));
+		delete tile;
 		return 0;
 	}
 
-	int clone(lua_State* pState)
+	int GGE_tile_draw(lua_State* pState)
 	{
-		Tile*	tile		= getTilePointer(pState);
-		Layer*	layer		= tile->getLayer();
-		Tile*	tileClone	= new Tile(*tile);
-		tileClone->setPosition
+		Tile* tile = getTilePointer(pState);
+		tile->draw
 		(
 			Gorgon::Point
 			(
@@ -35,43 +38,38 @@ namespace TileLua
 				lua_tonumber(pState,3)
 			)
 		);
-		layer->addTile(tileClone);
 		return 0;
 	}
 
-	int getPosition(lua_State* pState)
-	{
-		Tile* tile	= getTilePointer(pState);
-		lua_pushnumber(pState,tile->getPosition().getX());
-		lua_pushnumber(pState,tile->getPosition().getY());
-		return 2;
-	}
-
-	int setPosition(lua_State* pState)
+	int GGE_tile_logic(lua_State* pState)
 	{
 		Tile* tile = getTilePointer(pState);
-		tile->setPosition(Gorgon::Point(lua_tonumber(pState,2),lua_tonumber(pState,3)));
+		tile->logic();
 		return 0;
 	}
 
-	int getLayerPointer(lua_State* pState)
+	int GGE_tile_animationGet(lua_State* pState)
 	{
-		Tile* tile	= getTilePointer(pState);
-		lua_pushnumber(pState,(int)tile->getLayer());
+		Tile* tile = getTilePointer(pState);
+		lua_pushnumber(pState,tile->getAnimation());
 		return 1;
+	}
+
+	int GGE_tile_animationSet(lua_State* pState)
+	{
+		Tile* tile = getTilePointer(pState);
+		tile->setAnimation((int)lua_tonumber(pState,2));
+		return 0;
 	}
 
 	void registerFunctions(Gorgon::Lua* pScript)
 	{
-		pScript->registerFunction("lua_tile_getAnimation",getAnimation);
-		pScript->registerFunction("lua_tile_setAnimation",setAnimation);
-		pScript->registerFunction("lua_tile_clone",clone);
-		pScript->registerFunction("lua_tile_getPosition",getPosition);
-		pScript->registerFunction("lua_tile_setPosition",setPosition);
-		pScript->registerFunction("lua_tile_getLayerPointer",getLayerPointer);
+		pScript->registerFunction("GGE_tile_new"			,GGE_tile_new			);
+		pScript->registerFunction("GGE_tile_delete"			,GGE_tile_delete		);
+		pScript->registerFunction("GGE_tile_draw"			,GGE_tile_draw			);
+		pScript->registerFunction("GGE_tile_logic"			,GGE_tile_logic			);
+		pScript->registerFunction("GGE_tile_animationGet"	,GGE_tile_animationGet	);
+		pScript->registerFunction("GGE_tile_animationSet"	,GGE_tile_animationSet	);
 	}
 }
-
-
-
 

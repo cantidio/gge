@@ -70,25 +70,9 @@ class Object
 		 */
 		std::string mPaletteName;
 		/**
-		 * Ponteiro para o spritePack do objeto
-		 */
-		Gorgon::SpritePack* mSpritePack;
-		/**
-		 * Ponteiro para o animationPack do objeto
-		 */
-		Gorgon::AnimationPack* mAnimationPack;
-		/**
 		 * Ponteiro para a paleta de cores do objeto
 		 */
 		Gorgon::Palette* mPalette;
-		/**
-		 * Script que comanda as ações do objeto
-		 */
-		Gorgon::Lua* mScript;
-		/**
-		 * Layer que o Object se encontra
-		 */
-		Layer* mLayer;
 		/**
 		 * Handler de animação do objeto
 		 */
@@ -140,18 +124,18 @@ class Object
 		
 	public:
 		/**
-		 * Método Construtor vazio
+		 * Método Construtor
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
 		 * @version	29/09/2010
-		 * @param	Layer*					pLayer		, layer que o objeto se encontra
+		 * @param	const std::string& pSpriteFile, arquivo com o pacote de sprites
+		 * @param	const std::string& pAnimationFile, arquivo com o pacote de animaćões
 		 */
 		Object
 		(
 			const std::string& pSpriteFile,
-			const std::string& pAnimationFile,
-			Layer* pLayer = NULL
+			const std::string& pAnimationFile
 		);
 		/**
 		 * Método Destrutor
@@ -171,6 +155,7 @@ class Object
 		 * @param	const Mirroring&	pMirroring	, espelhamento a desenhar o objeto
 		 */
 		void draw(const Gorgon::Point& mPosition, const Gorgon::Mirroring& pMirroring) const;
+
 		/**
 		 * Método que realiza as operações lógicas do objeto
 		 *
@@ -179,24 +164,7 @@ class Object
 		 * @version	28/05/2009
 		 */
 		//void logic();
-		/**
-		 * Método para setar o Layer do objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	04/01/2010
-		 * @version	04/01/2010
-		 * @param	Layer* pLayer, ponteiro para o layer do objeto
-		 */
-		void setLayer(Layer* pLayer);
-		/**
-		 * Método para retornar o Layer do objeto
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	04/01/2010
-		 * @version	04/01/2010
-		 * @return	Layer*
-		 */
-		Layer* getLayer();
+
 		/**
 		 * Método para rodar 1 passo da animaćão
 		 *

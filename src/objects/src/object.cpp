@@ -4,20 +4,19 @@
 Object::Object
 (
 	const std::string& pSpritePackName,
-	const std::string& pAnimationPackName,
-	Layer* pLayer
+	const std::string& pAnimationPackName
 )
 {
 //	setAfterImageMode(false,0,0);
 //	mAfterImageMethod	= NULL;
 	
-	
-	mLayer				= pLayer;
 	mSpritePackName		= pSpritePackName;
 	mAnimationPackName	= pAnimationPackName;
-	mSpritePack			= ResourceManager::SpriteManager::load(mSpritePackName);
-	mAnimationPack		= ResourceManager::AnimationManager::load(mAnimationPackName);
-	mAnimationHandler	= new Gorgon::AnimationHandler(*mSpritePack,*mAnimationPack);
+	mAnimationHandler	= new Gorgon::AnimationHandler
+	(
+		ResourceManager::SpriteManager::load(mSpritePackName),
+		ResourceManager::AnimationManager::load(mAnimationPackName)
+	);
 }
 
 //TextWindowLua::registerFunctions(mScript);
@@ -30,16 +29,6 @@ Object::~Object()
 //	mLastDirections.clear();
 //	mLastSprites.clear();
 	delete mAnimationHandler;
-}
-
-void Object::setLayer(Layer* pLayer)
-{
-	mLayer = pLayer;
-}
-
-Layer* Object::getLayer()
-{
-	return mLayer;
 }
 
 void Object::draw(const Gorgon::Point& mPosition, const Gorgon::Mirroring& pMirroring) const

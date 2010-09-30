@@ -3,32 +3,64 @@
 	--
 	-- @author	Cantidio Oliveira Fontes
 	-- @since	13/12/2009
-	-- @version	15/12/2009
+	-- @version	29/09/2010
+	-- @param	string	pSpritePack		, pacote de sprites
+	-- @param	string	pAnimationPack	, pacote de animaćões
+	-- @param	int		pAnimation		, animaćão do tile
+	-- @param	{x,y}	pPosition		, posićão do tile
+	-- @param	Layer	pLayer			, layer em que o tile se encontra
 -]]
-function Tile(pPointer)
-	local this = {}
-
+function Tile(
+	pSpritePack,
+	pAnimationPack,
+	pAnimation,
+	pPosition,
+	pLayer
+)
+	local this			= {}
+	this.mSpritePack	= pSpritePack
+	this.mAnimationPack	= pAnimationPack
+	this.mPosition		= pPosition
+	this.mAnimation		= pAnimation
+	this.mLayer			= pLayer
+	this.mPointer		= GGE_tile_new(
+		pSpritePack,
+		pAnimationPack,
+		pAnimation,
+		pPosition
+	)
+	--[[
+		-- Método para deletar o tile
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	29/09/2010
+		-- @version	29/09/2010
+	-]]
+	this.delete = function()
+		GGE_tile_delete(this.mPointer)
+	end
 	--[[
 		-- Função que retorna a animação do tile
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	18/03/2009
-		-- @version	13/12/2009
+		-- @version	29/09/2010
 		-- @return	int
 	-]]
-	local function getAnimation()
-		return lua_tile_getAnimation(this.mPointer);
+	this.getAnimation = function()
+		return this.mAnimation
 	end
 	--[[
 		-- Funcão que muda a animacao do tile
 		-- 
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	13/12/2009
-		-- @version	13/12/2009
+		-- @version	29/09/2010
 		-- @param	int pAnimation, numero da nova animacao
 	-]]
-	local function setAnimation(pAnimation)
-		lua_tile_setAnimation(this.mPointer,pAnimation);
+	this.setAnimation = function(pAnimation)
+		this.mAnimation = pAnimation
+		GGE_tile_animationSet(this.mPointer,pAnimation);
 	end
 
 	--[[
@@ -36,11 +68,16 @@ function Tile(pPointer)
 		-- 
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	14/12/2009
-		-- @version	15/12/2009
+		-- @version	29/09/2010
 		-- @param	{x,y} pPosition, posicão do tile clonado
 	-]]
-	local function clone(pPosition)
-		lua_tile_clone(this.mPointer,pPosition.x,pPosition.y)
+	this.clone = function(pPosition)
+		return Tile(
+			this.mSpritePack,
+			this.mAnimationPack,
+			this.mAnimation,
+			pPosition
+		)
 	end
 
 	--[[
@@ -48,51 +85,51 @@ function Tile(pPointer)
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	13/12/2009
-		-- @version	15/12/2009
+		-- @version	29/09/2010
 		-- @return	{x,y}
 	-]]
-	local function getPosition()
-		X,Y = lua_tile_getPosition(this.mPointer);
-		return { x = X, y = Y}
+	this.getPosition = function()
+		return this.mPosition
 	end
 	--[[
 		-- Funcao para setar a posicao do tile
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	13/12/2009
-		-- @version	15/12/2009
+		-- @version	29/09/2010
 		-- @param	{x,y} pPosition	, nova posicao para o tile
 	-]]
-	local function setPosition(pPosition)
-		lua_tile_setPosition(
+	this.setPosition = function(pPosition)
+		this.mPosition = pPosition
+	end
+
+	--[[
+		-- Método para desenhar o tile diretamente
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	29/09/2010
+		-- @version	29/09/2010
+		-- @param	{x,y} pPosition, posićão a desenhar o tile
+	-]]
+	this.directDraw = function(pPosition)
+		GGE_tile_draw(
 			this.mPointer,
 			pPosition.x,
 			pPosition.y
-		);
+		)
 	end
+	
 	--[[
 		-- Funcao para retornar o layer do tile
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	13/12/2009
-		-- @version	15/12/2009
+		-- @version	29/09/2010
 		-- @return	Layer
 	-]]
-	local function getLayer()
-		local layer = Layer()
-		layer.setPointer(lua_tile_getLayerPointer(this.mPointer))
-		return layer
+	this.getLayer = function()
+		return this.mLayer
 	end
-
-	this.getAnimation	= getAnimation
-	this.setAnimation	= setAnimation
-	this.clone			= clone
-	this.getPosition	= getPosition
-	this.setPosition	= setPosition
-	this.getLayer		= getLayer
-
-	--ponteiro para a classe
-	this.mPointer		= pPointer
 
 	return this
 end
