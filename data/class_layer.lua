@@ -1,4 +1,3 @@
-dofile("data/background/class_tile.lua")
 --[[
 	-- Classe que representa um layer de um Cenário
 	--

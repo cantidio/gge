@@ -1,4 +1,3 @@
-dofile("data/background/class_layer.lua")
 --[[
 	-- Classe que representa um cenário
 	--

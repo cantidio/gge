@@ -1,5 +1,3 @@
-dofile("players.lua")
-dofile("backgrounds.lua")
 function Game()
 	local this = { }
 

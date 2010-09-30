@@ -58,7 +58,13 @@ void Game::registerLuaFunctions()
 	ObjectLua::registerFunctions(mScript);
 	TileLua::registerFunctions(mScript);
 	InputLua::registerFunctions(mScript);
-	mScript->loadScript("data/");
+	mScript->loadScript("data/class_tile.lua");
+	mScript->loadScript("data/class_layer.lua");
+	mScript->loadScript("data/class_background.lua");
+	mScript->loadScript("data/class_object.lua");
+	mScript->loadScript("data/class_player.lua");
+	mScript->loadScript("data/class_input.lua");
+	mScript->loadScript("data/class_game.lua");
 }
 
 void Game::run()
@@ -71,7 +77,7 @@ void Game::run()
 			{
 				Gorgon::Video::get().clear(0xAA0BDD);
 
-				//executa funƒá√£o logic do mal aqui
+				//executa fun√√o logic do mal aqui
 			
 				//TextWindow::get().show();
 				Gorgon::Video::get().drawText(10,10,0,-1,"FPS: %d",fps_antigo);
