@@ -1,73 +1,69 @@
-function Game()
-	local this = { }
-
-	this.mName				= ""
-	this.mVersion			= "0.0"
-	this.debugWindow		= true -- n„o sei o que fazer com isso ainda. kkkk
-
-	this.mVideo		= {
-		width		= 320,
-		height		= 240,
-		FPS			= 60,
-		fullScreen	= true,
+print("include: GGE_Game")
+--[[
+	-- Classe que representa o jogo
+	--
+	-- @author	Cantidio Oliveira Fontes
+	-- @since	
+	-- @version	30/09/2001
+-]]
+function GGE_Game()
+	GGE_game_log("GGE_Game()")
+	
+	local this 			= { }
+	this.mName			= ""
+	this.mVersion		= "0.0"
+	this.debugWindow	= true -- n√£o sei o que fazer com isso ainda. kkkk
+	this.mVideo			= {
+		width			= 320,
+		height			= 240,
+		FPS				= 60,
+		fullScreen		= false,
 	}
-
-	this.mWindow.logo		= ""
-	this.mWindow.title		= ""
-
-
+	this.mWindow		= {
+		logo			= "",
+		title			= "",
+	}
 	--[[
-		--MÈtodo para iniciar o vÌdeo do engine
+		--M√©todo para iniciar o v√≠deo do engine
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	29/09/2010
 		-- @version	29/09/2010
 	-]]
 	this.init = function()
-		if not GGE_init( --inicia o vÌdeo, o input e o audio*
+		GGE_game_log("GGE_Game().init()")
+		
+		if not GGE_game_setFPS(this.mVideo.FPS)		or
+		not GGE_game_setGameName(this.mName)		or
+		not GGE_game_setGameVersion(this.mVersion)	or
+		not GGE_game_init( 							--inicia o v√≠deo, o input e o audio*
 			this.mWindow.title,
 			this.mVideo.width,
 			this.mVideo.height,
 			this.mVideo.fullScreen
-		)										or 
-		not GGE_setGameName(this.mName)			or
-		not GGE_setGameVersion(this.mVersion)	or
-		not GGE_setFPS(this.mVideo.FPS)			then
+		) then
 			return nil
 		end
 		return true
 	end
-	
 	--[[
 		-- M√©todo chamado a cada iteraƒá√£o do jogo
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	01/10/2010
+		-- @version	01/10/2010
 	-]]
 	this.logic = function()
 		this.state()
 	end
 
-
-	local function getNextMission(pBackground,pPlayer)
-		if pBackground.name == "jonas" then
-			if pBackground.Flag == 1 then
-
-				this.state = this.stateMission2Init
-			else
-				this.state = this.stateMission3Init
-			end
-		else
-			this.state = this.stateMission4Init
-		end
-		pBackground.clear()
-
-	end
-
-	local function stateDisclaimerInit()
+--[[	this.stateDisclaimerInit = function()
 		this.background = Background("data/background/disclaimer.lua")
 		this.time		= 0
 		this.state = this.stateDisclaimer
 	end
 
-	local function stateDisclaimer()
+	this.stateDisclaimer = function()
 		this.background.logic()
 		this.background.draw();
 		this.time = this.time + 1
@@ -89,12 +85,12 @@ function Game()
 		
 	end
 
-	local function stateMenu()
+	this.stateMenu = function()
 		this.background.logic()
 		this.background.draw()
 	end
 
-	local function stateNewGameInit()
+	this.stateNewGameInit = function ()
 		dofile("data/mission.lua")
 	end
 
@@ -112,11 +108,24 @@ function Game()
 		logic{
 			move lanlanlanl
 			desloca com a camera
-			roda a lÛgica de todos os layers
-				os layers rodam a lÛgica de todos objetos dentro deles
+			roda a l√≥gica de todos os layers
+				os layers rodam a l√≥gica de todos objetos dentro deles
 		}
 		pGui.draw()
 	end
+-]]
+	this.state = function() end
+	return this
+end
 
+--[[
+	-- Func√£o para executar um passo da l√≥gica do game
+	--
+	-- @author	Cantidio Oliveira Fontes
+	-- @since	30/09/2010
+	-- @version	01/10/2010
+-]]
+function GGE_game_runStep()
+	this.logic()
 end
 

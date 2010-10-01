@@ -173,16 +173,18 @@ namespace ObjectLua
 */
 	void registerFunctions(Gorgon::Lua* pScript)
 	{
-		pScript->registerFunction("GGE_object_new",GGE_object_new);
-		pScript->registerFunction("GGE_object_animationChangeByIndex",GGE_object_animationChangeByIndex);
-		pScript->registerFunction("GGE_object_animationGetRealIndex",GGE_object_animationGetRealIndex);
-		pScript->registerFunction("GGE_object_animationChange",GGE_object_animationChange);
-		pScript->registerFunction("GGE_object_animationOnGet",GGE_object_animationOnGet);
-		pScript->registerFunction("GGE_object_animationIsPlaying",GGE_object_animationIsPlaying);
-		pScript->registerFunction("GGE_object_animationGetFrameOn",GGE_object_animationGetFrameOn);
-		pScript->registerFunction("GGE_object_animationSetFrameOn",GGE_object_animationSetFrameOn);
-		pScript->registerFunction("GGE_object_animationRunStep",GGE_object_animationRunStep);
-		pScript->registerFunction("GGE_object_draw",GGE_object_draw);
+		pScript->registerFunction("GGE_object_new"						,GGE_object_new						);
+		pScript->registerFunction("GGE_object_delete"					,GGE_object_delete					);
+		pScript->registerFunction("GGE_object_draw"						,GGE_object_draw					);
+		pScript->registerFunction("GGE_object_animationChangeByIndex"	,GGE_object_animationChangeByIndex	);
+		pScript->registerFunction("GGE_object_animationGetRealIndex"	,GGE_object_animationGetRealIndex	);
+		pScript->registerFunction("GGE_object_animationChange"			,GGE_object_animationChange			);
+		pScript->registerFunction("GGE_object_animationOnGet"			,GGE_object_animationOnGet			);
+		pScript->registerFunction("GGE_object_animationIsPlaying"		,GGE_object_animationIsPlaying		);
+		pScript->registerFunction("GGE_object_animationGetFrameOn"		,GGE_object_animationGetFrameOn		);
+		pScript->registerFunction("GGE_object_animationSetFrameOn"		,GGE_object_animationSetFrameOn		);
+		pScript->registerFunction("GGE_object_animationRunStep"			,GGE_object_animationRunStep		);
+		
 		/*
 		pScript->registerFunction("lua_object_setAfterImageMode",lua_setAfterImageMode);
 		pScript->registerFunction("lua_object_setAfterImageMethodNormal",lua_setAfterImageMethodNormal);

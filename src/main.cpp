@@ -2,8 +2,8 @@
 
 int main()
 {
-	Game game;
-	game.run();
+	Gorgon::Log::init("gge_log.txt");
+	Game::get().run();
 	return 0;
 }END_OF_MAIN()
 

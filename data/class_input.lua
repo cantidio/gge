@@ -1,3 +1,4 @@
+print("include: GGE_Input")
 --[[
 	-- Classe para representar os inputs
 	--

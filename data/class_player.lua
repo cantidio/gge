@@ -1,3 +1,4 @@
+print("include: GGE_Player")
 --[[
 	-- Classe que representa um jogador
 	--
@@ -8,10 +9,11 @@
 	-- @param	string		pAnimation	, pacote de anima√√es a ser usado
 	-- @param	GGE_Layer	pLayer		, layer o qual o player se encontra
 	-- @details
-	--			A classe de jogador √© a mesma classe deGGE_Object s√≥ que com possibilidade
+	--			A classe de jogador È a mesma classe GGE_Object sÛ com possibilidade
 	-- de leitura da entrada de dados do jogador
 -]]
 function GGE_Player(pSprite, pAnimation, pLayer)
+	GGE_game_log("GGE_Player()")
 	local this	= {}
 	this 		= GGE_Object( pSprite, pAnimation, pLayer )
 	this.mInput	= GGE_Input()

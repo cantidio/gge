@@ -3,6 +3,7 @@
 
 #include <gorgon++/gorgon.hpp>
 #include <string>
+#include "game_lua.hpp"
 #include "object_lua.hpp"
 #include "tile_lua.hpp"
 #include "input_lua.hpp"
@@ -18,8 +19,9 @@
 class Game
 {
 	protected:
-		Gorgon::Lua* mScript;
-		int mFPS;
+		Gorgon::Lua*	mScript;
+		static Game*	mSingleton;
+		int 			mFPS;
 
 		/**
 		 * Método para registrar as funćões em Lua
@@ -30,7 +32,6 @@ class Game
 		 * @return	void
 		 */
 		void registerLuaFunctions();
-	public:
 		/**
 		 * Método Construtor
 		 *
@@ -38,7 +39,6 @@ class Game
 		 * @since	30/09/2010
 		 * @version	30/09/2010
 		 */
-
 		Game();
 		/**
 		 * Método Destrutor
@@ -48,6 +48,9 @@ class Game
 		 * @version	30/09/2010
 		 */
 		~Game();
+	public:
+		static Game& get();
+		static void halt();
 
 		/**
 		 * Método que inicializa os valores

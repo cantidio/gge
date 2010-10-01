@@ -1,3 +1,4 @@
+print("include: GGE_Object")
 Mirroring = {
 	Normal	= 0,
 	HFlip	= 1,
@@ -5,153 +6,6 @@ Mirroring = {
 	VHflip	= 3,
 	HVFlip	= 3
 }
----------------------------------------------------------------------------------------------------------------------------------------------------------
---[[
-	-- Classe que representa um objeto
-	--
-	-- @author	Cantidio Oliveira Fontes
-	-- @since	17/12/2009
-	-- @version	04/01/2010
--]]
-function OLD_Object(pPointer)
-	local this = { }
-	
-	this.mPointer = pPointer	
-	
-	--[[
-		-- Método para retornar o espelhamento do objeto
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	17/12/2009
-		-- @version	17/12/2009
-		-- @return	int
-	-]]
-	local function getMirroring()
-		return lua_object_getMirroring(this.mPointer)
-	end
-	--[[
-		-- Método para setar o espelhamento do objeto
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	17/12/2009
-		-- @version	02/01/2010
-		-- @param	Mirroring pMirroring, espelhamento a ser setado ao objeto
-	-]]
-	local function setMirroring(pMirroring)
-		lua_object_setMirroring(this.mPointer,pMirroring)
-	end
-	
-	--[[
-		-- Função que seta o método das AfterImages para Normal
-		--
-		-- @author      Cantidio Oliveira Fontes
-		-- @since       26/06/2009
-		-- @version     02/01/2010
-	-]]
-	local function setAfterImageMethodNormal()
-        lua_object_setAfterImageMethodNormal(this.mPointer)
-	end
-	--[[
-		-- Função que sera o método das AfterImages para add
-		--
-		-- @author      Cantidio Oliveira Fontes
-		-- @since       26/06/2009
-		-- @version     02/01/2010
-		-- @param       {red,blue,green}	pColorAdd	, componente vermelho a ser adicionado
-		-- @param       {red,blue,green}	pColorSub	, componente vermelho a ser subtraído
-		-- @param       float   			pTrans		, valor da transparencia
-	-]]
-	local function setAfterImageMethodAdd(
-		pColorAdd,
-		pColorSub,
-		pTrans
-	)
-		lua_object_setAfterImageMethodAdd(
-			this.mPointer,
-			pColorAdd.red,
-			pColorAdd.green,
-			pColorAdd.blue,
-			pColorSub.red,
-			pColorSub.green,
-			pColorSub.blue,
-			pTrans
-		)
-	end
-
-	--[[
-		-- Função que sera o método das AfterImages para Trans
-		--
-		-- @author      Cantidio Oliveira Fontes
-		-- @since       26/06/2009
-		-- @version     02/01/2010
-		-- @param       float   pTrans, valor da transparencia
-	-]]
-	local function setAfterImageMethodTrans(pTrans)
-		lua_object_setAfterImageMethodTrans(this.mPointer,pTrans)
-	end
-
-	--[[
-		-- Método para retornar se o modo de after images está habilitado
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	26/06/2009
-		-- @version	04/01/2010
-		-- @param	bool pEnabled, se o modo de after images está habilitado ou não
-	-]]
-	local function setAfterImageEnabled(pEnabled)
-		lua_object_setAfterImageEnabled(this.mPointer,pEnabled)
-	end
-	
-	--[[
-		-- Método para retornar se o modo de after images está habilitado
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	26/06/2009
-		-- @version	04/01/2010
-		-- @param	int pDelay, delay entre cada after image
-	-]]
-	local function setAfterImageDelay(pDelay)
-		lua_object_setAfterImageDelay(this.mPointer,pDelay)
-	end
-	
-	--[[
-		-- Método para retornar se o modo de after images está habilitado
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	26/06/2009
-		-- @version	04/01/2010
-		-- @return	int pNumber, número de afterImages máximo permitido
-	-]]
-	local function setAfterImageNumber(pNumber)
-		lua_object_setAfterImageNumber(this.mPointer,pNumber)
-	end
-
-	--[[
-		-- Método para setar o método de afterImages
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	26/06/2009
-		-- @version	04/01/2010
-		-- @param	bool	pEnabled		, se o modo de after images está habilitado ou não
-		-- @param	int		pDelay			, delay entra cada after image
-		-- @param	int		pImageNumber	, número máximo de after images	
-	-]]
-	local function setAfterImageMode(
-		pEnabled,
-		pDelay,
-		pImageNumber
-	)
-		lua_object_setAfterImageMode(
-			this.mPointer,
-			pEnabled,
-			pDelay,
-			pImageNumber
-		)
-	end
-
-	return this
-end
--------------------------------------------------------------------------------------------------_NEW_
 --[[
 	-- Classe que representa um objeto
 	--
@@ -159,14 +13,15 @@ end
 	-- @since	17/12/2009
 	-- @version	30/09/2010
 	-- @param	string		pSprite		, nome do pacote de sprites do objeto
-	-- @param	string		pAnimation	, nome do pacote de anima��es do objeto
+	-- @param	string		pAnimation	, nome do pacote de animacoes do objeto
 	-- @param	GGE_Layer	pLayer		, layer o qual o objeto se encontra
 -]]
-function GGE_Object(pSprite, pAnimation,pLayer)
+function GGE_Object(pSprite, pAnimation, pLayer)
+	GGE_game_log("GGE_Object()")
 	local this = { }
 
-	this.mDirection	= Mirroring.normal	--espelhamento do objeto
-	this.mPosition	= { x = 0, y = 0 }	--posição do objeto
+	this.mMirroring	= Mirroring.normal	--espelhamento do objeto
+	this.mPosition	= { x = 0, y = 0 }	--posicão do objeto
 	this.mId		= ""				--
 	this.mLayer		= pLayer --layer que o objeto se encontra
 	this.mActive	= true
@@ -218,10 +73,28 @@ function GGE_Object(pSprite, pAnimation,pLayer)
 	this.isActive = function()
 		return this.mActive
 	end
-----------------------------------------------------------------------------------------------------------------------------------------------------	
---	this.getMirroring				= getMirroring
---	this.setMirroring				= setMirroring
-----------------------------------------------------------------------------------------------------------------------------------------------------	
+	--[[
+		-- Método para retornar o espelhamento do objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	01/10/2010
+		-- @version	01/10/2010
+		-- @return	Mirroring
+	-]]
+	this.getMirroring = function()
+		return this.mMirroring
+	end
+	--[[
+		-- Método para retornar o espelhamento do objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	01/10/2010
+		-- @version	01/10/2010
+		-- @param	Mirroring pMirroring, espelhamento do objeto
+	-]]
+	this.setMirroring = function(pMirroring)
+		this.mMirroring = pMirroring
+	end
 	--[[
 		-- Método para setar o id do objeto
 		--
@@ -245,7 +118,17 @@ function GGE_Object(pSprite, pAnimation,pLayer)
 	this.getId = function()
 		return this.mId
 	end
-
+	--[[
+		-- Método para setar o layer do objeto
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	01/10/2010
+		-- @version	01/10/2010
+		-- @param	GGE_Layer pLayer, layer do objeto
+	-]]
+	this.setLayer = function(pLayer)
+		this.mLayer = pLayer
+	end
 	--[[
 		-- Método para retornar o layer do objeto
 		--
@@ -256,7 +139,6 @@ function GGE_Object(pSprite, pAnimation,pLayer)
 		-- @todo rever isso
 	-]]
 	this.getLayer = function()
-		--local layer = Layer( GGE_object_getLayer(this.mPointer) )
 		return this.mLayer
 	end
 
@@ -297,8 +179,8 @@ function GGE_Object(pSprite, pAnimation,pLayer)
 		-- @param	{x,y} pPosition, posicão a ser adicionada ao objeto
 	-]]
 	this.addPosition = function(pPosition)
-		this.mPosition.x += pPosition.x
-		this.mPosition.y += pPosition.y
+		this.mPosition.x = this.mPosition.x + pPosition.x
+		this.mPosition.y = this.mPosition.y + pPosition.y
 	end
 
 	--[[
@@ -310,8 +192,8 @@ function GGE_Object(pSprite, pAnimation,pLayer)
 		-- @param	{x,y} pPosition, posicão a ser subtraída ao objeto
 	-]]
 	this.subPosition = function(pPosition)
-		this.mPosition.x -= pPosition.x
-		this.mPosition.y -= pPosition.y
+		this.mPosition.x = this.mPosition.x - pPosition.x
+		this.mPosition.y = this.mPosition.y - pPosition.y
 	end
 	
 	--[[
@@ -354,7 +236,7 @@ function GGE_Object(pSprite, pAnimation,pLayer)
 		return  { group = Group, index = Index, realIndex = Real }
 	end
 	--[[
-		-- Método para retornar se alguma animaćão está tocando
+		-- Método para retornar se alguma animacão está tocando
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
@@ -365,7 +247,7 @@ function GGE_Object(pSprite, pAnimation,pLayer)
 		return GGE_object_animationIsPlaying(this.mPointer)
 	end
 	--[[
-		-- Método para retornar o índice real da animaćão
+		-- Método para retornar o índice real da animacão
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
@@ -401,7 +283,6 @@ function GGE_Object(pSprite, pAnimation,pLayer)
 	this.setFrameOn = function(pFrame)
 		GGE_object_animationSetFrameOn(this.mPointer, pFrame)
 	end
-	
 	--[[
 		-- Método para desenhar normalmente
 		--
@@ -414,7 +295,7 @@ function GGE_Object(pSprite, pAnimation,pLayer)
 			this.mPointer,
 			this.mPosition.x + pPosition.x,
 			this.mPosition.y + pPosition.y,
-			this.mDirection
+			this.mMirroring
 		)
 	end
 	--[[
@@ -428,7 +309,7 @@ function GGE_Object(pSprite, pAnimation,pLayer)
 	-]]
 	this.directDraw = function(pPosition, pDirection)
 		if this.isActive() then
-			GGE_objectDraw(
+			GGE_object_draw(
 				this.mPointer,
 				pPosition.x,
 				pPosition.y,
@@ -436,7 +317,6 @@ function GGE_Object(pSprite, pAnimation,pLayer)
 			)
 		end
 	end
-
 	--[[
 		-- Método para executar a lógica do objeto
 		--
@@ -444,13 +324,13 @@ function GGE_Object(pSprite, pAnimation,pLayer)
 		-- @since	29/09/2010
 		-- @version	29/09/2010
 		-- @details
-		--	Esse método deve ser impletado pela classe que derivar
+		--	Esse Método deve ser impletado pela classe que derivar
 	-]]
-	this.logic = function()
+	this.basicLogic = function()
 		GGE_object_animationRunStep(this.mPointer)
 		--logica do objeto
 	end
 
-	print("classe Object criada, ponteiro de acesso em c++: " .. this.mPointer)
 	return this
 end
+

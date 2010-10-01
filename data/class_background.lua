@@ -1,17 +1,18 @@
+print("include: GGE_Background")
 --[[
 	-- Classe que representa um cenário
 	--
 	-- @author	Cantidio Oliveira Fontes
 	-- @since	19/03/2009
-	-- @version	17/12/1009
+	-- @version	01/10/1010
 	-- @param	int pPointer, endereço do cenário na memória
 -]]
-function GGE_Background(pPointer)
+function GGE_Background()
 	local this			= {}
 	this.mLayers		= {}		--Vetor com os Layers do cenário
 	this.mWidth			= 0			--Largura do cenário
 	this.mHeight		= 0			--Altura do cenário
-	this.mPosition		= {x=0,y=0}	--Posićão do cenário
+	this.mPosition		= {x=0,y=0}	--Posicão do cenário
 	this.mScrollLock	= false		--Se o cenário está podendo dar scrool
 	
 	--[[
@@ -25,7 +26,6 @@ function GGE_Background(pPointer)
 	this.getLayerNumber = function()
 		return #this.mLayers
 	end
-
 	--[[
 		-- Método para retornar o layer indicado
 		--
@@ -38,7 +38,6 @@ function GGE_Background(pPointer)
 	this.getLayer = function(pLayerPos)
 		return this.mLayers[pLayerPos]
 	end
-
 	--[[
 		-- Método para retornar os layers com o Id indicado
 		--
@@ -57,34 +56,32 @@ function GGE_Background(pPointer)
 		end
 		return layers
 	end
-	
 	--[[
 		-- Método para adicionar um layer ao cenário
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	30/09/2010
-		-- @version	30/09/2010
+		-- @version	01/10/2010
 		-- @param	Layer pLayer, layer a ser adicionado
 	-]]
 	this.addLayer = function(pLayer)
+		pLayer.setBackground(this)
 		this.mLayers[#this.mLayers+1] = pLayer
 	end
-
 	--[[
 		-- Método para remover um layer do cenário
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	30/09/2010
-		-- @version	30/09/2010
+		-- @version	01/10/2010
 		-- @param	int pLayerPosition, posićão do layer a ser removido
 	-]]
 	this.removeLayer = function(pLayerPosition)
-		if this.mLayers[pLayerPosition] != nil then
+		if not this.mLayers[pLayerPosition] == nil then
 			this.mLayers[pLayerPosition].delete()
 			this.mLayers[pLayerPosition] = nil
 		end
 	end
-	
 	--[[
 		-- Método para remover todos os layers com o id desejado
 		--
@@ -102,7 +99,6 @@ function GGE_Background(pPointer)
 		end
 		return #layers
 	end
-	
 	--[[
 		-- Método que retorna a largura do cenário
 		--
@@ -125,7 +121,6 @@ function GGE_Background(pPointer)
 	this.getHeight = function()
 		return this.mHeight
 	end
-
 	--[[
 		-- Método que retorna a posição atual do cenário
 		--
@@ -137,7 +132,6 @@ function GGE_Background(pPointer)
 	this.getPosition = function()
 		return this.mPosition
 	end
-
 	--[[
 		-- Método que seta a posição atual do cenário
 		--
@@ -149,7 +143,6 @@ function GGE_Background(pPointer)
 	this.setPosition = function(pPosition)
 		this.mPosition = pPosition
 	end
-
 	--[[
 		-- Método que adiciona um valor a posição do cenário
 		--
@@ -162,7 +155,6 @@ function GGE_Background(pPointer)
 		this.mPosition.x = this.mPosition.x + pPosition.x
 		this.mPosition.y = this.mPosition.y + pPosition.y
 	end
-
 	--[[
 		-- Método que subtrai um valor a posição x do cenário
 		--
@@ -175,7 +167,6 @@ function GGE_Background(pPointer)
 		this.mPosition.x = this.mPosition.x - pPosition.x
 		this.mPosition.y = this.mPosition.y - pPosition.y
 	end
-
 	--[[
 		-- Método que trava o scrolling do cenário
 		--
@@ -186,7 +177,6 @@ function GGE_Background(pPointer)
 	this.scrollLock = function()
 		this.mScroolLock = true
 	end
-
 	--[[
 		-- Método que destrava o scrolling do cenário
 		--
@@ -197,7 +187,6 @@ function GGE_Background(pPointer)
 	this.scrollUnlock = function()
 		this.mScroolLock = false
 	end
-
 	--[[
 		-- Método para desenhar o cenário
 		--
@@ -206,14 +195,10 @@ function GGE_Background(pPointer)
 		-- @version	30/09/2010
 	-]]
 	this.draw = function()
-		print("Background draws layers:")
 		for key, layer in pairs (this.mLayers) do 
-			io.write(key .. ",")
 			layer.draw(this.mPosition)
 		end
-		io.write("\n")
 	end
-	
 	--[[
 		-- Método que executa a lógica do cenário
 		--
@@ -222,12 +207,9 @@ function GGE_Background(pPointer)
 		-- @version	30/09/2010
 	-]]
 	this.basicLogic = function()
-		print("Background logic layers:")
 		for key, layer in pairs (this.mLayers) do 
-			io.write(key .. ",")
 			layer.logic()
 		end
-		io.write("\n")
 	end
 
 	this.logic = this.basicLogic

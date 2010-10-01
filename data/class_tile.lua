@@ -1,3 +1,4 @@
+print("include: GGE_Tile")
 --[[
 	-- Classe que representa um tile de um layer
 	--
@@ -17,7 +18,7 @@ function GGE_Tile(
 	pPosition,
 	pLayer
 )
-	local this		= {}
+	local this			= {}
 	this.mSpritePack	= pSpritePack
 	this.mAnimationPack	= pAnimationPack
 	this.mPosition		= pPosition
@@ -63,7 +64,6 @@ function GGE_Tile(
 		this.mAnimation = pAnimation
 		GGE_tile_animationSet(this.mPointer,pAnimation);
 	end
-
 	--[[
 		-- Funcão que clona o tile
 		-- 
@@ -80,7 +80,6 @@ function GGE_Tile(
 			pPosition
 		)
 	end
-
 	--[[
 		-- Funcão que retorna a posicão do tile
 		--
@@ -103,7 +102,6 @@ function GGE_Tile(
 	this.setPosition = function(pPosition)
 		this.mPosition = pPosition
 	end
-
 	--[[
 		-- Método para desenhar o tile diretamente
 		--
@@ -119,7 +117,6 @@ function GGE_Tile(
 			pPosition.y
 		)
 	end
-
 	--[[
 		-- Método para desenhar o tile
 		--
@@ -135,7 +132,6 @@ function GGE_Tile(
 			this.mPosition.y + pPosition.y
 		)
 	end
-	
 	--[[
 		-- Funcao para retornar o layer do tile
 		--
@@ -151,6 +147,7 @@ function GGE_Tile(
 	this.logic = function()
 		GGE_tile_logic(this.mPointer)
 	end
+	
 	return this
 end
 
