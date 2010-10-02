@@ -1,32 +1,27 @@
 #include "../include/game.hpp"
+
+//-------------------------------------------------------------------------------TIMER--------------------------------------
 int fps			= 0;
 int fps_antigo	= 0;
 int timer		= 0;
-
-void frame_rate()
-{
-	fps_antigo	= fps;
-	fps			= 0;
-}
-
-void game_time()
-{
-	++timer;
-}
+void frame_rate()	{ fps_antigo = fps; fps = 0; }
+void game_time()	{ ++timer; }
 END_OF_FUNCTION(game_time);
 //-------------------------------------------------------------------------------TIMER UP------------------------------------
 
 Game* Game::mSingleton = NULL;
 Game::Game()
 {
-	Gorgon::Log::get()->RegisterFormated("C++ -> Game::Game()");
+	Gorgon::Log::get().RegisterFormated("C++ -> Game::Game()");
 	registerLuaFunctions();
 }
 
 Game::~Game()
 {
-	Gorgon::Log::get()->RegisterFormated("C++ -> Game::~Game()");
+	Gorgon::Log::get().RegisterFormated("C++ -> Game::~Game()");
 	Input::halt();
+	ResourceManager::SpriteManager::clear();
+	ResourceManager::AnimationManager::clear();
 }
 
 Game& Game::get()
@@ -55,7 +50,7 @@ bool Game::init
 	const bool&			pFullScreen
 )
 {
-	Gorgon::Log::get()->RegisterFormated
+	Gorgon::Log::get().RegisterFormated
 	(
 		"C++ -> Game::init()\n\
 			\t\t\t\tpWindowTitle: %s\n\
@@ -90,7 +85,7 @@ bool Game::setFPS(const int& pFPS)
 
 void Game::registerLuaFunctions()
 {
-	Gorgon::Log::get()->RegisterFormated("C++ -> Game::registerLuaFunctions()");
+	Gorgon::Log::get().RegisterFormated("C++ -> Game::registerLuaFunctions()");
 
 	mScript = new Gorgon::Lua("");
 
@@ -110,7 +105,7 @@ void Game::registerLuaFunctions()
 
 void Game::run()
 {
-	Gorgon::Log::get()->RegisterFormated("C++ -> Game::run()");
+	Gorgon::Log::get().RegisterFormated("C++ -> Game::run()");
 	try
 	{
 		mScript->loadScript("game.lua");//carrega o game

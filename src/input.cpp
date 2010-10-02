@@ -4,14 +4,14 @@ Input* Input::mSingleton= NULL;
 
 Input::Input()
 {
-	Gorgon::Log::get()->RegisterFormated("C++ -> Input::Input()");
+	Gorgon::Log::get().RegisterFormated("C++ -> Input::Input()");
 	install_keyboard();
 	loadConfiguration();
 }
 
 Input::~Input()
 {
-	Gorgon::Log::get()->RegisterFormated("C++ -> Input::~Input()");
+	Gorgon::Log::get().RegisterFormated("C++ -> Input::~Input()");
 	remove_keyboard();
 }
 
@@ -40,7 +40,7 @@ Input& Input::get()
 
 void Input::createDefaultConfiguration()
 {
-	Gorgon::Log::get()->RegisterFormated("C++ -> Input::createDefaultConfiguration()");
+	Gorgon::Log::get().RegisterFormated("C++ -> Input::createDefaultConfiguration()");
 	mKey_start		= KEY_ENTER;
 	mKey_up			= KEY_UP;
 	mKey_down		= KEY_DOWN;
@@ -58,13 +58,13 @@ void Input::createDefaultConfiguration()
 
 void Input::loadConfiguration()
 {
-	Gorgon::Log::get()->RegisterFormated("C++ -> Input::loadConfiguration()");
+	Gorgon::Log::get().RegisterFormated("C++ -> Input::loadConfiguration()");
 	std::fstream* file;
 	file = new std::fstream("data/input.cfg",std::ios::in|std::ios::binary);
 	
 	if(!file->is_open())
 	{
-		Gorgon::Log::get()->RegisterFormated("C++ -> Input::loadConfiguration(): data/input.cfg ... Error");
+		Gorgon::Log::get().RegisterFormated("C++ -> Input::loadConfiguration(): data/input.cfg ... Error");
 		createDefaultConfiguration();
 		saveConfiguration();
 	}
@@ -83,7 +83,7 @@ void Input::loadConfiguration()
 		file->read((char*)&mKey_button6,sizeof(int));
 		file->read((char*)&mKey_button7,sizeof(int));
 		file->read((char*)&mKey_button8,sizeof(int));
-		Gorgon::Log::get()->RegisterFormated("C++ -> Input::loadConfiguration(): data/input.cfg ... Done");
+		Gorgon::Log::get().RegisterFormated("C++ -> Input::loadConfiguration(): data/input.cfg ... Done");
 	}
 	file->close();
 	delete file;
@@ -91,13 +91,13 @@ void Input::loadConfiguration()
 
 void Input::saveConfiguration() const
 {
-	Gorgon::Log::get()->RegisterFormated("C++ -> Input::saveConfiguration()");
+	Gorgon::Log::get().RegisterFormated("C++ -> Input::saveConfiguration()");
 	std::fstream* file;
 	file = new std::fstream("data/input.cfg",std::ios::out|std::ios::binary);
 
 	if(!file->is_open())
 	{
-		Gorgon::Log::get()->RegisterFormated("C++ -> Input::saveConfiguration(): data/input.cfg ... Error");
+		Gorgon::Log::get().RegisterFormated("C++ -> Input::saveConfiguration(): data/input.cfg ... Error");
 	}
 	else
 	{
@@ -114,7 +114,7 @@ void Input::saveConfiguration() const
 		file->write((char*)&mKey_button6,sizeof(int));
 		file->write((char*)&mKey_button7,sizeof(int));
 		file->write((char*)&mKey_button8,sizeof(int));
-		Gorgon::Log::get()->RegisterFormated("C++ -> Input::saveConfiguration(): data/input.cfg ... Done");
+		Gorgon::Log::get().RegisterFormated("C++ -> Input::saveConfiguration(): data/input.cfg ... Done");
 	}
 	file->close();
 	delete file;

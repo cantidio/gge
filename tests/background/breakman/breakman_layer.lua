@@ -1,5 +1,6 @@
 print("include: BreakmanLayer")
-function breakman_layer()
+function BreakmanLayer()
+	GGE_game_log("BreakmanLayer")
 	local this	= GGE_Layer(
 		"tests/background/breakman/breakman_layer.gspk",
 		"tests/background/breakman/breakman_layer.gapk"

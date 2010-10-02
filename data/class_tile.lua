@@ -103,6 +103,30 @@ function GGE_Tile(
 		this.mPosition = pPosition
 	end
 	--[[
+		-- Funcao para adicionar um valor a posicao do tile
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	01/10/2010
+		-- @version	01/10/2010
+		-- @param	{x,y} pPosition	, posicao a ser adicionada a posicao do tile
+	-]]
+	this.addPosition = function(pPosition)
+		this.mPosition.x = this.mPosition.x + pPosition.x
+		this.mPosition.y = this.mPosition.y + pPosition.y
+	end
+	--[[
+		-- Funcao para subtrair um valor a posicao do tile
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	01/10/2010
+		-- @version	01/10/2010
+		-- @param	{x,y} pPosition	, posicao a ser subtraida da posicao do tile
+	-]]
+	this.subPosition = function(pPosition)
+		this.mPosition.x = this.mPosition.x - pPosition.x
+		this.mPosition.y = this.mPosition.y - pPosition.y
+	end
+	--[[
 		-- Método para desenhar o tile diretamente
 		--
 		-- @author	Cantidio Oliveira Fontes

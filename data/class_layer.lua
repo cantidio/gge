@@ -244,8 +244,10 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 	-]]
 	this.loadTiles = function(pTiles,pSpritePack,pAnimationPack)
 		GGE_game_log("GGE_Layer().loadTiles()")
+
 		if not pSpritePack == nil then this.mSpritePack = pSpritePack end
 		if not pAnimationPack == nil then this.mAnimationPack = pAnimationPack end
+
 		for key, tile in pairs (pTiles) do 
 			GGE_game_log("GGE_Layer().loadTiles() Key: " .. key .. " Animation: " .. tile.animation .. " Posx: " .. tile.position.x .. " posy: " .. tile.position.y)
 			this.addTile(
