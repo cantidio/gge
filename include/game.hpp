@@ -19,9 +19,9 @@
 class Game
 {
 	protected:
-		Gorgon::Lua*	mScript;
-		static Game*	mSingleton;
-		int 			mFPS;
+		Gorgon::Script::Lua	mScript;
+		static Game*		mSingleton;
+		int 				mFPS;
 
 		/**
 		 * Método para registrar as funćões em Lua

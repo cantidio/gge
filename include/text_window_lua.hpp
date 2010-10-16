@@ -8,7 +8,7 @@
  *    \ \_\ \_\ \__/.\_\\ \_,__/ \ \_,__/\ \_\ \__\ /\____\
  *     \/_/\/ /\/__/\/_/ \/___/   \/___/  \/_/\/__/ \/____/
  *
- *  Copyright (C) 2008-2009  Gorgon Team
+ *  Copyright (C) 2008-2010  Gorgon Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	10/07/2009
- * @version	10/07/2009
+ * @version	10/07/2010
  * @ingroup	Core
  */
 namespace TextWindowLua
@@ -59,6 +59,6 @@ namespace TextWindowLua
 	 * @version	10/07/2009
 	 * @param	Gorgon::Lua* pScript, ponteiro para a classe lua que receberá as funções
 	 */
-	void registerFunctions(Gorgon::Lua* pScript);
+	void registerFunctions(Gorgon::Script::Lua& pScript);
 }
 #endif

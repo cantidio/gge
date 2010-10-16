@@ -61,14 +61,14 @@ namespace TileLua
 		return 0;
 	}
 
-	void registerFunctions(Gorgon::Lua* pScript)
+	void registerFunctions(Gorgon::Script::Lua& pScript)
 	{
-		pScript->registerFunction("GGE_tile_new"			,GGE_tile_new			);
-		pScript->registerFunction("GGE_tile_delete"			,GGE_tile_delete		);
-		pScript->registerFunction("GGE_tile_draw"			,GGE_tile_draw			);
-		pScript->registerFunction("GGE_tile_logic"			,GGE_tile_logic			);
-		pScript->registerFunction("GGE_tile_animationGet"	,GGE_tile_animationGet	);
-		pScript->registerFunction("GGE_tile_animationSet"	,GGE_tile_animationSet	);
+		pScript.registerFunction("GGE_tile_new"				,GGE_tile_new			);
+		pScript.registerFunction("GGE_tile_delete"			,GGE_tile_delete		);
+		pScript.registerFunction("GGE_tile_draw"			,GGE_tile_draw			);
+		pScript.registerFunction("GGE_tile_logic"			,GGE_tile_logic			);
+		pScript.registerFunction("GGE_tile_animationGet"	,GGE_tile_animationGet	);
+		pScript.registerFunction("GGE_tile_animationSet"	,GGE_tile_animationSet	);
 	}
 }
 

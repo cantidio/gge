@@ -186,9 +186,9 @@ namespace InputLua
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	16/03/2009
 	 * @version	16/03/2009
-	 * @param	lua_State* pState, estado lua que a função será cadastrada
+	 * @param	lua_State& pState, estado lua que a função será cadastrada
 	 * @return	int
 	 */
-	void registerFunctions(Gorgon::Lua* pScript);
+	void registerFunctions(Gorgon::Script::Lua& pScript);
 }
 #endif

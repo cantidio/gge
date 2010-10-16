@@ -1,4 +1,5 @@
 dofile("tests/background/breakman/breakman_layer.lua")
+
 function Breakman()
 	GGE_game_log("Breakman")
 	local this = GGE_Background()

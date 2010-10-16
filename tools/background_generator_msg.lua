@@ -1,0 +1,12 @@
+msg_welcome						= "Bem vindo ao gerador de cenarios para o motor GGE"
+msg_done						= "Concluído"
+msg_input_bg_name				= "Digite o nome do cenário"
+msg_input_bg_width				= "Digite a largura do cenário"
+msg_input_bg_height				= "Digite a altura do cenário"
+msg_input_bg_layer_number		= "Digite a quantidade de camadas que o cenário possui"
+msg_processing_bg_layer			= "Processando a camada"
+msg_input_bg_layer_tile_width	= "Digite a largura do tile utilizado da camada"
+msg_input_bg_layer_tile_height	= "Digite a largura do tile utilizado da camada"
+msg_input_bg_layer_image_name	= "Digite o nome da imagem base a ser gerado o layer"
+msg_creating_bg_script			= "Criando script to cenário"
+

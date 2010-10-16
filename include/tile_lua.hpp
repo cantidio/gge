@@ -65,8 +65,8 @@ namespace TileLua
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	14/12/2009
 	 * @version	15/12/2009
-	 * @param	Gorgon::Lua* pScript, ponteiro para a classe lua que receberá as funções
+	 * @param	Gorgon::Lua& pScript, classe lua que receberá as funções
 	 */
-	void registerFunctions(Gorgon::Lua* pScript);
+	void registerFunctions(Gorgon::Script::Lua& pScript);
 }
 #endif

@@ -1,6 +1,7 @@
 dofile("tests/char/mature/mature.lua")
 dofile("tests/char/mammon/mammon.lua")
 dofile("tests/background/breakman/breakman_background.lua")
+--dofile("tools/saveroom/teste.lua")
 
 function TestGame()
 	local this				= {}

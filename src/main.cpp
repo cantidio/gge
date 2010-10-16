@@ -2,7 +2,7 @@
 
 int main()
 {
-	Gorgon::Log::init("gge_log.txt");
+	Gorgon::Core::Log::init("gge_log.txt");
 	Game::get().run();
 	Game::halt();
 	return 0;

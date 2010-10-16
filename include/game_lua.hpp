@@ -75,9 +75,9 @@ namespace GameLua
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	29/09/2010
 	 * @version	01/10/2010
-	 * @param	lua_State* pState, estado do interpretador lua atual
+	 * @param	lua_State& pState, estado do interpretador lua atual
 	 * @return	int
 	 */
-	void registerFunctions(Gorgon::Lua* pScript);
+	void registerFunctions(Gorgon::Script::Lua& pScript);
 }
 

@@ -12,13 +12,13 @@ END_OF_FUNCTION(game_time);
 Game* Game::mSingleton = NULL;
 Game::Game()
 {
-	Gorgon::Log::get().RegisterFormated("C++ -> Game::Game()");
+	Gorgon::Core::Log::get().RegisterFormated("C++ -> Game::Game()");
 	registerLuaFunctions();
 }
 
 Game::~Game()
 {
-	Gorgon::Log::get().RegisterFormated("C++ -> Game::~Game()");
+	Gorgon::Core::Log::get().RegisterFormated("C++ -> Game::~Game()");
 	Input::halt();
 	ResourceManager::SpriteManager::clear();
 	ResourceManager::AnimationManager::clear();
@@ -50,7 +50,7 @@ bool Game::init
 	const bool&			pFullScreen
 )
 {
-	Gorgon::Log::get().RegisterFormated
+	Gorgon::Core::Log::get().RegisterFormated
 	(
 		"C++ -> Game::init()\n\
 			\t\t\t\tpWindowTitle: %s\n\
@@ -81,34 +81,33 @@ bool Game::init
 bool Game::setFPS(const int& pFPS)
 {
 	mFPS = pFPS;
+	return true;
 }
 
 void Game::registerLuaFunctions()
 {
-	Gorgon::Log::get().RegisterFormated("C++ -> Game::registerLuaFunctions()");
-
-	mScript = new Gorgon::Lua("");
+	Gorgon::Core::Log::get().RegisterFormated("C++ -> Game::registerLuaFunctions()");
 
 	ObjectLua::registerFunctions(mScript);
 	TileLua::registerFunctions(mScript);
 	InputLua::registerFunctions(mScript);
 	GameLua::registerFunctions(mScript);
 	
-	mScript->loadScript("data/class_tile.lua");
-	mScript->loadScript("data/class_layer.lua");
-	mScript->loadScript("data/class_background.lua");
-	mScript->loadScript("data/class_input.lua");
-	mScript->loadScript("data/class_object.lua");
-	mScript->loadScript("data/class_player.lua");
-	mScript->loadScript("data/class_game.lua");
+	mScript.loadScript("data/class_tile.lua");
+	mScript.loadScript("data/class_layer.lua");
+	mScript.loadScript("data/class_background.lua");
+	mScript.loadScript("data/class_input.lua");
+	mScript.loadScript("data/class_object.lua");
+	mScript.loadScript("data/class_player.lua");
+	mScript.loadScript("data/class_game.lua");
 }
 
 void Game::run()
 {
-	Gorgon::Log::get().RegisterFormated("C++ -> Game::run()");
+	Gorgon::Core::Log::get().RegisterFormated("C++ -> Game::run()");
 	try
 	{
-		mScript->loadScript("game.lua");//carrega o game
+		mScript.loadScript("game.lua");//carrega o game
 		
 		while(!key[KEY_ESC])
 		{
@@ -117,7 +116,7 @@ void Game::run()
 				Gorgon::Video::get().clear(0xAA0BDD);
 
 				//executa funcao logic do mal aqui
-				mScript->function("GGE_game_runStep");
+				mScript.function("GGE_game_runStep");
 			
 				//TextWindow::get().show();
 				Gorgon::Video::get().drawText(10,10,0,-1,"FPS: %d",fps_antigo);
@@ -127,7 +126,7 @@ void Game::run()
 			}
 		}
 	}
-	catch(Gorgon::Exception e)
+	catch(Gorgon::Core::Exception e)
 	{
 		std::cout << e.getMessage() << std::endl;
 	}

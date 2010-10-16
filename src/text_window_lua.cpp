@@ -8,8 +8,8 @@ namespace TextWindowLua
 		return 0;
 	}
 
-	void registerFunctions(Gorgon::Lua* pScript)
+	void registerFunctions(Gorgon::Script::Lua& pScript)
 	{
-		pScript->registerFunction("print",print);
+		pScript.registerFunction("print",print);
 	}
 }

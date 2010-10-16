@@ -23,7 +23,7 @@ namespace GameLua
 	
 	int GGE_game_log(lua_State* pState)
 	{
-		Gorgon::Log::get().RegisterFormated
+		Gorgon::Core::Log::get().RegisterFormated
 		(
 			"LUA -> %s",lua_tostring(pState,1)
 		);
@@ -52,13 +52,13 @@ namespace GameLua
 		return 1;
 	}
 
-	void registerFunctions(Gorgon::Lua* pScript)
+	void registerFunctions(Gorgon::Script::Lua& pScript)
 	{
-		pScript->registerFunction("GGE_game_init"			, GGE_game_init				);
-		pScript->registerFunction("GGE_game_halt"			, GGE_game_halt				);
-		pScript->registerFunction("GGE_game_log"			, GGE_game_log				);
-		pScript->registerFunction("GGE_game_setFPS"			, GGE_game_setFPS			);
-		pScript->registerFunction("GGE_game_setGameName"	, GGE_game_setGameName		);
-		pScript->registerFunction("GGE_game_setGameVersion"	, GGE_game_setGameVersion	);
+		pScript.registerFunction("GGE_game_init"			, GGE_game_init				);
+		pScript.registerFunction("GGE_game_halt"			, GGE_game_halt				);
+		pScript.registerFunction("GGE_game_log"				, GGE_game_log				);
+		pScript.registerFunction("GGE_game_setFPS"			, GGE_game_setFPS			);
+		pScript.registerFunction("GGE_game_setGameName"		, GGE_game_setGameName		);
+		pScript.registerFunction("GGE_game_setGameVersion"	, GGE_game_setGameVersion	);
 	}
 }

@@ -161,8 +161,8 @@ namespace ObjectLua
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	31/03/2009
 	 * @version	29/09/2010
-	 * @param	Gorgon::Lua* script, ponteiro para a classe lua que receberá as funções
+	 * @param	Gorgon::Lua& script, referencia para a classe lua que receberá as funções
 	 */
-	void registerFunctions(Gorgon::Lua* script);
+	void registerFunctions(Gorgon::Script::Lua& script);
 }
 #endif

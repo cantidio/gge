@@ -80,20 +80,20 @@ namespace InputLua
 		return 1;
 	}
 
-	void registerFunctions(Gorgon::Lua* pScript)
+	void registerFunctions(Gorgon::Script::Lua& pScript)
 	{
-		pScript->registerFunction("GGE_input_buttonStart"	, GGE_input_buttonStart	);
-		pScript->registerFunction("GGE_input_buttonUp"		, GGE_input_buttonUp	);
-		pScript->registerFunction("GGE_input_buttonDown"	, GGE_input_buttonDown	);
-		pScript->registerFunction("GGE_input_buttonLeft"	, GGE_input_buttonLeft	);
-		pScript->registerFunction("GGE_input_buttonRight"	, GGE_input_buttonRight	);
-		pScript->registerFunction("GGE_input_button1"		, GGE_input_button1		);
-		pScript->registerFunction("GGE_input_button2"		, GGE_input_button2		);
-		pScript->registerFunction("GGE_input_button3"		, GGE_input_button3		);
-		pScript->registerFunction("GGE_input_button4"		, GGE_input_button4		);
-		pScript->registerFunction("GGE_input_button5"		, GGE_input_button5		);
-		pScript->registerFunction("GGE_input_button6"		, GGE_input_button6		);
-		pScript->registerFunction("GGE_input_button7"		, GGE_input_button7		);
-		pScript->registerFunction("GGE_input_button8"		, GGE_input_button8		);
+		pScript.registerFunction("GGE_input_buttonStart"	, GGE_input_buttonStart	);
+		pScript.registerFunction("GGE_input_buttonUp"		, GGE_input_buttonUp	);
+		pScript.registerFunction("GGE_input_buttonDown"	, GGE_input_buttonDown	);
+		pScript.registerFunction("GGE_input_buttonLeft"	, GGE_input_buttonLeft	);
+		pScript.registerFunction("GGE_input_buttonRight"	, GGE_input_buttonRight	);
+		pScript.registerFunction("GGE_input_button1"		, GGE_input_button1		);
+		pScript.registerFunction("GGE_input_button2"		, GGE_input_button2		);
+		pScript.registerFunction("GGE_input_button3"		, GGE_input_button3		);
+		pScript.registerFunction("GGE_input_button4"		, GGE_input_button4		);
+		pScript.registerFunction("GGE_input_button5"		, GGE_input_button5		);
+		pScript.registerFunction("GGE_input_button6"		, GGE_input_button6		);
+		pScript.registerFunction("GGE_input_button7"		, GGE_input_button7		);
+		pScript.registerFunction("GGE_input_button8"		, GGE_input_button8		);
 	}
 }

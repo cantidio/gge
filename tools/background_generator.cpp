@@ -7,190 +7,283 @@
 #include <gorgon++/gorgon.hpp>
 #include <iostream>
 #include <string>
-#include <gsbge/src/background/include/background.hpp>
+#include <sstream>
 #include <math.h>
-/*
- *
- */
+
 using namespace std;
 using namespace Gorgon;
-void createSpritePackFromImage(const Image& pImage, const int& pTileSize,SpritePack* pSpritePack)
-{
-	Image* aux;
-	bool isEqual;
-	for(int h = pImage.getHeight() - pTileSize ; h > -1 ; h-=pTileSize)
-    {
-        for(int w = pImage.getWidth() - pTileSize ; w > -1; w-=pTileSize)
-		{
-			isEqual = false;
-			aux		= new Image(pTileSize,pTileSize);
-			aux->blitImage
-			(
-				pImage,
-				0,
-				0,
-				w,
-				h,
-				pTileSize,
-				pTileSize,
-				false
-			);
-			if(!aux->isEmpty())
-			{
-				for(int i = pSpritePack->getSize() - 1; i > -1; --i)
-				{
-					if((*pSpritePack)[i] == (*aux))
-					{
-						isEqual = true;
-						break;
-					}
-				}
-				if(!isEqual)
-				{
-					pSpritePack->add
-					(
-						Sprite
-						(
-							*aux,
-							0,
-							pSpritePack->getSize()
-						)
-					);
-				}
-			}
-			delete aux;
-        }
-    }
-	cout << pSpritePack->getSize() <<" different tiles were found." << endl;
-}
 
-void createTileSheet( const int& pTileSize,const SpritePack* pSpritePack)
+#define LM " >> "
+#define MSG cout << LM
+
+typedef struct
 {
-	const int rows = (int)sqrt(pSpritePack->getSize()) + 1;
-	Image aux(pTileSize * rows + rows, pTileSize* rows + rows);
+	Point	position;
+	int		animation;
+}Tile;
+
+typedef struct
+{
+	int tileWidth;
+	int tileHeight;
+	SpritePack		sprite;
+	AnimationPack	animation;
+	string imageName;
+	vector<Tile> tiles;
+}Layer;
+
+typedef struct
+{
+	string name;
+	int width;
+	int height;
+	int layerNumber;
+	vector<Layer> layers;
+}BG;
+/**
+ * Function that generates a tilesheet with the Layer's tiles
+ *
+ * @author	Cantidio Oliveira Fontes
+ * @since	14/10/2010
+ * @version	16/10/2010
+ * @param	const string& pImageName, tilesheet image's name
+ * @param	Layer& pLayer, the layer that will generate the tilesheet
+ */
+void createTileSheet(const string& pImageName, Layer& pLayer)
+{
+	const int rows = (int)sqrt(pLayer.sprite.getSize()) + 1;
+	Image aux(pLayer.tileWidth * rows + rows, pLayer.tileHeight* rows + rows);
 	aux.clear(0xFF00FF);
 	int h,w,i;
-	for(i = h = 0; h < rows && i < pSpritePack->getSize(); ++h)
+	for(i = h = 0; h < rows && i < pLayer.sprite.getSize(); ++h)
 	{
-		for(int w = 0; w < rows && i < pSpritePack->getSize(); ++w,++i)
+		for(int w = 0; w < rows && i < pLayer.sprite.getSize(); ++w,++i)
 		{
-			aux.drawImage((*pSpritePack)[i],w + pTileSize*w,h + pTileSize*h);
+			aux.drawImage
+			(
+				pLayer.sprite[i],
+				w + pLayer.tileWidth * w,
+				h + pLayer.tileHeight * h
+			);
 		}
 	}
-	//cout << "raiz: " <<  << endl;
-	aux.save("lastsheet.bmp");
+	aux.save(pImageName);
+}
+/**
+ * Function that generates the layer based in the image registered in it
+ *
+ * @author	Cantidio Oliveira Fontes
+ * @since	14/10/2010
+ * @version	16/10/2010
+ * @param	Layer& pLayer, the layer that will be populate
+ * @details
+ *			This function generates the tiles, the SpritePack
+ * and the AnimationPack of the Layer
+ */
+void createBgLayerFromImage(Layer& pLayer)
+{
+	Image image(pLayer.imageName);
+	register int h,w,i;
+
+	for(h = 0; h < image.getHeight(); h+=pLayer.tileHeight)
+	{
+		for(w = 0; w < image.getWidth(); w+=pLayer.tileWidth)
+		{
+			Image	tileimg(pLayer.tileWidth, pLayer.tileHeight);
+			Tile	tile;
+			tile.position = Point(w,h);
+			tileimg.blitImage
+			(
+				image,
+				0, 0, w, h,
+				pLayer.tileWidth,
+				pLayer.tileHeight
+			);
+			if(!tileimg.isEmpty()) //só adiciona ao pacte se o tile possuir algum conteúdo
+			{
+				for(i = 0; i < pLayer.sprite.getSize(); ++i)
+				{
+					if(pLayer.sprite[i] == tileimg) // já temos um tile igual no pacote
+						break;
+				}
+				if(i >= pLayer.sprite.getSize())
+				{
+					pLayer.sprite.add(Sprite(tileimg,w,h));
+					pLayer.animation.add(Animation(w,h));
+					pLayer.animation[i].add(Frame(w,h,-1));
+				}
+				tile.animation = i;
+				pLayer.tiles.push_back(tile);
+
+				Video::get().drawImage(tileimg,w,h);
+				Video::get().show();
+			}
+		}
+	}
+	while(!key[KEY_ESC])
+	{
+		Video::get().drawImage(image,0,0);
+		Video::get().show();
+	}
+}
+/**
+ * Function that creates the Layer
+ *
+ * @author	Cantidio Oliveira Fontes
+ * @since	14/10/2010
+ * @version	16/10/2010
+ * @param	const string& pLayerName	, the name of the Layer
+ * @param	Layer& pLayer				, the Layer to be populated
+ * @param	Script::Lua& pLua			, the lua script to generate the code
+ */
+void createBgLayer
+(
+	const string&	pLayerName,
+	Layer&			pLayer,
+	Script::Lua&	pLua
+)
+{
+	string aux = pLayerName;
+	aux.insert(aux.length(), ".lua");
+	Core::File file(aux, ios::out);
+	string spritepack		= pLayerName;
+	string animationpack	= pLayerName;
+	spritepack.insert(spritepack.length(),".gspk");
+	animationpack.insert(animationpack.length(),".gapk");
+	
+	string tiles = ""; //gera o código dos tiles
+	for(int i = 0; i < pLayer.tiles.size(); ++i)
+	{
+		tiles.insert
+		(
+			tiles.length(),
+			pLua.function
+			(
+				"make_tile",
+				Script::LuaParam
+				(
+					"ddd",//d-> number
+					pLayer.tiles[i].animation,
+					(int)pLayer.tiles[i].position.getX(),
+					(int)pLayer.tiles[i].position.getY()
+				),
+				1
+			)->getStringValue()
+		);
+	}
+	
+	file << pLua.function
+	(
+		"make_Layer_class",
+		Script::LuaParam
+		(
+			"ssss",		//s->string
+			pLayerName.c_str(),
+			spritepack.c_str(),
+			animationpack.c_str(),
+			tiles.c_str()
+		),
+		1
+	)->getStringValue() << endl;
+	
+	pLayer.sprite.save(spritepack);
+	pLayer.animation.save(animationpack);
+	
+	//createTileSheet( spritepack.insert(spritepack.length(),".bmp"), pLayer);
+	
+	file.close();	
+}
+/**
+ * Function that creates the background
+ *
+ * @author	Cantidio Oliveira Fontes
+ * @since	16/10/2010
+ * @version	16/10/2010
+ * @param	BG&				pBG		, the background to be created
+ * @param	Script::Lua&	pLua	, the lua script to generate the code
+ */
+void createBg(BG& pBg, Script::Lua& pLua)
+{
+	string aux = pBg.name;
+	aux.insert(pBg.name.length(),".lua");
+	Core::File file(aux, ios::out);
+	
+	for(int i = 0; i < pBg.layerNumber; ++i)
+	{
+		stringstream layerName;
+		layerName << pBg.name << "_layer_" << (i + 1);
+		file << "dofile(\"" << layerName.str() << ".lua\")" << endl;
+		
+		createBgLayerFromImage(pBg.layers[i]);
+		createBgLayer(layerName.str(), pBg.layers[i], pLua);
+	}
+	file << endl;
+	file << pLua.function
+	(
+		"make_BG_class",
+		Script::LuaParam
+		(
+			"sddd",		//s->string d-> number
+			pBg.name.c_str(),
+			pBg.width,
+			pBg.height,
+			pBg.layerNumber
+		),
+		1
+	)->getStringValue() << endl;
+	file.close();
 }
 
-int doBackgroundFromImage(const string& pBgImageName, const int& pTileSize)
+void strNormalize(string& pBgName)
 {
-    Image bgImage(pBgImageName);
-    Layer layer;
-	SpritePack*		spritePack		= layer.getSpritePack();
-	AnimationPack*	animationPack	= layer.getAnimationPack();
-	Image* aux;
-	bool isEqual;
-	int pos;
-	createSpritePackFromImage(bgImage,pTileSize,spritePack);
-
-	for(int i = 0; i < spritePack->getSize(); ++i)
+	for(size_t found = pBgName.find(" "); found != string::npos; found = pBgName.find(" "))
 	{
-		animationPack->add(Animation(0,i));
-		(*animationPack)[i].add(Frame(0,i,-1));
+		pBgName.replace(found, 1, "_");
 	}
-    
-    for(int h = bgImage.getHeight() - pTileSize; h > -1 ; h-=pTileSize)
-    {
-        for(int w = bgImage.getWidth() - pTileSize; w > -1; w-=pTileSize)
-		{
-			isEqual = false;
-			aux = new Image(pTileSize,pTileSize);
-			aux->blitImage
-			(
-				bgImage,
-				0,
-				0,
-				w,
-				h,
-				pTileSize,
-				pTileSize,
-				false
-			);
-			if(!aux->isEmpty())
-			{
-				for(int i = spritePack->getSize() - 1; i > -1; --i)
-				{
-					if((*spritePack)[i] == *aux)
-					{
-						layer.addTile
-						(
-							new Tile
-							(
-								*spritePack,
-								*animationPack,
-								i,
-								Point(w,h)
-							)
-						);
-						break;
-					}
-				}
-			}
-			delete aux;
-        }
-    }
-	layer.draw(Video::get(),Gorgon::Point(10,10));
-	Video::get().show();
-	while(!key[KEY_ESC]);
-
-	std::string baseName = pBgImageName;
-	baseName.erase(baseName.find_first_of('.'));
-
-	string spriteName		= baseName;
-	string animationName	= baseName;
-	string layerName		= baseName;
-
-	spriteName.append("_layer.gspk");
-	animationName.append("_layer.gapk");
-	layerName.append("_layer.lua");
-
-	spritePack->save(spriteName);
-	animationPack->save(animationName);
-	layer.save(layerName);
-	createTileSheet(pTileSize,spritePack);
-	delete spritePack;
-	delete animationPack;
 }
 
 int main(int argc, char** argv)
 {
     string bgImageName;
     int tileSize;
-
+    BG bg;
+	Script::Lua lua;
+	lua.loadScript("background_generator.lua");
+	lua.loadScript("background_generator_msg.lua");
 	
-
-	/*cout << "Digite quantas camadas o cenário possui: ";
-	cin << bglayerNumber;
-	for(int i = 0; i < bglayerNumber; ++i)
-	{
-	 cout << "Digite o nome da imagem do layer: " << i+1 << " do cenário: ";
-	 cin >> s
-
-
-
-
-	}*/
-    cout << "Digite o nome da imagem do cenário: ";
-    cin >> bgImageName;
-    cout << endl;
-    cout << "Digite o lado do tile a ser usado: ";
-    cin >> tileSize;
-    cout << endl;
-    allegro_init();
+	allegro_init();
 	install_keyboard();
-    Gorgon::Video::init("Background Generator",400,300);
-    doBackgroundFromImage(bgImageName,tileSize);
-	//doBackgroundFromImage("breakman.pcx",16);
-    //breakman.bmp 16
-    return (EXIT_SUCCESS);
+    Gorgon::Video::init("Background Generator",640,480);
+	
+	MSG << lua.getStringVar("msg_welcome") << endl;
+	MSG << lua.getStringVar("msg_input_bg_name") << ":" << endl;
+	MSG;   getline(cin, bg.name); strNormalize(bg.name);
+	MSG << lua.getStringVar("msg_input_bg_width") << ":" << endl;
+	MSG;   cin >> bg.width;
+	MSG << lua.getStringVar("msg_input_bg_height") << ":" << endl;
+	MSG;   cin >> bg.height;
+	MSG << lua.getStringVar("msg_input_bg_layer_number") << ":" << endl;
+	MSG;   cin >> bg.layerNumber;
+	
+	for(int i = 0; i < bg.layerNumber; ++i)
+	{
+		Layer layer;
+		MSG << lua.getStringVar("msg_processing_bg_layer") << ": " << (i+1) << endl;
+		MSG << lua.getStringVar("msg_input_bg_layer_tile_width") << ":" << endl;
+		MSG;   cin >> layer.tileWidth;
+		MSG << lua.getStringVar("msg_input_bg_layer_tile_height") << ":" << endl;
+		MSG;   cin >> layer.tileHeight;
+		MSG << lua.getStringVar("msg_input_bg_layer_image_name") << ":" << endl;
+		cin.ignore(INT_MAX,'\n');
+		MSG;   getline(cin, layer.imageName);
+		bg.layers.push_back(layer);
+	}
+	
+	MSG << lua.getStringVar("msg_creating_bg_script") << "..." << endl;
+	
+	createBg(bg,lua);
+	
+	MSG << lua.getStringVar("msg_done") << endl;
+    return 0;
 }
 
