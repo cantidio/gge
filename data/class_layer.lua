@@ -30,14 +30,14 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		print("layer delete tiles:")
 		for key, tile in pairs (this.mTiles) do 
 			io.write(key .. ",")
-			tile.delete()
+			tile = nil
 		end
 		io.write("\n")
 
 		print ("layer delete objects:")
 		for key, object in pairs (this.mObjects) do 
 			io.write(key .. ",")
-			object.delete()
+			object = nil
 		end
 		io.write("\n")
 		this = {}
@@ -73,6 +73,7 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @param	Tile pTile, tile a ser adicionado
 	-]]
 	this.addTile = function(pTile)
+		pTile:setLayer(this)
 		this.mTiles[#this.mTiles + 1] = pTile
 	end
 	--[[
@@ -108,7 +109,7 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 	-]]
 	this.removeTile = function (pTile)
 		if not this.mTiles[pTile] == nil then
-			this.mTiles[pTile].delete()
+--this.mTiles[pTile].delete()
 			this.mTiles[pTile] = nil
 		end
 	end
@@ -143,7 +144,7 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @param	GGE_Object pObject, objeto a ser adicionado ao layer
 	-]]
 	this.addObject = function(pObject)
-		pObject.setLayer(this)
+		pObject:setLayer(this)
 		this.mObjects[#this.mObjects + 1] = pObject
 	end
 	--[[
@@ -168,9 +169,9 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 	-]]
 	this.getObjectById = function(pObjectId)
 		local objects = {}
-		for key, tile in pairs(this.mTiles) do 
-			if tile.getId() == pObjectId then
-				objects[#objects + 1] = { position = key, object = tile }
+		for key, obj in pairs(this.mObjects) do 
+			if obj:getId() == pObjectId then
+				objects[#objects + 1] = { position = key, object = obj }
 			end
 		end
 		return objects
@@ -197,7 +198,6 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 	-]]
 	this.removeObject = function(pObjectPosition)
 		if not this.mObjects[pObjectPosition] == nil then
-			this.mObjects[pObjectPosition].delete()
 			this.mObjects[pObjectPosition] = nil
 		end
 	end
@@ -213,7 +213,6 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 	this.removeObjectById = function(pObjectId)
 		local objects = this.getObjectById(pObjectId)
 		for iterator = 1, #objects, 1 do
-			objects[iterator].object.delete()
 			this.mObjects[objects[iterator].position] = nil
 		end
 		return #objects
@@ -251,7 +250,7 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		for key, tile in pairs (pTiles) do 
 			GGE_game_log("GGE_Layer().loadTiles() Key: " .. key .. " Animation: " .. tile.animation .. " Posx: " .. tile.position.x .. " posy: " .. tile.position.y)
 			this.addTile(
-				GGE_Tile(
+				GGE_Tile.new(
 					this.mSpritePack,
 					this.mAnimationPack,
 					tile.animation,
@@ -266,7 +265,7 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	30/09/2010
-		-- @version	01/10/2010
+		-- @version	20/10/2010
 		-- @param	{x,y} pPosition, posićão a desenhar o layer
 		-- @details
 		--	Esse método desenha todos os tiles e todos os objetos contidos no layer as well
@@ -274,10 +273,10 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 	this.draw = function(pPosition)
 		local position = this.getRealPosition(pPosition)
 		for key, tile in pairs (this.mTiles) do 
-			tile.draw(position)
+			tile:draw(position)
 		end
 		for key, object in pairs (this.mObjects) do 
-			object.draw(position)
+			if object:isActive() then object:draw(position) end
 		end
 	end
 	--[[
@@ -285,14 +284,14 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	18/03/2009
-		-- @version	30/09/2010
+		-- @version	20/10/2010
 	-]]
 	this.basicLogic = function()
 		for key, tile in pairs (this.mTiles) do 
-			tile.logic()
+			tile:logic()
 		end
 		for key, object in pairs (this.mObjects) do 
-			object.logic()
+			if object:isActive() then object:logic() end
 		end
 	end
 	--[[

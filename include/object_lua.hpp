@@ -34,91 +34,148 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	12/03/2009
- * @version	29/09/2010
+ * @version	20/10/2010
  * @ingroup	Objects
  */
-namespace ObjectLua
-{
-	/**
-	 * Função que retorna o índice real da animação dados o seu grupo e índice
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	18/06/2009
-	 * @version	29/09/2010
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int GGE_object_animationGetRealIndex(lua_State* pState);
-	/**
-	 * Função que muda a animação de um objeto através de um índice direto
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @version	12/03/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int GGE_object_animationChangeByIndex(lua_State* pState);
-	/**
-	 * Função que muda a animação de um objeto por seu grupo e índice
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	09/06/2009
-	 * @version	09/06/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int GGE_object_animationChange(lua_State* pState);
-	/**
-	 * Função que retorna verdadeiro se a animação está tocando
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	12/03/2009
-	 * @version	12/03/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int GGE_object_animationIsPlaying(lua_State* pState);
-	/**
-	 * Função que retorna o grupo e o índice da animação que está tocando
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	26/01/2010
-	 * @version	26/01/2010
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int GGE_object_animationOnGet(lua_State* pState);
-	/**
-	 * Função que retorna o número do frame atual da animação que está tocando
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	14/03/2009
-	 * @version	14/03/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int GGE_object_animationGetFrameOn(lua_State* pState);
-	/**
-	 * Função que roda um frame da animaćão atual do objeto
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	29/09/2010
-	 * @version	29/09/2010
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int GGE_object_animationRunStep(lua_State* pState);
-	/**
-	 * Função que retorna o ponteiro do layer do objeto
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	20/01/2009
-	 * @version	02/01/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-//	int lua_getLayer(lua_State* pState);
+ class ObjectLua
+ {
+ 	protected:
+		static luaL_reg mMethods[];		/**< all class methods*/
+		static luaL_reg mMetatable[];	/**< class metatable */
+	public:
+		/**
+		 * Method that creates a new Object in LUA
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	17/10/2010
+		 * @version	20/10/2010
+		 * @param	lua_State* pState, state of the lua interpreter
+		 * @return	int
+		 */
+		static int constructor(lua_State* pState);
+		/**
+		 * Method that deletes a new Object in LUA
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	17/10/2010
+		 * @version	20/10/2010
+		 * @param	lua_State* pState, state of the lua interpreter
+		 * @return	int
+		 */
+		static int destructor(lua_State* pState);
+		/**
+		 * Method that draws a Object in LUA
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	17/10/2010
+		 * @version	18/10/2010
+		 * @param	lua_State* pState, state of the lua interpreter
+		 * @return	int
+		 */
+		static int draw(lua_State* pState);
+		/**
+		 * Method that execute the Object logic function in LUA
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	17/10/2010
+		 * @version	18/10/2010
+		 * @param	lua_State* pState, state of the lua interpreter
+		 * @return	int
+		 */
+		static int logic(lua_State* pState);
+		/**
+		 * Função que retorna o índice real da animação dados o seu grupo e índice
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	18/06/2009
+		 * @version	29/09/2010
+		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @return	int
+		 */
+		static int getAnimationRealIndex(lua_State* pState);
+		/**
+		 * Função que muda a animação de um objeto através de um índice direto
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @version	12/03/2009
+		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @return	int
+		 */
+		static int changeAnimationByIndex(lua_State* pState);
+		/**
+		 * Função que muda a animação de um objeto por seu grupo e índice
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	09/06/2009
+		 * @version	09/06/2009
+		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @return	int
+		 */
+		static int changeAnimation(lua_State* pState);
+		/**
+		 * Função que retorna verdadeiro se a animação está tocando
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	12/03/2009
+		 * @version	12/03/2009
+		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @return	int
+		 */
+		static int animationIsPlaying(lua_State* pState);
+		/**
+		 * Função que retorna a posicao, o grupo e o índice da animação que está tocando
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	26/01/2010
+		 * @version	26/01/2010
+		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @return	int
+		 */
+		static int getAnimationOn(lua_State* pState);//real, group. index
+		/**
+		 * Method that sets the frame on of the animation playing
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	14/03/2009
+		 * @version	14/03/2009
+		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @return	int
+		 */
+		static int setFrameOn(lua_State* pState);
+		/**
+		 * Função que retorna o número do frame atual da animação que está tocando
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	14/03/2009
+		 * @version	14/03/2009
+		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @return	int
+		 */
+		static int getFrameOn(lua_State* pState);
+		/**
+		 * Função que roda um frame da animaćão atual do objeto
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	29/09/2010
+		 * @version	29/09/2010
+		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @return	int
+		 */
+		static int animationRunStep(lua_State* pState);
+		/**
+		 * Method that registers the Object Class to be used in lua
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	14/12/2009
+		 * @version	17/10/2010
+		 * @param	Gorgon::Script::Lua& pScript, the script to register the class
+		 */
+		static void registerClass(Gorgon::Script::Lua& pScript);
+ };
+
+	
+	
 	/**
 	 * Função para setar o método de afterImage para Normal
 	 *
@@ -155,14 +212,6 @@ namespace ObjectLua
 	 * @param	lua_State* pState, estado do interpretador lua atual
 	 */
 //	int setAfterImageMode(lua_State* pState);
-	/**
-	 * Método que registra as funçãode cenário para serem acessadas por um script
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	31/03/2009
-	 * @version	29/09/2010
-	 * @param	Gorgon::Lua& script, referencia para a classe lua que receberá as funções
-	 */
-	void registerFunctions(Gorgon::Script::Lua& script);
-}
+
 #endif
+

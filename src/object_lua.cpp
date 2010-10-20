@@ -1,98 +1,202 @@
 #include "../include/object_lua.hpp"
+#define OBJECT_CLASS "GGE_OBJECT_BASIC"
 
-namespace ObjectLua
+luaL_reg ObjectLua::mMethods[] =
 {
-	inline Object* getObjectPointer(lua_State* pState)
-	{
-		return (Object*)lua_tointeger(pState,1);
-	}
+	{"new",						ObjectLua::constructor},
+	{"draw",					ObjectLua::draw},
+	{"logic",					ObjectLua::logic},
+	{"getAnimationRealIndex",	ObjectLua::getAnimationRealIndex},
+	{"changeAnimationByIndex",	ObjectLua::changeAnimationByIndex},
+	{"changeAnimation",			ObjectLua::changeAnimation},
+	{"animationIsPlaying",		ObjectLua::animationIsPlaying},
+	{"getAnimationOn",			ObjectLua::getAnimationOn},
+	{"animationRunStep",		ObjectLua::animationRunStep},
+	{"setFrameOn",				ObjectLua::setFrameOn},
+	{"getFrameOn",				ObjectLua::getFrameOn},
+	{0,0}
+};
+luaL_reg ObjectLua::mMetatable[] =
+{
+	{"__gc",			ObjectLua::destructor},//method called when object is destroyed
+	//tostring
+	{0,0}
+};
 
-	int GGE_object_new(lua_State* pState)
-	{
-		Object* object = new Object
+int ObjectLua::constructor(lua_State* pState)
+{
+	Gorgon::Core::Log::get().RegisterFormated("C++ -> ObjectLua:new()");
+	Gorgon::Script::Lua lua(pState);
+	lua.createUserData
+	(
+		OBJECT_CLASS,
+		new Object//não comeća do 1, pois espera-se que o uso seja var:new("","") e não var.new("","")
 		(
-			lua_tostring(pState,1),
-			lua_tostring(pState,2)
-		);
-		lua_pushnumber(pState,(int)object);
-		return 1;
-	}
-	
-	int GGE_object_delete(lua_State* pState)
-	{
-		Object* object = getObjectPointer(pState);
-		delete object;
-	}
+			lua_tostring(pState, 2),
+			lua_tostring(pState, 3)
+		),
+		sizeof(Object*)
+	);
+	Gorgon::Core::Log::get().RegisterFormated("C++ -> ObjectLua:~new()");
+	return 1;
+}
 
-	int GGE_object_animationGetRealIndex(lua_State* pState)
+int ObjectLua::destructor(lua_State* pState)
+{
+	Gorgon::Core::Log::get().RegisterFormated("C++ -> ObjectLua:destructor()");
+	Gorgon::Script::Lua lua(pState);
+	Object* object = (Object*)lua.getUserData(OBJECT_CLASS);
+	if(object) delete object;
+	Gorgon::Core::Log::get().RegisterFormated("C++ -> ObjectLua:~destructor()");
+	return 0;
+}
+
+int ObjectLua::draw(lua_State* pState)
+{
+	Gorgon::Script::Lua lua(pState);
+	Object* object = (Object*)lua.getUserData(OBJECT_CLASS);
+	if(object)
 	{
-		Object* object = getObjectPointer(pState);
+		const Gorgon::Point position
+		(
+			lua_tointeger(pState,2),
+			lua_tointeger(pState,3)
+		);
+		Gorgon::Mirroring mirror;
+		switch((int)lua_tointeger(pState,4))
+		{
+			case 0:		mirror = Gorgon::Mirroring::Normal;	break;
+			case 1:		mirror = Gorgon::Mirroring::HFlip;	break;
+			case 2:		mirror = Gorgon::Mirroring::VFlip;	break;
+			default:	mirror = Gorgon::Mirroring::VHFlip;	break;
+		}
+		object->draw( position, mirror );
+	}
+	return 0;
+}
+
+int ObjectLua::logic(lua_State* pState)
+{
+	Gorgon::Script::Lua lua(pState);
+	Object* object = (Object*)lua.getUserData(OBJECT_CLASS);
+	if(object)
+	{
+		object->animationRunStep();
+	}
+	return 0;
+}
+
+int ObjectLua::getAnimationRealIndex(lua_State* pState)
+{
+	Gorgon::Script::Lua lua(pState);
+	Object* object = (Object*)lua.getUserData(OBJECT_CLASS);
+	if(object)
+	{
 		lua_pushnumber
 		(
 			pState,
 			object->getAnimationRealIndex
 			(
-				(int)lua_tointeger(pState,2),
-				(int)lua_tointeger(pState,3)
+				(int)lua_tointeger(pState, 2),
+				(int)lua_tointeger(pState, 3)
 			)
 		);
-		return 1;
 	}
+	return 1;
+}
 
-	int GGE_object_animationChangeByIndex(lua_State* pState)
+int ObjectLua::changeAnimationByIndex(lua_State* pState)
+{
+	Gorgon::Script::Lua lua(pState);
+	Object* object = (Object*)lua.getUserData(OBJECT_CLASS);
+	if(object)
 	{
-		Object* object = getObjectPointer(pState);
 		object->changeAnimation((int)lua_tointeger(pState,2));
-		return 0;
 	}
+	return 0;
+}
 
-	int GGE_object_animationChange(lua_State* pState)
+int ObjectLua::changeAnimation(lua_State* pState)
+{
+	Gorgon::Script::Lua lua(pState);
+	Object* object = (Object*)lua.getUserData(OBJECT_CLASS);
+	if(object)
 	{
-		Object* object = getObjectPointer(pState);
 		object->changeAnimation
 		(
 			(int)lua_tointeger(pState,2),
 			(int)lua_tointeger(pState,3)
 		);
-		return 0;
 	}
+	return 0;
+}
 
-	int GGE_object_animationIsPlaying(lua_State* pState)
+int ObjectLua::animationIsPlaying(lua_State* pState)
+{
+	Gorgon::Script::Lua lua(pState);
+	Object* object = (Object*)lua.getUserData(OBJECT_CLASS);
+	if(object)
 	{
-		Object* object = getObjectPointer(pState);
-		lua_pushboolean(pState,object->animationIsPlaying());
-		return 1;
+		lua_pushboolean(pState, object->animationIsPlaying());
 	}
+	return 1;
+}
 
-	int GGE_object_animationOnGet(lua_State* pState)
+int ObjectLua::getAnimationOn(lua_State* pState)//real, group. index
+{
+	Gorgon::Script::Lua lua(pState);
+	Object* object = (Object*)lua.getUserData(OBJECT_CLASS);
+	if(object)
 	{
-		Object* object = getObjectPointer(pState);
-		lua_pushnumber(pState,object->getAnimationOnGroup());
-		lua_pushnumber(pState,object->getAnimationOnIndex());
-		lua_pushnumber(pState,object->getAnimationOn());
-		return 3;
+		lua_pushnumber(pState, object->getAnimationOn());
+		lua_pushnumber(pState, object->getAnimationOnGroup());
+		lua_pushnumber(pState, object->getAnimationOnIndex());
 	}
+	return 3;
+}
 
-	int GGE_object_animationGetFrameOn(lua_State* pState)
+int ObjectLua::animationRunStep(lua_State* pState)
+{
+	Gorgon::Script::Lua lua(pState);
+	Object* object = (Object*)lua.getUserData(OBJECT_CLASS);
+	if(object)
 	{
-		Object* object = getObjectPointer(pState);
-		lua_pushnumber(pState,object->getFrameOn());
-		return 1;
-	}
-
-	int GGE_object_animationSetFrameOn(lua_State* pState)
-	{
-		Object* object = getObjectPointer(pState);
-		object->setFrameOn( lua_tointeger(pState,2) );
-		return 0;
-	}
-	
-	int GGE_object_animationRunStep(lua_State* pState)
-	{
-		Object* object = getObjectPointer(pState);
 		object->animationRunStep();
-		return 0;
 	}
+	return 0;
+}
+
+int ObjectLua::setFrameOn(lua_State* pState)
+{
+	Gorgon::Script::Lua lua(pState);
+	Object* object = (Object*)lua.getUserData(OBJECT_CLASS);
+	if(object)
+	{
+		object->setFrameOn( lua_tointeger(pState, 2) );
+	}
+	return 0;
+}
+
+int ObjectLua::getFrameOn(lua_State* pState)
+{
+	Gorgon::Script::Lua lua(pState);
+	Object* object = (Object*)lua.getUserData(OBJECT_CLASS);
+	if(object)
+	{
+		lua_pushnumber(pState, object->getFrameOn());
+	}
+	return 1;
+}
+
+void ObjectLua::registerClass(Gorgon::Script::Lua& pScript)
+{
+	pScript.registerUserData
+	(
+		OBJECT_CLASS,
+		mMethods,
+		mMetatable
+	);
+}
 
 /*	int lua_getLayer(lua_State* pState)
 	{
@@ -101,28 +205,6 @@ namespace ObjectLua
 		return 1;
 	}
 */
-	int GGE_object_draw(lua_State* pState)
-	{
-		Object* object = getObjectPointer(pState);
-		const Gorgon::Point position
-		(
-			lua_tointeger(pState,2),
-			lua_tointeger(pState,3)
-		);
-		Gorgon::Mirroring mirror;
-
-		switch((int)lua_tointeger(pState,4))
-		{
-			case 0:		mirror = Gorgon::Mirroring::Normal;	break;
-			case 1:		mirror = Gorgon::Mirroring::HFlip;	break;
-			case 2:		mirror = Gorgon::Mirroring::VFlip;	break;
-			default:	mirror = Gorgon::Mirroring::VHFlip;	break;
-		}
-		
-		object->draw( position, mirror );
-		return 1;
-	}
-
 /*	int lua_setAfterImageMethodNormal(lua_State* pState)
 	{
 		Object* object = getObjectPointer(pState);
@@ -171,25 +253,4 @@ namespace ObjectLua
 		return 0;
 	}
 */
-	void registerFunctions(Gorgon::Script::Lua& pScript)
-	{
-		pScript.registerFunction("GGE_object_new"						,GGE_object_new						);
-		pScript.registerFunction("GGE_object_delete"					,GGE_object_delete					);
-		pScript.registerFunction("GGE_object_draw"						,GGE_object_draw					);
-		pScript.registerFunction("GGE_object_animationChangeByIndex"	,GGE_object_animationChangeByIndex	);
-		pScript.registerFunction("GGE_object_animationGetRealIndex"		,GGE_object_animationGetRealIndex	);
-		pScript.registerFunction("GGE_object_animationChange"			,GGE_object_animationChange			);
-		pScript.registerFunction("GGE_object_animationOnGet"			,GGE_object_animationOnGet			);
-		pScript.registerFunction("GGE_object_animationIsPlaying"		,GGE_object_animationIsPlaying		);
-		pScript.registerFunction("GGE_object_animationGetFrameOn"		,GGE_object_animationGetFrameOn		);
-		pScript.registerFunction("GGE_object_animationSetFrameOn"		,GGE_object_animationSetFrameOn		);
-		pScript.registerFunction("GGE_object_animationRunStep"			,GGE_object_animationRunStep		);
-		
-		/*
-		pScript->registerFunction("lua_object_setAfterImageMode",lua_setAfterImageMode);
-		pScript->registerFunction("lua_object_setAfterImageMethodNormal",lua_setAfterImageMethodNormal);
-		pScript->registerFunction("lua_object_setAfterImageMethodAdd",lua_setAfterImageMethodAdd);
-		pScript->registerFunction("lua_object_setAfterImageMethodTrans",lua_setAfterImageMethodTrans);
-		*/
-	}
-}
+

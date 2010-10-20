@@ -1,28 +1,33 @@
-dofile("tests/char/mature/mature.lua")
-dofile("tests/char/mammon/mammon.lua")
-dofile("tests/background/breakman/breakman_background.lua")
+--dofile("tests/char/mature/mature.lua")
+dofile("tests/char/frozen_shade/frozen_shade.lua")
+dofile("tests/background/saveroom/teste.lua")
+--dofile("tests/char/mammon/mammon.lua")
+
+--dofile("tests/background/breakman/breakman_background.lua")
+
 --dofile("tools/saveroom/teste.lua")
 
-function TestGame()
-	local this				= {}
-	this					= GGE_Game()
-	this.mWindow.title		= "TEST - GGE"
-	this.mVideo.width		= 320
-	this.mVideo.height		= 240
-	this.mVideo.FPS			= 60
-	this.init()
+TestGame = class(
+	function(self)
+		self.super:constructor()
+		self.mWindow.title		= "TEST - GGE"
+		self.mVideo.width		= 640
+		self.mVideo.height		= 480
+		self.mVideo.FPS			= 120
 
+		self:init()
 
-	this.BG = Breakman()
-	this.BG.getLayer(1).addObject(Mature(nil))
-	this.BG.getLayer(1).addObject(Mature(nil))
---	this.BG.setPosition({x=30,y=50})
-	this.state = function()
-		this.BG.draw()
-		this.BG.logic()
-	end
+		self.BG = teste()
+		self.BG.getLayer(1).addObject(FrozenShade:new())
 	
-	return this
+		self.BG.setPosition({x=30, y=50})
+	end,
+	GGE_Game
+)
+
+function TestGame:state()
+	self.BG.draw()
+	self.BG.logic()
 end
-this = TestGame()
+this = TestGame:new()
 

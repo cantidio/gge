@@ -1,4 +1,6 @@
 #include "../include/game.hpp"
+#include "../include/console_window.hpp"
+
 
 //-------------------------------------------------------------------------------TIMER--------------------------------------
 int fps			= 0;
@@ -74,6 +76,8 @@ bool Game::init
 		pHeight,
 		pFullScreen
 	);
+    install_mouse();
+    install_timer();
 	Input::init();
 	return true;
 }
@@ -88,11 +92,12 @@ void Game::registerLuaFunctions()
 {
 	Gorgon::Core::Log::get().RegisterFormated("C++ -> Game::registerLuaFunctions()");
 
-	ObjectLua::registerFunctions(mScript);
-	TileLua::registerFunctions(mScript);
+	ObjectLua::registerClass(mScript);
+	TileLua::registerClass(mScript);
 	InputLua::registerFunctions(mScript);
 	GameLua::registerFunctions(mScript);
 	
+	mScript.loadScript("data/class.lua");
 	mScript.loadScript("data/class_tile.lua");
 	mScript.loadScript("data/class_layer.lua");
 	mScript.loadScript("data/class_background.lua");
@@ -104,31 +109,74 @@ void Game::registerLuaFunctions()
 
 void Game::run()
 {
+	int state = 0;
 	Gorgon::Core::Log::get().RegisterFormated("C++ -> Game::run()");
 	try
 	{
 		mScript.loadScript("game.lua");//carrega o game
-		
+		mRunning = true;
 		while(!key[KEY_ESC])
 		{
 			while(timer >= 0 && !key[KEY_ESC])
 			{
 				Gorgon::Video::get().clear(0xAA0BDD);
-
-				//executa funcao logic do mal aqui
-				mScript.function("GGE_game_runStep");
-			
+				
+				if(state==0)
+				{
+					//executa funcao logic do mal aqui
+					mScript.function("GGE_game_runStep");
+					Gorgon::Video::get().drawText(10,10,0,-1,"FPS: %d",fps_antigo);
+					
+					if(key[KEY_F2])
+					{
+						state = 1;
+						key[KEY_F2] = 0;
+						clear_keybuf();
+						ConsoleWindow::get().run();
+					}
+				}
+				else
+				{
+					ConsoleWindow::get().draw();
+					ConsoleWindow::get().logic();
+					if(key[KEY_F2])
+					{
+						ConsoleWindow::get().stop();
+						state = 0;
+						key[KEY_F2] = 0;
+					}
+					if(key[KEY_F5])//mandou executar
+					{
+						key[KEY_F5] = 0;
+						mScript.executeString
+						(
+							ConsoleWindow::get().getText()
+						);
+					}
+				}
+		
 				//TextWindow::get().show();
-				Gorgon::Video::get().drawText(10,10,0,-1,"FPS: %d",fps_antigo);
+				
 				Gorgon::Video::get().show();
 				--timer;
 				++fps;
 			}
 		}
+		mRunning = false;
 	}
 	catch(Gorgon::Core::Exception e)
 	{
 		std::cout << e.getMessage() << std::endl;
 	}
+}
+
+bool Game::isRunning() const
+{
+	return mRunning;
+}
+void Game::console(const std::string& pString)
+{
+	std::cout << pString << std::endl;
+	mScript.executeString(pString);
 }
 

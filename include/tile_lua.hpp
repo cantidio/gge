@@ -26,47 +26,92 @@
  */
 #ifndef _GGE_TILE_LUA_
 #define	_GGE_TILE_LUA_
+#include <gorgon++/gorgon.hpp>
 #include "tile.hpp"
-//#include <gorgon++/gorgon.hpp>
 
 /**
- * NameSpace que engloba os wrappers de algumas funções em lua relacionadas ao Layers
+ * Class that makes the wrapper to use the Tile class in LUA
  *
  * @author	Cantidio Oliveira Fontes
  * @since	14/12/2009
- * @version	15/12/2009
+ * @version	18/10/2010
  * @ingroup	Background
  */
-namespace TileLua
+class TileLua
 {
-	/**
-	 * Função que retorna a animacão do tile
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	14/12/2009
-	 * @version	15/12/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int getAnimation(lua_State* pState);
-	/**
-	 * Função que seta a animacão do tile
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	14/12/2009
-	 * @version	15/12/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
-	 * @return	int
-	 */
-	int setAnimation(lua_State* pState);
-	/**
-	 * Método que registra as funçoes do tile para serem acessadas por um script
-	 *
-	 * @author	Cantidio Oliveira Fontes
-	 * @since	14/12/2009
-	 * @version	15/12/2009
-	 * @param	Gorgon::Lua& pScript, classe lua que receberá as funções
-	 */
-	void registerFunctions(Gorgon::Script::Lua& pScript);
-}
+	protected:
+		static luaL_reg mMethods[];		/**< all class methods*/
+		static luaL_reg mMetatable[];	/**< class metatable */
+	public:
+		/**
+		 * Method that creates a new Tile in LUA
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	17/10/2010
+		 * @version	18/10/2010
+		 * @param	lua_State* pState, state of the lua interpreter
+		 * @return	int
+		 */
+		static int __new(lua_State* pState);
+		/**
+		 * Method that deletes a new Tile in LUA
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	17/10/2010
+		 * @version	18/10/2010
+		 * @param	lua_State* pState, state of the lua interpreter
+		 * @return	int
+		 */
+		static int __del(lua_State* pState);
+		/**
+		 * Função que retorna a animacão do tile
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	14/12/2009
+		 * @version	15/12/2009
+		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @return	int
+		 */
+		static int getAnimation(lua_State* pState);
+		/**
+		 * Função que seta a animacão do tile
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	14/12/2009
+		 * @version	17/10/2010
+		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @return	int
+		 */
+		static int setAnimation(lua_State* pState);
+		/**
+		 * Method that draws a Tile in LUA
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	17/10/2010
+		 * @version	18/10/2010
+		 * @param	lua_State* pState, state of the lua interpreter
+		 * @return	int
+		 */
+		static int draw(lua_State* pState);
+		/**
+		 * Method that execute the tile logic function in LUA
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	17/10/2010
+		 * @version	18/10/2010
+		 * @param	lua_State* pState, state of the lua interpreter
+		 * @return	int
+		 */
+		static int logic(lua_State* pState);
+		/**
+		 * Method that registers the class to be used in lua
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	14/12/2009
+		 * @version	17/10/2010
+		 * @param	Gorgon::Script::Lua& pScript, the script to register the class
+		 */
+		static void registerClass(Gorgon::Script::Lua& pScript);
+};
 #endif
+

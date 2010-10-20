@@ -22,7 +22,7 @@ class Game
 		Gorgon::Script::Lua	mScript;
 		static Game*		mSingleton;
 		int 				mFPS;
-
+		bool				mRunning;
 		/**
 		 * Método para registrar as funćões em Lua
 		 *
@@ -89,5 +89,7 @@ class Game
 		 * @version	30/09/2010
 		 */
 		void run();
+		bool isRunning() const;
+		void console(const std::string& pString);
 };
 #endif

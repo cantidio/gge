@@ -1,19 +1,37 @@
---Arquivo de script do inimigo FrozenShade do jogo castlevania
+print("include: FrozenShade")
 
-dofile("data/character/character_class.lua")
+FrozenShade = class(
+	function(self, pPosition, pLayer)
+		GGE_game_log("FrozenShade.new()")
+		self.super:constructor(
+			"tests/char/frozen_shade/frozen.gspk",
+			"tests/char/frozen_shade/frozen.gapk",
+			pLayer,
+			pPosition 
+		)
+		GGE_game_log("FrozenShade.~new()")
+	end,
+	GGE_Player
+)
 
-name				= "Frozen Shade"
-sprite				= "data/character/enemy/frozen_shade/frozen.gspk"
-animation			= "data/character/enemy/frozen_shade/frozen.gapk"
-colision			= "data/character/enemy/frozen_shade/frozen.gcpk"
-palette				= ""
-xPulse				= 3
-xPulseMax			= 5
-helperMaxInstances	= { 1, 50}
-helperScriptFile	= {
-	"data/character/enemy/frozen_shade/clone_effect.lua",
-	"data/character/enemy/frozen_shade/ice_shot.lua",
-}
+function FrozenShade:logic()
+	self.super:logic()
+	if self.mInput.buttonDown()  then
+		self:addPosition({x=0, y=1})
+	elseif self.mInput.buttonUp() then
+		self:subPosition({x=0, y=1})
+	end
+	
+	if self.mInput.buttonRight() then
+		self:addPosition({x=1, y=0})
+	elseif self.mInput.buttonLeft() then
+		self:subPosition({x=1, y=0})
+	end
+
+	--this.state()
+end
+
+--[[
 -- Instância do clone do personagem
 clone 				= {}
 
@@ -96,4 +114,4 @@ function logic()
 	
 	state()
 end
- 
+ -]]
