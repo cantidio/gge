@@ -1,9 +1,10 @@
 #include "../include/tile_lua.hpp"
 #include "../include/tile.hpp"
 #define TILE_CLASS "GGE_TILE_BASIC"
+
 luaL_reg TileLua::mMethods[] =
 {
-	{"new",				TileLua::__new},
+	{"new",				TileLua::constructor},
 	{"getAnimation",	TileLua::getAnimation},
 	{"setAnimation",	TileLua::setAnimation},
 	{"draw",			TileLua::draw},
@@ -12,12 +13,12 @@ luaL_reg TileLua::mMethods[] =
 };
 luaL_reg TileLua::mMetatable[]=
 {
-	{"__gc",	TileLua::__del},//method called when object is destroyed
+	{"__gc",	TileLua::destructor},//method called when object is destroyed
 	//tostring
 	{0,0}
 };
 
-int TileLua::__new(lua_State* pState)
+int TileLua::constructor(lua_State* pState)
 {
 	//std::cout << "Tile new" << std::endl;
 	Gorgon::Script::Lua lua(pState);
@@ -26,16 +27,16 @@ int TileLua::__new(lua_State* pState)
 		TILE_CLASS,
 		new Tile
 		(
-			ResourceManager::SpriteManager::load	( lua_tostring(pState, 1) ),
-			ResourceManager::AnimationManager::load	( lua_tostring(pState, 2) ),
-			(int)lua_tonumber(pState, 3)
+			ResourceManager::SpriteManager::load	( lua_tostring(pState, 2) ),//comeća do 2 para ser usado assim: TILE:new()
+			ResourceManager::AnimationManager::load	( lua_tostring(pState, 3) ),
+			(int)lua_tonumber(pState, 4)
 		),
 		sizeof(Tile*)
 	);
 	return 1;
 }
 
-int TileLua::__del(lua_State* pState)
+int TileLua::destructor(lua_State* pState)
 {
 	//std::cout << "Tile del\n";
 	Gorgon::Script::Lua lua(pState);

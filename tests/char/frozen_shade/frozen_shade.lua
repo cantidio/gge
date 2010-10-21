@@ -1,35 +1,32 @@
-print("include: FrozenShade")
+FrozenShade = class()
 
-FrozenShade = class(
-	function(self, pPosition, pLayer)
-		GGE_game_log("FrozenShade.new()")
-		self.super:constructor(
-			"tests/char/frozen_shade/frozen.gspk",
-			"tests/char/frozen_shade/frozen.gapk",
-			pLayer,
-			pPosition 
-		)
-		GGE_game_log("FrozenShade.~new()")
-	end,
-	GGE_Player
-)
-
-function FrozenShade:logic()
-	self.super:logic()
-	if self.mInput.buttonDown()  then
-		self:addPosition({x=0, y=1})
-	elseif self.mInput.buttonUp() then
-		self:subPosition({x=0, y=1})
-	end
+function FrozenShade:new(pPosition, pLayer)
+	local self = GGE_Player:new(
+		FrozenShade.__dir .. "frozen.gspk",
+		FrozenShade.__dir .. "frozen.gapk",
+		pLayer,
+		pPosition 
+	)
 	
-	if self.mInput.buttonRight() then
-		self:addPosition({x=1, y=0})
-	elseif self.mInput.buttonLeft() then
-		self:subPosition({x=1, y=0})
-	end
+	function self:logic()
+		self:basicLogic()
+		if self.mInput.buttonDown()  then
+			self:addPosition({x=0, y=1})
+		elseif self.mInput.buttonUp() then
+			self:subPosition({x=0, y=1})
+		end
+	
+		if self.mInput.buttonRight() then
+			self:addPosition({x=1, y=0})
+		elseif self.mInput.buttonLeft() then
+			self:subPosition({x=1, y=0})
+		end
 
-	--this.state()
+		--this.state()
+	end
+	return self
 end
+
 
 --[[
 -- Instância do clone do personagem

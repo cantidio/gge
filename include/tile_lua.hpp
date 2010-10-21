@@ -48,21 +48,21 @@ class TileLua
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/10/2010
-		 * @version	18/10/2010
+		 * @version	21/10/2010
 		 * @param	lua_State* pState, state of the lua interpreter
 		 * @return	int
 		 */
-		static int __new(lua_State* pState);
+		static int constructor(lua_State* pState);
 		/**
 		 * Method that deletes a new Tile in LUA
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/10/2010
-		 * @version	18/10/2010
+		 * @version	21/10/2010
 		 * @param	lua_State* pState, state of the lua interpreter
 		 * @return	int
 		 */
-		static int __del(lua_State* pState);
+		static int destructor(lua_State* pState);
 		/**
 		 * Função que retorna a animacão do tile
 		 *

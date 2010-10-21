@@ -14,23 +14,25 @@ function make_Layer_class(
 	pTiles
 )
 	desc = ""
-	desc = desc .. "function " .. pName .. "()\n"
-	desc = desc .. "	local this	= GGE_Layer(\n"
-	desc = desc .. "		\"" .. pSpritePackName .. "\",\n"
-	desc = desc .. "		\"" .. pAnimationPackName .. "\"\n"
+	desc = desc .. pName .. " = class()\n"
+	desc = desc .. "function " .. pName .. ":new(pBackground)\n"
+	desc = desc .. "	local self = GGE_Layer:new(\n"
+	desc = desc .. "		" .. pName .. ".__dir .. \"" .. pSpritePackName .. "\",\n"
+	desc = desc .. "		" .. pName .. ".__dir .. \"" .. pAnimationPackName .. "\",\n"
+	desc = desc .. "		pBackground\n"
 	desc = desc .. "	)\n"
-	desc = desc .. "	this.loadTiles(\n"
+	desc = desc .. "	self:loadTiles(\n"
 	desc = desc .. "		{\n"
 	desc = desc .. pTiles
 	desc = desc .. "		}\n"
 	desc = desc .. "	)--end load tiles\n\n"
 	
-	desc = desc .. "	this.logic	= function()\n"
-	desc = desc .. "		this.basicLogic()\n"
+	desc = desc .. "	function self:logic()\n"
+	desc = desc .. "		self:basicLogic()\n"
 	desc = desc .. "		--put your layer logic here\n"
 	desc = desc .. "	end\n\n"
 	
-	desc = desc .. "	return this\n"
+	desc = desc .. "	return self\n"
 	desc = desc .. "end\n"
 	return desc
 end
@@ -42,21 +44,22 @@ function make_BG_class(
 	pLayerNumber
 )
 	desc = ""
-	desc = desc .. "function " .. pName .. "()\n"
-	desc = desc .. "	local this	= GGE_Background()\n"
-	desc = desc .. "	this.width	= " .. pWidth .. "\n"
-	desc = desc .. "	this.height	= " .. pHeight .. "\n"
+	desc = desc .. pName .. " = class()\n"
+	desc = desc .. "function " .. pName .. ":new()\n"
+	desc = desc .. "	local self	= GGE_Background:new()\n"
+	desc = desc .. "	self.width	= " .. pWidth .. "\n"
+	desc = desc .. "	self.height	= " .. pHeight .. "\n"
 	
 	--gera os layers
 	for iterator = 1, pLayerNumber, 1 do
-		desc = desc .. "	this.addLayer(" .. pName .. "_layer_" .. iterator .. "())\n"
+		desc = desc .. "	self:addLayer(" .. pName .. "_layer_" .. iterator .. ":new(self))\n"
 	end	
 	
-	desc = desc .. "\n	this.logic	= function()\n"
-	desc = desc .. "		this.basicLogic()\n"
+	desc = desc .. "\n	function self:logic()\n"
+	desc = desc .. "		self:basicLogic()\n"
 	desc = desc .. "		--put your background logic here\n"
 	desc = desc .. "	end\n\n"
-	desc = desc .. "	return this\n"
+	desc = desc .. "	return self\n"
 	desc = desc .. "end\n"
 	return desc
 end

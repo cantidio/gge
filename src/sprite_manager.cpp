@@ -7,12 +7,12 @@ namespace ResourceManager
 
 	Gorgon::SpritePack& SpriteManager::load(const std::string& pSpritePackName)
 	{
-		Gorgon::Core::Log::get().RegisterFormated("C++ -> SpriteManager::load()");
+//		Gorgon::Core::Log::get().RegisterFormated("C++ -> SpriteManager::load()");
 		for(int i = 0; i < mTable.size(); ++i)
 		{
 			if(mTable[i].fileName == pSpritePackName)
 			{
-				Gorgon::Core::Log::get().RegisterFormated("C++ -> SpriteManager::load(): SpritePack: \"%s\" found in position: %d",pSpritePackName.c_str(),i);
+//				Gorgon::Core::Log::get().RegisterFormated("C++ -> SpriteManager::load(): SpritePack: \"%s\" found in position: %d",pSpritePackName.c_str(),i);
 				++mTable[i].use;
 				return *mTable[i].spritePack;
 			}

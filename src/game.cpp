@@ -97,6 +97,7 @@ void Game::registerLuaFunctions()
 	InputLua::registerFunctions(mScript);
 	GameLua::registerFunctions(mScript);
 	
+	mScript.loadScript("data/include.lua");
 	mScript.loadScript("data/class.lua");
 	mScript.loadScript("data/class_tile.lua");
 	mScript.loadScript("data/class_layer.lua");
@@ -115,12 +116,12 @@ void Game::run()
 	{
 		mScript.loadScript("game.lua");//carrega o game
 		mRunning = true;
+		
 		while(!key[KEY_ESC])
 		{
 			while(timer >= 0 && !key[KEY_ESC])
 			{
 				Gorgon::Video::get().clear(0xAA0BDD);
-				
 				if(state==0)
 				{
 					//executa funcao logic do mal aqui

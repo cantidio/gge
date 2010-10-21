@@ -1,5 +1,4 @@
 #include "../include/object.hpp"
-//#include "../include/object_lua.hpp"
 
 Object::Object
 (
@@ -18,8 +17,6 @@ Object::Object
 		ResourceManager::AnimationManager::load(mAnimationPackName)
 	);
 }
-
-//TextWindowLua::registerFunctions(mScript);
 
 Object::~Object()
 {

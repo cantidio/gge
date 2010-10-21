@@ -212,7 +212,7 @@ void createBg(BG& pBg, Script::Lua& pLua)
 	{
 		stringstream layerName;
 		layerName << pBg.name << "_layer_" << (i + 1);
-		file << "dofile(\"" << layerName.str() << ".lua\")" << endl;
+		file << "include(\"" << layerName.str() << ".lua\")" << endl;
 		
 		createBgLayerFromImage(pBg.layers[i]);
 		createBgLayer(layerName.str(), pBg.layers[i], pLua);

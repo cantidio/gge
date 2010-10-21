@@ -1,5 +1,5 @@
 print("include: GGE_Player")
-
+GGE_Player = class()
 --[[
 	-- Classe que representa um jogador
 	--
@@ -13,26 +13,19 @@ print("include: GGE_Player")
 	--			A classe de jogador é a mesma classe GGE_Object só com possibilidade
 	-- de leitura da entrada de dados do jogador
 -]]
-GGE_Player = class(
-	function(
-		self,
+function GGE_Player:new(
+	pSpritePack,
+	pAnimationPack,
+	pLayer,
+	pPosition
+)
+	local self = GGE_Object:new(
 		pSpritePack,
 		pAnimationPack,
 		pLayer,
 		pPosition
 	)
-		GGE_game_log("GGE_Player.new()")
-		--print("GGE_Player.new()")
-		self.super:constructor(
-			pSpritePack,
-			pAnimationPack,
-			pLayer,
-			pPosition
-		)
-		self.mInput	= GGE_Input()
-		GGE_game_log("GGE_Player.~new()")
-		--print("GGE_Player.~new()")
-	end,
-	GGE_Object
-)
+	self.mInput	= GGE_Input()
+	return self
+end
 

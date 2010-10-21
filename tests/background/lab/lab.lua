@@ -1,29 +1,20 @@
-function Lab()
-	local this = Background()
-	this.gravity		= 0.5
-	this.voidFriction	= 1
-	this.width			= 240
-	this.height			= 160
-	this.posX			= 0
-	this.posY			= 0
-	this.layers			= {
-		"lab/lab1_layer.lua",
-		"lab/lab2_layer.lua"
-	}
-	this.colision		= {
-		"",
-		""
-	}
-	this.logic = function ()
---[[		this.getLayer(1).getTile(70).setPosition({x=300,y=66})
-		this.getLayer(1).getBackground().getLayer(1).getTile(1).getLayer().getTile(70).setPosition({x=300,y=66})
+include("lab1_layer.lua")
+include("lab2_layer.lua")
 
-		this.getLayer(1).getTile(70).setAnimation(12)
-		print(this.getLayer(1).getTile(70).getPosition().x)
-		print("animation: " .. this.getLayer(1).getTile(70).getAnimation())
-		-]]
+Lab = class()
+function Lab:new()
+	local self = GGE_Background:new()
+	self.width			= 240
+	self.height			= 160
+	self.posX			= 0
+	self.posY			= 0
+
+	self:addLayer( lab2_layer:new(self) )
+	self:addLayer( lab1_layer:new(self) )
+	
+	function self:logic()
+		self:basicLogic()
 	end
-	return this
+	return self
 end
-this = Lab()
 

@@ -7,12 +7,12 @@ namespace ResourceManager
 	
 	AnimationPack& AnimationManager::load(const std::string& pAnimationPackName)
 	{
-		Gorgon::Core::Log::get().RegisterFormated("C++ -> AnimationManager::load()");
+//		Gorgon::Core::Log::get().RegisterFormated("C++ -> AnimationManager::load()");
 		for(int i = 0; i < mTable.size(); ++i)
 		{
 			if(mTable[i].fileName == pAnimationPackName)
 			{
-				Gorgon::Core::Log::get().RegisterFormated("C++ -> AnimationManager::load(): AnimationPack: \"%s\" found in position: %d",pAnimationPackName.c_str(), i);
+//				Gorgon::Core::Log::get().RegisterFormated("C++ -> AnimationManager::load(): AnimationPack: \"%s\" found in position: %d",pAnimationPackName.c_str(), i);
 				++mTable[i].use;
 				return *mTable[i].animationPack;
 			}

@@ -1,11 +1,13 @@
 print("include: BreakmanLayer")
-function BreakmanLayer()
+BreakmanLayer = class()
+function BreakmanLayer:new(pBackground)
 	GGE_game_log("BreakmanLayer")
-	local this	= GGE_Layer(
-		"tests/background/breakman/breakman_layer.gspk",
-		"tests/background/breakman/breakman_layer.gapk"
+	local self	= GGE_Layer:new(
+		BreakmanLayer.__dir .. "breakman_layer.gspk",
+		BreakmanLayer.__dir .. "breakman_layer.gapk",
+		pBackground
 	)
-	this.loadTiles(
+	self:loadTiles(
 		{
 			{
 				animation	= 0,
@@ -905,6 +907,6 @@ function BreakmanLayer()
 			},
 		}
 	)--end load tiles
-	return this
+	return self
 end
 

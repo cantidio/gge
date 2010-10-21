@@ -1,19 +1,20 @@
 print("include: GGE_Background")
+GGE_Background = class()
 --[[
 	-- Classe que representa um cenário
 	--
 	-- @author	Cantidio Oliveira Fontes
 	-- @since	19/03/2009
-	-- @version	01/10/1010
+	-- @version	21/10/1010
 	-- @param	int pPointer, endereço do cenário na memória
 -]]
-function GGE_Background()
-	local this			= {}
-	this.mLayers		= {}		--Vetor com os Layers do cenário
-	this.mWidth			= 0			--Largura do cenário
-	this.mHeight		= 0			--Altura do cenário
-	this.mPosition		= {x=0,y=0}	--Posicão do cenário
-	this.mScrollLock	= false		--Se o cenário está podendo dar scrool
+function GGE_Background:new()
+	local self = {}
+	self.mLayers		= {}		--Vetor com os Layers do cenário
+	self.mWidth			= 0			--Largura do cenário
+	self.mHeight		= 0			--Altura do cenário
+	self.mPosition		= {x=0,y=0}	--Posicão do cenário
+	self.mScrollLock	= false		--Se o cenário está podendo dar scrool
 	
 	--[[
 		-- Método que retorna o número de layers que o cenário possui
@@ -23,8 +24,8 @@ function GGE_Background()
 		-- @version	17/12/2009
 		-- @return	int
 	-]]
-	this.getLayerNumber = function()
-		return #this.mLayers
+	function self:getLayerNumber()
+		return #self.mLayers
 	end
 	--[[
 		-- Método para retornar o layer indicado
@@ -35,8 +36,8 @@ function GGE_Background()
 		-- @param	int pLayerPos, posićão do layer
 		-- @return	Layer
 	-]]
-	this.getLayer = function(pLayerPos)
-		return this.mLayers[pLayerPos]
+	function self:getLayer(pLayerPos)
+		return self.mLayers[pLayerPos]
 	end
 	--[[
 		-- Método para retornar os layers com o Id indicado
@@ -47,9 +48,9 @@ function GGE_Background()
 		-- @param	string playerId, id dos layers que deseja-se recuperar	
 		-- @return 	{position,layer}
 	-]]
-	this.getLayerById = function(pLayerId)
+	function self:getLayerById(pLayerId)
 		local layers = {}
-		for key, lay in pairs(this.mLayers) do
+		for key, lay in pairs(self.mLayers) do
 			if lay.getId() == pLayerId then
 				layers[#layers + 1] = { position = key, layer = lay }
 			end
@@ -64,9 +65,9 @@ function GGE_Background()
 		-- @version	01/10/2010
 		-- @param	Layer pLayer, layer a ser adicionado
 	-]]
-	this.addLayer = function(pLayer)
-		pLayer.setBackground(this)
-		this.mLayers[#this.mLayers+1] = pLayer
+	function self:addLayer(pLayer)
+		pLayer:setBackground(self)
+		self.mLayers[#self.mLayers + 1] = pLayer
 	end
 	--[[
 		-- Método para remover um layer do cenário
@@ -76,10 +77,9 @@ function GGE_Background()
 		-- @version	01/10/2010
 		-- @param	int pLayerPosition, posićão do layer a ser removido
 	-]]
-	this.removeLayer = function(pLayerPosition)
-		if not this.mLayers[pLayerPosition] == nil then
-			this.mLayers[pLayerPosition].delete()
-			this.mLayers[pLayerPosition] = nil
+	function self:removeLayer(pLayerPosition)
+		if not self.mLayers[pLayerPosition] == nil then
+			self.mLayers[pLayerPosition] = nil
 		end
 	end
 	--[[
@@ -91,11 +91,10 @@ function GGE_Background()
 		-- @param	string pLayerId, id dos layers a serem removidos
 		-- @return	int, número de layers removidos
 	-]]
-	this.removeLayerById = function(pLayerId)
-		local layers = this.getLayerById(pLayerId)
+	function self:removeLayerById(pLayerId)
+		local layers = self:getLayerById(pLayerId)
 		for iterator = 1, #layers, 1  do
-			layers[iterator].layer.delete()
-			this.mLayers[layers[iterator].position] = nil
+			self.mLayers[layers[iterator].position] = nil
 		end
 		return #layers
 	end
@@ -107,8 +106,8 @@ function GGE_Background()
 		-- @version	02/01/2010
 		-- @return	int
 	-]]
-	this.getWidth = function()
-		return this.mWidth
+	function self:getWidth()
+		return self.mWidth
 	end
 	--[[
 		-- Método que retorna a altura do cenário
@@ -118,8 +117,8 @@ function GGE_Background()
 		-- @version	02/01/2010
 		-- @return	int
 	-]]
-	this.getHeight = function()
-		return this.mHeight
+	function self:getHeight()
+		return self.mHeight
 	end
 	--[[
 		-- Método que retorna a posição atual do cenário
@@ -129,8 +128,8 @@ function GGE_Background()
 		-- @version	02/01/2010
 		-- @return	{x,y}
 	-]]
-	this.getPosition = function()
-		return this.mPosition
+	function self:getPosition()
+		return self.mPosition
 	end
 	--[[
 		-- Método que seta a posição atual do cenário
@@ -140,8 +139,8 @@ function GGE_Background()
 		-- @version	02/01/2010
 		-- @param	{x,y} pPosition, nova posição do cenário
 	-]]
-	this.setPosition = function(pPosition)
-		this.mPosition = pPosition
+	function self:setPosition(pPosition)
+		self.mPosition = pPosition
 	end
 	--[[
 		-- Método que adiciona um valor a posição do cenário
@@ -151,9 +150,9 @@ function GGE_Background()
 		-- @version	02/01/2010
 		-- @param	int pPosition, valor a ser adicionado a posição do cenário
 	-]]
-	this.addPosition = function(pPosition)
-		this.mPosition.x = this.mPosition.x + pPosition.x
-		this.mPosition.y = this.mPosition.y + pPosition.y
+	function self:addPosition(pPosition)
+		self.mPosition.x = self.mPosition.x + pPosition.x
+		self.mPosition.y = self.mPosition.y + pPosition.y
 	end
 	--[[
 		-- Método que subtrai um valor a posição x do cenário
@@ -163,9 +162,9 @@ function GGE_Background()
 		-- @version	02/01/2010
 		-- @param	{x,y} pPosition, valor a ser subtraído da posição do cenário
 	-]]
-	this.subPosition = function(pPosition)
-		this.mPosition.x = this.mPosition.x - pPosition.x
-		this.mPosition.y = this.mPosition.y - pPosition.y
+	function self:subPosition(pPosition)
+		self.mPosition.x = self.mPosition.x - pPosition.x
+		self.mPosition.y = self.mPosition.y - pPosition.y
 	end
 	--[[
 		-- Método que trava o scrolling do cenário
@@ -174,8 +173,8 @@ function GGE_Background()
 		-- @since	19/03/2009
 		-- @version	19/03/2009
 	-]]
-	this.scrollLock = function()
-		this.mScroolLock = true
+	function self:scrollLock()
+		self.mScroolLock = true
 	end
 	--[[
 		-- Método que destrava o scrolling do cenário
@@ -184,8 +183,8 @@ function GGE_Background()
 		-- @since	19/03/2009
 		-- @version	19/03/2009
 	-]]
-	this.scrollUnlock = function()
-		this.mScroolLock = false
+	function self:scrollUnlock()
+		self.mScroolLock = false
 	end
 	--[[
 		-- Método para desenhar o cenário
@@ -194,9 +193,9 @@ function GGE_Background()
 		-- @since	30/09/2010
 		-- @version	30/09/2010
 	-]]
-	this.draw = function()
-		for key, layer in pairs (this.mLayers) do 
-			layer.draw(this.mPosition)
+	function self:draw()
+		for key, layer in pairs (self.mLayers) do 
+			layer:draw(self.mPosition)
 		end
 	end
 	--[[
@@ -206,13 +205,13 @@ function GGE_Background()
 		-- @since	30/09/2010
 		-- @version	30/09/2010
 	-]]
-	this.basicLogic = function()
-		for key, layer in pairs (this.mLayers) do 
-			layer.logic()
+	function self:basicLogic()
+		for key, layer in pairs (self.mLayers) do 
+			layer:logic()
 		end
 	end
-
-	this.logic = this.basicLogic
-	return this
+	function self:logic() self:basicLogic() end
+	
+	return self
 end
 

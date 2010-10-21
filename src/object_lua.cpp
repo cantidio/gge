@@ -25,7 +25,7 @@ luaL_reg ObjectLua::mMetatable[] =
 
 int ObjectLua::constructor(lua_State* pState)
 {
-	Gorgon::Core::Log::get().RegisterFormated("C++ -> ObjectLua:new()");
+//	Gorgon::Core::Log::get().RegisterFormated("C++ -> ObjectLua:new()");
 	Gorgon::Script::Lua lua(pState);
 	lua.createUserData
 	(
@@ -37,17 +37,17 @@ int ObjectLua::constructor(lua_State* pState)
 		),
 		sizeof(Object*)
 	);
-	Gorgon::Core::Log::get().RegisterFormated("C++ -> ObjectLua:~new()");
+//	Gorgon::Core::Log::get().RegisterFormated("C++ -> ObjectLua:~new()");
 	return 1;
 }
 
 int ObjectLua::destructor(lua_State* pState)
 {
-	Gorgon::Core::Log::get().RegisterFormated("C++ -> ObjectLua:destructor()");
+//	Gorgon::Core::Log::get().RegisterFormated("C++ -> ObjectLua:destructor()");
 	Gorgon::Script::Lua lua(pState);
 	Object* object = (Object*)lua.getUserData(OBJECT_CLASS);
 	if(object) delete object;
-	Gorgon::Core::Log::get().RegisterFormated("C++ -> ObjectLua:~destructor()");
+//	Gorgon::Core::Log::get().RegisterFormated("C++ -> ObjectLua:~destructor()");
 	return 0;
 }
 

@@ -1,4 +1,5 @@
 print("include: GGE_Layer")
+GGE_Layer = class()
 --[[
 	-- Classe que representa um layer de um Cenário
 	--
@@ -9,39 +10,16 @@ print("include: GGE_Layer")
 	-- @param	string pAnimationPack		, localizacão do arquivo de animacoes do layer
 	-- @param	GGE_Background pBackground	, cenário ao qual o layer está inserido
 -]]
-function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
-	local this			= {}
-	this.mBackground	= pBackground		--Referencia ao cenário do layer
-	this.mTiles			= {}				--Vetor com os tiles do layer
-	this.mObjects		= {}				--Vetor com os objetos do layer
-	this.mSpritePack	= pSpritePack		--Localização do arquivo de sprites do layer
-	this.mAnimationPack	= pAnimationPack	--Localização do arquivo de animações do layer
-	this.mScrollSpeed	= {x = 1, y = 1}	--Velocidade de deslocamento do layer
-	this.mId			= ""
-
-	--[[
-		-- Método destrutor
-		--
-		-- @author	Cantidio Oliveira Fontes
-		-- @since	30/09/2010
-		-- @version	30/09/2010
-	-]]
-	this.delete = function()
-		print("layer delete tiles:")
-		for key, tile in pairs (this.mTiles) do 
-			io.write(key .. ",")
-			tile = nil
-		end
-		io.write("\n")
-
-		print ("layer delete objects:")
-		for key, object in pairs (this.mObjects) do 
-			io.write(key .. ",")
-			object = nil
-		end
-		io.write("\n")
-		this = {}
-	end
+function GGE_Layer:new(pSpritePack, pAnimationPack, pBackground)
+	local self			= {}
+	self.mBackground	= pBackground				--Referencia ao cenário do layer
+	self.mTiles			= { }						--Vetor com os tiles do layer
+	self.mObjects		= { }						--Vetor com os objetos do layer
+	self.mSpritePack	= pSpritePack		or ""	--Localização do arquivo de sprites do layer
+	self.mAnimationPack	= pAnimationPack	or ""	--Localização do arquivo de animações do layer
+	self.mScrollSpeed	= {x = 1, y = 1}			--Velocidade de deslocamento do layer
+	self.mId			= ""
+	
 	--[[
 		-- Método para setar o id do layer
 		--
@@ -50,8 +28,8 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @version	30/09/2010
 		-- @param	string pId, id do layer
 	-]]
-	this.setId = function(pId)
-		this.mId = pId
+	function self:setId(pId)
+		self.mId = pId
 	end
 	--[[
 		-- Método para pegar o id do layer
@@ -61,8 +39,8 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @version	30/09/2010
 		-- @return	string, id do layer
 	-]]
-	this.getId = function()
-		return this.mId
+	function self:getId()
+		return self.mId
 	end
 	--[[
 		-- Método para adicionar um tile ao layer
@@ -72,9 +50,9 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @version	30/09/2010
 		-- @param	Tile pTile, tile a ser adicionado
 	-]]
-	this.addTile = function(pTile)
+	function self:addTile(pTile)
 		pTile:setLayer(this)
-		this.mTiles[#this.mTiles + 1] = pTile
+		self.mTiles[#self.mTiles + 1] = pTile
 	end
 	--[[
 		-- Método que retorna o número de tiles do layer
@@ -84,8 +62,8 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @version	29/09/2010
 		-- @return	int
 	-]]
-	this.getTileNumber = function()
-		return #this.mTiles;
+	function self:getTileNumber()
+		return #self.mTiles;
 	end
 	--[[
 		-- Método que retorna um tile
@@ -96,8 +74,8 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @param	int pTile, indice do tile
 		-- @return	Tile
 	-]]
-	this.getTile = function(pTile)
-		return this.mTiles[pTile]
+	function self:getTile(pTile)
+		return self.mTiles[pTile]
 	end
 	--[[
 		-- Funcao que remove um tile
@@ -107,10 +85,10 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @version	29/09/2010
 		-- @param	int pTile, indice do tile
 	-]]
-	this.removeTile = function (pTile)
-		if not this.mTiles[pTile] == nil then
---this.mTiles[pTile].delete()
-			this.mTiles[pTile] = nil
+	function self:removeTile(pTile)
+		if not self.mTiles[pTile] == nil then
+			--self.mTiles[pTile].delete()
+			self.mTiles[pTile] = nil
 		end
 	end
 	--[[
@@ -121,8 +99,8 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @version	29/09/2010
 		-- @return	Background
 	-]]
-	this.getBackground = function()
-		return this.mBackground
+	function self:getBackground()
+		return self.mBackground
 	end
 	--[[
 		--Função que seta o background do Layer
@@ -132,8 +110,8 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @version	29/09/2010
 		-- @param	Background pBackground, o nome cenário
 	-]]
-	this.setBackground = function(pBackground)
-		this.mBackground = pBackground
+	function self:setBackground(pBackground)
+		self.mBackground = pBackground
 	end
 	--[[
 		-- Método para adicionar um objeto ao layer
@@ -143,9 +121,9 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @version	01/10/2010
 		-- @param	GGE_Object pObject, objeto a ser adicionado ao layer
 	-]]
-	this.addObject = function(pObject)
+	function self:addObject(pObject)
 		pObject:setLayer(this)
-		this.mObjects[#this.mObjects + 1] = pObject
+		self.mObjects[#self.mObjects + 1] = pObject
 	end
 	--[[
 		--Função que retorna o número de objects do layer
@@ -155,8 +133,8 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @version	29/09/2010
 		-- @return	int
 	-]]
-	this.getObjectNumber = function()
-		return #this.mObjects
+	function self:getObjectNumber()
+		return #self.mObjects
 	end
 	--[[
 		-- Método para retornar um Objeto por seu id
@@ -167,9 +145,9 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @param	string pObjectId, id do objeto a ser procurado
 		-- @return	{{position,object}} tabela com todos os objetos encontrados, possui sua posicao no layer e o objeto
 	-]]
-	this.getObjectById = function(pObjectId)
+	function self:getObjectById(pObjectId)
 		local objects = {}
-		for key, obj in pairs(this.mObjects) do 
+		for key, obj in pairs(self.mObjects) do 
 			if obj:getId() == pObjectId then
 				objects[#objects + 1] = { position = key, object = obj }
 			end
@@ -185,8 +163,8 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @param	int pObjectPos, posicao do objeto
 		-- @return	Object or nil
 	-]]
-	this.getObject = function(pObjectPos)
-		return this.mObjects[pObjectPos]
+	function self:getObject(pObjectPos)
+		return self.mObjects[pObjectPos]
 	end
 	--[[
 		-- Método para remover um objeto do layer
@@ -196,9 +174,9 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @version	30/09/2010
 		-- @param	int pObjectPosition, posićao do objeto
 	-]]
-	this.removeObject = function(pObjectPosition)
-		if not this.mObjects[pObjectPosition] == nil then
-			this.mObjects[pObjectPosition] = nil
+	function self:removeObject(pObjectPosition)
+		if not self.mObjects[pObjectPosition] == nil then
+			self.mObjects[pObjectPosition] = nil
 		end
 	end
 	--[[
@@ -210,10 +188,10 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @param	string pObjectId, id do objeto
 		-- @return	int número de objetos encontrados e removidos
 	-]]
-	this.removeObjectById = function(pObjectId)
-		local objects = this.getObjectById(pObjectId)
+	function self:removeObjectById(pObjectId)
+		local objects = self:getObjectById(pObjectId)
 		for iterator = 1, #objects, 1 do
-			this.mObjects[objects[iterator].position] = nil
+			self.mObjects[objects[iterator].position] = nil
 		end
 		return #objects
 	end
@@ -225,10 +203,10 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @version	30/09/2010
 		-- @return	{x,y} posicao real
 	-]]
-	this.getRealPosition = function(pPosition)
+	function self:getRealPosition(pPosition)
 		local position = {}
-		position.x = pPosition.x * this.mScrollSpeed.x
-		position.y = pPosition.y * this.mScrollSpeed.y
+		position.x = pPosition.x * self.mScrollSpeed.x
+		position.y = pPosition.y * self.mScrollSpeed.y
 		return position
 	end
 	--[[
@@ -241,24 +219,25 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @param	string pAnimationPack		, nome do pacote de animaćões
 		-- @param	{animation,position} Ptiles	, vetor com os tiles
 	-]]
-	this.loadTiles = function(pTiles,pSpritePack,pAnimationPack)
-		GGE_game_log("GGE_Layer().loadTiles()")
+	function self:loadTiles(pTiles, pSpritePack, pAnimationPack)
+		GGE_game_log("self:loadTiles()")
 
-		if not pSpritePack == nil then this.mSpritePack = pSpritePack end
-		if not pAnimationPack == nil then this.mAnimationPack = pAnimationPack end
+		if not pSpritePack		== nil	then self.mSpritePack		= pSpritePack		end
+		if not pAnimationPack	== nil	then self.mAnimationPack	= pAnimationPack	end
 
 		for key, tile in pairs (pTiles) do 
-			GGE_game_log("GGE_Layer().loadTiles() Key: " .. key .. " Animation: " .. tile.animation .. " Posx: " .. tile.position.x .. " posy: " .. tile.position.y)
-			this.addTile(
-				GGE_Tile.new(
-					this.mSpritePack,
-					this.mAnimationPack,
+	--		GGE_game_log("GGE_Layer().loadTiles() Key: " .. key .. " Animation: " .. tile.animation .. " Posx: " .. tile.position.x .. " posy: " .. tile.position.y)
+			self:addTile(
+				GGE_Tile:new(
+					self.mSpritePack,
+					self.mAnimationPack,
 					tile.animation,
 					tile.position,
-					this
+					self
 				)
 			)
 		end
+		GGE_game_log("self:~loadTiles()")
 	end
 	--[[
 		-- Método para desenhar o layer
@@ -270,12 +249,12 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @details
 		--	Esse método desenha todos os tiles e todos os objetos contidos no layer as well
 	-]]
-	this.draw = function(pPosition)
-		local position = this.getRealPosition(pPosition)
-		for key, tile in pairs (this.mTiles) do 
+	function self:draw(pPosition)
+		local position = self:getRealPosition(pPosition)
+		for key, tile in pairs( self.mTiles ) do 
 			tile:draw(position)
 		end
-		for key, object in pairs (this.mObjects) do 
+		for key, object in pairs( self.mObjects ) do 
 			if object:isActive() then object:draw(position) end
 		end
 	end
@@ -286,11 +265,11 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @since	18/03/2009
 		-- @version	20/10/2010
 	-]]
-	this.basicLogic = function()
-		for key, tile in pairs (this.mTiles) do 
+	function self:basicLogic()
+		for key, tile in pairs (self.mTiles) do 
 			tile:logic()
 		end
-		for key, object in pairs (this.mObjects) do 
+		for key, object in pairs (self.mObjects) do 
 			if object:isActive() then object:logic() end
 		end
 	end
@@ -301,8 +280,9 @@ function GGE_Layer(pSpritePack,pAnimationPack,pBackground)
 		-- @since	30/09/2010
 		-- @version	30/09/2010
 	-]]
-	this.logic = this.basicLogic
+	function self:logic() self:basicLogic() end
 	
-	return this
+	return self
 end
+
 

@@ -1,20 +1,21 @@
-dofile("tests/background/breakman/breakman_layer.lua")
+include("breakman_layer.lua")
 
-function Breakman()
+Breakman = class()
+function Breakman:new()
 	GGE_game_log("Breakman")
-	local this = GGE_Background()
+	local self = GGE_Background:new()
 	
-	this.width			= 256
-	this.height			= 224
-	this.addLayer( BreakmanLayer() )
+	self.width			= 256
+	self.height			= 224
+	self:addLayer( BreakmanLayer:new(self) )
 
-	this.flag = true
-	this.logic = function()
-		this.basicLogic()
-		local tile = math.random(1,this.getLayer(1).getTileNumber())
+	self.flag = true
+	function self:logic()
+		self:basicLogic()
+		local tile = math.random(1,self:getLayer(1):getTileNumber())
 		local dir  = math.random(0,70)
 		--this.getLayer(1).getTile(tile).addPosition({x=5*dir,y=0})
-		this.getLayer(1).getTile(tile).setAnimation(dir)
+		self:getLayer(1):getTile(tile):setAnimation(dir)
 		--[[if this.flag then
 			this.getLayer(1).getBackground().getLayer(1).getTile(70).addPosition({x=5,y=0})
 			if this.getLayer(1).getBackground().getLayer(1).getTile(70).getPosition().x > 320 then
@@ -33,6 +34,6 @@ function Breakman()
 		print("animation: " .. this.getLayer(1).getTile(70).getAnimation())
 -]]
 	end
-	return this
+	return self
 end
 
