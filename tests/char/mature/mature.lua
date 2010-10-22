@@ -1,83 +1,81 @@
-function Mature(pLayer)
-	GGE_game_log("Mature()")
-	local this = { }
-	this = GGE_Player(
-		"tests/char/mature/mature.gspk",
-		"tests/char/mature/mature.gapk",
-		pLayer
+Mature = class()
+function Mature:new(pPosition, pLayer)
+	local self = GGE_Player:new(
+		Mature.__dir .. "mature.gspk",
+		Mature.__dir .. "mature.gapk",
+		pLayer,
+		pPosition 
 	)
-		
-	this.stateBorning = function()
+			
+	function self:stateBorning()
 		print("mature state: borning")
 		--this.setAfterImageMethodTrans(0.5)
 		--this.setAfterImageMethodAdd({r=200,g=0,b=0},{r=0,g=0,b=0},0.5)
-		
-		this.state = this.stateStandInit
+		self.state = self.stateStandInit
 	end
 
-	this.stateStandInit = function()
+	function self:stateStandInit()
 		print("mature state: stand")
-		this.changeAnimation(0,0)
-		this.state = this.stateStanding
+		self:changeAnimation(0,0)
+		self.state = self.stateStanding
 	end
 
-	this.stateStanding = function()
-		if this.mInput.button1() then
-			this.state = this.stateKick1Init
-		elseif this.mInput.button2() then
-			this.state = this.stateKick2Init
+	function self:stateStanding()
+		if self.mInput:button1() then
+			self.state = self.stateKick1Init
+		elseif self.mInput:button2() then
+			self.state = self.stateKick2Init
 		end
 	end
 
-	this.stateKick1Init = function()
+	function self:stateKick1Init()
 		print("mature state: kick1")
 		--this.setAfterImageMode(true,2,10)
-		this.changeAnimation(10,0)
-		this.state = this.stateKicking1
+		self:changeAnimation(10,0)
+		self.state = self.stateKicking1
 	end
 
-	this.stateKicking1 = function()
-		this.addPosition({x=-5,y=0})
-		if not this.animationIsPlaying() then
+	function self:stateKicking1()
+		if not self:animationIsPlaying() then
 			--this.setAfterImageMode(false,1,1)
-			this.state = this.stateStandInit
+			self.state = self.stateStandInit
 		end
 	end
 
-	this.stateKick2Init = function()
+	function self:stateKick2Init()
 		print("mature state: kick2")
 		--this.getBackground().getlayer)(.getBac
 		--this.setAfterImageMode(true,2,10)
-		this.changeAnimation(10,1)
-		this.state = this.stateKicking2
+		self:changeAnimation(10,1)
+		self.state = self.stateKicking2
 	end
 
-	this.stateKicking2 = function()
-		if not this.animationIsPlaying() then
+	function self:stateKicking2()
+		if not self:animationIsPlaying() then
 			--this.setAfterImageMode(false,1,1)
-			this.state = this.stateStandInit
+			self.state = self.stateStandInit
 		end
 	end
 
-	this.logic = function()
-		this.basicLogic()
-		if this.mInput.buttonDown()  then
-			this.addPosition({x=0,y=3})
-		elseif this.mInput.buttonUp() then
-			this.subPosition({x=0,y=3})
+	function self:logic()
+		self:basicLogic()
+		if self.mInput:buttonDown()  then
+			self:addPosition({x=0,y=3})
+		elseif self.mInput:buttonUp() then
+			self:subPosition({x=0,y=3})
 		end
 		
-		if this.mInput.buttonRight() then
-			this.addPosition({x=3,y=0})
-		elseif this.mInput.buttonLeft() then
-			this.subPosition({x=3,y=0})
+		if self.mInput:buttonRight() then
+			self:addPosition({x=3,y=0})
+		elseif self.mInput:buttonLeft() then
+			self:subPosition({x=3,y=0})
 		end
 
-		this.state()
+		self:state()
 	end
 	
-	this.state				= this.stateBorning
+	self.state = self.stateBorning
 
-	return this
+	return self
 end
 

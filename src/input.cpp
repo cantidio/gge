@@ -119,69 +119,17 @@ void Input::saveConfiguration() const
 	file->close();
 	delete file;
 }
-
-bool Input::buttonStart()
-{
-	return key[mKey_start];
-}
-
-bool Input::buttonUp()
-{
-	return key[mKey_up];
-}
-
-bool Input::buttonDown()
-{
-	return key[mKey_down];
-}
-
-bool Input::buttonLeft()
-{
-	return key[mKey_left];
-}
-
-bool Input::buttonRight()
-{
-	return key[mKey_right];
-}
-
-bool Input::button1()
-{
-	return key[mKey_button1];
-}
-
-bool Input::button2()
-{
-	return key[mKey_button2];
-}
-
-bool Input::button3()
-{
-	return key[mKey_button3];
-}
-
-bool Input::button4()
-{
-	return key[mKey_button4];
-}
-
-bool Input::button5()
-{
-	return key[mKey_button5];
-}
-
-bool Input::button6()
-{
-	return key[mKey_button6];
-}
-
-bool Input::button7()
-{
-	return key[mKey_button7];
-}
-
-bool Input::button8()
-{
-	return key[mKey_button8];
-}
+bool Input::buttonStart()	{ return key[mKey_start];	}
+bool Input::buttonUp()		{ return key[mKey_up]; 		}
+bool Input::buttonDown()	{ return key[mKey_down];	}
+bool Input::buttonLeft()	{ return key[mKey_left];	}
+bool Input::buttonRight()	{ return key[mKey_right];	}
+bool Input::button1()		{ return key[mKey_button1];	}
+bool Input::button2()		{ return key[mKey_button2];	}
+bool Input::button3()		{ return key[mKey_button3];	}
+bool Input::button4()		{ return key[mKey_button4];	}
+bool Input::button5()		{ return key[mKey_button5];	}
+bool Input::button6()		{ return key[mKey_button6];	}
+bool Input::button7()		{ return key[mKey_button7];	}
+bool Input::button8()		{ return key[mKey_button8];	}
 

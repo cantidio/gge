@@ -1,90 +1,95 @@
-print("include: Mammon.lua")
-function Mammon(pLayer)
-	local this = { }
-	this = GGE_Player(
-		"tests/char/mammon/mammon.gspk",
-		"tests/char/mammon/mammon.gapk",
-		pLayer
+Mammon=class()
+
+function Mammon:new(pPosition,pLayer)
+	local self = GGE_Player:new(
+		Mammon.__dir .. "mammon.gspk",
+		Mammon.__dir .. "mammon.gapk",
+		pLayer,
+		pPosition 
 	)
 	
-	this.stateBorning = function()
+	function self:stateBorning()
 		print("state: borning")
 		--this.setAfterImageMethodTrans(0.5)
 		--this.setAfterImageMode(true,5,10)
 		--this.setAfterImageMethodAdd({blue=200},{},0.5)
-		this.state = this.stateStandInit
-		this.setMirroring(Mirroring.HFlip)
+		self.state = self.stateStandInit
+		self:setMirroring(Mirroring.HFlip)
 	end
 
-	this.stateStandInit = function()
-		this.changeAnimationByIndex(1)
-		this.state = this.stateStanding
+	function self:stateStandInit()
+		self:changeAnimationByIndex(1)
+		self.state = self.stateStanding
 	end
 
-	this.stateStanding = function()
-		if this.mInput.button1() then
+	function self:stateStanding()
+		if self.mInput:button1() then
 			print("state: stand")
-			this.state = this.stateAttackInit
-		elseif this.mInput.buttonDown() then
-			this.state= this.stateAInit
-		elseif this.mInput.buttonRight() or this.mInput.buttonLeft() then
-			this.state = this.stateWalkInit
+			self.state = self.stateAttackInit
+		elseif self.mInput:buttonDown() then
+			self.state= self.stateAInit
+		elseif self.mInput:buttonRight() or self.mInput:buttonLeft() then
+			self.state = self.stateWalkInit
 		end
 	end
 
-	this.stateAInit = function()
-		this.changeAnimationByIndex(2)
-		this.state = this.stateAing
+	function self:stateAInit()
+		self:changeAnimationByIndex(2)
+		self.state = self.stateAing
 	end
 	
-	this.stateAing = function()
-		if not this.mInput.buttonDown() then
-			this.state = this.stateStandInit
+	function self:stateAing()
+		if not self.mInput:buttonDown() then
+			self.state = self.stateStandInit
 		end
 	end
 	
-	this.stateWalkInit = function()
+	function self:stateWalkInit()
 		print("state: walk")
-		this.changeAnimationByIndex(8);
-		this.state = this.stateWalking
+		self:changeAnimationByIndex(8);
+		self.state = self.stateWalking
 	end
 	
-	this.stateWalking = function()
+	function self:stateWalking()
 		print("state: walking")
-		if this.mInput.button1() then
-			this.state = this.stateAttackInit
-			
-		elseif this.mInput.buttonDown() then
-			this.state = this.stateAInit
-			
-		elseif this.mInput.buttonRight() then 
-			this.addPosition({x=5,y=0})
-		elseif this.mInput.buttonLeft() then
-			this.subPosition({x=5,y=0})
+		if self.mInput:button1()			then
+			self.state = self.stateAttackInit
+		elseif self.mInput:buttonDown()		then
+			self.state = self.stateAInit
+		elseif self.mInput:buttonRight()	then 
+			self:addPosition({x=5,y=0})
+		elseif self.mInput:buttonLeft() 	then
+			self:subPosition({x=5,y=0})
 		else
-			this.state = this.stateStandInit
+			self.state = self.stateStandInit
 		end
 	end
 	
-	this.stateAttackInit = function()
+	function self:stateAttackInit()
 		print("state attack")
 		--this.setAfterImageMode(true,30,5)
-		this.changeAnimation(100,0)
-		this.state = this.stateAttacking
+		self:changeAnimation(100,0)
+		self.state = self.stateAttacking
 	end
 
-	this.stateAttacking = function()
-		if not this.animationIsPlaying() then
+	function self:stateAttacking()
+		if not self:animationIsPlaying() then
 			--this.setAfterImageMode(false,1,1)
-			this.state = this.stateStandInit
+			self.state = self.stateStandInit
 		end
 	end
 
-	this.logic = function()
-		this.basicLogic()
-		this.state()
+	function self:logic()
+		if self.mInput:buttonUp()		then 
+			self:subPosition({x=0,y=1})
+		elseif self.mInput:buttonDown() then
+			self:addPosition({x=0,y=1})
+		end
+		self:basicLogic()
+		self:state()
 	end
-	this.state = this.stateBorning	
-	return this
+
+	self.state = self.stateBorning	
+	return self
 end
 

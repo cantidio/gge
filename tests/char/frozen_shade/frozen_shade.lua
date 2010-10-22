@@ -10,15 +10,15 @@ function FrozenShade:new(pPosition, pLayer)
 	
 	function self:logic()
 		self:basicLogic()
-		if self.mInput.buttonDown()  then
+		if self.mInput:buttonDown()  then
 			self:addPosition({x=0, y=1})
-		elseif self.mInput.buttonUp() then
+		elseif self.mInput:buttonUp() then
 			self:subPosition({x=0, y=1})
 		end
 	
-		if self.mInput.buttonRight() then
+		if self.mInput:buttonRight() then
 			self:addPosition({x=1, y=0})
-		elseif self.mInput.buttonLeft() then
+		elseif self.mInput:buttonLeft() then
 			self:subPosition({x=1, y=0})
 		end
 

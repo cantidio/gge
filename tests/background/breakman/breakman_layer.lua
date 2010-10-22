@@ -1,4 +1,3 @@
-print("include: BreakmanLayer")
 BreakmanLayer = class()
 function BreakmanLayer:new(pBackground)
 	GGE_game_log("BreakmanLayer")

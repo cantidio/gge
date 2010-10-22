@@ -37,9 +37,9 @@
  * @version	20/10/2010
  * @ingroup	Objects
  */
- class ObjectLua
- {
- 	protected:
+class ObjectLua
+{
+	protected:
 		static luaL_reg mMethods[];		/**< all class methods*/
 		static luaL_reg mMetatable[];	/**< class metatable */
 	public:
@@ -84,52 +84,52 @@
 		 */
 		static int logic(lua_State* pState);
 		/**
-		 * Função que retorna o índice real da animação dados o seu grupo e índice
+		 * Method that returns the real index of a given animation
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	18/06/2009
 		 * @version	29/09/2010
-		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @param	lua_State* pState, state of the lua interpreter
 		 * @return	int
 		 */
 		static int getAnimationRealIndex(lua_State* pState);
 		/**
-		 * Função que muda a animação de um objeto através de um índice direto
+		 * Method that changes the animation of the object throught its reak index
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
 		 * @version	12/03/2009
-		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @param	lua_State* pState, state of the lua interpreter
 		 * @return	int
 		 */
 		static int changeAnimationByIndex(lua_State* pState);
 		/**
-		 * Função que muda a animação de um objeto por seu grupo e índice
+		 * Method that changes the animation of the object throught its grounp and index
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	09/06/2009
 		 * @version	09/06/2009
-		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @param	lua_State* pState, state of the lua interpreter
 		 * @return	int
 		 */
 		static int changeAnimation(lua_State* pState);
 		/**
-		 * Função que retorna verdadeiro se a animação está tocando
+		 * Method that returns true if the actual animation is still playing
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	12/03/2009
 		 * @version	12/03/2009
-		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @param	lua_State* pState, state of the lua interpreter
 		 * @return	int
 		 */
 		static int animationIsPlaying(lua_State* pState);
 		/**
-		 * Função que retorna a posicao, o grupo e o índice da animação que está tocando
+		 * Method that returns the real index, the group and the index of the animation that is playing
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	26/01/2010
 		 * @version	26/01/2010
-		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @param	lua_State* pState, state of the lua interpreter
 		 * @return	int
 		 */
 		static int getAnimationOn(lua_State* pState);//real, group. index
@@ -139,7 +139,7 @@
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
 		 * @version	14/03/2009
-		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @param	lua_State* pState, state of the lua interpreter
 		 * @return	int
 		 */
 		static int setFrameOn(lua_State* pState);
@@ -149,7 +149,7 @@
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	14/03/2009
 		 * @version	14/03/2009
-		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @param	lua_State* pState, state of the lua interpreter
 		 * @return	int
 		 */
 		static int getFrameOn(lua_State* pState);
@@ -159,7 +159,7 @@
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	29/09/2010
 		 * @version	29/09/2010
-		 * @param	lua_State* pState, estado do interpretador lua atual
+		 * @param	lua_State* pState, state of the lua interpreter
 		 * @return	int
 		 */
 		static int animationRunStep(lua_State* pState);
@@ -174,15 +174,13 @@
 		static void registerClass(Gorgon::Script::Lua& pScript);
  };
 
-	
-	
 	/**
 	 * Função para setar o método de afterImage para Normal
 	 *
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	26/06/2009
 	 * @version	26/06/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
+	 * @param	lua_State* pState, state of the lua interpreter
 	 */
 //	int setAfterImageMethodNormal(lua_State* pState);
 	/**
@@ -191,7 +189,7 @@
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	26/06/2009
 	 * @version	26/06/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
+	 * @param	lua_State* pState, state of the lua interpreter
 	 */
 //	int setAfterImageMethodAdd(lua_State* pState);
 	/**
@@ -200,7 +198,7 @@
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	26/06/2009
 	 * @version	26/06/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
+	 * @param	lua_State* pState, state of the lua interpreter
 	 */
 //	int setAfterImageMethodTrans(lua_State* pState);
 	/**
@@ -209,7 +207,7 @@
 	 * @author	Cantidio Oliveira Fontes
 	 * @since	26/06/2009
 	 * @version	26/06/2009
-	 * @param	lua_State* pState, estado do interpretador lua atual
+	 * @param	lua_State* pState, state of the lua interpreter
 	 */
 //	int setAfterImageMode(lua_State* pState);
 

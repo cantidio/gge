@@ -1,22 +1,23 @@
 print("include: GGE_Input")
+GGE_Input = class()
 --[[
 	-- Classe para representar os inputs
 	--
 	-- @author	Cantidio Oliveira Fontes
 	-- @since	26/01/2010
-	-- @version	26/01/2010
+	-- @version	22/10/2010
 -]]
-function GGE_Input()
-	local this = {}
+function GGE_Input:new()
+	local self = {}
 	--[[
 		-- Método para verificar se o botão start está apertado
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
-		-- @version	26/01/2010
+		-- @version\t22/10/2010
 		-- @return	bool
 	-]]
-	this.buttonStart = function()
+	function self:buttonStart()
 		return GGE_input_buttonStart()
 	end
 	--[[
@@ -24,10 +25,10 @@ function GGE_Input()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
-		-- @version	26/01/2010
+		-- @version\t22/10/2010
 		-- @return	bool
 	-]]
-	this. buttonUp = function()
+	function self:buttonUp()
 		return GGE_input_buttonUp()
 	end
 	--[[
@@ -35,10 +36,10 @@ function GGE_Input()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
-		-- @version	26/01/2010
+		-- @version\t22/10/2010
 		-- @return	bool
 	-]]
-	this.buttonDown = function()
+	function self:buttonDown()
 		return GGE_input_buttonDown()
 	end
 	--[[
@@ -46,10 +47,10 @@ function GGE_Input()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
-		-- @version	26/01/2010
+		-- @version\t22/10/2010
 		-- @return	bool
 	-]]
-	this.buttonLeft = function()
+	function self:buttonLeft()
 		return GGE_input_buttonLeft()
 	end
 	--[[
@@ -57,10 +58,10 @@ function GGE_Input()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
-		-- @version	26/01/2010
+		-- @version\t22/10/2010
 		-- @return	bool
 	-]]
-	this.buttonRight = function()
+	function self:buttonRight()
 		return GGE_input_buttonRight()
 	end
 	--[[
@@ -68,10 +69,10 @@ function GGE_Input()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
-		-- @version	26/01/2010
+		-- @version\t22/10/2010
 		-- @return	bool
 	-]]
-	this.button1 = function()
+	function self:button1()
 		return GGE_input_button1()
 	end
 	--[[
@@ -79,10 +80,10 @@ function GGE_Input()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
-		-- @version	26/01/2010
+		-- @version\t22/10/2010
 		-- @return	bool
 	-]]
-	this.button2 = function()
+	function self:button2()
 		return GGE_input_button2()
 	end
 	--[[
@@ -90,10 +91,10 @@ function GGE_Input()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
-		-- @version	26/01/2010
+		-- @version\t22/10/2010
 		-- @return	bool
 	-]]
-	this.button3 = function()
+	function self:button3()
 		return GGE_input_button3()
 	end
 	--[[
@@ -101,10 +102,10 @@ function GGE_Input()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
-		-- @version	26/01/2010
+		-- @version\t22/10/2010
 		-- @return	bool
 	-]]
-	this.button4 = function()
+	function self:button4()
 		return GGE_input_button4()
 	end
 	--[[
@@ -112,10 +113,10 @@ function GGE_Input()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
-		-- @version	26/01/2010
+		-- @version\t22/10/2010
 		-- @return	bool
 	-]]
-	this.button5 = function()
+	function self:button5()
 		return GGE_input_button5()
 	end
 	--[[
@@ -123,10 +124,10 @@ function GGE_Input()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
-		-- @version	26/01/2010
+		-- @version\t22/10/2010
 		-- @return	bool
 	-]]
-	this.button6 = function()
+	function self:button6()
 		return GGE_input_button6()
 	end
 	--[[
@@ -134,10 +135,10 @@ function GGE_Input()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
-		-- @version	26/01/2010
+		-- @version\t22/10/2010
 		-- @return	bool
 	-]]
-	this.button7 = function()
+	function self:button7()
 		return GGE_input_button7()
 	end
 	--[[
@@ -145,13 +146,13 @@ function GGE_Input()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
-		-- @version	26/01/2010
+		-- @version\t22/10/2010
 		-- @return	bool
 	-]]
-	this.button8 = function()
+	function self:button8()
 		return GGE_input_button8()
 	end
 	
-	return this
+	return self
 end
 

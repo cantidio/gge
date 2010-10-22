@@ -5,7 +5,7 @@ GGE_Player = class()
 	--
 	-- @author	Cantidio Oliveira Fontes
 	-- @since	26/01/2010
-	-- @version	20/10/2010
+	-- @version	22/10/2010
 	-- @param	string 		pSprite		, pacote de sprites a ser usado
 	-- @param	string		pAnimation	, pacote de anima√√es a ser usado
 	-- @param	GGE_Layer	pLayer		, layer o qual o player se encontra
@@ -25,7 +25,7 @@ function GGE_Player:new(
 		pLayer,
 		pPosition
 	)
-	self.mInput	= GGE_Input()
+	self.mInput	= GGE_Input:new()
 	return self
 end
 
