@@ -5,17 +5,19 @@ GGE_Background = class()
 	--
 	-- @author	Cantidio Oliveira Fontes
 	-- @since	19/03/2009
-	-- @version	21/10/1010
+	-- @version	26/10/1010
 	-- @param	int pPointer, endereço do cenário na memória
 -]]
 function GGE_Background:new()
-	local self = {}
+	local self			= {}
 	self.mLayers		= {}		--Vetor com os Layers do cenário
 	self.mWidth			= 0			--Largura do cenário
 	self.mHeight		= 0			--Altura do cenário
 	self.mPosition		= {x=0,y=0}	--Posicão do cenário
 	self.mScrollLock	= false		--Se o cenário está podendo dar scrool
-	
+	self.mCameraTarget	= nil
+	--self.mCameraPosition={x=0,y=0}
+	--self.mCameraVelocity={x=1,y=1}
 	--[[
 		-- Método que retorna o número de layers que o cenário possui
 		--
@@ -125,11 +127,14 @@ function GGE_Background:new()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	19/03/2009
-		-- @version	02/01/2010
+		-- @version	26/10/2010
 		-- @return	{x,y}
 	-]]
 	function self:getPosition()
-		return self.mPosition
+		local aux = {}
+		aux.x = self.mPosition.x
+		aux.y = self.mPosition.y
+		return aux 
 	end
 	--[[
 		-- Método que seta a posição atual do cenário
@@ -206,12 +211,75 @@ function GGE_Background:new()
 		-- @version	30/09/2010
 	-]]
 	function self:basicLogic()
+		self:cameraLogic()
 		for key, layer in pairs (self.mLayers) do 
 			layer:logic()
 		end
 	end
 	function self:logic() self:basicLogic() end
-	
+
+	function getWindowWidth() return 320	end
+	function getWindowHeight() return 180	end
+
+	--[[
+		-- Method that executes the logic behind the camera
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	25/10/2010
+		-- @version	26/10/2010
+	-]]
+	function self:cameraLogic()
+		if self.mCameraTarget then
+			local cameraPos	 = self:getPosition()
+			local targetPos  = self.mCameraTarget:getPosition()
+			
+			if	targetPos.x >= (getWindowWidth()/2) then
+				if targetPos.x <= (self.mWidth - getWindowWidth()/2)		then
+					cameraPos.x = -1 * (targetPos.x - getWindowWidth()/2 )
+				elseif targetPos.x >= (self.mWidth - getWindowWidth()/2)	then
+					cameraPos.x = -1 * (self.mWidth - getWindowWidth())
+				end
+			elseif targetPos.x <= (getWindowWidth()/2) then
+				cameraPos.x = 0
+			end
+			
+			if	targetPos.y >= (getWindowHeight()/2) then
+				if targetPos.y <= (self.mHeight - getWindowHeight()/2) then
+					cameraPos.y = -1 * (targetPos.y - getWindowHeight()/2 )
+				elseif targetPos.y >= (self.mHeight - getWindowHeight()/2) then
+					cameraPos.y = -1 * (self.mHeight - getWindowHeight())
+				end
+			elseif targetPos.y <= (getWindowHeight()/2) then
+				cameraPos.y = 0
+			end
+			
+--[[			if self.mCameraPosition.x < cameraPos.x then
+				self.mCameraPosition.x = self.mCameraPosition.x + self.mCameraVelocity.x
+			elseif self.mCameraPosition.x > cameraPos.x then
+				self.mCameraPosition.x = self.mCameraPosition.x - self.mCameraVelocity.x
+			end
+			
+			if self.mCameraPosition.y < cameraPos.y then
+				self.mCameraPosition.y = self.mCameraPosition.y + self.mCameraVelocity.y
+			elseif self.mCameraPosition.y > cameraPos.y then
+				self.mCameraPosition.y = self.mCameraPosition.y - self.mCameraVelocity.y
+			end
+	-]]
+			self:setPosition(cameraPos)
+		end
+	end
+	--[[
+		-- Method that sets the target object of the camera
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	25/10/2010
+		-- @version	25/10/2010
+		-- @param	GGE_Object pObject, the object that will be followed
+	-]]
+	function self:setCameraTarget(pObject)
+		self.mCameraTarget = pObject
+	end
+
 	return self
 end
 

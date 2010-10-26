@@ -47,8 +47,8 @@ function make_BG_class(
 	desc = desc .. pName .. " = class()\n"
 	desc = desc .. "function " .. pName .. ":new()\n"
 	desc = desc .. "	local self	= GGE_Background:new()\n"
-	desc = desc .. "	self.width	= " .. pWidth .. "\n"
-	desc = desc .. "	self.height	= " .. pHeight .. "\n"
+	desc = desc .. "	self.mWidth	= " .. pWidth .. "\n"
+	desc = desc .. "	self.mHeight= " .. pHeight .. "\n"
 	
 	--gera os layers
 	for iterator = 1, pLayerNumber, 1 do
