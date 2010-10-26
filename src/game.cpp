@@ -11,6 +11,33 @@ void game_time()	{ ++timer; }
 END_OF_FUNCTION(game_time);
 //-------------------------------------------------------------------------------TIMER UP------------------------------------
 
+void trySaveScreenShot(const int& pShotNumber)
+{
+	std::stringstream out;
+	out << "shots/shot" << pShotNumber << ".bmp" << std::endl;
+	Gorgon::Core::File file(out.str(),std::ios::in | std::ios::binary);
+	if(file.is_open())
+	{
+		file.close();
+		trySaveScreenShot(pShotNumber + 1);
+	}
+	else
+	{
+		Gorgon::ImageFormatBmp imageFormat;
+		file.close();
+		imageFormat.save(static_cast<Gorgon::Image&>(Gorgon::Video::get()),out.str());
+	}
+}
+
+void screenShot()
+{
+	if(key[KEY_F12])
+	{
+		trySaveScreenShot(0);
+		key[KEY_F12] = 0;
+	}
+}
+
 Game* Game::mSingleton = NULL;
 Game::Game()
 {
@@ -121,6 +148,7 @@ void Game::run()
 		{
 			while(timer >= 0 && !key[KEY_ESC])
 			{
+				screenShot();
 				Gorgon::Video::get().clear(0xAA0BDD);
 				if(state==0)
 				{
