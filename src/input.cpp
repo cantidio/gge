@@ -15,14 +15,6 @@ Input::~Input()
 	remove_keyboard();
 }
 
-void Input::init()
-{
-	if(mSingleton==NULL)
-	{
-		mSingleton= new Input();
-	}
-}
-
 void Input::halt()
 {
 	if(mSingleton!=NULL)
@@ -34,7 +26,10 @@ void Input::halt()
 
 Input& Input::get()
 {
-	init();
+	if(mSingleton == NULL)
+	{
+		mSingleton = new Input();
+	}
 	return *mSingleton;
 }
 
@@ -132,4 +127,20 @@ bool Input::button5()		{ return key[mKey_button5];	}
 bool Input::button6()		{ return key[mKey_button6];	}
 bool Input::button7()		{ return key[mKey_button7];	}
 bool Input::button8()		{ return key[mKey_button8];	}
+void Input::cleanKeyBuffer()
+{
+	key[mKey_start]		= 0;
+	key[mKey_up]		= 0;
+	key[mKey_down]		= 0;
+	key[mKey_left]		= 0;
+	key[mKey_right]		= 0;
+	key[mKey_button1]	= 0;
+	key[mKey_button2]	= 0;
+	key[mKey_button3]	= 0;
+	key[mKey_button4]	= 0;
+	key[mKey_button5]	= 0;
+	key[mKey_button6]	= 0;
+	key[mKey_button7]	= 0;
+	key[mKey_button8]	= 0;
+}
 

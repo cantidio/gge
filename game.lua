@@ -9,13 +9,13 @@ include("tests/background/breakman/breakman_background.lua")
 include("tests/background/lab/lab.lua")
 include("tests/background/muro/muro.lua")
 
-TestGame = class()
+TestGame = class()--Manila Chase Scene
 function TestGame:new()
 	local self = GGE_Game:new()
 	self.mWindow.title		= "TEST - GGE"
 	self.mVideo.width		= 320
-	self.mVideo.height		= 180
-	self.mVideo.FPS			= 120
+	self.mVideo.height		= 240
+	self.mVideo.FPS			= 60
 --	self.mVideo.fullScreen	= true
 	self:init()
 	self.BG = DebugRoom:new()

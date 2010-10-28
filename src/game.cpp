@@ -14,8 +14,9 @@ END_OF_FUNCTION(game_time);
 void trySaveScreenShot(const int& pShotNumber)
 {
 	std::stringstream out;
-	out << "shots/shot" << pShotNumber << ".bmp" << std::endl;
+	out << "shots/shot" << pShotNumber << ".bmp";
 	Gorgon::Core::File file(out.str(),std::ios::in | std::ios::binary);
+	
 	if(file.is_open())
 	{
 		file.close();
@@ -26,6 +27,7 @@ void trySaveScreenShot(const int& pShotNumber)
 		Gorgon::ImageFormatBmp imageFormat;
 		file.close();
 		imageFormat.save(static_cast<Gorgon::Image&>(Gorgon::Video::get()),out.str());
+		Gorgon::Core::Log::get().RegisterFormated("C++ -> ScreenShot saved: %s",out.str().c_str());
 	}
 }
 
@@ -33,6 +35,7 @@ void screenShot()
 {
 	if(key[KEY_F12])
 	{
+		Gorgon::Core::Log::get().RegisterFormated("C++ -> Trying to take a Screenshot...");
 		trySaveScreenShot(0);
 		key[KEY_F12] = 0;
 	}
@@ -105,7 +108,7 @@ bool Game::init
 	);
     install_mouse();
     install_timer();
-	Input::init();
+	Input::get();//just to init the input
 	return true;
 }
 
@@ -154,7 +157,7 @@ void Game::run()
 				{
 					//executa funcao logic do mal aqui
 					mScript.function("GGE_game_runStep");
-					Gorgon::Video::get().drawText(10,10,0,-1,"FPS: %d",fps_antigo);
+					Gorgon::Video::get().drawText(10,10,0xFF0000,-1,"FPS: %d",fps_antigo);
 					
 					if(key[KEY_F2])
 					{

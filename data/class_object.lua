@@ -139,11 +139,14 @@ function GGE_Object:new(
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	17/12/2009
-		-- @version	18/10/2010
+		-- @version	27/10/2010
 		-- @return	{x,y}
 	-]]
 	function self:getPosition()
-		return self.mPosition
+		local aux = {}
+		aux.x = self.mPosition.x
+		aux.y = self.mPosition.y
+		return aux
 	end
 	--[[
 		-- Método para setar a posicão do objeto
@@ -158,7 +161,7 @@ function GGE_Object:new(
 					obj.setPosition(pos)
 	-]]
 	function self:setPosition(pPosition)
-		self.mPosition = pPosition
+		self.mPosition = pPosition or {x=0,y=0}
 	end
 	--[[
 		-- Método para adicionar uma posicão ao objeto

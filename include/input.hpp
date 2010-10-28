@@ -31,11 +31,11 @@
 #include <iostream>
 #include <fstream>
 /**
- * Classe responsável por tratar a entrada de dados
+ * Class responsable to deal with user input
  *
  * @author	Cantidio Oliveira Fontes
  * @since	16/03/2009
- * @version	28/05/2009
+ * @version	27/10/2010
  * @ingroup	Input
  * @todo	Aceitar joystick
  * @todo	Aceitar mais de um player
@@ -43,65 +43,23 @@
 class Input
 {
 	private:
-		/**
-		 * Ponteiro para a instância da classe
-		 */
-		static Input* mSingleton;
-		/**
-		 * Código da tecla de start no teclado
-		 */
-		int mKey_start;
-		/**
-		 * Código da tecla direcional para cima no teclado
-		 */
-		int mKey_up;
-		/**
-		 * Código da tecla direcional para baixo no teclado
-		 */
-		int mKey_down;
-		/**
-		 * Código da tecla direcional para esquerda no teclado
-		 */
-		int mKey_left;
-		/**
-		 * Código da tecla direcional para direita no teclado
-		 */
-		int mKey_right;
-		/**
-		 * Código da tecla de botão1 no teclado
-		 */
-		int mKey_button1;
-		/**
-		 * Código da tecla de botão2 no teclado
-		 */
-		int mKey_button2;
-		/**
-		 * Código da tecla de botão3 no teclado
-		 */
-		int mKey_button3;
-		/**
-		 * Código da tecla de botão4 no teclado
-		 */
-		int mKey_button4;
-		/**
-		 * Código da tecla de botão5 no teclado
-		 */
-		int mKey_button5;
-		/**
-		 * Código da tecla de botão6 no teclado
-		 */
-		int mKey_button6;
-		/**
-		 * Código da tecla de botão7 no teclado
-		 */
-		int mKey_button7;
-		/**
-		 * Código da tecla de botão8 no teclado
-		 */
-		int mKey_button8;
+		static Input* mSingleton;/**< Pointer to the instance of the class */
+		int mKey_start;		/**< Code of the key for buttonStart*/
+		int mKey_up;		/**< Code of the key for buttonUp*/
+		int mKey_down;		/**< Code of the key for buttonDown*/
+		int mKey_left;		/**< Code of the key for buttonLeft*/
+		int mKey_right;		/**< Code of the key for buttonRight*/
+		int mKey_button1;	/**< Code of the key for button1*/
+		int mKey_button2;	/**< Code of the key for button2*/
+		int mKey_button3;	/**< Code of the key for button3*/
+		int mKey_button4;	/**< Code of the key for button4*/
+		int mKey_button5;	/**< Code of the key for button5*/
+		int mKey_button6;	/**< Code of the key for button6*/
+		int mKey_button7;	/**< Code of the key for button7*/
+		int mKey_button8;	/**< Code of the key for button8*/
 	protected:
 		/**
-		 * Método Construtor
+		 * Constructor
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -109,7 +67,7 @@ class Input
 		 */
 		Input();
 		/**
-		 * Método Destrutor
+		 * Destructor
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -117,7 +75,7 @@ class Input
 		 */
 		virtual ~Input();
 		/**
-		 * Método que carrega a configuração de botões
+		 * Method that loads the buttons's configuration
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -125,7 +83,7 @@ class Input
 		 */
 		void loadConfiguration();
 		/**
-		 * Método que salva a configuração de botões
+		 * Method that saves the buttons's configuration
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -133,7 +91,7 @@ class Input
 		 */
 		void saveConfiguration() const;
 		/**
-		 * Método que cria uma configuração de botões padrão
+		 * Method that creates a default configuration for the buttons
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -142,15 +100,7 @@ class Input
 		void createDefaultConfiguration();
 	public:
 		/**
-		 * Método para instânciar a classe caso a mesma ainda não tenha sido instânciada
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	16/03/2009
-		 * @version	28/05/2009
-		 */
-		static void init();
-		/**
-		 * Método para destruir a instância da classe
+		 * Method to destroy the singleton instance of the class
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -158,16 +108,15 @@ class Input
 		 */
 		static void halt();
 		/**
-		 * Método para retornar a instância da classe
+		 * Method to return the singleton instance of the class
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
 		 * @version	28/05/2009
 		 */
 		static Input& get();
-
 		/**
-		 * Método que retorna verdadeiro caso o botão start esteja pressionado
+		 * Method that returns true if the buttonStart is pressed
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -176,7 +125,7 @@ class Input
 		 */
 		bool buttonStart();
 		/**
-		 * Método que retorna verdadeiro caso o botão direcional para cima esteja pressionado
+		 * Method that returns true if the buttonUp is pressed
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -185,7 +134,7 @@ class Input
 		 */
 		bool buttonUp();
 		/**
-		 * Método que retorna verdadeiro caso o botão direcional direito esteja pressionado
+		 * Method that returns true if the buttonRight is pressed
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -194,7 +143,7 @@ class Input
 		 */
 		bool buttonRight();
 		/**
-		 * Método que retorna verdadeiro caso o botão direcional para baixo esteja pressionado
+		 * Method that returns true if the buttonDown is pressed
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -203,7 +152,7 @@ class Input
 		 */
 		bool buttonDown();
 		/**
-		 * Método que retorna verdadeiro caso o botão direcional esquerdo esteja pressionado
+		 * Method that returns true if the buttonLeft is pressed
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -212,7 +161,7 @@ class Input
 		 */
 		bool buttonLeft();
 		/**
-		 * Método que retorna verdadeiro caso o botão1 esteja pressionado
+		 * Method that returns true if the button1 is pressed
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -221,7 +170,7 @@ class Input
 		 */
 		bool button1();
 		/**
-		 * Método que retorna verdadeiro caso o botão2 esteja pressionado
+		 * Method that returns true if the button2 is pressed
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -230,7 +179,7 @@ class Input
 		 */
 		bool button2();
 		/**
-		 * Método que retorna verdadeiro caso o botão3 esteja pressionado
+		 * Method that returns true if the button3 is pressed
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -239,7 +188,7 @@ class Input
 		 */
 		bool button3();
 		/**
-		 * Método que retorna verdadeiro caso o botão4 esteja pressionado
+		 * Method that returns true if the button4 is pressed
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -248,7 +197,7 @@ class Input
 		 */
 		bool button4();
 		/**
-		 * Método que retorna verdadeiro caso o botão5 esteja pressionado
+		 * Method that returns true if the button5 is pressed
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -257,7 +206,7 @@ class Input
 		 */
 		bool button5();
 		/**
-		 * Método que retorna verdadeiro caso o botão6 esteja pressionado
+		 * Method that returns true if the button6 is pressed
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -266,7 +215,7 @@ class Input
 		 */
 		bool button6();
 		/**
-		 * Método que retorna verdadeiro caso o botão7 esteja pressionado
+		 * Method that returns true if the button7 is pressed
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -275,7 +224,7 @@ class Input
 		 */
 		bool button7();
 		/**
-		 * Método que retorna verdadeiro caso o botão8 esteja pressionado
+		 * Method that returns true if the button8 is pressed
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	16/03/2009
@@ -283,6 +232,14 @@ class Input
 		 * @return	bool
 		 */
 		bool button8();
+		/**
+		 * Method that cleans the keybuffer
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	27/10/2010
+		 * @version	27/10/2010
+		 */
+		void cleanKeyBuffer();
 };
 
 #endif

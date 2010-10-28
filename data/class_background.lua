@@ -196,11 +196,13 @@ function GGE_Background:new()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	30/09/2010
-		-- @version	30/09/2010
+		-- @version	27/10/2010
 	-]]
 	function self:draw()
 		for key, layer in pairs (self.mLayers) do 
-			layer:draw(self.mPosition)
+			if layer:isActive() then
+				layer:draw(self.mPosition)
+			end
 		end
 	end
 	--[[
@@ -208,18 +210,19 @@ function GGE_Background:new()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	30/09/2010
-		-- @version	30/09/2010
+		-- @version	27/10/2010
 	-]]
 	function self:basicLogic()
 		self:cameraLogic()
 		for key, layer in pairs (self.mLayers) do 
-			layer:logic()
+			if layer:isActive() then
+				layer:logic()
+			end
 		end
 	end
-	function self:logic() self:basicLogic() end
 
 	function getWindowWidth() return 320	end
-	function getWindowHeight() return 180	end
+	function getWindowHeight() return 240	end
 
 	--[[
 		-- Method that executes the logic behind the camera
@@ -279,6 +282,8 @@ function GGE_Background:new()
 	function self:setCameraTarget(pObject)
 		self.mCameraTarget = pObject
 	end
+	
+	self.logic = self.basicLogic
 
 	return self
 end

@@ -19,7 +19,39 @@ function GGE_Layer:new(pSpritePack, pAnimationPack, pBackground)
 	self.mAnimationPack	= pAnimationPack	or ""	--Localização do arquivo de animações do layer
 	self.mScrollSpeed	= {x = 1, y = 1}			--Velocidade de deslocamento do layer
 	self.mId			= ""
+	self.mActive		= true
 	
+	--[[
+		-- Method to activate the layer
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	18/10/2010
+	-]]
+	function self:activate()
+		self.mActive = true
+	end
+	--[[
+		-- Method to deactivate the layer
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	18/10/2010
+	-]]
+	function self:deactivate()
+		self.mActive = false
+	end
+	--[[
+		-- Method that returns if the layer is active
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	26/01/2010
+		-- @version	18/10/2010
+		-- @return	bool
+	-]]
+	function self:isActive()
+		return self.mActive
+	end
 	--[[
 		-- Método para setar o id do layer
 		--

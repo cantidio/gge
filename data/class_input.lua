@@ -146,11 +146,21 @@ function GGE_Input:new()
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	26/01/2010
-		-- @version\t22/10/2010
+		-- @version	22/10/2010
 		-- @return	bool
 	-]]
 	function self:button8()
 		return GGE_input_button8()
+	end
+	--[[
+		-- Method that cleans the buffer
+		--
+		-- @author	Cantidio Oliveira Fontes
+		-- @since	27/10/2010
+		-- @version	27/10/2010
+	-]]
+	function self:cleanBuffer()
+		return GGE_input_cleanKeyBuffer()
 	end
 	
 	return self
