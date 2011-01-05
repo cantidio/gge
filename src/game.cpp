@@ -41,13 +41,27 @@ void screenShot()
 	}
 }
 
+//-----------------------------------------------------------------------------------------------------------------
 Game* Game::mSingleton = NULL;
-Game::Game()
+Game::Game(int pArgc, char** pArgv)
 {
 	Gorgon::Core::Log::get().RegisterFormated("C++ -> Game::Game()");
+	if(pArgv != NULL)
+	{
+		for(int i = 0; i < pArgc; ++i)
+		{
+			if(pArgv[i] != NULL)
+			{
+				mArgs.push_back(pArgv[i]);
+			}
+		}
+	}
 	registerLuaFunctions();
 }
-
+std::vector<std::string> Game::getArgs() const
+{
+	return mArgs;
+}
 Game::~Game()
 {
 	Gorgon::Core::Log::get().RegisterFormated("C++ -> Game::~Game()");
@@ -56,12 +70,17 @@ Game::~Game()
 	ResourceManager::AnimationManager::clear();
 }
 
-Game& Game::get()
+void Game::instantiate(int pArgc, char** pArgv)
 {
 	if(mSingleton == NULL)
 	{
-		mSingleton = new Game();
+		mSingleton = new Game(pArgc, pArgv);
 	}
+}
+
+Game& Game::get()
+{
+	instantiate();
 	return *mSingleton;
 }
 
@@ -205,10 +224,5 @@ void Game::run()
 bool Game::isRunning() const
 {
 	return mRunning;
-}
-void Game::console(const std::string& pString)
-{
-	std::cout << pString << std::endl;
-	mScript.executeString(pString);
 }
 

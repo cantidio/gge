@@ -9,7 +9,7 @@ include("tests/background/breakman/breakman_background.lua")
 include("tests/background/lab/lab.lua")
 include("tests/background/muro/muro.lua")
 
-TestGame = class()--Manila Chase Scene
+TestGame = class()	-- Manila Chase Scene
 function TestGame:new()
 	local self = GGE_Game:new()
 	self.mWindow.title		= "TEST - GGE"
@@ -18,12 +18,16 @@ function TestGame:new()
 	self.mVideo.FPS			= 60
 --	self.mVideo.fullScreen	= true
 	self:init()
-	self.BG = DebugRoom:new()
-	self.obj = FrozenShade:new({x=80,y=150})
+	self.BG		= DebugRoom:new()
+	self.obj	= FrozenShade:new({x=80,y=150})
 	self.BG:getLayer(2):addObject( self.obj )
 	self.BG:setCameraTarget(self.obj)
 	
-	
+--	local arg = GGE_game_getArgs()
+--	for k,v in ipairs( arg ) do
+--		print(v)
+--	end
+
 	function self:state()
 		self.BG:draw()
 		self.BG:logic()
@@ -31,6 +35,5 @@ function TestGame:new()
 
 	return self
 end
-
 this = TestGame:new()
 

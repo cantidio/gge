@@ -2,12 +2,10 @@
 #include "../include/console_window.hpp"
 #include <omp.h>
 
-int main()
+int main(int argc, char** argv)
 {
-//	Gorgon::Core::Log::init("gge_log.txt");
-//	Game::get().init();
-//	ConsoleWindow::get();
 	Gorgon::Core::Log::init("gge_log.txt");
+	Game::instantiate(argc,argv);
 	#pragma omp parallel sections
 	{
 		#pragma omp section

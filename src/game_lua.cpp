@@ -2,6 +2,21 @@
 #include "../include/game.hpp"
 namespace GameLua
 {
+	int returnArray(lua_State* L, std::vector<std::string> pStrings)
+	{
+		lua_createtable(L, pStrings.size(), 0);
+		int newTable = lua_gettop(L);
+		for(int i = 0 ; i < pStrings.size(); ++i)
+		{
+			lua_pushstring(L, pStrings[i].c_str());
+			lua_rawseti(L, newTable, i + 1);
+		}
+		return 1;
+	}
+	int GGE_game_getArgs(lua_State* pState)
+	{
+		return returnArray(pState,Game::get().getArgs());
+	}
 	int GGE_game_init(lua_State* pState)
 	{
 		bool noError = Game::get().init
@@ -54,6 +69,7 @@ namespace GameLua
 
 	void registerFunctions(Gorgon::Script::Lua& pScript)
 	{
+		pScript.registerFunction("GGE_game_getArgs"			, GGE_game_getArgs			);
 		pScript.registerFunction("GGE_game_init"			, GGE_game_init				);
 		pScript.registerFunction("GGE_game_halt"			, GGE_game_halt				);
 		pScript.registerFunction("GGE_game_log"				, GGE_game_log				);

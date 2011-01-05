@@ -19,10 +19,11 @@
 class Game
 {
 	protected:
-		Gorgon::Script::Lua	mScript;
-		static Game*		mSingleton;
-		int 				mFPS;
-		bool				mRunning;
+		Gorgon::Script::Lua			mScript;
+		static Game*				mSingleton;
+		int 						mFPS;
+		bool						mRunning;
+		std::vector<std::string>	mArgs;
 		/**
 		 * Método para registrar as funćões em Lua
 		 *
@@ -37,9 +38,9 @@ class Game
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	30/09/2010
-		 * @version	30/09/2010
+		 * @version	05/01/2011
 		 */
-		Game();
+		Game(int pArgc = 0, char** pArgv = NULL);
 		/**
 		 * Método Destrutor
 		 *
@@ -49,9 +50,40 @@ class Game
 		 */
 		~Game();
 	public:
+		/**
+		 * Método que instancia o jogo
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	05/01/2011
+		 * @version	05/01/2011
+		 */
+		static void instantiate(int pArgc = 0, char** pArgv = NULL);
+		/**
+		 * Método para retornar a instancia do game
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	30/09/2010
+		 * @version	30/09/2010
+		 * @return	Game&
+		 */
 		static Game& get();
+		/**
+		 * Método para deletar a instancia do game
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	30/09/2010
+		 * @version	30/09/2010
+		 */
 		static void halt();
-
+		/**
+		 * Método que retorna o vetor de argumentos
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	05/01/2011
+		 * @version	05/01/2011
+		 * @return	std::vector<std::string>
+		 */
+		std::vector<std::string> getArgs() const;
 		/**
 		 * Método que inicializa os valores
 		 *
@@ -71,7 +103,6 @@ class Game
 			const int&			pHeight			= 240	,
 			const bool&			pFullScreen		= false
 		);
-
 		/**
 		 * Método para setar os FPS
 		 *
@@ -80,7 +111,6 @@ class Game
 		 * @version	30/09/2010
 		 */
 		bool setFPS(const int& pFPS);
-
 		/**
 		 * Método para executar o game
 		 *
@@ -89,7 +119,13 @@ class Game
 		 * @version	30/09/2010
 		 */
 		void run();
+		/**
+		 * Método que retorna se o jogo está executando
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	30/09/2010
+		 * @version	30/09/2010
+		 */
 		bool isRunning() const;
-		void console(const std::string& pString);
 };
 #endif
