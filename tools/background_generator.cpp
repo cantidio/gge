@@ -5,6 +5,7 @@
  * Created on December 12, 2009, 2:03 PM
  */
 #include <gorgon++/gorgon.hpp>
+#include <gorgon++/addon/image_loader/magick++/gorgon_image_loader.hpp>
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -168,7 +169,7 @@ void createBgLayer
 					(int)pLayer.tiles[i].position.getY()
 				),
 				1
-			)->getStringValue()
+			).getStringValue()
 		);
 	}
 	
@@ -184,7 +185,7 @@ void createBgLayer
 			tiles.c_str()
 		),
 		1
-	)->getStringValue() << endl;
+	).getStringValue() << endl;
 	
 	pLayer.sprite.save(spritepack);
 	pLayer.animation.save(animationpack);
@@ -230,7 +231,7 @@ void createBg(BG& pBg, Script::Lua& pLua)
 			pBg.layerNumber
 		),
 		1
-	)->getStringValue() << endl;
+	).getStringValue() << endl;
 	file.close();
 }
 
@@ -253,6 +254,8 @@ int main(int argc, char** argv)
 	
 	allegro_init();
 	install_keyboard();
+	
+	ImageLoader::setLoader(new ImageLoaderMagick());
     Gorgon::Video::init("Background Generator",640,480);
 	
 	MSG << lua.getStringVar("msg_welcome") << endl;

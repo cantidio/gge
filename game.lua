@@ -3,6 +3,7 @@ include("tests/char/mature/mature.lua")
 include("tests/char/frozen_shade/frozen_shade.lua")
 include("tests/char/mammon/mammon.lua")
 --BGS
+include("tools/SaveRoom/Castlevania_Save_Room.lua")
 include("tests/background/DebugRoom/DebugRoom.lua")
 include("tests/background/saveroom/SaveRoom.lua")
 include("tests/background/breakman/breakman_background.lua")
@@ -18,10 +19,10 @@ function TestGame:new()
 	self.mVideo.FPS			= 60
 --	self.mVideo.fullScreen	= true
 	self:init()
-	self.BG		= DebugRoom:new()
-	self.obj	= FrozenShade:new({x=80,y=150})
-	self.BG:getLayer(2):addObject( self.obj )
-	self.BG:setCameraTarget(self.obj)
+	self.BG		= Castlevania_Save_Room:new()
+--	self.obj	= FrozenShade:new({x=80,y=150})
+--	self.BG:getLayer(2):addObject( self.obj )
+--	self.BG:setCameraTarget(self.obj)
 	
 --	local arg = GGE_game_getArgs()
 --	for k,v in ipairs( arg ) do

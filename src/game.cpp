@@ -1,6 +1,6 @@
 #include "../include/game.hpp"
 #include "../include/console_window.hpp"
-
+#include <gorgon++/addon/image_loader/gorgon++/include/gorgon_image_loader_autodetect.hpp>
 
 //-------------------------------------------------------------------------------TIMER--------------------------------------
 int fps			= 0;
@@ -13,7 +13,7 @@ END_OF_FUNCTION(game_time);
 
 void trySaveScreenShot(const int& pShotNumber)
 {
-	std::stringstream out;
+	/*std::stringstream out;
 	out << "shots/shot" << pShotNumber << ".bmp";
 	Gorgon::Core::File file(out.str(),std::ios::in | std::ios::binary);
 	
@@ -28,7 +28,7 @@ void trySaveScreenShot(const int& pShotNumber)
 		file.close();
 		imageFormat.save(static_cast<Gorgon::Image&>(Gorgon::Video::get()),out.str());
 		Gorgon::Core::Log::get().RegisterFormated("C++ -> ScreenShot saved: %s",out.str().c_str());
-	}
+	}*/
 }
 
 void screenShot()
@@ -128,6 +128,7 @@ bool Game::init
     install_mouse();
     install_timer();
 	Input::get();//just to init the input
+	Gorgon::ImageLoader::setLoader(new Gorgon::ImageLoaderAutodetect());//inicia o loader padrão da gorgon
 	return true;
 }
 
