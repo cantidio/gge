@@ -15,7 +15,7 @@ animationpack = {
 		group			= 5,
 		index			= 0,
 		looping			= true,
-		loopFrame		= 3,
+		loopFrame		= 0,
 		repeatNumber	= -1,
 		frames			= {
 			{
@@ -44,7 +44,7 @@ animationpack = {
 		group			= 10,
 		index			= 0,
 		looping			= true,
-		loopFrame		= 3,
+		loopFrame		= 0,
 		repeatNumber	= -1,
 		frames			= {
 			{
@@ -73,7 +73,7 @@ animationpack = {
 		group			= 15,
 		index			= 0,
 		looping			= true,
-		loopFrame		= 7,
+		loopFrame		= 0,
 		repeatNumber	= -1,
 		frames			= {
 			{
@@ -122,7 +122,7 @@ animationpack = {
 		group			= 20,
 		index			= 0,
 		looping			= true,
-		loopFrame		= 7,
+		loopFrame		= 0,
 		repeatNumber	= -1,
 		frames			= {
 			{
@@ -171,7 +171,7 @@ animationpack = {
 		group			= 25,
 		index			= 0,
 		looping			= true,
-		loopFrame		= 7,
+		loopFrame		= 0,
 		repeatNumber	= -1,
 		frames			= {
 			{
@@ -220,7 +220,7 @@ animationpack = {
 		group			= 30,
 		index			= 0,
 		looping			= true,
-		loopFrame		= 7,
+		loopFrame		= 0,
 		repeatNumber	= -1,
 		frames			= {
 			{
@@ -269,7 +269,7 @@ animationpack = {
 		group			= 35,
 		index			= 0,
 		looping			= true,
-		loopFrame		= 7,
+		loopFrame		= 0,
 		repeatNumber	= -1,
 		frames			= {
 			{
@@ -318,7 +318,7 @@ animationpack = {
 		group			= 40,
 		index			= 0,
 		looping			= true,
-		loopFrame		= 7,
+		loopFrame		= 0,
 		repeatNumber	= -1,
 		frames			= {
 			{
