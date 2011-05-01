@@ -1,7 +1,8 @@
 --chars
-include("tests/char/mature/mature.lua")
-include("tests/char/frozen_shade/frozen_shade.lua")
-include("tests/char/mammon/mammon.lua")
+include("tests/char/Foxy/foxy.lua")
+--include("tests/char/mature/mature.lua")
+--include("tests/char/frozen_shade/frozen_shade.lua")
+--include("tests/char/mammon/mammon.lua")
 --BGS
 --include("tools/SaveRoom/Castlevania_Save_Room.lua")
 include("tests/background/Rugal/rugal.lua")
@@ -22,9 +23,9 @@ function TestGame:new()
 	self:init()
 --	self.BG		= DebugRoom:new()
 	self.BG		= RugalBG:new()
---	self.obj	= FrozenShade:new({x=80,y=150})
---	self.BG:getLayer(2):addObject( self.obj )
---	self.BG:setCameraTarget(self.obj)
+	self.obj	= Foxy:new({x=80,y=150})
+	self.BG:getLayer(2):addObject( self.obj )
+	self.BG:setCameraTarget(self.obj)
 	
 --	local arg = GGE_game_getArgs()
 --	for k,v in ipairs( arg ) do

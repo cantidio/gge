@@ -17,7 +17,7 @@ engine:
 	g++ -c src/tile_lua.cpp
 	g++ -c src/game_lua.cpp
 	mv *.o obj/
-	g++ src/main.cpp obj/*.o -o gge.exe  `gorgon-config --libs --addons` -lguichan -lguichan_allegro -fopenmp
+	g++ src/main.cpp obj/*.o -o gge.exe  `gorgon-config --libs --addons` -lguichan -lguichan_allegro -fopenmp -lSDL_image
 
 clean:
 	@rm -rf main.e

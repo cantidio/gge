@@ -97,7 +97,7 @@ end
 RugalBG = class()
 function RugalBG:new()
 	local self = GGE_Background:new()
-	self.mWidth			= 432
+	self.mWidth			= 720
 	self.mHeight		= 240
 	self.mPosition.x	= 0
 	self.mPosition.y	= 0
@@ -108,13 +108,11 @@ function RugalBG:new()
 	
 	function self:logic()
 		self:basicLogic()
-		if self.mInput:buttonRight() then
-			self:addPosition({x=2, y=0})
-		elseif self.mInput:buttonLeft() then
-			self:subPosition({x=2, y=0})
-		end
-		--self:addPosition({x=1,y=1})
-		--print(self:getPosition().x .." " .. self:getPosition().y)
+--		if self.mInput:buttonRight() then
+--			self:addPosition({x=2, y=0})
+--		elseif self.mInput:buttonLeft() then
+--			self:subPosition({x=2, y=0})
+--		end
 	end
 	return self
 end

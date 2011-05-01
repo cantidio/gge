@@ -11,7 +11,7 @@ GGE_Layer = class()
 	-- @param	GGE_Background pBackground	, cenário ao qual o layer está inserido
 -]]
 function GGE_Layer:new(pSpritePack, pAnimationPack, pBackground)
-	local self			= {}
+	local self			= { }
 	self.mBackground	= pBackground				--Referencia ao cenário do layer
 	self.mTiles			= { }						--Vetor com os tiles do layer
 	self.mObjects		= { }						--Vetor com os objetos do layer
