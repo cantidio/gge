@@ -156,6 +156,7 @@ function GGE_Layer:new(pSpritePack, pAnimationPack, pBackground)
 	function self:addObject(pObject)
 		pObject:setLayer(this)
 		self.mObjects[#self.mObjects + 1] = pObject
+		return pObject
 	end
 	--[[
 		--Função que retorna o número de objects do layer

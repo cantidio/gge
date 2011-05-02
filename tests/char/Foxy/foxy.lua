@@ -22,7 +22,9 @@ function Foxy:new(pPosition, pLayer)
 
 	function self:stateStanding()
 		if self.mInput:buttonRight() or self.mInput:buttonLeft() then
-		self.state = self.stateWalkInit
+			self.state = self.stateWalkInit
+		elseif self.mInput:button1() then
+			self:stateAttackInit(210)
 		end
 	end
 
@@ -50,6 +52,17 @@ function Foxy:new(pPosition, pLayer)
 				self:changeAnimation(21,0)
 			end
 		else
+			self.state = self.stateStandInit
+		end
+	end
+	
+	function self:stateAttackInit(anim)
+		self:changeAnimation(anim)
+		self.state = self.stateAttack
+	end
+	
+	function self:stateAttack()
+		if self:getFrameOn() >= 8 then
 			self.state = self.stateStandInit
 		end
 	end

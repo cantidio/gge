@@ -23,7 +23,10 @@ function TestGame:new()
 	self:init()
 --	self.BG		= DebugRoom:new()
 	self.BG		= RugalBG:new()
-	self.obj	= Foxy:new({x=80,y=150})
+	self.obj	= Foxy:new({x=160,y=220})
+
+	
+	
 	self.BG:getLayer(2):addObject( self.obj )
 	self.BG:setCameraTarget(self.obj)
 	
@@ -41,3 +44,26 @@ function TestGame:new()
 end
 this = TestGame:new()
 
+An = 1
+this.obj.logic = function()
+	this.obj:basicLogic()
+	this.obj:state()
+	if this.obj.mInput:buttonUp() and An > 0 then
+		An = An - 1
+		this.obj:changeAnimationByIndex(An)
+	elseif this.obj.mInput:buttonDown() and An < 257 then
+		An = An + 1
+		this.obj:changeAnimationByIndex(An)
+    end
+end
+
+a = this.BG:getLayer(2):addObject( Foxy:new({x=260,y=220}) )
+a.logic = function()
+	a:basicLogic()
+	if a:getPosition().x > this.obj:getPosition().x then
+		a:setMirroring( Mirroring.HFlip)
+	else
+		a:setMirroring( Mirroring.Normal)
+	end
+end
+	
