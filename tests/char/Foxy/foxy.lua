@@ -15,15 +15,45 @@ function Foxy:new(pPosition, pLayer)
 	end
 
 	function self:stateStandInit()
-		print("mature state: stand")
+		print("Foxy state: stand")
 		self:changeAnimation(0,0)
 		self.state = self.stateStanding
 	end
 
 	function self:stateStanding()
-		
+		if self.mInput:buttonRight() or self.mInput:buttonLeft() then
+		self.state = self.stateWalkInit
+		end
 	end
 
+	function self:stateWalkInit()
+		print("Foxy state: walk")
+		if self.mInput:buttonRight() then
+			self:changeAnimation(20,0)
+		else
+			self:changeAnimation(21,0)
+		end
+		self.state = self.stateWalking
+	end
+	
+	function self:stateWalking()
+		anim = self:getAnimationOn()
+		
+		if self.mInput:buttonRight() then
+			self:addPosition({x=2,y=0})
+			if anim.group ~= 20 then
+				self:changeAnimation(20,0)
+			end
+		elseif self.mInput:buttonLeft() then
+			self:subPosition({x=2,y=0})
+			if anim.group ~= 21 then
+				self:changeAnimation(21,0)
+			end
+		else
+			self.state = self.stateStandInit
+		end
+	end
+	
 	function self:logic()
 		self:basicLogic()
 		if self.mInput:buttonDown()  then
@@ -32,12 +62,6 @@ function Foxy:new(pPosition, pLayer)
 			self:subPosition({x=0,y=3})
 		end
 		
-		if self.mInput:buttonRight() then
-			self:addPosition({x=3,y=0})
-		elseif self.mInput:buttonLeft() then
-			self:subPosition({x=3,y=0})
-		end
-
 		self:state()
 	end
 	

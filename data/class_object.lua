@@ -222,7 +222,7 @@ function GGE_Object:new(
 		-- @return	{group, index, realIndex}
 	-]]
 	function self:getAnimationOn()
-		local Real Group, Index = self.mObject:getAnimationOn()
+		local Real, Group, Index = self.mObject:getAnimationOn()
 		return  { group = Group, index = Index, realIndex = Real }
 	end
 	--[[
