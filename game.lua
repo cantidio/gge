@@ -58,6 +58,7 @@ this.obj.logic = function()
 end
 
 a = this.BG:getLayer(2):addObject( Foxy:new({x=260,y=220}) )
+a:changeAnimation(195,0)
 a.logic = function()
 	a:basicLogic()
 	if a:getPosition().x > this.obj:getPosition().x then
