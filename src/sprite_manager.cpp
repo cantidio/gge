@@ -2,10 +2,9 @@
 
 namespace ResourceManager
 {
-	using namespace Gorgon;
 	std::vector<SpriteId> SpriteManager::mTable;
 
-	Gorgon::SpritePack& SpriteManager::load(const std::string& pSpritePackName)
+	Gorgon::Graphic::SpritePack& SpriteManager::load(const std::string& pSpritePackName)
 	{
 //		Gorgon::Core::Log::get().RegisterFormated("C++ -> SpriteManager::load()");
 		for(int i = 0; i < mTable.size(); ++i)
@@ -22,7 +21,7 @@ namespace ResourceManager
 		SpriteId spriteId;
 		spriteId.use		= 1;
 		spriteId.fileName	= pSpritePackName;
-		spriteId.spritePack	= new Gorgon::SpritePack(pSpritePackName);
+		spriteId.spritePack	= new Gorgon::Graphic::SpritePack(pSpritePackName);
 		mTable.push_back(spriteId);
 		return *spriteId.spritePack;
 	}

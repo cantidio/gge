@@ -39,9 +39,9 @@ namespace ResourceManager
 	 */
 	typedef struct
 	{
-		Gorgon::SpritePack* spritePack;
-		std::string			fileName;
-		int					use;
+		Gorgon::Graphic::SpritePack* spritePack;
+		std::string fileName;
+		int use;
 	}SpriteId;
 	
 	/**
@@ -67,9 +67,9 @@ namespace ResourceManager
 			 * @since	11/03/2009
 			 * @version	29/09/2010
 			 * @param	const std::string& pSpritePackName, nome do spritePack
-			 * @return	Gorgon::SpritePack&
+			 * @return	Gorgon::Graphic::SpritePack&
 			 */
-			static Gorgon::SpritePack& load(const std::string& pSpritePackName);
+			static Gorgon::Graphic::SpritePack& load(const std::string& pSpritePackName);
 			/**
 			 * Método para retirar da memória o spritePack carregado
 			 *

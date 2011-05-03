@@ -11,7 +11,7 @@ Object::Object
 	
 	mSpritePackName		= pSpritePackName;
 	mAnimationPackName	= pAnimationPackName;
-	mAnimationHandler	= new Gorgon::AnimationHandler
+	mAnimationHandler	= new Gorgon::Graphic::AnimationHandler
 	(
 		ResourceManager::SpriteManager::load(mSpritePackName),
 		ResourceManager::AnimationManager::load(mAnimationPackName)
@@ -28,7 +28,7 @@ Object::~Object()
 	delete mAnimationHandler;
 }
 
-void Object::draw(const Gorgon::Point& mPosition, const Gorgon::Mirroring& pMirroring) const
+void Object::draw(const Gorgon::Point& mPosition, const Gorgon::Graphic::Mirroring& pMirroring) const
 {
 /*	if(mAfterImageMethod != NULL)
 	{
@@ -43,7 +43,7 @@ void Object::draw(const Gorgon::Point& mPosition, const Gorgon::Mirroring& pMirr
 */
 	mAnimationHandler->draw
 	(
-		Gorgon::Video::get(),
+		Gorgon::Graphic::Video::get(),
 		(int)mPosition.getX(),
 		(int)mPosition.getY(),
 		pMirroring

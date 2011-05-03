@@ -5,8 +5,8 @@ TextWindow::TextWindow
 (
 	const int& pWidth,
 	const int pHeight,
-	const Gorgon::Color& pColor
-) : Gorgon::Image(pWidth,pHeight,32)
+	const Gorgon::Graphic::Color& pColor
+) : Gorgon::Graphic::Image(pWidth,pHeight,32)
 {
 	mTextColor = pColor;
 }
@@ -17,7 +17,7 @@ void TextWindow::init
 (
 	const int& pWidth,
 	const int pHeight,
-	const Gorgon::Color& pColor
+	const Gorgon::Graphic::Color& pColor
 )
 {
 	if(!mSingleton)
@@ -75,5 +75,5 @@ void TextWindow::add(const char* pText, ...)
 
 void TextWindow::show() const
 {
-	Gorgon::Video::get().drawImage(*this,0,0);
+	Gorgon::Graphic::Video::get().drawImage(*this,0,0);
 }

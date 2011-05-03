@@ -62,13 +62,13 @@ int ObjectLua::draw(lua_State* pState)
 			lua_tointeger(pState,2),
 			lua_tointeger(pState,3)
 		);
-		Gorgon::Mirroring mirror;
+		Gorgon::Graphic::Mirroring mirror;
 		switch((int)lua_tointeger(pState,4))
 		{
-			case 0:		mirror = Gorgon::Mirroring::Normal;	break;
-			case 1:		mirror = Gorgon::Mirroring::HFlip;	break;
-			case 2:		mirror = Gorgon::Mirroring::VFlip;	break;
-			default:	mirror = Gorgon::Mirroring::VHFlip;	break;
+			case 0:		mirror = Gorgon::Graphic::Mirroring::Normal;	break;
+			case 1:		mirror = Gorgon::Graphic::Mirroring::HFlip;		break;
+			case 2:		mirror = Gorgon::Graphic::Mirroring::VFlip;		break;
+			default:	mirror = Gorgon::Graphic::Mirroring::VHFlip;	break;
 		}
 		object->draw( position, mirror );
 	}

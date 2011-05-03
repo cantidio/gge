@@ -2,19 +2,19 @@
 
 Tile::Tile
 (
-	Gorgon::SpritePack&		pSpritePack,
-	Gorgon::AnimationPack&	pAnimationPack,
-	const int&				pAnimationNumber
+	Gorgon::Graphic::SpritePack&	pSpritePack,
+	Gorgon::Graphic::AnimationPack&	pAnimationPack,
+	const int&						pAnimationNumber
 )
 {
-	mAnimationHandler	= new Gorgon::AnimationHandler(pSpritePack, pAnimationPack);
+	mAnimationHandler	= new Gorgon::Graphic::AnimationHandler(pSpritePack, pAnimationPack);
 	mAnimationHandler->optimize();
 	mAnimationHandler->changeAnimation(pAnimationNumber,true);
 }
 
 Tile::Tile(const Tile& pOrig)
 {
-	mAnimationHandler	= new Gorgon::AnimationHandler(*pOrig.mAnimationHandler);
+	mAnimationHandler	= new Gorgon::Graphic::AnimationHandler(*pOrig.mAnimationHandler);
 }
 
 Tile::~Tile()
@@ -44,7 +44,7 @@ void Tile::draw(const Gorgon::Point& pPosition)
 {
 	mAnimationHandler->draw
 	(
-		Gorgon::Video::get(),
+		Gorgon::Graphic::Video::get(),
 		pPosition.getX(),
 		pPosition.getY()
 	);

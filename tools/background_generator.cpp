@@ -27,8 +27,8 @@ typedef struct
 {
 	int tileWidth;
 	int tileHeight;
-	SpritePack		sprite;
-	AnimationPack	animation;
+	Graphic::SpritePack		sprite;
+	Graphic::AnimationPack	animation;
 	string imageName;
 	vector<Tile> tiles;
 }Layer;
@@ -53,7 +53,7 @@ typedef struct
 void createTileSheet(const string& pImageName, Layer& pLayer)
 {
 	const int rows = (int)sqrt(pLayer.sprite.getSize()) + 1;
-	Image aux(pLayer.tileWidth * rows + rows, pLayer.tileHeight* rows + rows);
+	Graphic::Image aux(pLayer.tileWidth * rows + rows, pLayer.tileHeight* rows + rows);
 	aux.clear(0xFF00FF);
 	int h,w,i;
 	for(i = h = 0; h < rows && i < pLayer.sprite.getSize(); ++h)
@@ -83,15 +83,15 @@ void createTileSheet(const string& pImageName, Layer& pLayer)
  */
 void createBgLayerFromImage(Layer& pLayer)
 {
-	Image image(pLayer.imageName);
+	Graphic::Image image(pLayer.imageName);
 	register int h,w,i;
 
 	for(h = 0; h < image.getHeight(); h+=pLayer.tileHeight)
 	{
 		for(w = 0; w < image.getWidth(); w+=pLayer.tileWidth)
 		{
-			Image	tileimg(pLayer.tileWidth, pLayer.tileHeight);
-			Tile	tile;
+			Graphic::Image	tileimg(pLayer.tileWidth, pLayer.tileHeight);
+			Tile			tile;
 			tile.position = Point(w,h);
 			tileimg.blitImage
 			(
@@ -109,22 +109,22 @@ void createBgLayerFromImage(Layer& pLayer)
 				}
 				if(i >= pLayer.sprite.getSize())
 				{
-					pLayer.sprite.add(Sprite(tileimg,w,h));
-					pLayer.animation.add(Animation(w,h));
-					pLayer.animation[i].add(Frame(w,h,-1));
+					pLayer.sprite.add(Graphic::Sprite(tileimg,w,h));
+					pLayer.animation.add(Graphic::Animation(w,h));
+					pLayer.animation[i].add(Graphic::Frame(w,h,-1));
 				}
 				tile.animation = i;
 				pLayer.tiles.push_back(tile);
 
-				Video::get().drawImage(tileimg,w,h);
-				Video::get().show();
+				Graphic::Video::get().drawImage(tileimg,w,h);
+				Graphic::Video::get().show();
 			}
 		}
 	}
 	while(!key[KEY_ESC])
 	{
-		Video::get().drawImage(image,0,0);
-		Video::get().show();
+		Graphic::Video::get().drawImage(image,0,0);
+		Graphic::Video::get().show();
 	}
 }
 /**
@@ -255,8 +255,8 @@ int main(int argc, char** argv)
 	allegro_init();
 	install_keyboard();
 	
-	ImageLoader::setLoader(new ImageLoaderMagick());
-    Gorgon::Video::init("Background Generator",640,480);
+	Graphic::ImageLoader::setLoader(new ImageLoaderMagick());
+	Graphic::Video::init("Background Generator",640,480);
 	
 	MSG << lua.getStringVar("msg_welcome") << endl;
 	MSG << lua.getStringVar("msg_input_bg_name") << ":" << endl;

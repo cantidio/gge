@@ -17,7 +17,7 @@ ConsoleWindow::ConsoleWindow()
 	imageLoader		= new gcn::AllegroImageLoader();
 	gcn::Image::setImageLoader(imageLoader);
 	graphics		= new gcn::AllegroGraphics();
-	graphics->setTarget(Gorgon::Video::get().getImg());
+	graphics->setTarget(Gorgon::Graphic::Video::get().getImg());
 	input			= new gcn::AllegroInput();
 	gui 			= new gcn::Gui();
 	gui->setGraphics(graphics);
@@ -30,7 +30,7 @@ ConsoleWindow::ConsoleWindow()
 	
 	top = new gcn::Window("Lua Console");
 	top->setMovable(false);
-	top->setDimension(gcn::Rectangle(0,0,Gorgon::Video::get().getWidth(),Gorgon::Video::get().getHeight()));
+	top->setDimension(gcn::Rectangle(0,0,Gorgon::Graphic::Video::get().getWidth(),Gorgon::Graphic::Video::get().getHeight()));
 	gui->setTop(top);
 	
 	textBox = new gcn::TextBox("");
@@ -38,7 +38,7 @@ ConsoleWindow::ConsoleWindow()
 	top->add(textBox); 
 	
 	label = new gcn::Label("To execute your code hit F5.");
-	label->setPosition(10,Gorgon::Video::get().getHeight()- 40);
+	label->setPosition(10,Gorgon::Graphic::Video::get().getHeight()- 40);
 	top->add(label);
 }
 
@@ -88,8 +88,8 @@ void ConsoleWindow::draw()
 		gcn::Rectangle
 		(
 			0,0,
-			Gorgon::Video::get().getWidth(),
-			Gorgon::Video::get().getHeight() - 40
+			Gorgon::Graphic::Video::get().getWidth(),
+			Gorgon::Graphic::Video::get().getHeight() - 40
 		)
 	);
 	gui->draw();

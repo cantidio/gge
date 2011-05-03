@@ -2,10 +2,9 @@
 
 namespace ResourceManager
 {
-	using namespace Gorgon;
 	std::vector<AnimationId> AnimationManager::mTable;
 	
-	AnimationPack& AnimationManager::load(const std::string& pAnimationPackName)
+	Gorgon::Graphic::AnimationPack& AnimationManager::load(const std::string& pAnimationPackName)
 	{
 //		Gorgon::Core::Log::get().RegisterFormated("C++ -> AnimationManager::load()");
 		for(int i = 0; i < mTable.size(); ++i)
@@ -22,7 +21,7 @@ namespace ResourceManager
 		AnimationId animationId;
 		animationId.use				= 1;
 		animationId.fileName		= pAnimationPackName;
-		animationId.animationPack	= new AnimationPack(pAnimationPackName);
+		animationId.animationPack	= new Gorgon::Graphic::AnimationPack(pAnimationPackName);
 		mTable.push_back(animationId);
 		return *animationId.animationPack;
 	}

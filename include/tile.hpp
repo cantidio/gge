@@ -42,7 +42,7 @@ class Tile
 		/**
 		 * Handler de animação do objeto
 		 */
-		Gorgon::AnimationHandler* mAnimationHandler;
+		Gorgon::Graphic::AnimationHandler* mAnimationHandler;
 	public:
 		/**
 		 * Método Construtor
@@ -56,9 +56,9 @@ class Tile
 		 */
 		Tile
 		(
-			Gorgon::SpritePack&		pSpritePack,
-			Gorgon::AnimationPack&	pAnimationPack,
-			const int&				pAnimationNumber
+			Gorgon::Graphic::SpritePack&	pSpritePack,
+			Gorgon::Graphic::AnimationPack&	pAnimationPack,
+			const int&						pAnimationNumber
 		);
 		/**
 		 * Método Construtor de Cópia

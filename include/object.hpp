@@ -53,74 +53,24 @@ class Layer;
 class Object
 {
 	protected:
-		/**
-		 * Nome do arquivo de sprites do objeto
-		 */
-		std::string mSpritePackName;
-		/**
-		 * Nome do arquivo de animações do objeto
-		 */
-		std::string mAnimationPackName;
-		/**
-		 * Nome do arquivo de colisões do objeo
-		 */
-		std::string mColisionPackName;
-		/**
-		 * Nome do arquivo da paleta de cores do objeto
-		 */
-		std::string mPaletteName;
-		/**
-		 * Ponteiro para a paleta de cores do objeto
-		 */
-		Gorgon::Palette* mPalette;
-		/**
-		 * Handler de animação do objeto
-		 */
-		Gorgon::AnimationHandler* mAnimationHandler;
-		/**
-		 * Ponteiro para o método de renderização das afterImages
-		 */
-//		void (Object::*mAfterImageMethod)(const int&)const;
-		/**
-		 * Variável que guarda se o sistema de afterImages está habilitado
-		 */
-//		bool mAfterImageEnabled;
-		/**
-		 * Delay das afterImages
-		 */
-//		int	mAfterImageDelay;
-		/**
-		 * Número de afterImages
-		 */
-//		int mAfterImageNumber;
-		/**
-		 * Delay atual das afterImages
-		 */
-//		int mAfterImageDelayInUse;
-		/**
-		 * Cor a ser adicionada no método de add
-		 */
-//		Gorgon::Color mAfterImageColorAdd;
-		/**
-		 * Cor a ser subtraída no método de add
-		 */
-//		Gorgon::Color mAfterImageColorSub;
-		/**
-		 * Porcentagem de transparência das afterImages
-		 */
-//		float mAfterImageTrans;
-		/**
-		 * Variável que guarda as ultimas posições do objeto
-		 */
-//		std::vector<Gorgon::Point>			mLastPositions;
-		/**
-		 * Variável que guarda as últimas direções do objeto
-		 */
-//		std::vector<Gorgon::Mirroring>		mLastDirections;
-		/**
-		 * Variável que guarda os ponteiros dos últimos sprites usados
-		 */
-//		std::vector<const Gorgon::Sprite*>	mLastSprites;
+		std::string mSpritePackName;							/**<< Nome do arquivo de sprites do objeto*/
+		std::string mAnimationPackName;							/**<< Nome do arquivo de animações do objeto*/
+		std::string mColisionPackName;							/**<< Nome do arquivo de colisões do objeo*/
+		std::string mPaletteName;								/**<< Nome do arquivo da paleta de cores do objeto*/
+		Gorgon::Graphic::Palette* mPalette;						/**<< Ponteiro para a paleta de cores do objeto*/
+		Gorgon::Graphic::AnimationHandler* mAnimationHandler;	/**<< Handler de animação do objeto*/
+		
+//		void (Object::*mAfterImageMethod)(const int&)const;		/**<< Ponteiro para o método de renderização das afterImages*/
+//		bool mAfterImageEnabled;								/**<< Variável que guarda se o sistema de afterImages está habilitado*/
+//		int	mAfterImageDelay;									/**<< Delay das afterImages*/
+//		int mAfterImageNumber;									/**<< Número de afterImages*/
+//		int mAfterImageDelayInUse;								/**<< Delay atual das afterImages*/
+//		Gorgon::Color mAfterImageColorAdd;						/**<< Cor a ser adicionada no método de add*/
+//		Gorgon::Color mAfterImageColorSub;						/**<< Cor a ser subtraída no método de add*/
+//		float mAfterImageTrans;									/**<< Porcentagem de transparência das afterImages*/
+//		std::vector<Gorgon::Point>			mLastPositions;		/**<< Variável que guarda as ultimas posições do objeto*/
+//		std::vector<Gorgon::Mirroring>		mLastDirections;	/**<< Variável que guarda as últimas direções do objeto*/
+//		std::vector<const Gorgon::Sprite*>	mLastSprites;		/**<< Variável que guarda os ponteiros dos últimos sprites usados*/
 		
 	public:
 		/**
@@ -154,7 +104,7 @@ class Object
 		 * @param	const Point&		pPosition	, posicão a desenhar o objeto
 		 * @param	const Mirroring&	pMirroring	, espelhamento a desenhar o objeto
 		 */
-		void draw(const Gorgon::Point& mPosition, const Gorgon::Mirroring& pMirroring) const;
+		void draw(const Gorgon::Point& mPosition, const Gorgon::Graphic::Mirroring& pMirroring) const;
 
 		/**
 		 * Método que realiza as operações lógicas do objeto

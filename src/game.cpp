@@ -118,7 +118,7 @@ bool Game::init
 	install_int( frame_rate, 1000 );
 	install_int_ex(game_time, BPS_TO_TIMER(mFPS));
 	
-	Gorgon::Video::init
+	Gorgon::Graphic::Video::init
 	(
 		pWindowTitle,
 		pWidth,
@@ -172,12 +172,12 @@ void Game::run()
 			while(timer >= 0 && !key[KEY_ESC])
 			{
 				screenShot();
-				Gorgon::Video::get().clear(0xAA0BDD);
+				Gorgon::Graphic::Video::get().clear(0xAA0BDD);
 				if(state==0)
 				{
 					//executa funcao logic do mal aqui
 					mScript.function("GGE_game_runStep");
-					Gorgon::Video::get().drawText(10,10,0xFF0000,-1,"FPS: %d",fps_antigo);
+					Gorgon::Graphic::Video::get().drawText(10,10,0xFF0000,-1,"FPS: %d",fps_antigo);
 					
 					if(key[KEY_F2])
 					{
@@ -209,7 +209,7 @@ void Game::run()
 		
 				//TextWindow::get().show();
 				
-				Gorgon::Video::get().show();
+				Gorgon::Graphic::Video::get().show();
 				--timer;
 				++fps;
 			}

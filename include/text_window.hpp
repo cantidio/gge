@@ -35,7 +35,7 @@
  * @since	10/07/2009
  * @version	10/07/2009
  */
-class TextWindow : public Gorgon::Image
+class TextWindow : public Gorgon::Graphic::Image
 {
 	private:
 		/**
@@ -45,7 +45,7 @@ class TextWindow : public Gorgon::Image
 		/**
 		 * Variável que guarda a cor do texto a ser escrito
 		 */
-		Gorgon::Color mTextColor;
+		Gorgon::Graphic::Color mTextColor;
 
 		/**
 		 * Método Construtor
@@ -61,7 +61,7 @@ class TextWindow : public Gorgon::Image
 		(
 			const int& pWidth,
 			const int pHeight,
-			const Gorgon::Color& pColor
+			const Gorgon::Graphic::Color& pColor
 		);
 		/**
 		 * Método Destrutor
@@ -86,7 +86,7 @@ class TextWindow : public Gorgon::Image
 		(
 			const int& pWidth			= 160,
 			const int pHeight			= 120,
-			const Gorgon::Color& pColor = Gorgon::Color(255,255,255)
+			const Gorgon::Graphic::Color& pColor = Gorgon::Graphic::Color(255,255,255)
 		);
 		/**
 		 * Método para destruir a instância única da classe
