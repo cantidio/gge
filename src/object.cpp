@@ -44,8 +44,7 @@ void Object::draw(const Gorgon::Point& mPosition, const Gorgon::Graphic::Mirrori
 	mAnimationHandler->draw
 	(
 		Gorgon::Graphic::Video::get(),
-		(int)mPosition.getX(),
-		(int)mPosition.getY(),
+		mPosition,
 		pMirroring
 	);
 }
