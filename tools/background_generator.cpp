@@ -63,8 +63,11 @@ void createTileSheet(const string& pImageName, Layer& pLayer)
 			aux.drawImage
 			(
 				pLayer.sprite[i],
-				w + pLayer.tileWidth * w,
-				h + pLayer.tileHeight * h
+				Point
+				(
+					w + pLayer.tileWidth * w,
+					h + pLayer.tileHeight * h
+				)
 			);
 		}
 	}
@@ -96,7 +99,8 @@ void createBgLayerFromImage(Layer& pLayer)
 			tileimg.blitImage
 			(
 				image,
-				0, 0, w, h,
+				Point(0, 0),
+				Point(w, h),
 				pLayer.tileWidth,
 				pLayer.tileHeight
 			);
@@ -116,14 +120,14 @@ void createBgLayerFromImage(Layer& pLayer)
 				tile.animation = i;
 				pLayer.tiles.push_back(tile);
 
-				Graphic::Video::get().drawImage(tileimg,w,h);
+				Graphic::Video::get().drawImage(tileimg,Point(w,h));
 				Graphic::Video::get().show();
 			}
 		}
 	}
 	while(!key[KEY_ESC])
 	{
-		Graphic::Video::get().drawImage(image,0,0);
+		Graphic::Video::get().drawImage(image,Point(0,0));
 		Graphic::Video::get().show();
 	}
 }
