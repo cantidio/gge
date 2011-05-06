@@ -17,7 +17,7 @@ engine:
 	g++ -c src/tile_lua.cpp
 	g++ -c src/game_lua.cpp
 	mv *.o obj/
-	g++ src/main.cpp obj/*.o -o gge.exe  `gorgon-config --libs --addons --addons_sdl --addons_magick` -lguichan -lguichan_allegro -fopenmp
+	g++ src/main.cpp obj/*.o -o gge.exe  `gorgon-config --libs --addons --addon_sdl --addon_magick` -lguichan -lguichan_allegro -fopenmp
 
 clean:
 	@rm -rf main.e
@@ -28,4 +28,4 @@ clean:
 tools: bgGen
 
 bgGen:
-	g++ tools/background_generator.cpp -o tools/background_generator.exe `gorgon-config --libs --addons --addons_sdl --addons_magick` 
+	g++ tools/background_generator.cpp -o tools/background_generator.exe `gorgon-config --libs --addons --addon_sdl --addon_magick` 

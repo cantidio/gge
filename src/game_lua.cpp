@@ -38,9 +38,9 @@ namespace GameLua
 	
 	int GGE_game_log(lua_State* pState)
 	{
-		Gorgon::Core::Log::get().RegisterFormated
+		Gorgon::Core::Log::get().writeFormatted
 		(
-			"LUA -> %s",lua_tostring(pState,1)
+			"LUA -> %s\n",lua_tostring(pState,1)
 		);
 		return 0;
 	}

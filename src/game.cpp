@@ -27,7 +27,7 @@ void trySaveScreenShot(const int& pShotNumber)
 		Gorgon::ImageFormatBmp imageFormat;
 		file.close();
 		imageFormat.save(static_cast<Gorgon::Image&>(Gorgon::Video::get()),out.str());
-		Gorgon::Core::Log::get().RegisterFormated("C++ -> ScreenShot saved: %s",out.str().c_str());
+		Gorgon::Core::Log::get().writeFormatted("C++ -> ScreenShot saved: %s",out.str().c_str());
 	}*/
 }
 
@@ -35,7 +35,7 @@ void screenShot()
 {
 	if(key[KEY_F12])
 	{
-		Gorgon::Core::Log::get().RegisterFormated("C++ -> Trying to take a Screenshot...");
+		Gorgon::Core::Log::get().write(std::string("C++ -> Trying to take a Screenshot..."));
 		trySaveScreenShot(0);
 		key[KEY_F12] = 0;
 	}
@@ -45,7 +45,7 @@ void screenShot()
 Game* Game::mSingleton = NULL;
 Game::Game(int pArgc, char** pArgv)
 {
-	Gorgon::Core::Log::get().RegisterFormated("C++ -> Game::Game()");
+	Gorgon::Core::Log::get().write(std::string("C++ -> Game::Game()"));
 	if(pArgv != NULL)
 	{
 		for(int i = 0; i < pArgc; ++i)
@@ -64,7 +64,7 @@ std::vector<std::string> Game::getArgs() const
 }
 Game::~Game()
 {
-	Gorgon::Core::Log::get().RegisterFormated("C++ -> Game::~Game()");
+	Gorgon::Core::Log::get().write(std::string("C++ -> Game::~Game()"));
 	Input::halt();
 	ResourceManager::SpriteManager::clear();
 	ResourceManager::AnimationManager::clear();
@@ -101,13 +101,13 @@ bool Game::init
 	const bool&			pFullScreen
 )
 {
-	Gorgon::Core::Log::get().RegisterFormated
+	Gorgon::Core::Log::get().writeFormatted
 	(
 		"C++ -> Game::init()\n\
 			\t\t\t\tpWindowTitle: %s\n\
 			\t\t\t\tpWidth:       %d\n\
 			\t\t\t\tpHeight:      %d\n\
-			\t\t\t\tFullscreen:   %d",
+			\t\t\t\tFullscreen:   %d\n",
 		pWindowTitle.c_str(),
 		pWidth,pHeight,
 		(int)pFullScreen
@@ -128,7 +128,6 @@ bool Game::init
     install_mouse();
     install_timer();
 	Input::get();//just to init the input
-//	Gorgon::ImageLoader::setLoader(new Gorgon::ImageLoaderAutodetect());//inicia o loader padrão da gorgon
 	return true;
 }
 
@@ -140,7 +139,7 @@ bool Game::setFPS(const int& pFPS)
 
 void Game::registerLuaFunctions()
 {
-	Gorgon::Core::Log::get().RegisterFormated("C++ -> Game::registerLuaFunctions()");
+	Gorgon::Core::Log::get().write(std::string("C++ -> Game::registerLuaFunctions()"));
 
 	ObjectLua::registerClass(mScript);
 	TileLua::registerClass(mScript);
@@ -161,7 +160,7 @@ void Game::registerLuaFunctions()
 void Game::run()
 {
 	int state = 0;
-	Gorgon::Core::Log::get().RegisterFormated("C++ -> Game::run()");
+	Gorgon::Core::Log::get().write(std::string("C++ -> Game::run()"));
 	try
 	{
 		mScript.loadScript("game.lua");//carrega o game
