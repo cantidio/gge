@@ -40,7 +40,7 @@ void Tile::logic()
 	mAnimationHandler->playByStep();
 }
 
-void Tile::draw(const Gorgon::Point& pPosition)
+void Tile::draw(const Gorgon::Core::Point& pPosition)
 {
 	mAnimationHandler->draw( Gorgon::Graphic::Video::get(), pPosition );
 }

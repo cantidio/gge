@@ -176,7 +176,7 @@ void Game::run()
 				{
 					//executa funcao logic do mal aqui
 					mScript.function("GGE_game_runStep");
-					Gorgon::Graphic::Video::get().drawText(Gorgon::Point(10,10),0xFF0000,-1,"FPS: %d",fps_antigo);
+					Gorgon::Graphic::Video::get().drawText(Gorgon::Core::Point(10,10),0xFF0000,-1,"FPS: %d",fps_antigo);
 					
 					if(key[KEY_F2])
 					{

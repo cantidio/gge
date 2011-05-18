@@ -57,7 +57,7 @@ int ObjectLua::draw(lua_State* pState)
 	Object* object = (Object*)lua.getUserData(OBJECT_CLASS);
 	if(object)
 	{
-		const Gorgon::Point position
+		const Gorgon::Core::Point position
 		(
 			lua_tointeger(pState,2),
 			lua_tointeger(pState,3)
@@ -200,21 +200,21 @@ void ObjectLua::registerClass(Gorgon::Script::Lua& pScript)
 
 /*	int lua_getLayer(lua_State* pState)
 	{
-		Object* object = getObjectPointer(pState);
+		Object* object = getObjectCore::Pointer(pState);
 		lua_pushnumber(pState,(int)object->getLayer());
 		return 1;
 	}
 */
 /*	int lua_setAfterImageMethodNormal(lua_State* pState)
 	{
-		Object* object = getObjectPointer(pState);
+		Object* object = getObjectCore::Pointer(pState);
 		object->setAfterImageMethodNormal();
 		return 0;
 	}
 
 	int lua_setAfterImageMethodAdd(lua_State* pState)
 	{
-		Object* object = getObjectPointer(pState);
+		Object* object = getObjectCore::Pointer(pState);
 		object->setAfterImageMethodAdd
 		(
 			Gorgon::Color
@@ -236,14 +236,14 @@ void ObjectLua::registerClass(Gorgon::Script::Lua& pScript)
 
 	int lua_setAfterImageMethodTrans(lua_State* pState)
 	{
-		Object* object = getObjectPointer(pState);
+		Object* object = getObjectCore::Pointer(pState);
 		object->setAfterImageMethodTrans(lua_tonumber(pState,2));
 		return 0;
 	}
 
 	int lua_setAfterImageMode(lua_State* pState)
 	{
-		Object* object = getObjectPointer(pState);
+		Object* object = getObjectCore::Pointer(pState);
 		object->setAfterImageMode
 		(
 			lua_toboolean(pState,2),

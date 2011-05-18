@@ -17,7 +17,6 @@ namespace ResourceManager
 				return *mTable[i].spritePack;
 			}
 		}
-		Gorgon::Core::Log::get().write(std::string("SpritePack not found in table, inserted in new position."),true,false);
 		//Gorgon::Core::Log::get().writeFormatted("C++ -> SpriteManager::load(): SpritePack: \"%s\" not found in SpriteManager Table\n",pSpritePackName.c_str());
 		//Gorgon::Core::Log::get().writeFormatted("C++ -> SpriteManager::load(): SpritePack: \"%s\" add in SpriteManager Table\n",pSpritePackName.c_str());
 		SpriteId spriteId;
@@ -25,6 +24,7 @@ namespace ResourceManager
 		spriteId.fileName	= pSpritePackName;
 		spriteId.spritePack	= new Gorgon::Graphic::SpritePack(pSpritePackName);
 		mTable.push_back(spriteId);
+		Gorgon::Core::Log::get().write(std::string("SpritePack not found in table, inserted in new position."),true,false);
 		return *spriteId.spritePack;
 	}
 

@@ -109,9 +109,9 @@ class Tile
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	17/03/2009
 		 * @version	29/09/2010
-		 * @param	const Gorgon::Point& pPosition, posição
+		 * @param	const Gorgon::Core::Point& pPosition, posição
 		 */
-		void draw(const Gorgon::Point& pPosition = Gorgon::Point(0,0));
+		void draw(const Gorgon::Core::Point& pPosition = Gorgon::Core::Point(0,0));
 };
 #endif
 

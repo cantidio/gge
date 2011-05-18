@@ -48,11 +48,11 @@ TextWindow& TextWindow::get()
 
 void TextWindow::add(const std::string& pString)
 {
-	blitImage(*this,Gorgon::Point(0,0),Gorgon::Point(0,10),getWidth(),getHeight());
+	blitImage(*this,Gorgon::Core::Point(0,0),Gorgon::Core::Point(0,10),getWidth(),getHeight());
 	drawRectangle
 	(
-		Gorgon::Point(0, getHeight() - 10),
-		Gorgon::Point(getWidth(),getHeight()),
+		Gorgon::Core::Point(0, getHeight() - 10),
+		Gorgon::Core::Point(getWidth(),getHeight()),
 		makecol(255,0,255),
 		true
 	);
@@ -73,5 +73,5 @@ void TextWindow::add(const char* pText, ...)
 
 void TextWindow::show() const
 {
-	Gorgon::Graphic::Video::get().drawImage(*this,Gorgon::Point(0,0));
+	Gorgon::Graphic::Video::get().drawImage(*this,Gorgon::Core::Point(0,0));
 }

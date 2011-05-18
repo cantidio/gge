@@ -16,10 +16,10 @@ TestGame = class()	-- Manila Chase Scene
 function TestGame:new()
 	local self = GGE_Game:new()
 	self.mWindow.title		= "TEST - GGE"
-	self.mVideo.width		= 320
-	self.mVideo.height		= 240
+	self.mVideo.width		= 640
+	self.mVideo.height		= 480
 	self.mVideo.FPS			= 60
---	self.mVideo.fullScreen	= true
+	self.mVideo.fullScreen		= false--true
 	self:init()
 --	self.BG		= DebugRoom:new()
 	self.BG		= RugalBG:new()

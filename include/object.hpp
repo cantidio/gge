@@ -68,7 +68,7 @@ class Object
 //		Gorgon::Color mAfterImageColorAdd;						/**<< Cor a ser adicionada no método de add*/
 //		Gorgon::Color mAfterImageColorSub;						/**<< Cor a ser subtraída no método de add*/
 //		float mAfterImageTrans;									/**<< Porcentagem de transparência das afterImages*/
-//		std::vector<Gorgon::Point>			mLastPositions;		/**<< Variável que guarda as ultimas posições do objeto*/
+//		std::vector<Gorgon::Core::Point>			mLastPositions;		/**<< Variável que guarda as ultimas posições do objeto*/
 //		std::vector<Gorgon::Mirroring>		mLastDirections;	/**<< Variável que guarda as últimas direções do objeto*/
 //		std::vector<const Gorgon::Sprite*>	mLastSprites;		/**<< Variável que guarda os ponteiros dos últimos sprites usados*/
 		
@@ -101,10 +101,10 @@ class Object
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	11/03/2009
 		 * @version	29/09/2010
-		 * @param	const Point&		pPosition	, posicão a desenhar o objeto
+		 * @param	const Core::Point&		pPosition	, posicão a desenhar o objeto
 		 * @param	const Mirroring&	pMirroring	, espelhamento a desenhar o objeto
 		 */
-		void draw(const Gorgon::Point& mPosition, const Gorgon::Graphic::Mirroring& pMirroring) const;
+		void draw(const Gorgon::Core::Point& mPosition, const Gorgon::Graphic::Mirroring& pMirroring) const;
 
 		/**
 		 * Método que realiza as operações lógicas do objeto

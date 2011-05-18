@@ -51,7 +51,7 @@ int TileLua::draw(lua_State* pState)
 	Tile* tile = (Tile*)lua.getUserData(TILE_CLASS,1);
 	tile->draw
 	(
-		Gorgon::Point
+		Gorgon::Core::Point
 		(
 			lua_tonumber(pState, 2),
 			lua_tonumber(pState, 3)

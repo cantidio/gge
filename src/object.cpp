@@ -28,7 +28,7 @@ Object::~Object()
 	delete mAnimationHandler;
 }
 
-void Object::draw(const Gorgon::Point& mPosition, const Gorgon::Graphic::Mirroring& pMirroring) const
+void Object::draw(const Gorgon::Core::Point& mPosition, const Gorgon::Graphic::Mirroring& pMirroring) const
 {
 /*	if(mAfterImageMethod != NULL)
 	{
