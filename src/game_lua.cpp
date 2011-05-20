@@ -1,5 +1,7 @@
 #include "../include/game_lua.hpp"
 #include "../include/game.hpp"
+#include <gorgon++/graphic/video.hpp>
+
 namespace GameLua
 {
 	int returnArray(lua_State* L, std::vector<std::string> pStrings)
@@ -13,10 +15,12 @@ namespace GameLua
 		}
 		return 1;
 	}
+
 	int GGE_game_getArgs(lua_State* pState)
 	{
 		return returnArray(pState,Game::get().getArgs());
 	}
+
 	int GGE_game_init(lua_State* pState)
 	{
 		bool noError = Game::get().init
@@ -67,6 +71,18 @@ namespace GameLua
 		return 1;
 	}
 
+	int GGE_game_getWidth(lua_State* pState)
+	{
+		lua_pushnumber(pState,Gorgon::Graphic::Video::get().getWidth());
+		return 1;
+	}
+
+	int GGE_game_getHeight(lua_State* pState)
+	{
+		lua_pushnumber(pState,Gorgon::Graphic::Video::get().getHeight());
+		return 1;
+	}
+
 	void registerFunctions(Gorgon::Script::Lua& pScript)
 	{
 		pScript.registerFunction("GGE_game_getArgs"			, GGE_game_getArgs			);
@@ -76,5 +92,7 @@ namespace GameLua
 		pScript.registerFunction("GGE_game_setFPS"			, GGE_game_setFPS			);
 		pScript.registerFunction("GGE_game_setGameName"		, GGE_game_setGameName		);
 		pScript.registerFunction("GGE_game_setGameVersion"	, GGE_game_setGameVersion	);
+		pScript.registerFunction("GGE_game_getWidth"		, GGE_game_getWidth			);
+		pScript.registerFunction("GGE_game_getHeight"		, GGE_game_getHeight		);
 	}
 }

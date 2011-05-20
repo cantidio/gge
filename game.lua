@@ -12,12 +12,22 @@ include("tests/background/breakman/breakman_background.lua")
 include("tests/background/lab/lab.lua")
 include("tests/background/muro/muro.lua")
 -]]
+
+--720p = 1280x720
+--1080p = 1920x1080
+
 TestGame = class()	-- Manila Chase Scene
+
+
 function TestGame:new()
 	local self = GGE_Game:new()
 	self.mWindow.title		= "TEST - GGE"
-	self.mVideo.width		= 640
-	self.mVideo.height		= 480
+	self.mVideo.width		= 1280
+	self.mVideo.height		= 720
+
+--	self.mVideo.widthR		= 640
+--	self.mVideo.heightR		= 360
+
 	self.mVideo.FPS			= 60
 	self.mVideo.fullScreen		= false--true
 	self:init()
@@ -25,7 +35,6 @@ function TestGame:new()
 	self.BG		= RugalBG:new()
 	self.obj	= Foxy:new({x=160,y=220})
 
-	
 	
 	self.BG:getLayer(2):addObject( self.obj )
 	self.BG:setCameraTarget(self.obj)

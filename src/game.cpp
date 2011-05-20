@@ -58,10 +58,12 @@ Game::Game(int pArgc, char** pArgv)
 	}
 	registerLuaFunctions();
 }
+
 std::vector<std::string> Game::getArgs() const
 {
 	return mArgs;
 }
+
 Game::~Game()
 {
 	Gorgon::Core::Log::get().write(std::string("C++ -> Game::~Game()"));
@@ -125,8 +127,8 @@ bool Game::init
 		pHeight,
 		pFullScreen
 	);
-    install_mouse();
-    install_timer();
+	install_mouse();
+	install_timer();
 	Input::get();//just to init the input
 	return true;
 }
@@ -215,9 +217,9 @@ void Game::run()
 		}
 		mRunning = false;
 	}
-	catch(Gorgon::Core::Exception e)
+	catch(Gorgon::Core::Exception& exception)
 	{
-		std::cout << e.getMessage() << std::endl;
+		throw exception;
 	}
 }
 

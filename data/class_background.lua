@@ -221,53 +221,42 @@ function GGE_Background:new()
 		end
 	end
 
-	function getWindowWidth() return 320	end
-	function getWindowHeight() return 240	end
-
 	--[[
 		-- Method that executes the logic behind the camera
 		--
 		-- @author	Cantidio Oliveira Fontes
 		-- @since	25/10/2010
-		-- @version	26/10/2010
+		-- @version	19/05/2011
+		-- @todo	quando a largura da tela é maior que a largura do cenário da pau
 	-]]
 	function self:cameraLogic()
 		if self.mCameraTarget then
-			local cameraPos	 = self:getPosition()
-			local targetPos  = self.mCameraTarget:getPosition()
+			local cameraPos	 	= self:getPosition()
+			local targetPos  	= self.mCameraTarget:getPosition()
+			local window_width	= GGE_game_getWidth()
+			local window_height	= GGE_game_getHeight()
 			
-			if	targetPos.x >= (getWindowWidth()/2) then
-				if targetPos.x <= (self.mWidth - getWindowWidth()/2)		then
-					cameraPos.x = -1 * (targetPos.x - getWindowWidth()/2 )
-				elseif targetPos.x >= (self.mWidth - getWindowWidth()/2)	then
-					cameraPos.x = -1 * (self.mWidth - getWindowWidth())
+			
+			if	targetPos.x >= (window_width/2) then
+				if targetPos.x <= (self.mWidth - window_width/2)		then
+					cameraPos.x = -1 * (targetPos.x - window_width/2 )
+				elseif targetPos.x >= (self.mWidth - window_width/2)	then
+					cameraPos.x = -1 * (self.mWidth - window_width)
 				end
-			elseif targetPos.x <= (getWindowWidth()/2) then
+			elseif targetPos.x <= (window_width/2) then
 				cameraPos.x = 0
 			end
 			
-			if	targetPos.y >= (getWindowHeight()/2) then
-				if targetPos.y <= (self.mHeight - getWindowHeight()/2) then
-					cameraPos.y = -1 * (targetPos.y - getWindowHeight()/2 )
-				elseif targetPos.y >= (self.mHeight - getWindowHeight()/2) then
-					cameraPos.y = -1 * (self.mHeight - getWindowHeight())
+			if	targetPos.y >= (window_height/2) then
+				if targetPos.y <= (self.mHeight - window_height/2) then
+					cameraPos.y = -1 * (targetPos.y - window_height/2 )
+				elseif targetPos.y >= (self.mHeight - window_height/2) then
+					cameraPos.y = -1 * (self.mHeight - window_height)
 				end
-			elseif targetPos.y <= (getWindowHeight()/2) then
+			elseif targetPos.y <= (window_height/2) then
 				cameraPos.y = 0
 			end
 			
---[[			if self.mCameraPosition.x < cameraPos.x then
-				self.mCameraPosition.x = self.mCameraPosition.x + self.mCameraVelocity.x
-			elseif self.mCameraPosition.x > cameraPos.x then
-				self.mCameraPosition.x = self.mCameraPosition.x - self.mCameraVelocity.x
-			end
-			
-			if self.mCameraPosition.y < cameraPos.y then
-				self.mCameraPosition.y = self.mCameraPosition.y + self.mCameraVelocity.y
-			elseif self.mCameraPosition.y > cameraPos.y then
-				self.mCameraPosition.y = self.mCameraPosition.y - self.mCameraVelocity.y
-			end
-	-]]
 			self:setPosition(cameraPos)
 		end
 	end
