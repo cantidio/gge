@@ -42,6 +42,6 @@ void Tile::logic()
 
 void Tile::draw(const Gorgon::Core::Point& pPosition)
 {
-	mAnimationHandler->draw( Gorgon::Graphic::Video::get(), pPosition );
+	mAnimationHandler->draw( pPosition , 0, Gorgon::Graphic::Mirroring::Normal);
 }
 

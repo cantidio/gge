@@ -8,7 +8,7 @@ Object::Object
 {
 //	setAfterImageMode(false,0,0);
 //	mAfterImageMethod	= NULL;
-	
+
 	mSpritePackName		= pSpritePackName;
 	mAnimationPackName	= pAnimationPackName;
 	mAnimationHandler	= new Gorgon::Graphic::AnimationHandler
@@ -41,15 +41,11 @@ void Object::draw(const Gorgon::Core::Point& mPosition, const Gorgon::Graphic::M
 		}
 	}
 */
-	mAnimationHandler->draw
-	(
-		Gorgon::Graphic::Video::get(),
-		mPosition,
-		pMirroring
-	);
+	mAnimationHandler->draw( mPosition, 0, pMirroring );
+
 }
 
-void Object::animationRunStep() 
+void Object::animationRunStep()
 {
 	mAnimationHandler->playByStep();
 }
@@ -128,7 +124,7 @@ void Object::setFrameOn(const int& pFrame)
 		}
 	}
 	++mAfterImageDelayInUse;
-	
+
 }
 
 void Object::drawAfterImageNormal(const int& pImage) const

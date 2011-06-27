@@ -48,7 +48,7 @@ TextWindow& TextWindow::get()
 
 void TextWindow::add(const std::string& pString)
 {
-	blitImage(*this,Gorgon::Core::Point(0,0),Gorgon::Core::Point(0,10),getWidth(),getHeight());
+/*	blitImage(*this,Gorgon::Core::Point(0,0),Gorgon::Core::Point(0,10),getWidth(),getHeight());
 	drawRectangle
 	(
 		Gorgon::Core::Point(0, getHeight() - 10),
@@ -56,22 +56,22 @@ void TextWindow::add(const std::string& pString)
 		makecol(255,0,255),
 		true
 	);
-	drawText(pString,0,getHeight()-10,mTextColor.get());
+	drawText(pString,0,getHeight()-10,mTextColor.get());*/
 }
 
 void TextWindow::add(const char* pText, ...)
 {
-	char buf[512];
+	/*char buf[512];
 	va_list ap;
 
 	ASSERT(pText);
 	va_start(ap,pText);
 	uvszprintf(buf,sizeof(buf),pText,ap);
 	va_end(ap);
-	add(std::string(buf));
+	add(std::string(buf));*/
 }
 
 void TextWindow::show() const
 {
-	Gorgon::Graphic::Video::get().drawImage(*this,Gorgon::Core::Point(0,0));
+	//Gorgon::Graphic::Video::get().drawImage(*this,Gorgon::Core::Point(0,0));
 }

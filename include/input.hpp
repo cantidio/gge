@@ -27,7 +27,6 @@
 #ifndef _GSBGE_INPUT_
 #define	_GSBGE_INPUT_
 #include <gorgon++/gorgon.hpp>
-#include <allegro.h>
 #include <iostream>
 #include <fstream>
 /**
@@ -44,6 +43,7 @@ class Input
 {
 	private:
 		static Input* mSingleton;/**< Pointer to the instance of the class */
+		Gorgon::Input::Keyboard* mKeyboard;/**<< pointer to the keyboard*/
 		int mKey_start;		/**< Code of the key for buttonStart*/
 		int mKey_up;		/**< Code of the key for buttonUp*/
 		int mKey_down;		/**< Code of the key for buttonDown*/
@@ -240,6 +240,7 @@ class Input
 		 * @version	27/10/2010
 		 */
 		void cleanKeyBuffer();
+		void update();
 };
 
 #endif

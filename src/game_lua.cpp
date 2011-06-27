@@ -1,6 +1,6 @@
 #include "../include/game_lua.hpp"
 #include "../include/game.hpp"
-#include <gorgon++/graphic/video.hpp>
+#include <gorgon++/graphic/display.hpp>
 
 namespace GameLua
 {
@@ -39,7 +39,7 @@ namespace GameLua
 		Game::halt();
 		return 0;
 	}
-	
+
 	int GGE_game_log(lua_State* pState)
 	{
 		Gorgon::Core::Log::get().writeFormatted
@@ -48,14 +48,14 @@ namespace GameLua
 		);
 		return 0;
 	}
-	
+
 	int GGE_game_setGameName(lua_State* pState)
 	{
 		lua_tostring(pState,1);
 		lua_pushboolean(pState,true);
 		return 1;
 	}
-	
+
 	int GGE_game_setGameVersion(lua_State* pState)
 	{
 		//Game::get().setGameVersion()
@@ -63,7 +63,7 @@ namespace GameLua
 		lua_pushboolean(pState,true);
 		return 1;
 	}
-	
+
 	int GGE_game_setFPS(lua_State* pState)
 	{
 		Game::get().setFPS( (int)lua_tointeger(pState, 1) );
@@ -73,13 +73,13 @@ namespace GameLua
 
 	int GGE_game_getWidth(lua_State* pState)
 	{
-		lua_pushnumber(pState,Gorgon::Graphic::Video::get().getWidth());
+		lua_pushnumber( pState, Game::get().getWidth() );
 		return 1;
 	}
 
 	int GGE_game_getHeight(lua_State* pState)
 	{
-		lua_pushnumber(pState,Gorgon::Graphic::Video::get().getHeight());
+		lua_pushnumber( pState, Game::get().getHeight() );
 		return 1;
 	}
 

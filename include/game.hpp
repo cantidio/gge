@@ -19,8 +19,11 @@
 class Game
 {
 	protected:
-		Gorgon::Script::Lua			mScript;
-		static Game*				mSingleton;
+		static Game*				mSingleton; /**<< Singleton instance of the class*/
+		Gorgon::Script::Lua			mScript;    /**<< Instance of the lua interpreter*/
+		Gorgon::Graphic::Display*   mDisplay;   /**<< Pointer to the display of the game*/
+		Gorgon::Input::Keyboard*    mKeyboard;  /**<< Pointer to the keyboard*/
+
 		int 						mFPS;
 		bool						mRunning;
 		std::vector<std::string>	mArgs;
@@ -127,5 +130,7 @@ class Game
 		 * @version	30/09/2010
 		 */
 		bool isRunning() const;
+		int getWidth() const;
+		int getHeight() const;
 };
 #endif

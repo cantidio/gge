@@ -23,6 +23,11 @@ namespace ResourceManager
 		spriteId.use		= 1;
 		spriteId.fileName	= pSpritePackName;
 		spriteId.spritePack	= new Gorgon::Graphic::SpritePack(pSpritePackName);
+
+		spriteId.spritePack->setAlphaMask( Gorgon::Graphic::Color(1,0,1) );
+
+		spriteId.spritePack->convertToDisplayFormat();
+
 		mTable.push_back(spriteId);
 		Gorgon::Core::Log::get().write(std::string("SpritePack not found in table, inserted in new position."),true,false);
 		return *spriteId.spritePack;

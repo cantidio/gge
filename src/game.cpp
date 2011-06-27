@@ -1,6 +1,8 @@
 #include "../include/game.hpp"
 #include "../include/console_window.hpp"
+#include <allegro5/allegro.h>
 //#include <gorgon++/addon/image_loader/gorgon++/include/gorgon_image_loader_autodetect.hpp>
+
 
 //-------------------------------------------------------------------------------TIMER--------------------------------------
 int fps			= 0;
@@ -8,7 +10,7 @@ int fps_antigo	= 0;
 int timer		= 0;
 void frame_rate()	{ fps_antigo = fps; fps = 0; }
 void game_time()	{ ++timer; }
-END_OF_FUNCTION(game_time);
+
 //-------------------------------------------------------------------------------TIMER UP------------------------------------
 
 void trySaveScreenShot(const int& pShotNumber)
@@ -16,7 +18,7 @@ void trySaveScreenShot(const int& pShotNumber)
 	/*std::stringstream out;
 	out << "shots/shot" << pShotNumber << ".bmp";
 	Gorgon::Core::File file(out.str(),std::ios::in | std::ios::binary);
-	
+
 	if(file.is_open())
 	{
 		file.close();
@@ -33,11 +35,11 @@ void trySaveScreenShot(const int& pShotNumber)
 
 void screenShot()
 {
-	if(key[KEY_F12])
+	if( 0 )
 	{
 		Gorgon::Core::Log::get().write(std::string("C++ -> Trying to take a Screenshot..."));
 		trySaveScreenShot(0);
-		key[KEY_F12] = 0;
+
 	}
 }
 
@@ -70,6 +72,9 @@ Game::~Game()
 	Input::halt();
 	ResourceManager::SpriteManager::clear();
 	ResourceManager::AnimationManager::clear();
+
+	delete mKeyboard;
+	delete mDisplay;
 }
 
 void Game::instantiate(int pArgc, char** pArgv)
@@ -114,21 +119,9 @@ bool Game::init
 		pWidth,pHeight,
 		(int)pFullScreen
 	);
-	allegro_init();
-	LOCK_VARIABLE(timer);
-	LOCK_FUNCTION(game_time);
-	install_int( frame_rate, 1000 );
-	install_int_ex(game_time, BPS_TO_TIMER(mFPS));
-	
-	Gorgon::Graphic::Video::init
-	(
-		pWindowTitle,
-		pWidth,
-		pHeight,
-		pFullScreen
-	);
-	install_mouse();
-	install_timer();
+
+    mDisplay    = new Gorgon::Graphic::Display( pWindowTitle, pWidth, pHeight, pFullScreen );
+	mKeyboard   = new Gorgon::Input::Keyboard();
 	Input::get();//just to init the input
 	return true;
 }
@@ -147,7 +140,7 @@ void Game::registerLuaFunctions()
 	TileLua::registerClass(mScript);
 	InputLua::registerFunctions(mScript);
 	GameLua::registerFunctions(mScript);
-	
+
 	mScript.loadScript("data/include.lua");
 	mScript.loadScript("data/class.lua");
 	mScript.loadScript("data/class_tile.lua");
@@ -167,53 +160,66 @@ void Game::run()
 	{
 		mScript.loadScript("game.lua");//carrega o game
 		mRunning = true;
-		
-		while(!key[KEY_ESC])
+
+		while(1)
 		{
-			while(timer >= 0 && !key[KEY_ESC])
+		    mKeyboard->update();
+		    Input::get().update();
+			if( mKeyboard->getKey( Gorgon::Input::Key::ESCAPE ).isPressed() )
 			{
-				screenShot();
-				Gorgon::Graphic::Video::get().clear(0xAA0BDD);
-				if(state==0)
-				{
-					//executa funcao logic do mal aqui
-					mScript.function("GGE_game_runStep");
-					Gorgon::Graphic::Video::get().drawText(Gorgon::Core::Point(10,10),0xFF0000,-1,"FPS: %d",fps_antigo);
-					
-					if(key[KEY_F2])
-					{
-						state = 1;
-						key[KEY_F2] = 0;
-						clear_keybuf();
-						ConsoleWindow::get().run();
-					}
-				}
-				else
-				{
-					ConsoleWindow::get().draw();
-					ConsoleWindow::get().logic();
-					if(key[KEY_F2])
-					{
-						ConsoleWindow::get().stop();
-						state = 0;
-						key[KEY_F2] = 0;
-					}
-					if(key[KEY_F5])//mandou executar
-					{
-						key[KEY_F5] = 0;
-						mScript.executeString
-						(
-							ConsoleWindow::get().getText()
-						);
-					}
-				}
-		
-				//TextWindow::get().show();
-				
-				Gorgon::Graphic::Video::get().show();
-				--timer;
-				++fps;
+				break;
 			}
+			else if( mKeyboard->getKey( Gorgon::Input::Key::LEFT_ALT ).isPressed() && mKeyboard->getKey( Gorgon::Input::Key::ENTER ).isPressed() )
+			{
+				mDisplay->toogleFullScreen();
+			}
+
+
+            screenShot();
+            mDisplay->clear( Gorgon::Graphic::Color( 0, 0, 0, 0 ) );
+            if(state == 0)
+            {
+                //executa funcao logic do mal aqui
+                mScript.function("GGE_game_runStep");
+                //Gorgon::Graphic::Video::get().drawText(Gorgon::Core::Point(10,10),0xFF0000,-1,"FPS: %d",fps_antigo);
+
+               if( 0 )//key[KEY_F2])
+                {
+                    state = 1;
+//                    key[KEY_F2] = 0;
+  //                  clear_keybuf();
+                    ConsoleWindow::get().run();
+                }
+            }
+            else
+            {
+             /*   ConsoleWindow::get().draw();
+                ConsoleWindow::get().logic();
+                if(key[KEY_F2])
+                {
+                    ConsoleWindow::get().stop();
+                    state = 0;
+                    key[KEY_F2] = 0;
+                }
+                if(key[KEY_F5])//mandou executar
+                {
+                    key[KEY_F5] = 0;
+                    mScript.executeString
+                    (
+                        ConsoleWindow::get().getText()
+                    );
+                }*/
+            }
+
+            //TextWindow::get().show();
+
+            mDisplay->swapBuffers();
+
+			al_rest(0.01);
+
+            --timer;
+            ++fps;
+
 		}
 		mRunning = false;
 	}
@@ -228,3 +234,12 @@ bool Game::isRunning() const
 	return mRunning;
 }
 
+int Game::getWidth() const
+{
+    mDisplay->getWidth();
+}
+
+int Game::getHeight() const
+{
+    mDisplay->getHeight();
+}
