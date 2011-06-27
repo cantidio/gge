@@ -1,0 +1,111 @@
+# depslib dependency file v1.0
+1309181966 source:/home/cantidio/workspace/gge/src/animation_manager.cpp
+	"../include/animation_manager.hpp"
+
+1309181966 /home/cantidio/workspace/gge/include/animation_manager.hpp
+	<gorgon++/gorgon.hpp>
+
+1309200835 source:/home/cantidio/workspace/gge/src/console_window.cpp
+	"../include/console_window.hpp"
+
+1309200755 /home/cantidio/workspace/gge/include/console_window.hpp
+	<gorgon++/gorgon.hpp>
+
+1309210105 source:/home/cantidio/workspace/gge/src/game.cpp
+	"../include/game.hpp"
+	"../include/console_window.hpp"
+	<allegro5/allegro.h>
+
+1309201930 /home/cantidio/workspace/gge/include/game.hpp
+	<gorgon++/gorgon.hpp>
+	<string>
+	"game_lua.hpp"
+	"object_lua.hpp"
+	"tile_lua.hpp"
+	"input_lua.hpp"
+	"input.hpp"
+
+1309181966 /home/cantidio/workspace/gge/include/game_lua.hpp
+	<gorgon++/gorgon.hpp>
+
+1309181966 /home/cantidio/workspace/gge/include/object_lua.hpp
+	<gorgon++/gorgon.hpp>
+	"object.hpp"
+
+1309181966 /home/cantidio/workspace/gge/include/object.hpp
+	<gorgon++/gorgon.hpp>
+	"sprite_manager.hpp"
+	"animation_manager.hpp"
+
+1309181966 /home/cantidio/workspace/gge/include/sprite_manager.hpp
+	<gorgon++/gorgon.hpp>
+
+1309181966 /home/cantidio/workspace/gge/include/tile_lua.hpp
+	<gorgon++/gorgon.hpp>
+	"tile.hpp"
+
+1309181966 /home/cantidio/workspace/gge/include/tile.hpp
+	<gorgon++/gorgon.hpp>
+	"resource_manager.hpp"
+
+1309181966 /home/cantidio/workspace/gge/include/resource_manager.hpp
+	"animation_manager.hpp"
+	"sprite_manager.hpp"
+
+1309181966 /home/cantidio/workspace/gge/include/input_lua.hpp
+	"input.hpp"
+	<gorgon++/gorgon.hpp>
+
+1309204622 /home/cantidio/workspace/gge/include/input.hpp
+	<gorgon++/gorgon.hpp>
+	<iostream>
+	<fstream>
+
+1309202064 source:/home/cantidio/workspace/gge/src/game_lua.cpp
+	"../include/game_lua.hpp"
+	"../include/game.hpp"
+	<gorgon++/graphic/display.hpp>
+
+1309204609 source:/home/cantidio/workspace/gge/src/input.cpp
+	"../include/input.hpp"
+
+1309181966 source:/home/cantidio/workspace/gge/src/input_lua.cpp
+	"../include/input_lua.hpp"
+
+1309204226 source:/home/cantidio/workspace/gge/src/main.cpp
+	"../include/game.hpp"
+	"../include/console_window.hpp"
+	<omp.h>
+	<gorgon++/gorgon.hpp>
+	<gorgon++/addon/allegro5/graphic/system.hpp>
+	<gorgon++/addon/allegro5/input/system.hpp>
+
+1309203157 source:/home/cantidio/workspace/gge/src/object.cpp
+	"../include/object.hpp"
+
+1309181966 source:/home/cantidio/workspace/gge/src/object_lua.cpp
+	"../include/object_lua.hpp"
+
+1309204985 source:/home/cantidio/workspace/gge/src/sprite_manager.cpp
+	"../include/sprite_manager.hpp"
+
+1309203187 source:/home/cantidio/workspace/gge/src/text_window.cpp
+	"../include/text_window.hpp"
+
+1309181966 /home/cantidio/workspace/gge/include/text_window.hpp
+	<gorgon++/gorgon.hpp>
+
+1309181966 source:/home/cantidio/workspace/gge/src/text_window_lua.cpp
+	"../include/text_window_lua.hpp"
+
+1309181966 /home/cantidio/workspace/gge/include/text_window_lua.hpp
+	"text_window.hpp"
+	<gorgon++/gorgon.hpp>
+
+1309203226 source:/home/cantidio/workspace/gge/src/tile.cpp
+	"../include/tile.hpp"
+
+1309181966 source:/home/cantidio/workspace/gge/src/tile_lua.cpp
+	"../include/tile_lua.hpp"
+	"../include/tile.hpp"
+

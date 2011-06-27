@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Gorgon Game Engine" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="LinuxDebug">
+				<Option platforms="Unix;" />
+				<Option output="Linux/Debug/gge" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="../" />
+				<Option object_output="Linux/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="LinuxRelease">
+				<Option platforms="Unix;" />
+				<Option output="Linux/Release/gge" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="../" />
+				<Option object_output="Linux/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="`gorgon-config --libs --addons --addon_allegro5`" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../data/class.lua" />
+		<Unit filename="../data/class_background.lua" />
+		<Unit filename="../data/class_game.lua" />
+		<Unit filename="../data/class_input.lua" />
+		<Unit filename="../data/class_layer.lua" />
+		<Unit filename="../data/class_object.lua" />
+		<Unit filename="../data/class_player.lua" />
+		<Unit filename="../data/class_tile.lua" />
+		<Unit filename="../data/include.lua" />
+		<Unit filename="../include/animation_manager.hpp" />
+		<Unit filename="../include/colision_manager.hpp" />
+		<Unit filename="../include/console_window.hpp" />
+		<Unit filename="../include/game.hpp" />
+		<Unit filename="../include/game_lua.hpp" />
+		<Unit filename="../include/input.hpp" />
+		<Unit filename="../include/input_lua.hpp" />
+		<Unit filename="../include/object.hpp" />
+		<Unit filename="../include/object_lua.hpp" />
+		<Unit filename="../include/resource_manager.hpp" />
+		<Unit filename="../include/sprite_manager.hpp" />
+		<Unit filename="../include/text_window.hpp" />
+		<Unit filename="../include/text_window_lua.hpp" />
+		<Unit filename="../include/tile.hpp" />
+		<Unit filename="../include/tile_lua.hpp" />
+		<Unit filename="../src/animation_manager.cpp" />
+		<Unit filename="../src/console_window.cpp" />
+		<Unit filename="../src/game.cpp" />
+		<Unit filename="../src/game_lua.cpp" />
+		<Unit filename="../src/input.cpp" />
+		<Unit filename="../src/input_lua.cpp" />
+		<Unit filename="../src/main.cpp" />
+		<Unit filename="../src/object.cpp" />
+		<Unit filename="../src/object_lua.cpp" />
+		<Unit filename="../src/sprite_manager.cpp" />
+		<Unit filename="../src/text_window.cpp" />
+		<Unit filename="../src/text_window_lua.cpp" />
+		<Unit filename="../src/tile.cpp" />
+		<Unit filename="../src/tile_lua.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
